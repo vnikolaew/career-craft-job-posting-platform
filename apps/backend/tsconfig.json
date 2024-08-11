@@ -1,0 +1,33 @@
+{
+  "exclude": [
+    "node_modules",
+  ],
+  "include": [
+    "src"
+  ],
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": false,
+    "strict": false,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "noEmitOnError": false,
+    "alwaysStrict": false,
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "paths": {
+      "@*": ["src/*"]
+    },
+    "outDir": "dist",
+    "lib": ["ESNext", "ES2022"]
+  }
+}
