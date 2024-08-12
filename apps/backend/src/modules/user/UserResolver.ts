@@ -14,7 +14,7 @@ import {
    Resolver,
    Root,
    Subscription,
-   SubscribeResolverData,
+   SubscribeResolverData, ID,
 } from "type-graphql";
 import { MyContext, Nullable } from "@types";
 import { getUserCookie, lucia } from "@lib/auth";
@@ -103,6 +103,11 @@ export class UserResolver extends UserRelationsResolver {
    @Query(() => User)
    public async findById(@Arg("id", () => String) id: string, @Ctx() { prisma }: MyContext): Promise<User> {
       return await prisma.user.findUnique({ where: { id } });
+   }
+
+   @FieldResolver(_ => ID, { nullable: false })
+   public async id(@Root() user: User): Promise<string> {
+      return user.id ?? ``;
    }
 
    @FieldResolver(_ => Object, { nullable: true })

@@ -6,13 +6,26 @@ import { xprisma } from "@prisma/prisma";
 
 export const githubLoginRouter = express.Router();
 
-githubLoginRouter.get(`/`, async (_, res) => {
+githubLoginRouter.get(`/`, async (req, res) => {
+   const redirect_url = req.query.redirect_url?.toString() ?? ``;
+
    const state = generateState();
    const url = await github.createAuthorizationURL(state);
 
-   console.log({ headersSet: res.headersSent, url });
+   console.log({ redirect_url });
 
    res
+      .appendHeader(
+         "Set-Cookie",
+         serializeCookie("github_oauth_redirect_url", encodeURIComponent(redirect_url), {
+            path: "/",
+            domain: `.apollo-next.com`,
+            secure: process.env.NODE_ENV === "production",
+            httpOnly: true,
+            maxAge: 60 * 10,
+            sameSite: "lax",
+         }),
+      )
       .appendHeader(
          "Set-Cookie",
          serializeCookie("github_oauth_state", state, {
@@ -30,13 +43,24 @@ githubLoginRouter.get(`/`, async (_, res) => {
 githubLoginRouter.get("/callback", async (req, res) => {
    const code = req.query.code?.toString() ?? null;
    const state = req.query.state?.toString() ?? null;
+
    const storedState = parseCookies(req.headers.cookie ?? "").get("github_oauth_state") ?? null;
+   const github_oauth_redirect_url = parseCookies(req.headers.cookie ?? "").get("github_oauth_redirect_url") ?? null;
+
+   console.log({ github_oauth_redirect_url: decodeURIComponent(github_oauth_redirect_url) });
+   let redirect_url: string
+   try {
+      redirect_url =  new URL(decodeURIComponent(github_oauth_redirect_url)).toString();
+   } catch (err) {
+      redirect_url = `/`
+   }
 
    if (!code || !state || !storedState || state !== storedState) {
       console.log(code, state, storedState);
       res.status(400).end();
       return;
    }
+
    try {
       const tokens = await github.validateAuthorizationCode(code);
       const githubUserResponse = await fetch("https://api.github.com/user", {
@@ -51,55 +75,74 @@ githubLoginRouter.get("/callback", async (req, res) => {
             AND: [{
                name: githubUser.login,
             }, {
-               account: {
-                  provider: `github`,
+               accounts: {
+                  some: {
+                     provider: `github`,
+                  },
                },
             }],
          },
       });
 
       if (existingUser) {
-         const session = await lucia.createSession(existingUser.id, {});
+         console.log(`User ${githubUser.login} already exists. Email: ${githubUser.email}.`);
+
+         const cookie = await getUserCookie(existingUser);
          return res
-            .appendHeader("Set-Cookie", lucia.createSessionCookie(session.id).serialize())
-            .redirect("/");
+            .appendHeader("Set-Cookie", cookie)
+            .redirect(redirect_url);
       }
 
-      let user = await xprisma.user.create({
-         data: {
+      console.log({ githubUser });
+      let user = await xprisma.user.upsert({
+         where: { email: githubUser.email },
+         create: {
             name: githubUser.login,
-            emailVerified: true,
+            emailVerified: new Date(),
             image: githubUser.avatar_url,
             email: githubUser.email,
-            account: {
-               create: {
-                  type: `github`,
-                  provider: `github`,
-                  providerAccountId: githubUser.id.toString(),
-                  access_token: tokens.accessToken
-               }
-            },
-            configuration: {
-               create: {
-                  sound_click_sound: null,
-                  sound_error_sound: null,
-                  language: `English`,
+            accounts: {
+               connectOrCreate: {
+                  where: {
+                     provider_providerAccountId: {
+                        provider: `github`,
+                        providerAccountId: githubUser.id.toString(),
+                     },
+                  },
+                  create: {
+                     type: `github`,
+                     provider: `github`,
+                     providerAccountId: githubUser.id.toString(),
+                     access_token: tokens.accessToken,
+                  },
                },
             },
-            experience: {
-               create: {
-                  level: 1,
-                  points: 0,
-                  metadata: {},
+         },
+         update: {
+            accounts: {
+               connectOrCreate: {
+                  where: {
+                     provider_providerAccountId: {
+                        provider: `github`,
+                        providerAccountId: githubUser.id.toString(),
+                     },
+                  },
+                  create: {
+                     type: `github`,
+                     provider: `github`,
+                     providerAccountId: githubUser.id.toString(),
+                     access_token: tokens.accessToken,
+                  },
                },
             },
          },
       });
 
-      const cookie = await getUserCookie(user)
+      const cookie = await getUserCookie(user);
 
-      return res.appendHeader("Set-Cookie", cookie).redirect("/");
+      return res.appendHeader("Set-Cookie", cookie).redirect(redirect_url);
    } catch (e) {
+      console.log(`An error occurred during GitHub authentication`, e);
       if (e instanceof OAuth2RequestError && e.message === "bad_verification_code") {
          res.status(400).end();
          return;

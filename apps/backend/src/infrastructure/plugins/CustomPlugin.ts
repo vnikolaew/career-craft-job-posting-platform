@@ -38,23 +38,23 @@ export class CustomPlugin implements ApolloServerPlugin<MyContext> {
                   ...response.body.singleResult.extensions,
                   complexity: contextValue.complexity,
                   timestamp: new Date().toISOString(),
+                  operationId: contextValue.operationId,
                };
 
             }
          },
       };
    }
-
-   public static plugins(httpServer: http.Server): ApolloServerPlugin<BaseContext>[] {
-      return [
-         __IS_DEV__ ?
-            ApolloServerPluginLandingPageLocalDefault({
-            })
-            : ApolloServerPluginLandingPageProductionDefault({}),
-         ApolloServerPluginDrainHttpServer({ httpServer }),
-         ApolloServerPluginCacheControl({ defaultMaxAge: 10 * 60 }),
-         responseCachePlugin(),
-         new CustomPlugin(),
-      ];
-   }
 }
+
+export const getPlugins = (httpServer: http.Server): ApolloServerPlugin<BaseContext>[] => {
+   return [
+      __IS_DEV__ ?
+         ApolloServerPluginLandingPageLocalDefault({})
+         : ApolloServerPluginLandingPageProductionDefault({}),
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginCacheControl({ defaultMaxAge: 10 * 60 }),
+      responseCachePlugin(),
+      new CustomPlugin(),
+   ];
+};

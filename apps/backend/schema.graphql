@@ -911,7 +911,7 @@ enum RelationLoadStrategy {
 type Session {
   createdAt: DateTimeISO!
   expiresAt: DateTimeISO!
-  id: String!
+  id: ID!
   sessionToken: String!
   updatedAt: DateTimeISO!
   userId: String!
@@ -1263,7 +1263,7 @@ type User {
   createdAt: DateTimeISO!
   email: String!
   emailVerified: DateTimeISO
-  id: String!
+  id: ID!
   image: String
 
   """[UserMetadata]"""
@@ -1497,7 +1497,7 @@ type UserSearchResponse {
   createdAt: DateTimeISO!
   email: String!
   emailVerified: DateTimeISO
-  id: String!
+  id: ID!
   image: String
 
   """[UserMetadata]"""

@@ -4,7 +4,7 @@ import {
 } from "@apollo/server";
 import express from "express";
 import { githubLoginRouter } from "@modules/user/auth/github";
-import { CustomPlugin } from "@infrastructure/plugins/CustomPlugin";
+import { getPlugins } from "@infrastructure/plugins/CustomPlugin";
 import { __IS_DEV__ } from "@consts";
 import { KeyvAdapter } from "@apollo/utils.keyvadapter";
 import Keyv from "keyv";
@@ -37,7 +37,13 @@ export class CustomApolloServer<TContext> {
 
    constructor(schema: BuildSchemaOptions, private readonly port = 4000) {
       this.schema = schema;
-      this.pubSub = new PubSub()
+      this.pubSub = new PubSub();
+   }
+
+   private get cache() {
+      return !!process.env.REDIS_URL?.length
+         ? new ErrorsAreMissesCache(new KeyvAdapter(new Keyv(process.env.REDIS_URL!)))
+         : new InMemoryLRUCache({ ttl: 1000 * 60 * 5, maxSize: 1_000 });
    }
 
    public async bootstrapServer() {
@@ -59,8 +65,8 @@ export class CustomApolloServer<TContext> {
                return asyncIteratorToIterable(this.pubSub.asyncIterator(routingKey));
             },
             publish(routingKey: string, ...args) {
-               return this.pubSub.publish(routingKey, ...args)
-            }
+               return this.pubSub.publish(routingKey, ...args);
+            },
          },
       });
       this.copySchemaFile();
@@ -69,9 +75,6 @@ export class CustomApolloServer<TContext> {
          server: this.httpServer,
          path: "/graphql",
       });
-      this.wsServer.on(`error`, console.error)
-      this.wsServer.on(`open`, console.log)
-      this.wsServer.on(`message`, console.log)
 
       const sServer = SubscriptionServer.create({
          schema, execute, subscribe,
@@ -80,19 +83,17 @@ export class CustomApolloServer<TContext> {
          },
          onOperation: async (message) => {
             console.log({ message });
-         }
-      }, { server: this.httpServer, path: `/graphql`, });
+         },
+      }, { server: this.httpServer, path: `/graphql` });
 
       const serverCleanup = useServer({ schema }, this.wsServer);
 
       this.server = new ApolloServer<TContext>({
          introspection: true,
-         cache: !!process.env.REDIS_URL?.length
-            ? new ErrorsAreMissesCache(new KeyvAdapter(new Keyv(process.env.REDIS_URL!)))
-            : new InMemoryLRUCache({ ttl: 1000 * 60 * 5, maxSize: 1_000 }),
+         cache: this.cache,
          schema,
          csrfPrevention: true,
-         plugins: [...CustomPlugin.plugins(this.httpServer), {
+         plugins: [...getPlugins(this.httpServer), {
             async serverWillStart() {
                return {
                   async drainServer() {

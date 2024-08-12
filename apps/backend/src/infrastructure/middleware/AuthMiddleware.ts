@@ -5,6 +5,7 @@ import { lucia } from "@lib/auth";
 export class AuthMiddleware implements MiddlewareInterface<MyContext> {
    async use({ context, info }: ResolverData<MyContext>, next: NextFn): Promise<any> {
       context.info = info;
+      context.operationId = crypto.randomUUID()
 
       const sessionId = lucia.readSessionCookie(context.req.headers?.cookie ?? ``);
       if (!sessionId) return next();
