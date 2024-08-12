@@ -1,11 +1,10 @@
 import { Authorized, Ctx, Field, Mutation, ObjectType, Resolver } from "type-graphql";
 import { randomBytes } from "crypto";
-// import { EmailService } from "@repo/emails";
-// import AccountVerificationEmail from "@repo/emails/src/AccountVerificationEmail";
 import { MyContext } from "@types";
 import { APP_NAME } from "@consts";
 import moment from "moment";
 import { xprisma } from "@prisma/prisma";
+import { EmailService, AccountVerificationEmail } from "@repo/emails";
 
 @ObjectType()
 export class SendVerificationEmailResponse {
@@ -51,31 +50,30 @@ export class EmailsResolver {
          },
       });
 
-      // const emailService = new EmailService();
+      const emailService = new EmailService();
 
-      // // Send the actual confirmation e-mail
-      // const response = await emailService.sendMail({
-      //    to: user!.email,
-      //    react: AccountVerificationEmail({
-      //       verificationToken: verificationToken.token,
-      //       confirmationUrl: `${process.env.BASE_URL}/api/email/verification/verify?token=${verificationToken.token}`,
-      //       appName: APP_NAME,
-      //       username: user!.name!,
-      //    }),
-      //    subject: `${APP_NAME} | Verify your e-mail address`,
-      // });
-      let response = { success: true };
+      // Send the actual confirmation e-mail
+      const response = await emailService.sendMail({
+         to: user!.email,
+         react: AccountVerificationEmail({
+            verificationToken: verificationToken.token,
+            confirmationUrl: `${process.env.BASE_URL}/api/email/verification/verify?token=${verificationToken.token}`,
+            appName: APP_NAME,
+            username: user!.name!,
+         }),
+         subject: `${APP_NAME} | Verify your e-mail address`,
+      });
 
       if (response.success) {
-         return {success: true}
+         return { success: true };
       } else {
-         return {success: false, error: response.error}
+         return { success: false, error: response.error };
       }
    }
 
    @Mutation(() => VerifyEmailResponse)
    async verifyEmail(@Ctx() { prisma, userId, req }: MyContext): Promise<VerifyEmailResponse> {
-      if (!userId) return {success: false};
+      if (!userId) return { success: false };
 
       const params = new URL(req.url!).searchParams;
 
@@ -90,14 +88,14 @@ export class EmailsResolver {
             },
          },
       });
-      if (!dbToken) return { success: false, error: `Token does not exist.` }
+      if (!dbToken) return { success: false, error: `Token does not exist.` };
 
       let user = await prisma.user.findUnique({
          where: { id: userId },
       });
 
       if (!user || user.metadata?.verificationToken !== dbToken.identifier) {
-         return { success: false, error: `Invalid token.` }
+         return { success: false, error: `Invalid token.` };
       }
 
       let [newUser, newToken] = await xprisma.$transaction([
@@ -118,6 +116,6 @@ export class EmailsResolver {
          }),
       ]);
 
-      return { success: true }
+      return { success: true };
    }
 }

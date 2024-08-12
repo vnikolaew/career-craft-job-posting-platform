@@ -20,6 +20,12 @@ const config: CodegenConfig = {
       }
    },
    ignoreNoDocuments: true,
+   config: {
+
+   },
+   skipDocumentValidation: {
+      skipValidationAgainstSchema: true
+   }
 };
 
 export default config;

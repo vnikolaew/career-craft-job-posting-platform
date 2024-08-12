@@ -1,6 +1,15 @@
 "use client";
 import React, { PropsWithChildren } from "react";
-import { ApolloClient, ApolloProvider, InMemoryCache, from, ApolloLink, HttpLink, split } from "@apollo/client";
+import {
+   ApolloClient,
+   ApolloProvider,
+   InMemoryCache,
+   from,
+   ApolloLink,
+   HttpLink,
+   split,
+   makeVar,
+} from "@apollo/client";
 import { RetryLink } from "@apollo/client/link/retry";
 import { APP_NAME, APP_VERSION } from "@/config/site";
 import { getMainDefinition } from "@apollo/client/utilities";
@@ -17,9 +26,6 @@ const wsLink2 = new GraphQLWsLink(
       url: process.env.NEXT_PUBLIC_GRAPHQL_WS_URL!,
    }),
 );
-// const wsLink = new WebSocketLink(
-//    new SubscriptionClient(process.env.NEXT_PUBLIC_GRAPHQL_WS_URL!),
-// );
 
 const chain = from([
    new ApolloLink((operation, forward) => {
@@ -28,7 +34,9 @@ const chain = from([
    }),
    new RetryLink({ delay: { max: 3000, jitter: true }, attempts: { max: 3 } }),
    new HttpLink({
-      uri: process.env.NEXT_PUBLIC_GRAPHQL_API_URL!, credentials: `include`, headers: {
+      uri: process.env.NEXT_PUBLIC_GRAPHQL_API_URL!,
+      credentials: `include`,
+      headers: {
          "x-client-name": `${APP_NAME} v1.0`,
          "x-client-version": APP_VERSION,
       },
@@ -41,6 +49,8 @@ const splitLink = split(
    },
    wsLink2, chain,
 );
+
+export const meIdVar = makeVar<string>(null!);
 
 const client = new ApolloClient({
    link: splitLink,
@@ -68,7 +78,7 @@ const client = new ApolloClient({
          IsUserLoggedIn: {
             fields: {
                isLoggedIn: {
-                  read(_, { cache }) {
+                  read() {
                      return true;
                   },
                },

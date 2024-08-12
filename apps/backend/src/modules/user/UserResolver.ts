@@ -13,14 +13,13 @@ import {
    Query,
    Resolver,
    Root,
-   PubSub,
    Subscription,
    SubscribeResolverData,
 } from "type-graphql";
 import { MyContext, Nullable } from "@types";
 import { getUserCookie, lucia } from "@lib/auth";
 import { getGravatarImageUrl } from "@modules/user/utils";
-import { NoCache, SessionId, UserId } from "src/infrastructure/decorators";
+import { AuthorizedField, NoCache, SessionId, UserId } from "src/infrastructure/decorators";
 import { GraphQLUpload, Upload } from "@infrastructure/scalars/Upload";
 import { JsonValue } from "@prisma/client/runtime/library";
 
@@ -53,6 +52,23 @@ export class UsersSearchInput {
    public limit: number = 10;
 }
 
+
+@ObjectType()
+export class UserCookiePreferences {
+   @Field(() => Boolean)
+   Necessary: boolean;
+
+   @Field(() => Boolean)
+   Statistics: boolean;
+
+   @Field(() => Boolean)
+   Functionality: boolean;
+
+   @Field(() => Boolean)
+   Marketing: boolean;
+}
+
+
 export function asyncIteratorToIterable<T>(asyncIterator: AsyncIterator<T>): AsyncIterable<T> {
    return {
       [Symbol.asyncIterator]() {
@@ -68,17 +84,17 @@ export class UserResolver extends UserRelationsResolver {
 
    @Subscription(() => User, { subscribe: async ({ context }: SubscribeResolverData<any, any, MyContext>) => asyncIteratorToIterable(context.pubSub.asyncIterator<User>(`USER_SIGNED_UP`)) })
    public async userSignedUp(): Promise<unknown> {
-      return Promise.resolve()
+      return Promise.resolve();
    }
 
    @Subscription(() => Int, {
       subscribe: async ({ context }: SubscribeResolverData<any, any, MyContext>) => {
          console.log(`we are here`);
          return asyncIteratorToIterable(context.pubSub.asyncIterator<number>(`RANDOM_NUMBER`));
-      }
+      },
    })
+
    public async* randomNumber(@Ctx() { pubSub }: MyContext): AsyncGenerator<number> {
-      console.log(`we are here`);
       for await (const element of asyncIteratorToIterable(pubSub.asyncIterator(`RANDOM_NUMBER`))) {
          yield (element as any).number as number;
       }
@@ -95,6 +111,7 @@ export class UserResolver extends UserRelationsResolver {
    }
 
    @FieldResolver(_ => Date, { nullable: true })
+   @AuthorizedField()
    public async emailVerified(@Root() user: User): Promise<Date> {
       return user.emailVerified ?? null!;
    }
@@ -102,6 +119,23 @@ export class UserResolver extends UserRelationsResolver {
    @FieldResolver(_ => String, { nullable: true })
    public async image(@Root() user: User): Promise<JsonValue> {
       return user.image ?? DEFAULT_USER_AVATAR_URL;
+   }
+
+   @FieldResolver(_ => Boolean)
+   @AuthorizedField()
+   public async cookieConsent(@Root() user: User): Promise<boolean> {
+      return user?.metadata?.[`cookie-consent`] ?? false;
+   }
+
+   @FieldResolver(_ => UserCookiePreferences, { nullable: true })
+   @AuthorizedField()
+   public async cookiePreferences(@Root() user: User, @Ctx() {}: MyContext): Promise<UserCookiePreferences> {
+      return user?.metadata?.[`cookie-preferences`] as UserCookiePreferences ?? {
+         Necessary: true,
+         Statistics: false,
+         Functionality: false,
+         Marketing: false,
+      };
    }
 
    @Mutation(() => Boolean)
@@ -152,7 +186,7 @@ export class UserResolver extends UserRelationsResolver {
    public async signUp(@Arg("signUpModel", () => UserSignUpInput) userInput: UserSignUpInput, @Ctx() {
       prisma,
       res,
-      pubSub
+      pubSub,
    }: MyContext): Promise<User> {
       const { email, password, username } = userInput;
 
@@ -176,8 +210,6 @@ export class UserResolver extends UserRelationsResolver {
       );
 
       const serializedCookie = await getUserCookie(user);
-      console.log({ serializedCookie });
-
       res.appendHeader(`Set-Cookie`, serializedCookie);
 
       await pubSub.publish(`USER_SIGNED_UP`, user);
@@ -206,9 +238,8 @@ export class UserResolver extends UserRelationsResolver {
 
       if (user && user.verifyPassword?.(password as string ?? ``)) {
          const serializedCookie = await getUserCookie(user);
-         console.log({ serializedCookie });
-
          res.appendHeader(`Set-Cookie`, serializedCookie);
+
          return user;
       }
 

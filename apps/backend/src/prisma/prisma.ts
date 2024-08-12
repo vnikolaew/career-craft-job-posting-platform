@@ -129,20 +129,15 @@ export let xprisma = prisma.$extends({
                   password: bcrypt.hashSync(password, 10),
                   name: username,
                   image,
-                  configuration: {
-                     create: {
-                        sound_click_sound: null,
-                        sound_error_sound: null,
-                        language: `English`,
+                  metadata: {
+                     'cookie-preferences': {
+                        Necessary: true,
+                        Statistics: false,
+                        Functionality: false,
+                        Marketing: false
                      },
-                  },
-                  experience: {
-                     create: {
-                        level: 1,
-                        points: 0,
-                        metadata: {},
-                     },
-                  },
+                     'cookie-consent': false
+                  }
                },
                select: {
                   id: true,
