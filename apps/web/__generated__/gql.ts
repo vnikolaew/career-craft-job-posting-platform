@@ -13,10 +13,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n    fragment MeFragment on User {\n        id\n        name\n        email\n        cookiePreferences {\n            Functionality\n            Marketing\n            Necessary\n            Statistics\n        }\n    }\n": types.MeFragmentFragmentDoc,
+    "\n    fragment MeFragment on User {\n        id\n        name\n        email\n        cookiePreferences {\n            functionality\n            marketing\n            necessary\n            statistics\n        }\n    }\n": types.MeFragmentFragmentDoc,
     "\n    mutation SignOut {\n        signOut\n    }\n": types.SignOutDocument,
-    "\n    mutation SignIn($signInModel: UserSignInInput!) {\n        signIn(signInModel: $signInModel) {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                Functionality\n                Marketing\n                Necessary\n                Statistics\n            }\n            createdAt\n        }\n    }\n": types.SignInDocument,
-    "\n    query MeQuery {\n        me {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                Functionality\n                Marketing\n                Necessary\n                Statistics\n            }\n        }\n    }\n": types.MeQueryDocument,
+    "\n    mutation SignIn($signInModel: UserSignInInput!) {\n        signIn(signInModel: $signInModel) {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                functionality\n                marketing\n                necessary\n                statistics\n            }\n            createdAt\n        }\n    }\n": types.SignInDocument,
+    "\n    query MeQuery {\n        me {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                functionality\n                marketing\n                necessary\n                statistics\n            }\n        }\n    }\n": types.MeQueryDocument,
+    "\n    query GoogleLoginQuery($redirectUrl: String!) {\n        googleLoginUrl(redirect_url: $redirectUrl)\n    }\n": types.GoogleLoginQueryDocument,
 };
 
 /**
@@ -36,7 +37,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    fragment MeFragment on User {\n        id\n        name\n        email\n        cookiePreferences {\n            Functionality\n            Marketing\n            Necessary\n            Statistics\n        }\n    }\n"): (typeof documents)["\n    fragment MeFragment on User {\n        id\n        name\n        email\n        cookiePreferences {\n            Functionality\n            Marketing\n            Necessary\n            Statistics\n        }\n    }\n"];
+export function gql(source: "\n    fragment MeFragment on User {\n        id\n        name\n        email\n        cookiePreferences {\n            functionality\n            marketing\n            necessary\n            statistics\n        }\n    }\n"): (typeof documents)["\n    fragment MeFragment on User {\n        id\n        name\n        email\n        cookiePreferences {\n            functionality\n            marketing\n            necessary\n            statistics\n        }\n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -44,11 +45,15 @@ export function gql(source: "\n    mutation SignOut {\n        signOut\n    }\n"
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    mutation SignIn($signInModel: UserSignInInput!) {\n        signIn(signInModel: $signInModel) {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                Functionality\n                Marketing\n                Necessary\n                Statistics\n            }\n            createdAt\n        }\n    }\n"): (typeof documents)["\n    mutation SignIn($signInModel: UserSignInInput!) {\n        signIn(signInModel: $signInModel) {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                Functionality\n                Marketing\n                Necessary\n                Statistics\n            }\n            createdAt\n        }\n    }\n"];
+export function gql(source: "\n    mutation SignIn($signInModel: UserSignInInput!) {\n        signIn(signInModel: $signInModel) {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                functionality\n                marketing\n                necessary\n                statistics\n            }\n            createdAt\n        }\n    }\n"): (typeof documents)["\n    mutation SignIn($signInModel: UserSignInInput!) {\n        signIn(signInModel: $signInModel) {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                functionality\n                marketing\n                necessary\n                statistics\n            }\n            createdAt\n        }\n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    query MeQuery {\n        me {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                Functionality\n                Marketing\n                Necessary\n                Statistics\n            }\n        }\n    }\n"): (typeof documents)["\n    query MeQuery {\n        me {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                Functionality\n                Marketing\n                Necessary\n                Statistics\n            }\n        }\n    }\n"];
+export function gql(source: "\n    query MeQuery {\n        me {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                functionality\n                marketing\n                necessary\n                statistics\n            }\n        }\n    }\n"): (typeof documents)["\n    query MeQuery {\n        me {\n            id\n            name\n            email\n            image\n            metadata\n            cookieConsent\n            cookiePreferences {\n                functionality\n                marketing\n                necessary\n                statistics\n            }\n        }\n    }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n    query GoogleLoginQuery($redirectUrl: String!) {\n        googleLoginUrl(redirect_url: $redirectUrl)\n    }\n"): (typeof documents)["\n    query GoogleLoginQuery($redirectUrl: String!) {\n        googleLoginUrl(redirect_url: $redirectUrl)\n    }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

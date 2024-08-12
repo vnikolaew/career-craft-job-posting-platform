@@ -33,3 +33,4 @@ export const LINKS = {
 } as const;
 
 export const __IS_DEV__ = process.env.NODE_ENV === `development`;
+export const __IS_HTTPS__ = process.env.HTTPS === `true`;

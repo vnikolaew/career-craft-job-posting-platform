@@ -17,11 +17,14 @@ import {
    SubscribeResolverData, ID,
 } from "type-graphql";
 import { MyContext, Nullable } from "@types";
-import { getUserCookie, lucia } from "@lib/auth";
+import { getUserCookie, google, lucia } from "@lib/auth";
 import { getGravatarImageUrl } from "@modules/user/utils";
 import { AuthorizedField, NoCache, SessionId, UserId } from "src/infrastructure/decorators";
 import { GraphQLUpload, Upload } from "@infrastructure/scalars/Upload";
 import { JsonValue } from "@prisma/client/runtime/library";
+import { generateCodeVerifier, generateState } from "arctic";
+import { serializeCookie } from "oslo/cookie";
+import { CookieAttributes } from "lucia";
 
 @InputType()
 export class UserSignUpInput implements Partial<User> {
@@ -56,16 +59,16 @@ export class UsersSearchInput {
 @ObjectType()
 export class UserCookiePreferences {
    @Field(() => Boolean)
-   Necessary: boolean;
+   necessary: boolean;
 
    @Field(() => Boolean)
-   Statistics: boolean;
+   statistics: boolean;
 
    @Field(() => Boolean)
-   Functionality: boolean;
+   functionality: boolean;
 
    @Field(() => Boolean)
-   Marketing: boolean;
+   marketing: boolean;
 }
 
 
@@ -126,7 +129,7 @@ export class UserResolver extends UserRelationsResolver {
       return user.image ?? DEFAULT_USER_AVATAR_URL;
    }
 
-   @FieldResolver(_ => Boolean)
+   @FieldResolver(_ => Boolean, { nullable: true })
    @AuthorizedField()
    public async cookieConsent(@Root() user: User): Promise<boolean> {
       return user?.metadata?.[`cookie-consent`] ?? false;
@@ -136,16 +139,55 @@ export class UserResolver extends UserRelationsResolver {
    @AuthorizedField()
    public async cookiePreferences(@Root() user: User, @Ctx() {}: MyContext): Promise<UserCookiePreferences> {
       return user?.metadata?.[`cookie-preferences`] as UserCookiePreferences ?? {
-         Necessary: true,
-         Statistics: false,
-         Functionality: false,
-         Marketing: false,
+         necessary: true,
+         statistics: false,
+         functionality: false,
+         marketing: false,
       };
    }
 
    @Mutation(() => Boolean)
    public async fileUpload(@Arg("file", () => GraphQLUpload) file: Upload, @Ctx() { prisma }: MyContext): Promise<boolean> {
       return true;
+   }
+
+   @Query(() => String)
+   @NoCache()
+   public async googleLoginUrl(@Arg("redirect_url", () => String, { nullable: true }) url: string, @Ctx() {
+      res,
+      req,
+   }: MyContext): Promise<string> {
+
+      const [state, codeVerifier] = [generateState(), generateCodeVerifier()];
+      let scopes = [`profile`, `email`];
+      const authUrl: URL = await google.createAuthorizationURL(state, codeVerifier, { scopes });
+
+      const host = req.headers.host.split(`:`)[0].trim();
+      const domain = new URL(req.headers.origin).hostname;
+
+      let cookieDomain: string;
+      if (domain === `localhost`) cookieDomain = `localhost`;
+      else {
+         const parts = domain.split(`.`);
+         cookieDomain = `.${parts.slice(parts.length - 2).join(`.`)}`;
+      }
+
+      let isCrossSite = host !== cookieDomain;
+      let cookieOpts: CookieAttributes = {
+         path: "/",
+         domain: cookieDomain,
+         secure: process.env.NODE_ENV === "production" || isCrossSite,
+         httpOnly: true,
+         maxAge: 60 * 10,
+         sameSite: isCrossSite ? `none` : "lax",
+      };
+
+      res
+         .appendHeader("Set-Cookie", serializeCookie("google_oauth_redirect_url", encodeURIComponent(url), cookieOpts))
+         .appendHeader("Set-Cookie", serializeCookie("google_oauth_state", state, cookieOpts))
+         .appendHeader("Set-Cookie", serializeCookie("google_oauth_code_verifier", codeVerifier, cookieOpts));
+
+      return authUrl.toString();
    }
 
    @Query(() => User, { nullable: true })
@@ -226,7 +268,7 @@ export class UserResolver extends UserRelationsResolver {
       password,
       username,
       email,
-   }: UserSignInInput, @Ctx() { prisma, res }: MyContext): Promise<User | null> {
+   }: UserSignInInput, @Ctx() { prisma, res, req }: MyContext): Promise<User | null> {
       const user = await prisma.user.findFirst({
          where: {
             OR: [
@@ -242,6 +284,8 @@ export class UserResolver extends UserRelationsResolver {
       });
 
       if (user && user.verifyPassword?.(password as string ?? ``)) {
+         console.log(req.headers.host, req.headers.origin);
+
          const serializedCookie = await getUserCookie(user);
          res.appendHeader(`Set-Cookie`, serializedCookie);
 

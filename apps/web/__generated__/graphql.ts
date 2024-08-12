@@ -1098,6 +1098,7 @@ export type Query = {
   getSession?: Maybe<Session>;
   getUser?: Maybe<User>;
   getVerificationToken?: Maybe<VerificationToken>;
+  googleLoginUrl: Scalars['String']['output'];
   groupByAccount: Array<AccountGroupBy>;
   groupBySession: Array<SessionGroupBy>;
   groupByUser: Array<UserGroupBy>;
@@ -1284,6 +1285,11 @@ export type QueryGetVerificationTokenArgs = {
 };
 
 
+export type QueryGoogleLoginUrlArgs = {
+  redirect_url?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type QueryGroupByAccountArgs = {
   by: Array<AccountScalarFieldEnum>;
   having?: InputMaybe<AccountScalarWhereWithAggregatesInput>;
@@ -1399,7 +1405,7 @@ export type Session = {
   __typename?: 'Session';
   createdAt: Scalars['DateTimeISO']['output'];
   expiresAt: Scalars['DateTimeISO']['output'];
-  id: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   sessionToken: Scalars['String']['output'];
   updatedAt: Scalars['DateTimeISO']['output'];
   userId: Scalars['String']['output'];
@@ -1749,12 +1755,12 @@ export type User = {
   __typename?: 'User';
   _count?: Maybe<UserCount>;
   accounts: Array<Account>;
-  cookieConsent: Scalars['Boolean']['output'];
-  cookiePreferences: UserCookiePreferences;
+  cookieConsent?: Maybe<Scalars['Boolean']['output']>;
+  cookiePreferences?: Maybe<UserCookiePreferences>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['String']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
-  id: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   image?: Maybe<Scalars['String']['output']>;
   /** [UserMetadata] */
   metadata?: Maybe<Scalars['JSON']['output']>;
@@ -1787,10 +1793,10 @@ export type UserSessionsArgs = {
 
 export type UserCookiePreferences = {
   __typename?: 'UserCookiePreferences';
-  Functionality: Scalars['Boolean']['output'];
-  Marketing: Scalars['Boolean']['output'];
-  Necessary: Scalars['Boolean']['output'];
-  Statistics: Scalars['Boolean']['output'];
+  functionality: Scalars['Boolean']['output'];
+  marketing: Scalars['Boolean']['output'];
+  necessary: Scalars['Boolean']['output'];
+  statistics: Scalars['Boolean']['output'];
 };
 
 export type UserCount = {
@@ -2021,12 +2027,12 @@ export type UserSearchResponse = {
   __typename?: 'UserSearchResponse';
   _count?: Maybe<UserCount>;
   accounts: Array<Account>;
-  cookieConsent: Scalars['Boolean']['output'];
-  cookiePreferences: UserCookiePreferences;
+  cookieConsent?: Maybe<Scalars['Boolean']['output']>;
+  cookiePreferences?: Maybe<UserCookiePreferences>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['String']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
-  id: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   image?: Maybe<Scalars['String']['output']>;
   /** [UserMetadata] */
   metadata?: Maybe<Scalars['JSON']['output']>;
@@ -2325,7 +2331,7 @@ export type VerificationTokenWhereUniqueInput = {
   token?: InputMaybe<StringFilter>;
 };
 
-export type MeFragmentFragment = { __typename?: 'User', id: string, name?: string | null, email: string, cookiePreferences: { __typename?: 'UserCookiePreferences', Functionality: boolean, Marketing: boolean, Necessary: boolean, Statistics: boolean } } & { ' $fragmentName'?: 'MeFragmentFragment' };
+export type MeFragmentFragment = { __typename?: 'User', id: string, name?: string | null, email: string, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } & { ' $fragmentName'?: 'MeFragmentFragment' };
 
 export type SignOutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -2337,17 +2343,25 @@ export type SignInMutationVariables = Exact<{
 }>;
 
 
-export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 'User', id: string, name?: string | null, email: string, image?: string | null, metadata?: any | null, cookieConsent: boolean, createdAt: any, cookiePreferences: { __typename?: 'UserCookiePreferences', Functionality: boolean, Marketing: boolean, Necessary: boolean, Statistics: boolean } } | null };
+export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 'User', id: string, name?: string | null, email: string, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, createdAt: any, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
 
 export type MeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name?: string | null, email: string, image?: string | null, metadata?: any | null, cookieConsent: boolean, cookiePreferences: { __typename?: 'UserCookiePreferences', Functionality: boolean, Marketing: boolean, Necessary: boolean, Statistics: boolean } } | null };
+export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name?: string | null, email: string, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
 
-export const MeFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Functionality"}},{"kind":"Field","name":{"kind":"Name","value":"Marketing"}},{"kind":"Field","name":{"kind":"Name","value":"Necessary"}},{"kind":"Field","name":{"kind":"Name","value":"Statistics"}}]}}]}}]} as unknown as DocumentNode<MeFragmentFragment, unknown>;
+export type GoogleLoginQueryQueryVariables = Exact<{
+  redirectUrl: Scalars['String']['input'];
+}>;
+
+
+export type GoogleLoginQueryQuery = { __typename?: 'Query', googleLoginUrl: string };
+
+export const MeFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"functionality"}},{"kind":"Field","name":{"kind":"Name","value":"marketing"}},{"kind":"Field","name":{"kind":"Name","value":"necessary"}},{"kind":"Field","name":{"kind":"Name","value":"statistics"}}]}}]}}]} as unknown as DocumentNode<MeFragmentFragment, unknown>;
 export const SignOutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignOut"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signOut"}}]}}]} as unknown as DocumentNode<SignOutMutation, SignOutMutationVariables>;
-export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"signInModel"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserSignInInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signInModel"},"value":{"kind":"Variable","name":{"kind":"Name","value":"signInModel"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"cookieConsent"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Functionality"}},{"kind":"Field","name":{"kind":"Name","value":"Marketing"}},{"kind":"Field","name":{"kind":"Name","value":"Necessary"}},{"kind":"Field","name":{"kind":"Name","value":"Statistics"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
-export const MeQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MeQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"cookieConsent"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Functionality"}},{"kind":"Field","name":{"kind":"Name","value":"Marketing"}},{"kind":"Field","name":{"kind":"Name","value":"Necessary"}},{"kind":"Field","name":{"kind":"Name","value":"Statistics"}}]}}]}}]}}]} as unknown as DocumentNode<MeQueryQuery, MeQueryQueryVariables>;
+export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"signInModel"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserSignInInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signInModel"},"value":{"kind":"Variable","name":{"kind":"Name","value":"signInModel"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"cookieConsent"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"functionality"}},{"kind":"Field","name":{"kind":"Name","value":"marketing"}},{"kind":"Field","name":{"kind":"Name","value":"necessary"}},{"kind":"Field","name":{"kind":"Name","value":"statistics"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
+export const MeQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MeQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"cookieConsent"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"functionality"}},{"kind":"Field","name":{"kind":"Name","value":"marketing"}},{"kind":"Field","name":{"kind":"Name","value":"necessary"}},{"kind":"Field","name":{"kind":"Name","value":"statistics"}}]}}]}}]}}]} as unknown as DocumentNode<MeQueryQuery, MeQueryQueryVariables>;
+export const GoogleLoginQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GoogleLoginQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"redirectUrl"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"googleLoginUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"redirect_url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"redirectUrl"}}}]}]}}]} as unknown as DocumentNode<GoogleLoginQueryQuery, GoogleLoginQueryQueryVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -3439,6 +3453,7 @@ export type Query = {
   getSession?: Maybe<Session>;
   getUser?: Maybe<User>;
   getVerificationToken?: Maybe<VerificationToken>;
+  googleLoginUrl: Scalars['String']['output'];
   groupByAccount: Array<AccountGroupBy>;
   groupBySession: Array<SessionGroupBy>;
   groupByUser: Array<UserGroupBy>;
@@ -3625,6 +3640,11 @@ export type QueryGetVerificationTokenArgs = {
 };
 
 
+export type QueryGoogleLoginUrlArgs = {
+  redirect_url?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type QueryGroupByAccountArgs = {
   by: Array<AccountScalarFieldEnum>;
   having?: InputMaybe<AccountScalarWhereWithAggregatesInput>;
@@ -3740,7 +3760,7 @@ export type Session = {
   __typename?: 'Session';
   createdAt: Scalars['DateTimeISO']['output'];
   expiresAt: Scalars['DateTimeISO']['output'];
-  id: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   sessionToken: Scalars['String']['output'];
   updatedAt: Scalars['DateTimeISO']['output'];
   userId: Scalars['String']['output'];
@@ -4090,12 +4110,12 @@ export type User = {
   __typename?: 'User';
   _count?: Maybe<UserCount>;
   accounts: Array<Account>;
-  cookieConsent: Scalars['Boolean']['output'];
-  cookiePreferences: UserCookiePreferences;
+  cookieConsent?: Maybe<Scalars['Boolean']['output']>;
+  cookiePreferences?: Maybe<UserCookiePreferences>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['String']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
-  id: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   image?: Maybe<Scalars['String']['output']>;
   /** [UserMetadata] */
   metadata?: Maybe<Scalars['JSON']['output']>;
@@ -4128,10 +4148,10 @@ export type UserSessionsArgs = {
 
 export type UserCookiePreferences = {
   __typename?: 'UserCookiePreferences';
-  Functionality: Scalars['Boolean']['output'];
-  Marketing: Scalars['Boolean']['output'];
-  Necessary: Scalars['Boolean']['output'];
-  Statistics: Scalars['Boolean']['output'];
+  functionality: Scalars['Boolean']['output'];
+  marketing: Scalars['Boolean']['output'];
+  necessary: Scalars['Boolean']['output'];
+  statistics: Scalars['Boolean']['output'];
 };
 
 export type UserCount = {
@@ -4362,12 +4382,12 @@ export type UserSearchResponse = {
   __typename?: 'UserSearchResponse';
   _count?: Maybe<UserCount>;
   accounts: Array<Account>;
-  cookieConsent: Scalars['Boolean']['output'];
-  cookiePreferences: UserCookiePreferences;
+  cookieConsent?: Maybe<Scalars['Boolean']['output']>;
+  cookiePreferences?: Maybe<UserCookiePreferences>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['String']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
-  id: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   image?: Maybe<Scalars['String']['output']>;
   /** [UserMetadata] */
   metadata?: Maybe<Scalars['JSON']['output']>;
@@ -4666,7 +4686,7 @@ export type VerificationTokenWhereUniqueInput = {
   token?: InputMaybe<StringFilter>;
 };
 
-export type MeFragmentFragment = { __typename?: 'User', id: string, name?: string | null, email: string, cookiePreferences: { __typename?: 'UserCookiePreferences', Functionality: boolean, Marketing: boolean, Necessary: boolean, Statistics: boolean } } & { ' $fragmentName'?: 'MeFragmentFragment' };
+export type MeFragmentFragment = { __typename?: 'User', id: string, name?: string | null, email: string, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } & { ' $fragmentName'?: 'MeFragmentFragment' };
 
 export type SignOutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -4678,12 +4698,19 @@ export type SignInMutationVariables = Exact<{
 }>;
 
 
-export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 'User', id: string, name?: string | null, email: string, image?: string | null, metadata?: any | null, cookieConsent: boolean, createdAt: any, cookiePreferences: { __typename?: 'UserCookiePreferences', Functionality: boolean, Marketing: boolean, Necessary: boolean, Statistics: boolean } } | null };
+export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 'User', id: string, name?: string | null, email: string, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, createdAt: any, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
 
 export type MeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name?: string | null, email: string, image?: string | null, metadata?: any | null, cookieConsent: boolean, cookiePreferences: { __typename?: 'UserCookiePreferences', Functionality: boolean, Marketing: boolean, Necessary: boolean, Statistics: boolean } } | null };
+export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name?: string | null, email: string, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
+
+export type GoogleLoginQueryQueryVariables = Exact<{
+  redirectUrl: Scalars['String']['input'];
+}>;
+
+
+export type GoogleLoginQueryQuery = { __typename?: 'Query', googleLoginUrl: string };
 
 
       export interface IntrospectionResultData {

@@ -131,10 +131,10 @@ export let xprisma = prisma.$extends({
                   image,
                   metadata: {
                      'cookie-preferences': {
-                        Necessary: true,
-                        Statistics: false,
-                        Functionality: false,
-                        Marketing: false
+                        necessary: true,
+                        statistics: false,
+                        functionality: false,
+                        marketing: false,
                      },
                      'cookie-consent': false
                   }

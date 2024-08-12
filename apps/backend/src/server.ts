@@ -5,7 +5,7 @@ import {
 import express from "express";
 import { githubLoginRouter } from "@modules/user/auth/github";
 import { getPlugins } from "@infrastructure/plugins/CustomPlugin";
-import { __IS_DEV__ } from "@consts";
+import { __IS_DEV__, __IS_HTTPS__ } from "@consts";
 import { KeyvAdapter } from "@apollo/utils.keyvadapter";
 import Keyv from "keyv";
 import { ErrorsAreMissesCache, InMemoryLRUCache } from "@apollo/utils.keyvaluecache";
@@ -26,6 +26,9 @@ import { SubscriptionServer } from "subscriptions-transport-ws";
 import { execute, subscribe } from "graphql";
 import * as http from "node:http";
 import { asyncIteratorToIterable } from "@modules/user/UserResolver";
+import { googleLoginRouter } from "@modules/user/auth/google";
+import * as https from "node:https";
+import { WHITELISTED_URLS } from "@infrastructure/middleware/HostMiddleware";
 
 export class CustomApolloServer<TContext> {
    private readonly schema: Partial<BuildSchemaOptions> & { resolvers: NonEmptyArray<Function> };
@@ -50,14 +53,17 @@ export class CustomApolloServer<TContext> {
       console.log(`🚀 Running in ${__IS_DEV__ ? `development` : `production`} mode ...`);
 
       this.app = express();
-      this.app.use(`/login/github`, githubLoginRouter);
+      this.app
+         .use(`/login/github`, githubLoginRouter)
+         .use(`/login/google`, googleLoginRouter);
 
-      this.httpServer = http.createServer(
-         // {
-         // key: fs.readFileSync(path.join(process.cwd(),`certs`, `api.apollo-next.com.key`)),
-         // cert: fs.readFileSync(path.join(process.cwd(),`certs`, `api.apollo-next.com.crt`)),
-         // },
-         this.app);
+      this.httpServer = __IS_HTTPS__ ? https.createServer(
+         {
+            key: fs.readFileSync(path.join(process.cwd(), `certs`, `api.apollo-next.com.key`)),
+            cert: fs.readFileSync(path.join(process.cwd(), `certs`, `api.apollo-next.com.crt`)),
+         },
+         this.app) : http.createServer(this.app);
+
 
       const schema = await buildSchema({
          ...this.schema, pubSub: {
@@ -136,7 +142,7 @@ export class CustomApolloServer<TContext> {
          }));
 
       await new Promise<void>(res => this.httpServer.listen({ port: PORT }, res));
-      console.log(`🚀 Server ready and listening on port ${PORT} at: http://api.apollo-next.com:${PORT}`);
+      console.log(`🚀 Server ready and listening on port ${PORT} at: ${WHITELISTED_URLS(PORT).join(`; `)}`);
    }
 
    private copySchemaFile() {

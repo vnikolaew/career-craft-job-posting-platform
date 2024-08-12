@@ -1,5 +1,6 @@
 import { xprisma } from "@prisma/prisma";
 import { parseArgs } from "node:util";
+import bcrypt from "bcryptjs";
 
 const options = {
    environment: { type: "string" as const },
@@ -17,13 +18,13 @@ async function main() {
          {
             email: `victorio.nikolaev25@gmail.com`,
             name: `vnikolaew`,
-            password: `vNikolaew123!`,
+            password: bcrypt.hashSync(`vNikolaew123!`, 10),
             image: DEFAULT_USER_AVATAR_URL,
          },
          {
             email: `vikinik01@abv.bg`,
             name: `vnikolaew2`,
-            password: `vNikolaew123!`,
+            password: bcrypt.hashSync(`vNikolaew123!`, 10),
             image: DEFAULT_USER_AVATAR_URL,
          },
       ];

@@ -56,7 +56,7 @@ const Footer = ({}: FooterProps) => {
                   <Image className={`rounded-full shadow-md`} height={32} width={32} src={logo} alt={`logo`} />
                   <h2 className={`text-lg font-semibold`}>{APP_NAME}</h2>
                </Link>
-               <span className={`!mt-4 text-sm !text-secondary`}>
+               <span className={`!mt-4 text-sm !text-neutral-400`}>
                   Copyright © {new Date().getFullYear()} - All rights reserved.
                </span>
             </div>

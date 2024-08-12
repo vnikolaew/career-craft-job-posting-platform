@@ -883,6 +883,7 @@ type Query {
   getSession(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   getUser(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
   getVerificationToken(relationLoadStrategy: RelationLoadStrategy, where: VerificationTokenWhereUniqueInput!): VerificationToken
+  googleLoginUrl(redirect_url: String): String!
   groupByAccount(by: [AccountScalarFieldEnum!]!, having: AccountScalarWhereWithAggregatesInput, orderBy: [AccountOrderByWithAggregationInput!], skip: Int, take: Int, where: AccountWhereInput): [AccountGroupBy!]!
   groupBySession(by: [SessionScalarFieldEnum!]!, having: SessionScalarWhereWithAggregatesInput, orderBy: [SessionOrderByWithAggregationInput!], skip: Int, take: Int, where: SessionWhereInput): [SessionGroupBy!]!
   groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByWithAggregationInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
@@ -1258,7 +1259,7 @@ scalar Upload
 type User {
   _count: UserCount
   accounts(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): [Account!]!
-  cookieConsent: Boolean!
+  cookieConsent: Boolean
   cookiePreferences: UserCookiePreferences
   createdAt: DateTimeISO!
   email: String!
@@ -1274,10 +1275,10 @@ type User {
 }
 
 type UserCookiePreferences {
-  Functionality: Boolean!
-  Marketing: Boolean!
-  Necessary: Boolean!
-  Statistics: Boolean!
+  functionality: Boolean!
+  marketing: Boolean!
+  necessary: Boolean!
+  statistics: Boolean!
 }
 
 type UserCount {
@@ -1492,7 +1493,7 @@ input UserScalarWhereWithAggregatesInput {
 type UserSearchResponse {
   _count: UserCount
   accounts(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): [Account!]!
-  cookieConsent: Boolean!
+  cookieConsent: Boolean
   cookiePreferences: UserCookiePreferences
   createdAt: DateTimeISO!
   email: String!

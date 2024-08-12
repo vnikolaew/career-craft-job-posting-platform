@@ -8,14 +8,17 @@ import { gql } from "@/__generated__";
 import { useMutation, useQuery } from "@apollo/client";
 import { UserSignInInput } from "@/__generated__/graphql";
 import { APP_NAME } from "@/config/site";
+import { isValidUrl } from "@/lib/utils";
+import Google from "@/components/icons/Google";
+import { LogOut } from "lucide-react";
 
 export interface NavbarProps {
 }
 
 const DEFAULT_USER: UserSignInInput = {
    email: `victorio.nikolaev25@gmail.com`,
-   username: `vnikolaew2`,
-   password: `6]F?U2Y$b@8u]tU`,
+   username: `vnikolaew`,
+   password: `vNikolaew123!`,
 };
 
 const SIGN_OUT_MUTATION = gql(/* GraphQL */`
@@ -34,10 +37,10 @@ const SIGN_IN_MUTATION = gql(/* GraphQL */`
             metadata
             cookieConsent
             cookiePreferences {
-                Functionality
-                Marketing
-                Necessary
-                Statistics
+                functionality
+                marketing
+                necessary
+                statistics
             }
             createdAt
         }
@@ -54,12 +57,18 @@ export const ME_QUERY = gql(/* GraphQL */`
             metadata
             cookieConsent
             cookiePreferences {
-                Functionality
-                Marketing
-                Necessary
-                Statistics
+                functionality
+                marketing
+                necessary
+                statistics
             }
         }
+    }
+`);
+
+export const GOOGLE_LOGIN_QUERY = gql(/* GraphQL */`
+    query GoogleLoginQuery($redirectUrl: String!) {
+        googleLoginUrl(redirect_url: $redirectUrl)
     }
 `);
 
@@ -71,9 +80,41 @@ const Navbar = ({}: NavbarProps) => {
          }
       },
    });
+   const { refetch: getGoogleLoginUrl, loading: getGoogleLoginUrlLoading } = useQuery(GOOGLE_LOGIN_QUERY, {
+      skip: true,
+   });
 
    const [signIn, { data: signInData, loading: signingIn }] = useMutation(SIGN_IN_MUTATION, {});
    const [signOut, { data: signOutData, loading: signingOut }] = useMutation(SIGN_OUT_MUTATION, {});
+
+   const handleGoogleSignIn = async () => {
+      const res = await getGoogleLoginUrl({ redirectUrl: window.location.href });
+      if (isValidUrl(res.data.googleLoginUrl)) {
+         window.location.href = res.data.googleLoginUrl;
+      }
+   };
+
+   const handleRegularSignIn = async () => {
+      await signIn({
+         variables: {
+            signInModel: DEFAULT_USER,
+         },
+         onCompleted: (data) => {
+            if (data?.signIn?.id) {
+               console.log(data.signIn);
+               window.location.reload();
+            }
+         },
+      });
+   };
+
+   async function handleSignOut() {
+      await signOut({
+         variables: {}, onCompleted: (data) => {
+            if (data?.signOut) window.location.reload();
+         },
+      });
+   }
 
    return (
       <div id={`navbar`} className={`w-full px-24 py-4 border-b border-neutral-800`}>
@@ -86,42 +127,43 @@ const Navbar = ({}: NavbarProps) => {
                {loading ? (
                   <div className={`h-10 w-10 rounded-full bg-neutral-700 animate-pulse`} />
                ) : (
-                  <Link href={`/`}>
+                  <Link className={`!w-fit !h-fit `} href={`/`}>
                      <Image height={40} width={40} className={`rounded-full shadow-md`}
                             src={data?.me?.image ?? DEFAULT_USER_AVATAR_URL}
                             alt={``} />
                   </Link>
                )}
-               {loading && <div className={`h-3 rounded-md w-12 bg-neutral-700 animate-pulse`} />}
-               {data?.me?.name && !loading && <span className={``}>{data.me.name}</span>}
-               {!data?.me?.name && !loading && <span>Not signed in.</span>}
+
+               {loading && <div className={`h-3 rounded-md w-12 bg-neutral-700 animate-pulse mr-4`} />}
+               {data?.me?.name && !loading && <span className={`mr-4`}>{data.me.name}</span>}
+               {!data?.me?.name && !loading && <span className={`mr-4`}>Not signed in.</span>}
 
                <span>
                {data?.me?.name ? (
                   <Link onClick={async e => {
                      e.preventDefault();
-                     await signOut({
-                        variables: {}, onCompleted: (data) => {
-                           if (data?.signOut) window.location.reload();
-                        },
-                     });
-                  }} className={`text-blue-500 underline`} href={`/`}>Sign out</Link>
+                     await handleSignOut();
+                  }} className={`btn btn-error !h-fit !min-h-fit !py-2 !px-4 !text-white text-base !gap-3`} href={`/`}>
+                     Sign out
+                     <LogOut size={18} />
+                  </Link>
                ) : (
-                  <Link onClick={async e => {
-                     e.preventDefault();
-                     await signIn({
-                        variables: {
-                           signInModel: DEFAULT_USER,
-                        },
-                        onCompleted: (data) => {
-                           if (data?.signIn?.id) {
-                              console.log(data.signIn);
-                              window.location.reload();
-                           }
-                        },
-                     });
-
-                  }} className={`text-blue-500 underline`} href={`/signin`}>Sign in</Link>
+                  <div className={`flex items-center gap-4`}>
+                     <Link onClick={async e => {
+                        e.preventDefault();
+                        await handleRegularSignIn();
+                     }} className={` btn btn-info !h-fit !min-h-fit !py-3 !px-6 !text-white`} href={`/signin`}>Sign
+                        in</Link>
+                     <Link onClick={async e => {
+                        e.preventDefault();
+                        await handleGoogleSignIn();
+                     }}
+                           className={`text-white inline-flex items-center gap-2 text-nowrap btn btn-ghost !h-fit !min-h-fit !py-3 !px-6 `}
+                           href={`/signin`}>
+                        <Google className={`fill-white`} />
+                        Continue with Google
+                     </Link>
+                  </div>
                )}
           </span>
             </div>
