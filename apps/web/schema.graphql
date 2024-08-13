@@ -2024,11 +2024,12 @@ type Mutation {
   deleteOneUser(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
   deleteOneVerificationToken(relationLoadStrategy: RelationLoadStrategy, where: VerificationTokenWhereUniqueInput!): VerificationToken
   fileUpload(file: Upload!): Boolean!
+  generateSignUpEmailCode(email: EmailAddress!): SignUpWithEmailCodeResponse!
   sendVerificationEmail: SendVerificationEmailResponse!
   signIn(signInModel: UserSignInInput!): User
   signOut: Boolean!
   signUp(signUpModel: UserSignUpInput!): User!
-  signUpWithEmailCode(email: EmailAddress!): SignUpWithEmailCodeResponse!
+  signUpWithEmailCode(code: Int!, email: EmailAddress!, firstName: String!, identifier: String!, lastName: String!): User!
   updateManyAccount(data: AccountUpdateManyMutationInput!, where: AccountWhereInput): AffectedRowsOutput!
   updateManyCompany(data: CompanyUpdateManyMutationInput!, where: CompanyWhereInput): AffectedRowsOutput!
   updateManyCompanyCategory(data: CompanyCategoryUpdateManyMutationInput!, where: CompanyCategoryWhereInput): AffectedRowsOutput!
@@ -2661,7 +2662,10 @@ input SessionWhereUniqueInput {
 }
 
 type SignUpWithEmailCodeResponse {
+  code: Int
   error: String
+  expires: DateTimeISO
+  identifier: String
   success: Boolean!
 }
 
@@ -2774,12 +2778,14 @@ type User {
   createdAt: DateTimeISO!
   email: String!
   emailVerified: DateTimeISO
+  first_name: String!
   id: ID!
   image: String
+  last_name: String!
 
   """[UserMetadata]"""
   metadata: JSON
-  name: String
+  name: String!
   sessions(cursor: SessionWhereUniqueInput, distinct: [SessionScalarFieldEnum!], orderBy: [SessionOrderByWithRelationInput!], skip: Int, take: Int, where: SessionWhereInput): [Session!]!
   updatedAt: DateTimeISO!
 }
@@ -2801,8 +2807,10 @@ type UserCountAggregate {
   createdAt: Int!
   email: Int!
   emailVerified: Int!
+  first_name: Int!
   id: Int!
   image: Int!
+  last_name: Int!
   metadata: Int!
   name: Int!
   password: Int!
@@ -2812,8 +2820,10 @@ type UserCountAggregate {
 input UserCountOrderByAggregateInput {
   email: SortOrder
   emailVerified: SortOrder
+  first_name: SortOrder
   id: SortOrder
   image: SortOrder
+  last_name: SortOrder
   metadata: SortOrder
   name: SortOrder
 }
@@ -2822,20 +2832,24 @@ input UserCreateInput {
   accounts: AccountCreateNestedManyWithoutUserInput
   email: String!
   emailVerified: DateTimeISO
+  first_name: String!
   id: String
   image: String
+  last_name: String!
   metadata: JSON
-  name: String
+  name: String!
   sessions: SessionCreateNestedManyWithoutUserInput
 }
 
 input UserCreateManyInput {
   email: String!
   emailVerified: DateTimeISO
+  first_name: String!
   id: String
   image: String
+  last_name: String!
   metadata: JSON
-  name: String
+  name: String!
 }
 
 input UserCreateNestedOneWithoutAccountsInput {
@@ -2863,10 +2877,12 @@ input UserCreateOrConnectWithoutSessionsInput {
 input UserCreateWithoutAccountsInput {
   email: String!
   emailVerified: DateTimeISO
+  first_name: String!
   id: String
   image: String
+  last_name: String!
   metadata: JSON
-  name: String
+  name: String!
   sessions: SessionCreateNestedManyWithoutUserInput
 }
 
@@ -2874,10 +2890,12 @@ input UserCreateWithoutSessionsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
   email: String!
   emailVerified: DateTimeISO
+  first_name: String!
   id: String
   image: String
+  last_name: String!
   metadata: JSON
-  name: String
+  name: String!
 }
 
 type UserGroupBy {
@@ -2887,10 +2905,12 @@ type UserGroupBy {
   createdAt: DateTimeISO!
   email: String!
   emailVerified: DateTimeISO
+  first_name: String!
   id: String!
   image: String
+  last_name: String!
   metadata: JSON
-  name: String
+  name: String!
   password: String
   updatedAt: DateTimeISO!
 }
@@ -2899,8 +2919,10 @@ type UserMaxAggregate {
   createdAt: DateTimeISO
   email: String
   emailVerified: DateTimeISO
+  first_name: String
   id: String
   image: String
+  last_name: String
   name: String
   password: String
   updatedAt: DateTimeISO
@@ -2909,8 +2931,10 @@ type UserMaxAggregate {
 input UserMaxOrderByAggregateInput {
   email: SortOrder
   emailVerified: SortOrder
+  first_name: SortOrder
   id: SortOrder
   image: SortOrder
+  last_name: SortOrder
   name: SortOrder
 }
 
@@ -2918,8 +2942,10 @@ type UserMinAggregate {
   createdAt: DateTimeISO
   email: String
   emailVerified: DateTimeISO
+  first_name: String
   id: String
   image: String
+  last_name: String
   name: String
   password: String
   updatedAt: DateTimeISO
@@ -2928,15 +2954,19 @@ type UserMinAggregate {
 input UserMinOrderByAggregateInput {
   email: SortOrder
   emailVerified: SortOrder
+  first_name: SortOrder
   id: SortOrder
   image: SortOrder
+  last_name: SortOrder
   name: SortOrder
 }
 
 enum UserOrderByRelevanceFieldEnum {
   email
+  first_name
   id
   image
+  last_name
   name
   password
 }
@@ -2953,10 +2983,12 @@ input UserOrderByWithAggregationInput {
   _min: UserMinOrderByAggregateInput
   email: SortOrder
   emailVerified: SortOrderInput
+  first_name: SortOrder
   id: SortOrder
   image: SortOrderInput
+  last_name: SortOrder
   metadata: SortOrderInput
-  name: SortOrderInput
+  name: SortOrder
 }
 
 input UserOrderByWithRelationInput {
@@ -2964,10 +2996,12 @@ input UserOrderByWithRelationInput {
   accounts: AccountOrderByRelationAggregateInput
   email: SortOrder
   emailVerified: SortOrderInput
+  first_name: SortOrder
   id: SortOrder
   image: SortOrderInput
+  last_name: SortOrder
   metadata: SortOrderInput
-  name: SortOrderInput
+  name: SortOrder
   sessions: SessionOrderByRelationAggregateInput
 }
 
@@ -2980,8 +3014,10 @@ enum UserScalarFieldEnum {
   createdAt
   email
   emailVerified
+  first_name
   id
   image
+  last_name
   metadata
   name
   password
@@ -2994,10 +3030,12 @@ input UserScalarWhereWithAggregatesInput {
   OR: [UserScalarWhereWithAggregatesInput!]
   email: StringWithAggregatesFilter
   emailVerified: DateTimeNullableWithAggregatesFilter
+  first_name: StringWithAggregatesFilter
   id: StringWithAggregatesFilter
   image: StringNullableWithAggregatesFilter
+  last_name: StringWithAggregatesFilter
   metadata: JsonNullableWithAggregatesFilter
-  name: StringNullableWithAggregatesFilter
+  name: StringWithAggregatesFilter
 }
 
 type UserSearchResponse {
@@ -3008,12 +3046,14 @@ type UserSearchResponse {
   createdAt: DateTimeISO!
   email: String!
   emailVerified: DateTimeISO
+  first_name: String!
   id: ID!
   image: String
+  last_name: String!
 
   """[UserMetadata]"""
   metadata: JSON
-  name: String
+  name: String!
   sessions(cursor: SessionWhereUniqueInput, distinct: [SessionScalarFieldEnum!], orderBy: [SessionOrderByWithRelationInput!], skip: Int, take: Int, where: SessionWhereInput): [Session!]!
   updatedAt: DateTimeISO!
 }
@@ -3034,20 +3074,24 @@ input UserUpdateInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
   metadata: JSON
-  name: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
   sessions: SessionUpdateManyWithoutUserNestedInput
 }
 
 input UserUpdateManyMutationInput {
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
   metadata: JSON
-  name: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
 }
 
 input UserUpdateOneRequiredWithoutAccountsNestedInput {
@@ -3079,10 +3123,12 @@ input UserUpdateToOneWithWhereWithoutSessionsInput {
 input UserUpdateWithoutAccountsInput {
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
   metadata: JSON
-  name: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
   sessions: SessionUpdateManyWithoutUserNestedInput
 }
 
@@ -3090,10 +3136,12 @@ input UserUpdateWithoutSessionsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   image: NullableStringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
   metadata: JSON
-  name: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
 }
 
 input UserUpsertWithoutAccountsInput {
@@ -3115,10 +3163,12 @@ input UserWhereInput {
   accounts: AccountListRelationFilter
   email: StringFilter
   emailVerified: DateTimeNullableFilter
+  first_name: StringFilter
   id: StringFilter
   image: StringNullableFilter
+  last_name: StringFilter
   metadata: JsonNullableFilter
-  name: StringNullableFilter
+  name: StringFilter
   sessions: SessionListRelationFilter
 }
 
@@ -3129,10 +3179,12 @@ input UserWhereUniqueInput {
   accounts: AccountListRelationFilter
   email: String
   emailVerified: DateTimeNullableFilter
+  first_name: StringFilter
   id: String
   image: StringNullableFilter
+  last_name: StringFilter
   metadata: JsonNullableFilter
-  name: StringNullableFilter
+  name: StringFilter
   sessions: SessionListRelationFilter
 }
 

@@ -63,6 +63,8 @@ googleLoginRouter.get("/callback", async (req, res) => {
       let user = await xprisma.user.upsert({
          where: { email: googleUser.email },
          create: {
+            first_name: googleUser.given_name ?? ``,
+            last_name: googleUser.family_name ?? ``,
             name: googleUser.name,
             emailVerified: new Date(),
             image: googleUser.picture,
@@ -86,6 +88,8 @@ googleLoginRouter.get("/callback", async (req, res) => {
          },
          update: {
             name: googleUser.name,
+            first_name: googleUser.given_name ?? ``,
+            last_name: googleUser.family_name ?? ``,
             emailVerified: new Date(),
             image: googleUser.picture,
             email: googleUser.email,

@@ -2,7 +2,7 @@ import express from "express";
 import { __IS_HTTPS__ } from "@consts";
 
 export const WHITELISTED_DOMAINS = new Set<string>(
-   (process.env.HOST?.split(`;`) ?? [`localhost`, `127.0.0.1`, `apollo-next.com`, `api.apollo-next.com`, `career-craft.com`, `api.career-craft.com`]));
+   (process.env.HOST?.split(`;`) ?? [`localhost`, `127.0.0.1` ,`career-craft.com`, `api.career-craft.com`]));
 
 export const WHITELISTED_URLS = (port: number) => [...WHITELISTED_DOMAINS].map(domain => `http${__IS_HTTPS__ ? `s` : ``}://${domain}:${port}`);
 

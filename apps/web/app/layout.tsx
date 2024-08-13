@@ -36,7 +36,7 @@ const dancingScript = Rubik({
 });
 
 export const metadata: Metadata = {
-   title: APP_NAME,
+   title: `${APP_NAME} | ${APP_DESCRIPTION_LONGER}`,
    description: APP_DESCRIPTION_LONGER,
    keywords: APP_KEYWORDS,
    authors: [
@@ -58,7 +58,7 @@ export default function RootLayout({
       <body>
       <Providers>
          <Navbar />
-         <main className={`min-h-[70vh]`}>
+         <main className={`min-h-[70vh] mt-24`}>
             {children}
          </main>
          <Footer />

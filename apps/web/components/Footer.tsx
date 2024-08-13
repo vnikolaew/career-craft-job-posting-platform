@@ -49,7 +49,7 @@ const ICON_CLASSNAME = `h-6 w-6 !fill-green-400 text-white transition-colors dur
 
 const Footer = ({}: FooterProps) => {
    return (
-      <section className={`w-full px-24 py-12 mt-24 border-t border-neutral-300 bg-neutral-200`}>
+      <section className={`w-full px-24 py-12 mt-24 border-t border-neutral-300 bg-neutral-100`}>
          <div className={`flex items-center justify-between w-full`}>
             <div className={`flex flex-col items-start`}>
                <Link className={`inline-flex gap-2 items-center`} href={`/`}>

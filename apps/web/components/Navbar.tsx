@@ -9,7 +9,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { UserSignInInput } from "@/__generated__/graphql";
 import { isValidUrl } from "@/lib/utils";
 import Google from "@/components/icons/Google";
-import { LogOut } from "lucide-react";
+import { Building2, CircleUserRound, LogOut } from "lucide-react";
+import SignedIn from "@/components/common/SignedIn";
 
 export interface NavbarProps {
 }
@@ -31,6 +32,8 @@ const SIGN_IN_MUTATION = gql(/* GraphQL */`
         signIn(signInModel: $signInModel) {
             id
             name
+            first_name
+            last_name
             email
             image
             metadata
@@ -51,6 +54,8 @@ export const ME_QUERY = gql(/* GraphQL */`
         me {
             id
             name
+            first_name
+            last_name
             email
             image
             metadata
@@ -116,12 +121,12 @@ const Navbar = ({}: NavbarProps) => {
    }
 
    return (
-      <div id={`navbar`} className={`w-full px-24 py-5 border-b border-neutral-300 fixed bg-opacity-80 bg-neutral-200`}>
+      <div id={`navbar`}
+           className={`w-full px-24 py-5 border-b border-neutral-300 fixed bg-opacity-80 bg-neutral-100 z-10`}>
          <nav className={`flex items-center justify-between`}>
             <Link className={`inline-flex gap-4 items-center`} href={`/`}>
                <Image className={` shadow-md`}
                       height={64} width={132} src={logo} alt={`logo`} />
-               {/*<h2 className={`text-xl font-semibold`}>{APP_NAME}</h2>*/}
             </Link>
             <div className={`flex items-center gap-4`}>
                {loading ? (
@@ -142,16 +147,52 @@ const Navbar = ({}: NavbarProps) => {
                   </Fragment>
                )}
                <span>
-               {data?.me?.name ? (
-                  <Link onClick={async e => {
-                     e.preventDefault();
-                     await handleSignOut();
-                  }} className={`btn btn-error !h-fit !min-h-fit !py-2 !px-4 !text-white text-base !gap-3`} href={`/`}>
-                     Sign out
-                     <LogOut size={18} />
-                  </Link>
+               {data?.me?.id ? (
+                  <div className={`flex items-center gap-4`}>
+                     <Link className={`!w-fit !h-fit `} href={`/`}>
+                        <Image height={40} width={40} className={`rounded-full shadow-md`}
+                               src={data?.me?.image ?? DEFAULT_USER_AVATAR_URL}
+                               alt={``} />
+                     </Link>
+                     <span
+                        className={`mr-4`}>{data?.me?.name?.length ? data?.me?.name : `${data?.me?.first_name} ${data?.me?.last_name}`}</span>
+                     <Link onClick={async e => {
+                        e.preventDefault();
+                        await handleSignOut();
+                     }} className={`btn btn-error !h-fit !min-h-fit !py-2 !px-4 !text-white text-base !gap-3`}
+                           href={`/`}>
+                        Sign out
+                        <LogOut size={18} />
+                     </Link>
+                  </div>
                ) : !loading ? (
                      <div className={`flex items-center gap-4`}>
+                        <div className={`dropdown`}>
+                           <Link onClick={async e => {
+                              e.preventDefault();
+                              // await handleRegularSignIn();
+                           }}
+                                 className={`btn btn-outline btn-accent !h-fit !min-h-fit !py-2.5 !px-6 !shadow-md hover:!opacity-95 duration-100 transition-all !text-green-600 !border-green-600 hover:!bg-neutral-100`}
+                                 href={`/signup`}>
+                              Sign up
+                           </Link>
+                           <ul
+                              className={`menu dropdown-content rounded-md bg-neutral-100 px-2 flex flex-col items-start gap-1`}>
+                              <li className={`p-2 cursor-pointer w-full rounded-md min-w-[200px] `}>
+                                 <Link className={`w-full inline-flex items-center gap-4 text-lg`} href={`/signup/user`}>
+                                    <CircleUserRound size={22} />
+                                    User
+                                 </Link>
+                              </li>
+                              <li
+                                 className={`p-2 cursor-pointer w-full bg-green-600 transition-all hover:!bg-neutral-100 text-white hover:!text-green-600 rounded-md min-w-[200px]`}>
+                                 <Link className={`w-full inline-flex items-center gap-4 text-lg`} href={`/signup`}>
+                                    <Building2 size={22} />
+                                    Company
+                                 </Link>
+                              </li>
+                           </ul>
+                        </div>
                         <Link onClick={async e => {
                            e.preventDefault();
                            await handleRegularSignIn();

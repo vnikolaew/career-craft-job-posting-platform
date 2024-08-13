@@ -25,6 +25,7 @@ import { JsonValue } from "@prisma/client/runtime/library";
 import { generateCodeVerifier, generateState } from "arctic";
 import { serializeCookie } from "oslo/cookie";
 import { CookieAttributes } from "lucia";
+import { CONSTS } from "@modules/user/consts";
 
 @InputType()
 export class UserSignUpInput implements Partial<User> {
@@ -80,8 +81,6 @@ export function asyncIteratorToIterable<T>(asyncIterator: AsyncIterator<T>): Asy
    };
 }
 
-export const DEFAULT_USER_AVATAR_URL = `https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg`;
-
 @Resolver(of => User)
 export class UserResolver extends UserRelationsResolver {
 
@@ -126,7 +125,7 @@ export class UserResolver extends UserRelationsResolver {
 
    @FieldResolver(_ => String, { nullable: true })
    public async image(@Root() user: User): Promise<JsonValue> {
-      return user.image ?? DEFAULT_USER_AVATAR_URL;
+      return user.image ?? CONSTS.DEFAULT_USER_AVATAR_URL;
    }
 
    @FieldResolver(_ => Boolean, { nullable: true })
@@ -251,7 +250,7 @@ export class UserResolver extends UserRelationsResolver {
             email,
             password,
             username,
-            image: imageUrl ?? DEFAULT_USER_AVATAR_URL,
+            image: imageUrl ?? CONSTS.DEFAULT_USER_AVATAR_URL,
          },
          { image: true },
       );

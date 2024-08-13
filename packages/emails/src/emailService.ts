@@ -29,8 +29,10 @@ export class EmailService {
             html,
          });
 
+         if(error?.message) return { success: false, error: error.message };
+
          console.log(`E-mail successfully sent to: ${to} with ID: ${data?.id}`);
-         return { success: true, id: data!.id! };
+         return { success: true, id: data?.id! };
       } catch (err) {
          console.error(`An error occurred while sending a Welcome e-mail to: ${to}: ${err}`);
          return { success: false, error: err };
