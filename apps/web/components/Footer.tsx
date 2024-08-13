@@ -45,16 +45,16 @@ export const Icons = {
       </svg>
    ),
 };
-const ICON_CLASSNAME = `h-6 w-6 !fill-neutral-200 text-white transition-colors duration-100 hover:!fill-accent hover:!text-accent`
+const ICON_CLASSNAME = `h-6 w-6 !fill-green-400 text-white transition-colors duration-100 hover:!fill-accent hover:!text-accent`
 
 const Footer = ({}: FooterProps) => {
    return (
-      <section className={`w-full px-24 py-12 mt-24 border-t border-neutral-800`}>
+      <section className={`w-full px-24 py-12 mt-24 border-t border-neutral-300 bg-neutral-200`}>
          <div className={`flex items-center justify-between w-full`}>
             <div className={`flex flex-col items-start`}>
                <Link className={`inline-flex gap-2 items-center`} href={`/`}>
-                  <Image className={`rounded-full shadow-md`} height={32} width={32} src={logo} alt={`logo`} />
-                  <h2 className={`text-lg font-semibold`}>{APP_NAME}</h2>
+                  <Image className={`shadow-md`} height={32} width={120} src={logo} alt={`logo`} />
+                  {/*<h2 className={`text-lg font-semibold`}>{APP_NAME}</h2>*/}
                </Link>
                <span className={`!mt-4 text-sm !text-neutral-400`}>
                   Copyright © {new Date().getFullYear()} - All rights reserved.

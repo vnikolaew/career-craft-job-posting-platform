@@ -12,16 +12,16 @@ googleLoginRouter.get("/callback", async (req, res) => {
    const code = req.query.code?.toString() ?? null;
    const state = req.query.state?.toString() ?? null;
 
-   let cookies = parseCookies(req.headers.cookie ?? ``)
+   let cookies = parseCookies(req.headers.cookie ?? ``);
    const storedState = cookies.get("google_oauth_state") ?? null;
    const github_oauth_redirect_url = cookies.get("google_oauth_redirect_url") ?? null;
    const codeVerifier = cookies.get("google_oauth_code_verifier") ?? null;
 
-   let redirect_url: string
+   let redirect_url: string;
    try {
-      redirect_url =  new URL(decodeURIComponent(github_oauth_redirect_url)).toString();
+      redirect_url = new URL(decodeURIComponent(github_oauth_redirect_url)).toString();
    } catch (err) {
-      redirect_url = `/`
+      redirect_url = `/`;
    }
 
    if (!code || !state || !storedState || state !== storedState) {
@@ -33,8 +33,8 @@ googleLoginRouter.get("/callback", async (req, res) => {
       const tokens: GoogleTokens = await google.validateAuthorizationCode(code, codeVerifier);
       const response = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
          headers: {
-            Authorization: `Bearer ${tokens.accessToken}`
-         }
+            Authorization: `Bearer ${tokens.accessToken}`,
+         },
       });
       const googleUser: GoogleUser = await response.json();
 
@@ -42,6 +42,7 @@ googleLoginRouter.get("/callback", async (req, res) => {
          where: {
             AND: [{
                name: googleUser.name,
+               email: googleUser.email,
             }, {
                accounts: {
                   some: {
@@ -64,7 +65,7 @@ googleLoginRouter.get("/callback", async (req, res) => {
          create: {
             name: googleUser.name,
             emailVerified: new Date(),
-            image: googleUser.picture   ,
+            image: googleUser.picture,
             email: googleUser.email,
             accounts: {
                connectOrCreate: {
@@ -84,12 +85,16 @@ googleLoginRouter.get("/callback", async (req, res) => {
             },
          },
          update: {
+            name: googleUser.name,
+            emailVerified: new Date(),
+            image: googleUser.picture,
+            email: googleUser.email,
             accounts: {
                connectOrCreate: {
                   where: {
                      provider_providerAccountId: {
                         provider: PROVIDER_ID,
-                        providerAccountId:googleUser.sub.toString(),
+                        providerAccountId: googleUser.sub.toString(),
                      },
                   },
                   create: {
@@ -119,11 +124,11 @@ googleLoginRouter.get("/callback", async (req, res) => {
 
 
 export interface GoogleUser {
-   sub: string
-   name: string
-   given_name: string
-   family_name: string
-   picture: string
-   email: string
-   email_verified: boolean
+   sub: string;
+   name: string;
+   given_name: string;
+   family_name: string;
+   picture: string;
+   email: string;
+   email_verified: boolean;
 }

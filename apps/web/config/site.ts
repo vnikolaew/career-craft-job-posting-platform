@@ -1,17 +1,18 @@
-export const APP_NAME = `Apollo Next Starter Template`;
+export const APP_NAME = `Career Craft`;
 export const AUTHOR = `Victorio Nikolaev`;
 
-export const AUTHOR_WEBSITE = `www.apollo-next-starter.com`;
-export const APP_HOST_NAME = `apollo-next-starter`;
-export const APP_DESCRIPTION = `A Starter Template Kit using Apollo & NextJS`;
-export const APP_DESCRIPTION_LONGER = `A Starter Template Kit using Apollo & NextJS`;
+export const AUTHOR_WEBSITE = `www.career-craft.com`;
+export const APP_HOST_NAME = `career-craft`;
+export const APP_DESCRIPTION = `A Job Listings and Postings Web Platform`;
+export const APP_DESCRIPTION_LONGER = `A Job Listings and Postings Web Platform`;
+
 export const APP_KEYWORDS = [
-   `starter`,
-   `next`,
-   `apollo`,
-   `apollo-next`,
-   `apollo-next-starter`,
-   `apollo-next-starter-kit`,
+   `jobs`,
+   `job listings`,
+   `job postings`,
+   `career`,
+   `job board`,
+   `job search`,
 ];
 
 export const APP_VERSION = `1.0.0`;

@@ -1,3 +1,5 @@
+import { ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export function isValidUrl(url: string) {
    try {
@@ -6,4 +8,8 @@ export function isValidUrl(url: string) {
    } catch (_) {
       return false;
    }
+}
+
+export const cn = (...inputs: ClassValue[]) => {
+   return twMerge(clsx(inputs))
 }

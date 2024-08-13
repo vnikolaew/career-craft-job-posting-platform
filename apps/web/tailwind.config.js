@@ -7,7 +7,12 @@ module.exports = {
     "./providers/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-mono)'],
+        mono: ['var(--font-mono)'],
+      }
+    },
   },
   plugins: [require("daisyui")],
 }

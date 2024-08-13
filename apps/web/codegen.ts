@@ -1,7 +1,7 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
-   schema: "http://api.apollo-next.com:4000",
+   schema: "https://api.career-craft.com:4000",
    documents: ["**/*.{tsx,ts,graphql}"],
    generates: {
       "./__generated__/": {

@@ -27,9 +27,12 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
+  id         String @id @default(cuid())
+  first_name String
+  last_name  String
+  name       String
+  email      String @unique
+
   /// @TypeGraphQL.omit(output: true, input: true)
   password      String?
   emailVerified DateTime?
@@ -83,4 +86,92 @@ model VerificationToken {
   expires    DateTime
 
   @@id([identifier, token])
+}
+
+model Company {
+  id   String @id @default(cuid())
+  name String
+
+  about_raw              String
+  career_description_raw String
+
+  email String @unique
+
+  /// [CompanyMetadata]
+  metadata         Json?   @default("null") @db.JsonB
+  brand_image_url  String?
+  banner_image_url String?
+
+  /// [CompanyLocalInfo]
+  local_info Json @default("null") @db.JsonB
+
+  /// [CompanyWorldwideInfo]
+  worldwide_info Json @default("null") @db.JsonB
+
+  benefits         String[]
+  company_values   String[]
+  work_environment String[]
+  hiring_process   String[]
+
+  /// [CompanyContacts]
+  contacts Json @default("null") @db.JsonB
+
+  categories CompanyCategory[]
+
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  JobListing JobListing[]
+}
+
+model CompanyCategory {
+  id          String @id @default(cuid())
+  name        String
+  description String
+
+  companies Company[]
+}
+
+model JobListing {
+  id   String @id @default(cuid())
+  name String
+
+  description_raw          String
+  external_application_url String?
+
+  level     JobListingLevel?
+  work_from WorkFromHome?
+  type      JobListingEmploymentType?
+
+  location   String
+  languages  String[]
+  parameters Json     @default("null") @db.JsonB
+  keywords   String[]
+
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum JobListingLevel {
+  Staff
+  Experts
+  Management
+}
+
+enum JobListingEmploymentType {
+  Permanent
+  Temporary
+  FreelanceProject
+  FullTime
+  PartTime
+  ForStudents
+  FlexibleTime
+  RefugeeStatus
+}
+
+enum WorkFromHome {
+  Hybrid
+  FullyRemote
 }

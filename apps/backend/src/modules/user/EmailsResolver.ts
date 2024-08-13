@@ -1,10 +1,12 @@
-import { Authorized, Ctx, Field, Mutation, ObjectType, Resolver } from "type-graphql";
+import { Arg, Authorized, Ctx, Field, Mutation, ObjectType, Resolver } from "type-graphql";
 import { randomBytes } from "crypto";
 import { MyContext } from "@types";
 import { APP_NAME } from "@consts";
 import moment from "moment";
 import { xprisma } from "@prisma/prisma";
 import { EmailService, AccountVerificationEmail } from "@repo/emails";
+import { GraphQLEmailAddress } from "graphql-scalars";
+import jwt from "jsonwebtoken";
 
 @ObjectType()
 export class SendVerificationEmailResponse {
@@ -19,11 +21,35 @@ export class SendVerificationEmailResponse {
 export class VerifyEmailResponse extends SendVerificationEmailResponse {
 }
 
+@ObjectType()
+export class SignUpWithEmailCodeResponse extends SendVerificationEmailResponse {
+}
+
 @Resolver()
-@Authorized()
 export class EmailsResolver {
 
+   @Mutation(() => SignUpWithEmailCodeResponse)
+   public async signUpWithEmailCode(
+      @Ctx() { prisma, req }: MyContext,
+      @Arg(`email`, of => GraphQLEmailAddress) email: string): Promise<SignUpWithEmailCodeResponse> {
+      const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+         expiresIn: "15m",
+      });
+      const emailService = new EmailService();
+      let magicLink = `${req.headers.origin}/api/verify?token=${encodeURIComponent(token)}`;
+
+      // Send the actual confirmation e-mail
+      const response = await emailService.sendMail({
+         to: email,
+         html: `Click on this link to log in: ${magicLink}`,
+         subject: `${APP_NAME} | Your Magic Link`,
+      });
+
+      return response.success ? { success: true } : { success: false, error: response.error };
+   }
+
    @Mutation(() => SendVerificationEmailResponse)
+   @Authorized()
    async sendVerificationEmail(@Ctx() { prisma, userId }: MyContext): Promise<SendVerificationEmailResponse> {
       if (!userId) return { success: false };
 
@@ -72,6 +98,7 @@ export class EmailsResolver {
    }
 
    @Mutation(() => VerifyEmailResponse)
+   @Authorized()
    async verifyEmail(@Ctx() { prisma, userId, req }: MyContext): Promise<VerifyEmailResponse> {
       if (!userId) return { success: false };
 

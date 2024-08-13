@@ -59,8 +59,9 @@ export class CustomApolloServer<TContext> {
 
       this.httpServer = __IS_HTTPS__ ? https.createServer(
          {
-            key: fs.readFileSync(path.join(process.cwd(), `certs`, `api.apollo-next.com.key`)),
-            cert: fs.readFileSync(path.join(process.cwd(), `certs`, `api.apollo-next.com.crt`)),
+            key: fs.readFileSync(path.join(process.cwd(), `certs`, `career-craft.com.key`)),
+            cert: fs.readFileSync(path.join(process.cwd(), `certs`, `career-craft.com.crt`)),
+            passphrase: `default`
          },
          this.app) : http.createServer(this.app);
 
@@ -123,7 +124,7 @@ export class CustomApolloServer<TContext> {
          hostMiddleware,
          // graphqlUploadExpress(),
          cors<cors.CorsRequest>({
-            origin: [`http://apollo-next.com:3000`, `http://localhost:3000`, `https://apollo-next.com:3000`],
+            origin: [`http://apollo-next.com:3000`, `http://localhost:3000`, `https://apollo-next.com:3000`, `http://career-craft.com:3000`, `https://career-craft.com:3000`],
             credentials: true,
          }),
          express.json(),
@@ -142,7 +143,7 @@ export class CustomApolloServer<TContext> {
          }));
 
       await new Promise<void>(res => this.httpServer.listen({ port: PORT }, res));
-      console.log(`🚀 Server ready and listening on port ${PORT} at: ${WHITELISTED_URLS(PORT).join(`; `)}`);
+      console.log(`🚀 Server ready and listening on port ${PORT} at: ${WHITELISTED_URLS(PORT).join(`\n\t`)}`);
    }
 
    private copySchemaFile() {

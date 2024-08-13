@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { Fragment } from "react";
 import logo from "@/public/favicon.png";
 import Image from "next/image";
 import { DEFAULT_USER_AVATAR_URL, meIdVar } from "@/providers/ApolloProvider";
 import { gql } from "@/__generated__";
 import { useMutation, useQuery } from "@apollo/client";
 import { UserSignInInput } from "@/__generated__/graphql";
-import { APP_NAME } from "@/config/site";
 import { isValidUrl } from "@/lib/utils";
 import Google from "@/components/icons/Google";
 import { LogOut } from "lucide-react";
@@ -117,27 +116,31 @@ const Navbar = ({}: NavbarProps) => {
    }
 
    return (
-      <div id={`navbar`} className={`w-full px-24 py-4 border-b border-neutral-800`}>
+      <div id={`navbar`} className={`w-full px-24 py-5 border-b border-neutral-300 fixed bg-opacity-80 bg-neutral-200`}>
          <nav className={`flex items-center justify-between`}>
             <Link className={`inline-flex gap-4 items-center`} href={`/`}>
-               <Image className={`rounded-full shadow-md`} height={32} width={32} src={logo} alt={`logo`} />
-               <h2 className={`text-xl`}>{APP_NAME}</h2>
+               <Image className={` shadow-md`}
+                      height={64} width={132} src={logo} alt={`logo`} />
+               {/*<h2 className={`text-xl font-semibold`}>{APP_NAME}</h2>*/}
             </Link>
             <div className={`flex items-center gap-4`}>
                {loading ? (
-                  <div className={`h-10 w-10 rounded-full bg-neutral-700 animate-pulse`} />
+                  <Fragment>
+                     <div className={`h-10 w-10 rounded-full bg-neutral-400 skeleton`} />
+                     <div className={`h-4 rounded-md w-24 bg-neutral-400 skeleton mr-4`} />
+                  </Fragment>
                ) : (
-                  <Link className={`!w-fit !h-fit `} href={`/`}>
-                     <Image height={40} width={40} className={`rounded-full shadow-md`}
-                            src={data?.me?.image ?? DEFAULT_USER_AVATAR_URL}
-                            alt={``} />
-                  </Link>
+                  <Fragment>
+                     {data?.me?.name && (
+                        <Link className={`!w-fit !h-fit `} href={`/`}>
+                           <Image height={40} width={40} className={`rounded-full shadow-md`}
+                                  src={data?.me?.image ?? DEFAULT_USER_AVATAR_URL}
+                                  alt={``} />
+                        </Link>
+                     )}
+                     <span className={`mr-4`}>{data?.me?.name}</span>
+                  </Fragment>
                )}
-
-               {loading && <div className={`h-3 rounded-md w-12 bg-neutral-700 animate-pulse mr-4`} />}
-               {data?.me?.name && !loading && <span className={`mr-4`}>{data.me.name}</span>}
-               {!data?.me?.name && !loading && <span className={`mr-4`}>Not signed in.</span>}
-
                <span>
                {data?.me?.name ? (
                   <Link onClick={async e => {
@@ -147,25 +150,29 @@ const Navbar = ({}: NavbarProps) => {
                      Sign out
                      <LogOut size={18} />
                   </Link>
-               ) : (
-                  <div className={`flex items-center gap-4`}>
-                     <Link onClick={async e => {
-                        e.preventDefault();
-                        await handleRegularSignIn();
-                     }} className={` btn btn-info !h-fit !min-h-fit !py-3 !px-6 !text-white`} href={`/signin`}>Sign
-                        in</Link>
-                     <Link onClick={async e => {
-                        e.preventDefault();
-                        await handleGoogleSignIn();
-                     }}
-                           className={`text-white inline-flex items-center gap-2 text-nowrap btn btn-ghost !h-fit !min-h-fit !py-3 !px-6 `}
-                           href={`/signin`}>
-                        <Google className={`fill-white`} />
-                        Continue with Google
-                     </Link>
-                  </div>
-               )}
-          </span>
+               ) : !loading ? (
+                     <div className={`flex items-center gap-4`}>
+                        <Link onClick={async e => {
+                           e.preventDefault();
+                           await handleRegularSignIn();
+                        }}
+                              className={`btn btn-info !h-fit !min-h-fit !py-2.5 !px-6 !text-white !bg-green-600 !border-green-600 !shadow-md hover:!opacity-95 duration-100 transition-opacity`}
+                              href={`/signin`}>
+                           Sign in
+                        </Link>
+                        <Link onClick={async e => {
+                           e.preventDefault();
+                           await handleGoogleSignIn();
+                        }}
+                              className={`text-neutral-500 inline-flex items-center gap-2 text-nowrap btn btn-ghost !h-fit !min-h-fit !py-2.5 !px-6 `}
+                              href={`/`}>
+                           <Google className={`fill-neutral-500`} />
+                           Continue with Google
+                        </Link>
+                     </div>
+                  )
+                  : null}
+         </span>
             </div>
          </nav>
       </div>
