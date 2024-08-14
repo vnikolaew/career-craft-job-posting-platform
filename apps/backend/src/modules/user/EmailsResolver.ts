@@ -43,7 +43,7 @@ export class EmailsResolver {
       return Math.floor(100000 + Math.random() * 900000);
    }
 
-   @Mutation(() => User)
+   @Mutation(() => User, {nullable: true})
    public async signInWithEmailCode(
       @Ctx() { prisma, res, pubSub }: MyContext,
       @Arg(`code`, of => Int) code: number,

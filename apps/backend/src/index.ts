@@ -6,7 +6,7 @@ import * as CrudResolvers from "@generated/resolvers/crud";
 import { CustomApolloServer } from "@server";
 import { BuildSchemaOptions } from "type-graphql";
 import { UserResolver } from "@modules/user/UserResolver";
-import { GraphQLEmailAddress, GraphQLJSONObject, resolvers as scalarResolvers } from "graphql-scalars";
+import { GraphQLJSONObject, resolvers as scalarResolvers } from "graphql-scalars";
 import { GraphQLUpload, Upload } from "@infrastructure/scalars/Upload";
 import { __IS_DEV__ } from "@consts";
 import {
@@ -17,14 +17,15 @@ import {
    AuthMiddleware,
 } from "src/infrastructure/middleware";
 import { MyContext } from "@types";
-import { MoviesResolver } from "@modules/movies/MoviesResolver";
 import { EmailsResolver } from "@modules/user/EmailsResolver";
+import { CompanyResolver } from "@modules/companies/CompanyResolver";
+import { CategoriesResolver } from "@modules/categories/CategoriesResolver";
 
 async function main() {
    const PORT = isNaN(Number.parseInt(process.env.PORT ?? ``)) ? 4000 : +process.env.PORT!;
 
    const schema: BuildSchemaOptions = {
-      resolvers: [UserResolver, MoviesResolver, EmailsResolver, UserCrudResolver, ...Object.entries(CrudResolvers).filter(([key, _]) => key.endsWith(`Resolver`)).map(([_, resolver]) => resolver as Function),
+      resolvers: [UserResolver, CompanyResolver, CategoriesResolver, EmailsResolver, UserCrudResolver, ...Object.entries(CrudResolvers).filter(([key, _]) => key.endsWith(`Resolver`)).map(([_, resolver]) => resolver as Function),
          // @ts-ignore
          ...Object.entries(scalarResolvers).map(([_, resolver]) => resolver as Function)],
       scalarsMap: [
@@ -33,7 +34,7 @@ async function main() {
             type: Upload,
             scalar: GraphQLUpload,
          },
-         ],
+      ],
       validate: true,
       authChecker: AuthMiddleware.authChecker,
       globalMiddlewares: [...(__IS_DEV__ && process.env.USE_SLEEP === `true` ? [DevOnlyMiddleware] : []), LoggingMiddleware, AuthMiddleware, ComplexityMiddleware, ACExposeHeadersMiddleware],

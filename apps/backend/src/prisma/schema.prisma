@@ -31,7 +31,9 @@ model User {
   first_name String
   last_name  String
   name       String
-  email      String @unique
+
+  /// @TypeGraphQL.omit(output: true)
+  email String @unique
 
   /// @TypeGraphQL.omit(output: true, input: true)
   password      String?
@@ -95,17 +97,25 @@ model Company {
   about_raw              String
   career_description_raw String
 
+  /// @TypeGraphQL.omit(output: true)
   email String @unique
 
   /// [CompanyMetadata]
-  metadata         Json?   @default("null") @db.JsonB
-  brand_image_url  String?
+  /// @TypeGraphQL.omit(output: true)
+  metadata Json? @default("null") @db.JsonB
+
+  /// @TypeGraphQL.omit(output: true)
+  brand_image_url String?
+
+  /// @TypeGraphQL.omit(output: true)
   banner_image_url String?
 
   /// [CompanyLocalInfo]
+  /// @TypeGraphQL.omit(output: true)
   local_info Json @default("null") @db.JsonB
 
   /// [CompanyWorldwideInfo]
+  /// @TypeGraphQL.omit(output: true)
   worldwide_info Json @default("null") @db.JsonB
 
   benefits         String[]
@@ -114,6 +124,7 @@ model Company {
   hiring_process   String[]
 
   /// [CompanyContacts]
+  /// @TypeGraphQL.omit(output: true)
   contacts Json @default("null") @db.JsonB
 
   categories CompanyCategory[]
@@ -129,6 +140,14 @@ model CompanyCategory {
   description String
 
   companies Company[]
+}
+
+model JobListingCategory {
+  id          String @id @default(cuid())
+  name        String
+  description String
+
+  listings JobListing[]
 }
 
 model JobListing {
@@ -152,6 +171,8 @@ model JobListing {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  categories JobListingCategory[]
 }
 
 enum JobListingLevel {

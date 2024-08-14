@@ -20,6 +20,14 @@ export type Scalars = {
   EmailAddress: { input: any; output: any; }
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { input: any; output: any; }
+  /** The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
+  JSONObject: { input: any; output: any; }
+  /** A field whose value is a valid decimal degrees latitude number (53.471): https://en.wikipedia.org/wiki/Latitude */
+  Latitude: { input: any; output: any; }
+  /** A field whose value is a valid decimal degrees longitude number (53.471): https://en.wikipedia.org/wiki/Longitude */
+  Longitude: { input: any; output: any; }
+  /** A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt. */
+  URL: { input: any; output: any; }
   /** The `Upload` scalar type represents a file upload. */
   Upload: { input: any; output: any; }
 };
@@ -525,6 +533,13 @@ export type AggregateJobListing = {
   _min?: Maybe<JobListingMinAggregate>;
 };
 
+export type AggregateJobListingCategory = {
+  __typename?: 'AggregateJobListingCategory';
+  _count?: Maybe<JobListingCategoryCountAggregate>;
+  _max?: Maybe<JobListingCategoryMaxAggregate>;
+  _min?: Maybe<JobListingCategoryMinAggregate>;
+};
+
 export type AggregateSession = {
   __typename?: 'AggregateSession';
   _count?: Maybe<SessionCountAggregate>;
@@ -550,34 +565,63 @@ export type Company = {
   __typename?: 'Company';
   _count?: Maybe<CompanyCount>;
   about_raw: Scalars['String']['output'];
-  banner_image_url?: Maybe<Scalars['String']['output']>;
+  banner_image_url?: Maybe<Scalars['URL']['output']>;
   benefits: Array<Scalars['String']['output']>;
-  brand_image_url?: Maybe<Scalars['String']['output']>;
+  brand_image_url?: Maybe<Scalars['URL']['output']>;
   career_description_raw: Scalars['String']['output'];
+  categories: Array<CompanyCategory>;
   company_values: Array<Scalars['String']['output']>;
-  /** [CompanyContacts] */
-  contacts: Scalars['JSON']['output'];
+  contacts?: Maybe<CompanyContacts>;
   createdAt: Scalars['DateTimeISO']['output'];
-  email: Scalars['String']['output'];
+  email: Scalars['EmailAddress']['output'];
   hiring_process: Array<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  /** [CompanyLocalInfo] */
-  local_info: Scalars['JSON']['output'];
-  /** [CompanyMetadata] */
-  metadata?: Maybe<Scalars['JSON']['output']>;
+  listings: Array<JobListing>;
+  local_info?: Maybe<CompanyLocalInfo>;
+  metadata?: Maybe<Scalars['JSONObject']['output']>;
   name: Scalars['String']['output'];
   updatedAt: Scalars['DateTimeISO']['output'];
   work_environment: Array<Scalars['String']['output']>;
-  /** [CompanyWorldwideInfo] */
-  worldwide_info: Scalars['JSON']['output'];
+  worldwide_info?: Maybe<CompanyWorldwideInfo>;
+};
+
+
+export type CompanyCategoriesArgs = {
+  cursor?: InputMaybe<CompanyCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CompanyCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CompanyCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CompanyCategoryWhereInput>;
+};
+
+
+export type CompanyListingsArgs = {
+  cursor?: InputMaybe<JobListingWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingWhereInput>;
 };
 
 export type CompanyCategory = {
   __typename?: 'CompanyCategory';
   _count?: Maybe<CompanyCategoryCount>;
+  companies: Array<Company>;
   description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+};
+
+
+export type CompanyCategoryCompaniesArgs = {
+  cursor?: InputMaybe<CompanyWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CompanyScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CompanyOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CompanyWhereInput>;
 };
 
 export type CompanyCategoryCount = {
@@ -801,6 +845,29 @@ export type CompanyCategoryWhereUniqueInput = {
   name?: InputMaybe<StringFilter>;
 };
 
+export type CompanyContact = {
+  __typename?: 'CompanyContact';
+  address: Scalars['String']['output'];
+  city: Scalars['String']['output'];
+  coordinates?: Maybe<Coordinates>;
+  phone_number: Scalars['String']['output'];
+};
+
+export type CompanyContacts = {
+  __typename?: 'CompanyContacts';
+  address: Scalars['String']['output'];
+  company_bulstat: Scalars['String']['output'];
+  contacts: Array<CompanyContact>;
+  email: Scalars['EmailAddress']['output'];
+  facebook_url: Scalars['URL']['output'];
+  linkedin_url: Scalars['URL']['output'];
+  name: Scalars['String']['output'];
+  phone_number: Scalars['String']['output'];
+  twitter_url: Scalars['URL']['output'];
+  website_url: Scalars['URL']['output'];
+  youtube_url: Scalars['URL']['output'];
+};
+
 export type CompanyCount = {
   __typename?: 'CompanyCount';
   categories: Scalars['Int']['output'];
@@ -999,6 +1066,13 @@ export type CompanyListRelationFilter = {
   every?: InputMaybe<CompanyWhereInput>;
   none?: InputMaybe<CompanyWhereInput>;
   some?: InputMaybe<CompanyWhereInput>;
+};
+
+export type CompanyLocalInfo = {
+  __typename?: 'CompanyLocalInfo';
+  employeeCount?: Maybe<Scalars['Int']['output']>;
+  locations: Array<Scalars['String']['output']>;
+  since?: Maybe<Scalars['DateTimeISO']['output']>;
 };
 
 export type CompanyMaxAggregate = {
@@ -1370,6 +1444,20 @@ export type CompanyWhereUniqueInput = {
   worldwide_info?: InputMaybe<JsonFilter>;
 };
 
+export type CompanyWorldwideInfo = {
+  __typename?: 'CompanyWorldwideInfo';
+  employeeCount?: Maybe<Scalars['Int']['output']>;
+  founded?: Maybe<Scalars['DateTimeISO']['output']>;
+  headquarters: Scalars['String']['output'];
+  locations: Array<Scalars['String']['output']>;
+};
+
+export type Coordinates = {
+  __typename?: 'Coordinates';
+  latitude?: Maybe<Scalars['Latitude']['output']>;
+  longitude?: Maybe<Scalars['Longitude']['output']>;
+};
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: InputMaybe<Scalars['DateTimeISO']['input']>;
 };
@@ -1475,6 +1563,16 @@ export type EnumWorkFromHomeNullableWithAggregatesFilter = {
   notIn?: InputMaybe<Array<WorkFromHome>>;
 };
 
+export type GetTopCompaniesInput = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type GetTopListingCategoriesInput = {
+  limit?: Scalars['Int']['input'];
+  skip?: Scalars['Int']['input'];
+};
+
 export type IntNullableFilter = {
   equals?: InputMaybe<Scalars['Int']['input']>;
   gt?: InputMaybe<Scalars['Int']['input']>;
@@ -1504,6 +1602,7 @@ export type IntNullableWithAggregatesFilter = {
 
 export type JobListing = {
   __typename?: 'JobListing';
+  _count?: Maybe<JobListingCount>;
   companyId: Scalars['String']['output'];
   createdAt: Scalars['DateTimeISO']['output'];
   description_raw: Scalars['String']['output'];
@@ -1518,6 +1617,245 @@ export type JobListing = {
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
   work_from?: Maybe<WorkFromHome>;
+};
+
+export type JobListingCategory = {
+  __typename?: 'JobListingCategory';
+  _count?: Maybe<JobListingCategoryCount>;
+  description: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type JobListingCategoryCount = {
+  __typename?: 'JobListingCategoryCount';
+  listings: Scalars['Int']['output'];
+};
+
+
+export type JobListingCategoryCountListingsArgs = {
+  where?: InputMaybe<JobListingWhereInput>;
+};
+
+export type JobListingCategoryCountAggregate = {
+  __typename?: 'JobListingCategoryCountAggregate';
+  _all: Scalars['Int']['output'];
+  description: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+};
+
+export type JobListingCategoryCountOrderByAggregateInput = {
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryCreateInput = {
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingCreateNestedManyWithoutCategoriesInput>;
+  name: Scalars['String']['input'];
+};
+
+export type JobListingCategoryCreateManyInput = {
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type JobListingCategoryCreateNestedManyWithoutListingsInput = {
+  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutListingsInput>>;
+  create?: InputMaybe<Array<JobListingCategoryCreateWithoutListingsInput>>;
+};
+
+export type JobListingCategoryCreateOrConnectWithoutListingsInput = {
+  create: JobListingCategoryCreateWithoutListingsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+export type JobListingCategoryCreateWithoutListingsInput = {
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type JobListingCategoryGroupBy = {
+  __typename?: 'JobListingCategoryGroupBy';
+  _count?: Maybe<JobListingCategoryCountAggregate>;
+  _max?: Maybe<JobListingCategoryMaxAggregate>;
+  _min?: Maybe<JobListingCategoryMinAggregate>;
+  description: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type JobListingCategoryListRelationFilter = {
+  every?: InputMaybe<JobListingCategoryWhereInput>;
+  none?: InputMaybe<JobListingCategoryWhereInput>;
+  some?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+export type JobListingCategoryMaxAggregate = {
+  __typename?: 'JobListingCategoryMaxAggregate';
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type JobListingCategoryMaxOrderByAggregateInput = {
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryMinAggregate = {
+  __typename?: 'JobListingCategoryMinAggregate';
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type JobListingCategoryMinOrderByAggregateInput = {
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export enum JobListingCategoryOrderByRelevanceFieldEnum {
+  Description = 'description',
+  Id = 'id',
+  Name = 'name'
+}
+
+export type JobListingCategoryOrderByRelevanceInput = {
+  fields: Array<JobListingCategoryOrderByRelevanceFieldEnum>;
+  search: Scalars['String']['input'];
+  sort: SortOrder;
+};
+
+export type JobListingCategoryOrderByWithAggregationInput = {
+  _count?: InputMaybe<JobListingCategoryCountOrderByAggregateInput>;
+  _max?: InputMaybe<JobListingCategoryMaxOrderByAggregateInput>;
+  _min?: InputMaybe<JobListingCategoryMinOrderByAggregateInput>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryOrderByWithRelationInput = {
+  _relevance?: InputMaybe<JobListingCategoryOrderByRelevanceInput>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  listings?: InputMaybe<JobListingOrderByRelationAggregateInput>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export enum JobListingCategoryScalarFieldEnum {
+  Description = 'description',
+  Id = 'id',
+  Name = 'name'
+}
+
+export type JobListingCategoryScalarWhereInput = {
+  AND?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type JobListingCategoryScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
+  description?: InputMaybe<StringWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type JobListingCategoryUpdateInput = {
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  listings?: InputMaybe<JobListingUpdateManyWithoutCategoriesNestedInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpdateManyMutationInput = {
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpdateManyWithWhereWithoutListingsInput = {
+  data: JobListingCategoryUpdateManyMutationInput;
+  where: JobListingCategoryScalarWhereInput;
+};
+
+export type JobListingCategoryUpdateManyWithoutListingsNestedInput = {
+  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutListingsInput>>;
+  create?: InputMaybe<Array<JobListingCategoryCreateWithoutListingsInput>>;
+  delete?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  set?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  update?: InputMaybe<Array<JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput>>;
+  updateMany?: InputMaybe<Array<JobListingCategoryUpdateManyWithWhereWithoutListingsInput>>;
+  upsert?: InputMaybe<Array<JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput>>;
+};
+
+export type JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput = {
+  data: JobListingCategoryUpdateWithoutListingsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+export type JobListingCategoryUpdateWithoutListingsInput = {
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput = {
+  create: JobListingCategoryCreateWithoutListingsInput;
+  update: JobListingCategoryUpdateWithoutListingsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+export type JobListingCategoryWhereInput = {
+  AND?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  listings?: InputMaybe<JobListingListRelationFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type JobListingCategoryWhereUniqueInput = {
+  AND?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingListRelationFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type JobListingCount = {
+  __typename?: 'JobListingCount';
+  categories: Scalars['Int']['output'];
+};
+
+
+export type JobListingCountCategoriesArgs = {
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCountAggregate = {
@@ -1555,6 +1893,7 @@ export type JobListingCountOrderByAggregateInput = {
 };
 
 export type JobListingCreateInput = {
+  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
   company: CompanyCreateNestedOneWithoutListingsInput;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
@@ -1603,6 +1942,12 @@ export type JobListingCreateManyInput = {
   work_from?: InputMaybe<WorkFromHome>;
 };
 
+export type JobListingCreateNestedManyWithoutCategoriesInput = {
+  connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCategoriesInput>>;
+  create?: InputMaybe<Array<JobListingCreateWithoutCategoriesInput>>;
+};
+
 export type JobListingCreateNestedManyWithoutCompanyInput = {
   connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCompanyInput>>;
@@ -1610,12 +1955,33 @@ export type JobListingCreateNestedManyWithoutCompanyInput = {
   createMany?: InputMaybe<JobListingCreateManyCompanyInputEnvelope>;
 };
 
+export type JobListingCreateOrConnectWithoutCategoriesInput = {
+  create: JobListingCreateWithoutCategoriesInput;
+  where: JobListingWhereUniqueInput;
+};
+
 export type JobListingCreateOrConnectWithoutCompanyInput = {
   create: JobListingCreateWithoutCompanyInput;
   where: JobListingWhereUniqueInput;
 };
 
+export type JobListingCreateWithoutCategoriesInput = {
+  company: CompanyCreateNestedOneWithoutListingsInput;
+  description_raw: Scalars['String']['input'];
+  external_application_url?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<JobListingCreatekeywordsInput>;
+  languages?: InputMaybe<JobListingCreatelanguagesInput>;
+  level?: InputMaybe<JobListingLevel>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  parameters?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<JobListingEmploymentType>;
+  work_from?: InputMaybe<WorkFromHome>;
+};
+
 export type JobListingCreateWithoutCompanyInput = {
+  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1776,6 +2142,7 @@ export type JobListingOrderByWithAggregationInput = {
 
 export type JobListingOrderByWithRelationInput = {
   _relevance?: InputMaybe<JobListingOrderByRelevanceInput>;
+  categories?: InputMaybe<JobListingCategoryOrderByRelationAggregateInput>;
   company?: InputMaybe<CompanyOrderByWithRelationInput>;
   companyId?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
@@ -1845,6 +2212,7 @@ export type JobListingScalarWhereWithAggregatesInput = {
 };
 
 export type JobListingUpdateInput = {
+  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1873,9 +2241,27 @@ export type JobListingUpdateManyMutationInput = {
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
+export type JobListingUpdateManyWithWhereWithoutCategoriesInput = {
+  data: JobListingUpdateManyMutationInput;
+  where: JobListingScalarWhereInput;
+};
+
 export type JobListingUpdateManyWithWhereWithoutCompanyInput = {
   data: JobListingUpdateManyMutationInput;
   where: JobListingScalarWhereInput;
+};
+
+export type JobListingUpdateManyWithoutCategoriesNestedInput = {
+  connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCategoriesInput>>;
+  create?: InputMaybe<Array<JobListingCreateWithoutCategoriesInput>>;
+  delete?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<JobListingScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  set?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  update?: InputMaybe<Array<JobListingUpdateWithWhereUniqueWithoutCategoriesInput>>;
+  updateMany?: InputMaybe<Array<JobListingUpdateManyWithWhereWithoutCategoriesInput>>;
+  upsert?: InputMaybe<Array<JobListingUpsertWithWhereUniqueWithoutCategoriesInput>>;
 };
 
 export type JobListingUpdateManyWithoutCompanyNestedInput = {
@@ -1892,12 +2278,33 @@ export type JobListingUpdateManyWithoutCompanyNestedInput = {
   upsert?: InputMaybe<Array<JobListingUpsertWithWhereUniqueWithoutCompanyInput>>;
 };
 
+export type JobListingUpdateWithWhereUniqueWithoutCategoriesInput = {
+  data: JobListingUpdateWithoutCategoriesInput;
+  where: JobListingWhereUniqueInput;
+};
+
 export type JobListingUpdateWithWhereUniqueWithoutCompanyInput = {
   data: JobListingUpdateWithoutCompanyInput;
   where: JobListingWhereUniqueInput;
 };
 
+export type JobListingUpdateWithoutCategoriesInput = {
+  company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
+  description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
+  external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  keywords?: InputMaybe<JobListingUpdatekeywordsInput>;
+  languages?: InputMaybe<JobListingUpdatelanguagesInput>;
+  level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  parameters?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
+  work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
+};
+
 export type JobListingUpdateWithoutCompanyInput = {
+  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1921,6 +2328,12 @@ export type JobListingUpdatelanguagesInput = {
   set?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type JobListingUpsertWithWhereUniqueWithoutCategoriesInput = {
+  create: JobListingCreateWithoutCategoriesInput;
+  update: JobListingUpdateWithoutCategoriesInput;
+  where: JobListingWhereUniqueInput;
+};
+
 export type JobListingUpsertWithWhereUniqueWithoutCompanyInput = {
   create: JobListingCreateWithoutCompanyInput;
   update: JobListingUpdateWithoutCompanyInput;
@@ -1931,6 +2344,7 @@ export type JobListingWhereInput = {
   AND?: InputMaybe<Array<JobListingWhereInput>>;
   NOT?: InputMaybe<Array<JobListingWhereInput>>;
   OR?: InputMaybe<Array<JobListingWhereInput>>;
+  categories?: InputMaybe<JobListingCategoryListRelationFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
   companyId?: InputMaybe<StringFilter>;
   description_raw?: InputMaybe<StringFilter>;
@@ -1950,6 +2364,7 @@ export type JobListingWhereUniqueInput = {
   AND?: InputMaybe<Array<JobListingWhereInput>>;
   NOT?: InputMaybe<Array<JobListingWhereInput>>;
   OR?: InputMaybe<Array<JobListingWhereInput>>;
+  categories?: InputMaybe<JobListingCategoryListRelationFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
   companyId?: InputMaybe<StringFilter>;
   description_raw?: InputMaybe<StringFilter>;
@@ -2035,21 +2450,13 @@ export type JsonWithAggregatesFilter = {
   string_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Movie = {
-  __typename?: 'Movie';
-  Poster: Scalars['String']['output'];
-  Title: Scalars['String']['output'];
-  Type: Scalars['String']['output'];
-  Year: Scalars['String']['output'];
-  imdbID: Scalars['String']['output'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   createManyAccount: AffectedRowsOutput;
   createManyCompany: AffectedRowsOutput;
   createManyCompanyCategory: AffectedRowsOutput;
   createManyJobListing: AffectedRowsOutput;
+  createManyJobListingCategory: AffectedRowsOutput;
   createManySession: AffectedRowsOutput;
   createManyUser: AffectedRowsOutput;
   createManyVerificationToken: AffectedRowsOutput;
@@ -2057,6 +2464,7 @@ export type Mutation = {
   createOneCompany: Company;
   createOneCompanyCategory: CompanyCategory;
   createOneJobListing: JobListing;
+  createOneJobListingCategory: JobListingCategory;
   createOneSession: Session;
   createOneUser: User;
   createOneVerificationToken: VerificationToken;
@@ -2064,6 +2472,7 @@ export type Mutation = {
   deleteManyCompany: AffectedRowsOutput;
   deleteManyCompanyCategory: AffectedRowsOutput;
   deleteManyJobListing: AffectedRowsOutput;
+  deleteManyJobListingCategory: AffectedRowsOutput;
   deleteManySession: AffectedRowsOutput;
   deleteManyUser: AffectedRowsOutput;
   deleteManyVerificationToken: AffectedRowsOutput;
@@ -2071,6 +2480,7 @@ export type Mutation = {
   deleteOneCompany?: Maybe<Company>;
   deleteOneCompanyCategory?: Maybe<CompanyCategory>;
   deleteOneJobListing?: Maybe<JobListing>;
+  deleteOneJobListingCategory?: Maybe<JobListingCategory>;
   deleteOneSession?: Maybe<Session>;
   deleteOneUser?: Maybe<User>;
   deleteOneVerificationToken?: Maybe<VerificationToken>;
@@ -2078,7 +2488,7 @@ export type Mutation = {
   generateSignUpEmailCode: SignUpWithEmailCodeResponse;
   sendVerificationEmail: SendVerificationEmailResponse;
   signIn?: Maybe<User>;
-  signInWithEmailCode: User;
+  signInWithEmailCode?: Maybe<User>;
   signOut: Scalars['Boolean']['output'];
   signUp: User;
   signUpWithEmailCode: User;
@@ -2086,6 +2496,7 @@ export type Mutation = {
   updateManyCompany: AffectedRowsOutput;
   updateManyCompanyCategory: AffectedRowsOutput;
   updateManyJobListing: AffectedRowsOutput;
+  updateManyJobListingCategory: AffectedRowsOutput;
   updateManySession: AffectedRowsOutput;
   updateManyUser: AffectedRowsOutput;
   updateManyVerificationToken: AffectedRowsOutput;
@@ -2093,6 +2504,7 @@ export type Mutation = {
   updateOneCompany?: Maybe<Company>;
   updateOneCompanyCategory?: Maybe<CompanyCategory>;
   updateOneJobListing?: Maybe<JobListing>;
+  updateOneJobListingCategory?: Maybe<JobListingCategory>;
   updateOneSession?: Maybe<Session>;
   updateOneUser?: Maybe<User>;
   updateOneVerificationToken?: Maybe<VerificationToken>;
@@ -2100,6 +2512,7 @@ export type Mutation = {
   upsertOneCompany: Company;
   upsertOneCompanyCategory: CompanyCategory;
   upsertOneJobListing: JobListing;
+  upsertOneJobListingCategory: JobListingCategory;
   upsertOneSession: Session;
   upsertOneUser: User;
   upsertOneVerificationToken: VerificationToken;
@@ -2127,6 +2540,12 @@ export type MutationCreateManyCompanyCategoryArgs = {
 
 export type MutationCreateManyJobListingArgs = {
   data: Array<JobListingCreateManyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type MutationCreateManyJobListingCategoryArgs = {
+  data: Array<JobListingCategoryCreateManyInput>;
   skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -2173,6 +2592,12 @@ export type MutationCreateOneJobListingArgs = {
 };
 
 
+export type MutationCreateOneJobListingCategoryArgs = {
+  data: JobListingCategoryCreateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+};
+
+
 export type MutationCreateOneSessionArgs = {
   data: SessionCreateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
@@ -2208,6 +2633,11 @@ export type MutationDeleteManyCompanyCategoryArgs = {
 
 export type MutationDeleteManyJobListingArgs = {
   where?: InputMaybe<JobListingWhereInput>;
+};
+
+
+export type MutationDeleteManyJobListingCategoryArgs = {
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 
@@ -2247,6 +2677,12 @@ export type MutationDeleteOneCompanyCategoryArgs = {
 export type MutationDeleteOneJobListingArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: JobListingWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneJobListingCategoryArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: JobListingCategoryWhereUniqueInput;
 };
 
 
@@ -2328,6 +2764,12 @@ export type MutationUpdateManyJobListingArgs = {
 };
 
 
+export type MutationUpdateManyJobListingCategoryArgs = {
+  data: JobListingCategoryUpdateManyMutationInput;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
 export type MutationUpdateManySessionArgs = {
   data: SessionUpdateManyMutationInput;
   where?: InputMaybe<SessionWhereInput>;
@@ -2371,6 +2813,13 @@ export type MutationUpdateOneJobListingArgs = {
   data: JobListingUpdateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: JobListingWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneJobListingCategoryArgs = {
+  data: JobListingCategoryUpdateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: JobListingCategoryWhereUniqueInput;
 };
 
 
@@ -2424,6 +2873,14 @@ export type MutationUpsertOneJobListingArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   update: JobListingUpdateInput;
   where: JobListingWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneJobListingCategoryArgs = {
+  create: JobListingCategoryCreateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  update: JobListingCategoryUpdateInput;
+  where: JobListingCategoryWhereUniqueInput;
 };
 
 
@@ -2739,6 +3196,7 @@ export type Query = {
   aggregateCompany: AggregateCompany;
   aggregateCompanyCategory: AggregateCompanyCategory;
   aggregateJobListing: AggregateJobListing;
+  aggregateJobListingCategory: AggregateJobListingCategory;
   aggregateSession: AggregateSession;
   aggregateUser: AggregateUser;
   aggregateVerificationToken: AggregateVerificationToken;
@@ -2754,6 +3212,8 @@ export type Query = {
   findFirstCompanyCategoryOrThrow?: Maybe<CompanyCategory>;
   findFirstCompanyOrThrow?: Maybe<Company>;
   findFirstJobListing?: Maybe<JobListing>;
+  findFirstJobListingCategory?: Maybe<JobListingCategory>;
+  findFirstJobListingCategoryOrThrow?: Maybe<JobListingCategory>;
   findFirstJobListingOrThrow?: Maybe<JobListing>;
   findFirstSession?: Maybe<Session>;
   findFirstSessionOrThrow?: Maybe<Session>;
@@ -2765,7 +3225,10 @@ export type Query = {
   getCompany?: Maybe<Company>;
   getCompanyCategory?: Maybe<CompanyCategory>;
   getJobListing?: Maybe<JobListing>;
+  getJobListingCategory?: Maybe<JobListingCategory>;
   getSession?: Maybe<Session>;
+  getTopCompanies: Array<Company>;
+  getTopListingCategories: Array<JobListingCategory>;
   getUser?: Maybe<User>;
   getVerificationToken?: Maybe<VerificationToken>;
   googleLoginUrl: Scalars['String']['output'];
@@ -2773,14 +3236,16 @@ export type Query = {
   groupByCompany: Array<CompanyGroupBy>;
   groupByCompanyCategory: Array<CompanyCategoryGroupBy>;
   groupByJobListing: Array<JobListingGroupBy>;
+  groupByJobListingCategory: Array<JobListingCategoryGroupBy>;
   groupBySession: Array<SessionGroupBy>;
   groupByUser: Array<UserGroupBy>;
   groupByVerificationToken: Array<VerificationTokenGroupBy>;
   jobListing?: Maybe<JobListing>;
+  jobListingCategories: Array<JobListingCategory>;
+  jobListingCategory?: Maybe<JobListingCategory>;
   jobListings: Array<JobListing>;
   me?: Maybe<User>;
   search: Array<UserSearchResponse>;
-  searchMovies: Array<Movie>;
   session?: Maybe<Session>;
   sessions: Array<Session>;
   user?: Maybe<User>;
@@ -2840,6 +3305,15 @@ export type QueryAggregateJobListingArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<JobListingWhereInput>;
+};
+
+
+export type QueryAggregateJobListingCategoryArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 
@@ -2986,6 +3460,28 @@ export type QueryFindFirstJobListingArgs = {
 };
 
 
+export type QueryFindFirstJobListingCategoryArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
+export type QueryFindFirstJobListingCategoryOrThrowArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
 export type QueryFindFirstJobListingOrThrowArgs = {
   cursor?: InputMaybe<JobListingWhereUniqueInput>;
   distinct?: InputMaybe<Array<JobListingScalarFieldEnum>>;
@@ -3087,9 +3583,25 @@ export type QueryGetJobListingArgs = {
 };
 
 
+export type QueryGetJobListingCategoryArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+
 export type QueryGetSessionArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: SessionWhereUniqueInput;
+};
+
+
+export type QueryGetTopCompaniesArgs = {
+  input: GetTopCompaniesInput;
+};
+
+
+export type QueryGetTopListingCategoriesArgs = {
+  input: GetTopListingCategoriesInput;
 };
 
 
@@ -3150,6 +3662,16 @@ export type QueryGroupByJobListingArgs = {
 };
 
 
+export type QueryGroupByJobListingCategoryArgs = {
+  by: Array<JobListingCategoryScalarFieldEnum>;
+  having?: InputMaybe<JobListingCategoryScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
 export type QueryGroupBySessionArgs = {
   by: Array<SessionScalarFieldEnum>;
   having?: InputMaybe<SessionScalarWhereWithAggregatesInput>;
@@ -3186,6 +3708,23 @@ export type QueryJobListingArgs = {
 };
 
 
+export type QueryJobListingCategoriesArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
+export type QueryJobListingCategoryArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+
 export type QueryJobListingsArgs = {
   cursor?: InputMaybe<JobListingWhereUniqueInput>;
   distinct?: InputMaybe<Array<JobListingScalarFieldEnum>>;
@@ -3199,12 +3738,6 @@ export type QueryJobListingsArgs = {
 
 export type QuerySearchArgs = {
   search?: UsersSearchInput;
-};
-
-
-export type QuerySearchMoviesArgs = {
-  page?: Scalars['Int']['input'];
-  search: Scalars['String']['input'];
 };
 
 
@@ -3648,7 +4181,7 @@ export type User = {
   cookieConsent?: Maybe<Scalars['Boolean']['output']>;
   cookiePreferences?: Maybe<UserCookiePreferences>;
   createdAt: Scalars['DateTimeISO']['output'];
-  email: Scalars['String']['output'];
+  email: Scalars['EmailAddress']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   first_name: Scalars['String']['output'];
   id: Scalars['ID']['output'];
@@ -3954,7 +4487,7 @@ export type UserSearchResponse = {
   cookieConsent?: Maybe<Scalars['Boolean']['output']>;
   cookiePreferences?: Maybe<UserCookiePreferences>;
   createdAt: Scalars['DateTimeISO']['output'];
-  email: Scalars['String']['output'];
+  email: Scalars['EmailAddress']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   first_name: Scalars['String']['output'];
   id: Scalars['ID']['output'];
@@ -4280,6 +4813,27 @@ export enum WorkFromHome {
   Hybrid = 'Hybrid'
 }
 
+export type GetTopJobCategoriesQueryVariables = Exact<{
+  input: GetTopListingCategoriesInput;
+}>;
+
+
+export type GetTopJobCategoriesQuery = { __typename?: 'Query', getTopListingCategories: Array<{ __typename?: 'JobListingCategory', id: string, name: string, description: string, _count?: { __typename?: 'JobListingCategoryCount', listings: number } | null }> };
+
+export type GetTopEmployersQueryVariables = Exact<{
+  input: GetTopCompaniesInput;
+}>;
+
+
+export type GetTopEmployersQuery = { __typename?: 'Query', getTopCompanies: Array<{ __typename?: 'Company', id: string, name: string, banner_image_url?: any | null, brand_image_url?: any | null, _count?: { __typename?: 'CompanyCount', listings: number } | null }> };
+
+export type GetCompanyQueryQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GetCompanyQueryQuery = { __typename?: 'Query', getCompany?: { __typename?: 'Company', id: string, name: string, about_raw: string, career_description_raw: string, benefits: Array<string>, company_values: Array<string>, work_environment: Array<string>, hiring_process: Array<string>, createdAt: any, updatedAt: any, metadata?: any | null, email: any, brand_image_url?: any | null, banner_image_url?: any | null, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string, coordinates?: { __typename?: 'Coordinates', latitude?: any | null, longitude?: any | null } | null }> } | null, local_info?: { __typename?: 'CompanyLocalInfo', since?: any | null, employeeCount?: number | null, locations: Array<string> } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', founded?: any | null, employeeCount?: number | null, headquarters: string, locations: Array<string> } | null } | null };
+
 export type SignInWithEmailCodeMutationVariables = Exact<{
   code: Scalars['Int']['input'];
   email: Scalars['EmailAddress']['input'];
@@ -4287,7 +4841,7 @@ export type SignInWithEmailCodeMutationVariables = Exact<{
 }>;
 
 
-export type SignInWithEmailCodeMutation = { __typename?: 'Mutation', signInWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: string } };
+export type SignInWithEmailCodeMutation = { __typename?: 'Mutation', signInWithEmailCode?: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: any } | null };
 
 export type GenerateEmailCodeMutationVariables = Exact<{
   email: Scalars['EmailAddress']['input'];
@@ -4305,7 +4859,7 @@ export type SignUpWithEmailCodeMutationVariables = Exact<{
 }>;
 
 
-export type SignUpWithEmailCodeMutation = { __typename?: 'Mutation', signUpWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: string } };
+export type SignUpWithEmailCodeMutation = { __typename?: 'Mutation', signUpWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: any } };
 
 export type SignOutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -4317,12 +4871,12 @@ export type SignInMutationVariables = Exact<{
 }>;
 
 
-export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: string, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, createdAt: any, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
+export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: any, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, createdAt: any, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
 
 export type MeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: string, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
+export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: any, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
 
 export type GoogleLoginQueryQueryVariables = Exact<{
   redirectUrl: Scalars['String']['input'];
@@ -4332,6 +4886,9 @@ export type GoogleLoginQueryQueryVariables = Exact<{
 export type GoogleLoginQueryQuery = { __typename?: 'Query', googleLoginUrl: string };
 
 
+export const GetTopJobCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTopJobCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetTopListingCategoriesInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTopListingCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]} as unknown as DocumentNode<GetTopJobCategoriesQuery, GetTopJobCategoriesQueryVariables>;
+export const GetTopEmployersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTopEmployers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetTopCompaniesInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTopCompanies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]} as unknown as DocumentNode<GetTopEmployersQuery, GetTopEmployersQueryVariables>;
+export const GetCompanyQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCompany"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"about_raw"}},{"kind":"Field","name":{"kind":"Name","value":"career_description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"benefits"}},{"kind":"Field","name":{"kind":"Name","value":"company_values"}},{"kind":"Field","name":{"kind":"Name","value":"work_environment"}},{"kind":"Field","name":{"kind":"Name","value":"hiring_process"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"coordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company_bulstat"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"website_url"}},{"kind":"Field","name":{"kind":"Name","value":"facebook_url"}},{"kind":"Field","name":{"kind":"Name","value":"twitter_url"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin_url"}},{"kind":"Field","name":{"kind":"Name","value":"youtube_url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"local_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"since"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldwide_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"headquarters"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyQueryQuery, GetCompanyQueryQueryVariables>;
 export const SignInWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignInWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signInWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignInWithEmailCodeMutation, SignInWithEmailCodeMutationVariables>;
 export const GenerateEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GenerateEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generateSignUpEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"expires"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<GenerateEmailCodeMutation, GenerateEmailCodeMutationVariables>;
 export const SignUpWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignUpWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUpWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"Argument","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignUpWithEmailCodeMutation, SignUpWithEmailCodeMutationVariables>;
@@ -4352,6 +4909,14 @@ export type Scalars = {
   EmailAddress: { input: any; output: any; }
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { input: any; output: any; }
+  /** The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
+  JSONObject: { input: any; output: any; }
+  /** A field whose value is a valid decimal degrees latitude number (53.471): https://en.wikipedia.org/wiki/Latitude */
+  Latitude: { input: any; output: any; }
+  /** A field whose value is a valid decimal degrees longitude number (53.471): https://en.wikipedia.org/wiki/Longitude */
+  Longitude: { input: any; output: any; }
+  /** A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt. */
+  URL: { input: any; output: any; }
   /** The `Upload` scalar type represents a file upload. */
   Upload: { input: any; output: any; }
 };
@@ -4857,6 +5422,13 @@ export type AggregateJobListing = {
   _min?: Maybe<JobListingMinAggregate>;
 };
 
+export type AggregateJobListingCategory = {
+  __typename?: 'AggregateJobListingCategory';
+  _count?: Maybe<JobListingCategoryCountAggregate>;
+  _max?: Maybe<JobListingCategoryMaxAggregate>;
+  _min?: Maybe<JobListingCategoryMinAggregate>;
+};
+
 export type AggregateSession = {
   __typename?: 'AggregateSession';
   _count?: Maybe<SessionCountAggregate>;
@@ -4882,34 +5454,63 @@ export type Company = {
   __typename?: 'Company';
   _count?: Maybe<CompanyCount>;
   about_raw: Scalars['String']['output'];
-  banner_image_url?: Maybe<Scalars['String']['output']>;
+  banner_image_url?: Maybe<Scalars['URL']['output']>;
   benefits: Array<Scalars['String']['output']>;
-  brand_image_url?: Maybe<Scalars['String']['output']>;
+  brand_image_url?: Maybe<Scalars['URL']['output']>;
   career_description_raw: Scalars['String']['output'];
+  categories: Array<CompanyCategory>;
   company_values: Array<Scalars['String']['output']>;
-  /** [CompanyContacts] */
-  contacts: Scalars['JSON']['output'];
+  contacts?: Maybe<CompanyContacts>;
   createdAt: Scalars['DateTimeISO']['output'];
-  email: Scalars['String']['output'];
+  email: Scalars['EmailAddress']['output'];
   hiring_process: Array<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  /** [CompanyLocalInfo] */
-  local_info: Scalars['JSON']['output'];
-  /** [CompanyMetadata] */
-  metadata?: Maybe<Scalars['JSON']['output']>;
+  listings: Array<JobListing>;
+  local_info?: Maybe<CompanyLocalInfo>;
+  metadata?: Maybe<Scalars['JSONObject']['output']>;
   name: Scalars['String']['output'];
   updatedAt: Scalars['DateTimeISO']['output'];
   work_environment: Array<Scalars['String']['output']>;
-  /** [CompanyWorldwideInfo] */
-  worldwide_info: Scalars['JSON']['output'];
+  worldwide_info?: Maybe<CompanyWorldwideInfo>;
+};
+
+
+export type CompanyCategoriesArgs = {
+  cursor?: InputMaybe<CompanyCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CompanyCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CompanyCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CompanyCategoryWhereInput>;
+};
+
+
+export type CompanyListingsArgs = {
+  cursor?: InputMaybe<JobListingWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingWhereInput>;
 };
 
 export type CompanyCategory = {
   __typename?: 'CompanyCategory';
   _count?: Maybe<CompanyCategoryCount>;
+  companies: Array<Company>;
   description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+};
+
+
+export type CompanyCategoryCompaniesArgs = {
+  cursor?: InputMaybe<CompanyWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CompanyScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CompanyOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CompanyWhereInput>;
 };
 
 export type CompanyCategoryCount = {
@@ -5133,6 +5734,29 @@ export type CompanyCategoryWhereUniqueInput = {
   name?: InputMaybe<StringFilter>;
 };
 
+export type CompanyContact = {
+  __typename?: 'CompanyContact';
+  address: Scalars['String']['output'];
+  city: Scalars['String']['output'];
+  coordinates?: Maybe<Coordinates>;
+  phone_number: Scalars['String']['output'];
+};
+
+export type CompanyContacts = {
+  __typename?: 'CompanyContacts';
+  address: Scalars['String']['output'];
+  company_bulstat: Scalars['String']['output'];
+  contacts: Array<CompanyContact>;
+  email: Scalars['EmailAddress']['output'];
+  facebook_url: Scalars['URL']['output'];
+  linkedin_url: Scalars['URL']['output'];
+  name: Scalars['String']['output'];
+  phone_number: Scalars['String']['output'];
+  twitter_url: Scalars['URL']['output'];
+  website_url: Scalars['URL']['output'];
+  youtube_url: Scalars['URL']['output'];
+};
+
 export type CompanyCount = {
   __typename?: 'CompanyCount';
   categories: Scalars['Int']['output'];
@@ -5331,6 +5955,13 @@ export type CompanyListRelationFilter = {
   every?: InputMaybe<CompanyWhereInput>;
   none?: InputMaybe<CompanyWhereInput>;
   some?: InputMaybe<CompanyWhereInput>;
+};
+
+export type CompanyLocalInfo = {
+  __typename?: 'CompanyLocalInfo';
+  employeeCount?: Maybe<Scalars['Int']['output']>;
+  locations: Array<Scalars['String']['output']>;
+  since?: Maybe<Scalars['DateTimeISO']['output']>;
 };
 
 export type CompanyMaxAggregate = {
@@ -5702,6 +6333,20 @@ export type CompanyWhereUniqueInput = {
   worldwide_info?: InputMaybe<JsonFilter>;
 };
 
+export type CompanyWorldwideInfo = {
+  __typename?: 'CompanyWorldwideInfo';
+  employeeCount?: Maybe<Scalars['Int']['output']>;
+  founded?: Maybe<Scalars['DateTimeISO']['output']>;
+  headquarters: Scalars['String']['output'];
+  locations: Array<Scalars['String']['output']>;
+};
+
+export type Coordinates = {
+  __typename?: 'Coordinates';
+  latitude?: Maybe<Scalars['Latitude']['output']>;
+  longitude?: Maybe<Scalars['Longitude']['output']>;
+};
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: InputMaybe<Scalars['DateTimeISO']['input']>;
 };
@@ -5807,6 +6452,16 @@ export type EnumWorkFromHomeNullableWithAggregatesFilter = {
   notIn?: InputMaybe<Array<WorkFromHome>>;
 };
 
+export type GetTopCompaniesInput = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type GetTopListingCategoriesInput = {
+  limit?: Scalars['Int']['input'];
+  skip?: Scalars['Int']['input'];
+};
+
 export type IntNullableFilter = {
   equals?: InputMaybe<Scalars['Int']['input']>;
   gt?: InputMaybe<Scalars['Int']['input']>;
@@ -5836,6 +6491,7 @@ export type IntNullableWithAggregatesFilter = {
 
 export type JobListing = {
   __typename?: 'JobListing';
+  _count?: Maybe<JobListingCount>;
   companyId: Scalars['String']['output'];
   createdAt: Scalars['DateTimeISO']['output'];
   description_raw: Scalars['String']['output'];
@@ -5850,6 +6506,245 @@ export type JobListing = {
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
   work_from?: Maybe<WorkFromHome>;
+};
+
+export type JobListingCategory = {
+  __typename?: 'JobListingCategory';
+  _count?: Maybe<JobListingCategoryCount>;
+  description: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type JobListingCategoryCount = {
+  __typename?: 'JobListingCategoryCount';
+  listings: Scalars['Int']['output'];
+};
+
+
+export type JobListingCategoryCountListingsArgs = {
+  where?: InputMaybe<JobListingWhereInput>;
+};
+
+export type JobListingCategoryCountAggregate = {
+  __typename?: 'JobListingCategoryCountAggregate';
+  _all: Scalars['Int']['output'];
+  description: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+};
+
+export type JobListingCategoryCountOrderByAggregateInput = {
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryCreateInput = {
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingCreateNestedManyWithoutCategoriesInput>;
+  name: Scalars['String']['input'];
+};
+
+export type JobListingCategoryCreateManyInput = {
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type JobListingCategoryCreateNestedManyWithoutListingsInput = {
+  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutListingsInput>>;
+  create?: InputMaybe<Array<JobListingCategoryCreateWithoutListingsInput>>;
+};
+
+export type JobListingCategoryCreateOrConnectWithoutListingsInput = {
+  create: JobListingCategoryCreateWithoutListingsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+export type JobListingCategoryCreateWithoutListingsInput = {
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type JobListingCategoryGroupBy = {
+  __typename?: 'JobListingCategoryGroupBy';
+  _count?: Maybe<JobListingCategoryCountAggregate>;
+  _max?: Maybe<JobListingCategoryMaxAggregate>;
+  _min?: Maybe<JobListingCategoryMinAggregate>;
+  description: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type JobListingCategoryListRelationFilter = {
+  every?: InputMaybe<JobListingCategoryWhereInput>;
+  none?: InputMaybe<JobListingCategoryWhereInput>;
+  some?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+export type JobListingCategoryMaxAggregate = {
+  __typename?: 'JobListingCategoryMaxAggregate';
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type JobListingCategoryMaxOrderByAggregateInput = {
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryMinAggregate = {
+  __typename?: 'JobListingCategoryMinAggregate';
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type JobListingCategoryMinOrderByAggregateInput = {
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export enum JobListingCategoryOrderByRelevanceFieldEnum {
+  Description = 'description',
+  Id = 'id',
+  Name = 'name'
+}
+
+export type JobListingCategoryOrderByRelevanceInput = {
+  fields: Array<JobListingCategoryOrderByRelevanceFieldEnum>;
+  search: Scalars['String']['input'];
+  sort: SortOrder;
+};
+
+export type JobListingCategoryOrderByWithAggregationInput = {
+  _count?: InputMaybe<JobListingCategoryCountOrderByAggregateInput>;
+  _max?: InputMaybe<JobListingCategoryMaxOrderByAggregateInput>;
+  _min?: InputMaybe<JobListingCategoryMinOrderByAggregateInput>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryOrderByWithRelationInput = {
+  _relevance?: InputMaybe<JobListingCategoryOrderByRelevanceInput>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  listings?: InputMaybe<JobListingOrderByRelationAggregateInput>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export enum JobListingCategoryScalarFieldEnum {
+  Description = 'description',
+  Id = 'id',
+  Name = 'name'
+}
+
+export type JobListingCategoryScalarWhereInput = {
+  AND?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type JobListingCategoryScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
+  description?: InputMaybe<StringWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type JobListingCategoryUpdateInput = {
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  listings?: InputMaybe<JobListingUpdateManyWithoutCategoriesNestedInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpdateManyMutationInput = {
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpdateManyWithWhereWithoutListingsInput = {
+  data: JobListingCategoryUpdateManyMutationInput;
+  where: JobListingCategoryScalarWhereInput;
+};
+
+export type JobListingCategoryUpdateManyWithoutListingsNestedInput = {
+  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutListingsInput>>;
+  create?: InputMaybe<Array<JobListingCategoryCreateWithoutListingsInput>>;
+  delete?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  set?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  update?: InputMaybe<Array<JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput>>;
+  updateMany?: InputMaybe<Array<JobListingCategoryUpdateManyWithWhereWithoutListingsInput>>;
+  upsert?: InputMaybe<Array<JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput>>;
+};
+
+export type JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput = {
+  data: JobListingCategoryUpdateWithoutListingsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+export type JobListingCategoryUpdateWithoutListingsInput = {
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput = {
+  create: JobListingCategoryCreateWithoutListingsInput;
+  update: JobListingCategoryUpdateWithoutListingsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+export type JobListingCategoryWhereInput = {
+  AND?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  listings?: InputMaybe<JobListingListRelationFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type JobListingCategoryWhereUniqueInput = {
+  AND?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryWhereInput>>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingListRelationFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type JobListingCount = {
+  __typename?: 'JobListingCount';
+  categories: Scalars['Int']['output'];
+};
+
+
+export type JobListingCountCategoriesArgs = {
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCountAggregate = {
@@ -5887,6 +6782,7 @@ export type JobListingCountOrderByAggregateInput = {
 };
 
 export type JobListingCreateInput = {
+  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
   company: CompanyCreateNestedOneWithoutListingsInput;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
@@ -5935,6 +6831,12 @@ export type JobListingCreateManyInput = {
   work_from?: InputMaybe<WorkFromHome>;
 };
 
+export type JobListingCreateNestedManyWithoutCategoriesInput = {
+  connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCategoriesInput>>;
+  create?: InputMaybe<Array<JobListingCreateWithoutCategoriesInput>>;
+};
+
 export type JobListingCreateNestedManyWithoutCompanyInput = {
   connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCompanyInput>>;
@@ -5942,12 +6844,33 @@ export type JobListingCreateNestedManyWithoutCompanyInput = {
   createMany?: InputMaybe<JobListingCreateManyCompanyInputEnvelope>;
 };
 
+export type JobListingCreateOrConnectWithoutCategoriesInput = {
+  create: JobListingCreateWithoutCategoriesInput;
+  where: JobListingWhereUniqueInput;
+};
+
 export type JobListingCreateOrConnectWithoutCompanyInput = {
   create: JobListingCreateWithoutCompanyInput;
   where: JobListingWhereUniqueInput;
 };
 
+export type JobListingCreateWithoutCategoriesInput = {
+  company: CompanyCreateNestedOneWithoutListingsInput;
+  description_raw: Scalars['String']['input'];
+  external_application_url?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<JobListingCreatekeywordsInput>;
+  languages?: InputMaybe<JobListingCreatelanguagesInput>;
+  level?: InputMaybe<JobListingLevel>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  parameters?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<JobListingEmploymentType>;
+  work_from?: InputMaybe<WorkFromHome>;
+};
+
 export type JobListingCreateWithoutCompanyInput = {
+  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -6108,6 +7031,7 @@ export type JobListingOrderByWithAggregationInput = {
 
 export type JobListingOrderByWithRelationInput = {
   _relevance?: InputMaybe<JobListingOrderByRelevanceInput>;
+  categories?: InputMaybe<JobListingCategoryOrderByRelationAggregateInput>;
   company?: InputMaybe<CompanyOrderByWithRelationInput>;
   companyId?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
@@ -6177,6 +7101,7 @@ export type JobListingScalarWhereWithAggregatesInput = {
 };
 
 export type JobListingUpdateInput = {
+  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -6205,9 +7130,27 @@ export type JobListingUpdateManyMutationInput = {
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
+export type JobListingUpdateManyWithWhereWithoutCategoriesInput = {
+  data: JobListingUpdateManyMutationInput;
+  where: JobListingScalarWhereInput;
+};
+
 export type JobListingUpdateManyWithWhereWithoutCompanyInput = {
   data: JobListingUpdateManyMutationInput;
   where: JobListingScalarWhereInput;
+};
+
+export type JobListingUpdateManyWithoutCategoriesNestedInput = {
+  connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCategoriesInput>>;
+  create?: InputMaybe<Array<JobListingCreateWithoutCategoriesInput>>;
+  delete?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<JobListingScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  set?: InputMaybe<Array<JobListingWhereUniqueInput>>;
+  update?: InputMaybe<Array<JobListingUpdateWithWhereUniqueWithoutCategoriesInput>>;
+  updateMany?: InputMaybe<Array<JobListingUpdateManyWithWhereWithoutCategoriesInput>>;
+  upsert?: InputMaybe<Array<JobListingUpsertWithWhereUniqueWithoutCategoriesInput>>;
 };
 
 export type JobListingUpdateManyWithoutCompanyNestedInput = {
@@ -6224,12 +7167,33 @@ export type JobListingUpdateManyWithoutCompanyNestedInput = {
   upsert?: InputMaybe<Array<JobListingUpsertWithWhereUniqueWithoutCompanyInput>>;
 };
 
+export type JobListingUpdateWithWhereUniqueWithoutCategoriesInput = {
+  data: JobListingUpdateWithoutCategoriesInput;
+  where: JobListingWhereUniqueInput;
+};
+
 export type JobListingUpdateWithWhereUniqueWithoutCompanyInput = {
   data: JobListingUpdateWithoutCompanyInput;
   where: JobListingWhereUniqueInput;
 };
 
+export type JobListingUpdateWithoutCategoriesInput = {
+  company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
+  description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
+  external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  keywords?: InputMaybe<JobListingUpdatekeywordsInput>;
+  languages?: InputMaybe<JobListingUpdatelanguagesInput>;
+  level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  parameters?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
+  work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
+};
+
 export type JobListingUpdateWithoutCompanyInput = {
+  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -6253,6 +7217,12 @@ export type JobListingUpdatelanguagesInput = {
   set?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type JobListingUpsertWithWhereUniqueWithoutCategoriesInput = {
+  create: JobListingCreateWithoutCategoriesInput;
+  update: JobListingUpdateWithoutCategoriesInput;
+  where: JobListingWhereUniqueInput;
+};
+
 export type JobListingUpsertWithWhereUniqueWithoutCompanyInput = {
   create: JobListingCreateWithoutCompanyInput;
   update: JobListingUpdateWithoutCompanyInput;
@@ -6263,6 +7233,7 @@ export type JobListingWhereInput = {
   AND?: InputMaybe<Array<JobListingWhereInput>>;
   NOT?: InputMaybe<Array<JobListingWhereInput>>;
   OR?: InputMaybe<Array<JobListingWhereInput>>;
+  categories?: InputMaybe<JobListingCategoryListRelationFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
   companyId?: InputMaybe<StringFilter>;
   description_raw?: InputMaybe<StringFilter>;
@@ -6282,6 +7253,7 @@ export type JobListingWhereUniqueInput = {
   AND?: InputMaybe<Array<JobListingWhereInput>>;
   NOT?: InputMaybe<Array<JobListingWhereInput>>;
   OR?: InputMaybe<Array<JobListingWhereInput>>;
+  categories?: InputMaybe<JobListingCategoryListRelationFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
   companyId?: InputMaybe<StringFilter>;
   description_raw?: InputMaybe<StringFilter>;
@@ -6367,21 +7339,13 @@ export type JsonWithAggregatesFilter = {
   string_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Movie = {
-  __typename?: 'Movie';
-  Poster: Scalars['String']['output'];
-  Title: Scalars['String']['output'];
-  Type: Scalars['String']['output'];
-  Year: Scalars['String']['output'];
-  imdbID: Scalars['String']['output'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   createManyAccount: AffectedRowsOutput;
   createManyCompany: AffectedRowsOutput;
   createManyCompanyCategory: AffectedRowsOutput;
   createManyJobListing: AffectedRowsOutput;
+  createManyJobListingCategory: AffectedRowsOutput;
   createManySession: AffectedRowsOutput;
   createManyUser: AffectedRowsOutput;
   createManyVerificationToken: AffectedRowsOutput;
@@ -6389,6 +7353,7 @@ export type Mutation = {
   createOneCompany: Company;
   createOneCompanyCategory: CompanyCategory;
   createOneJobListing: JobListing;
+  createOneJobListingCategory: JobListingCategory;
   createOneSession: Session;
   createOneUser: User;
   createOneVerificationToken: VerificationToken;
@@ -6396,6 +7361,7 @@ export type Mutation = {
   deleteManyCompany: AffectedRowsOutput;
   deleteManyCompanyCategory: AffectedRowsOutput;
   deleteManyJobListing: AffectedRowsOutput;
+  deleteManyJobListingCategory: AffectedRowsOutput;
   deleteManySession: AffectedRowsOutput;
   deleteManyUser: AffectedRowsOutput;
   deleteManyVerificationToken: AffectedRowsOutput;
@@ -6403,6 +7369,7 @@ export type Mutation = {
   deleteOneCompany?: Maybe<Company>;
   deleteOneCompanyCategory?: Maybe<CompanyCategory>;
   deleteOneJobListing?: Maybe<JobListing>;
+  deleteOneJobListingCategory?: Maybe<JobListingCategory>;
   deleteOneSession?: Maybe<Session>;
   deleteOneUser?: Maybe<User>;
   deleteOneVerificationToken?: Maybe<VerificationToken>;
@@ -6410,7 +7377,7 @@ export type Mutation = {
   generateSignUpEmailCode: SignUpWithEmailCodeResponse;
   sendVerificationEmail: SendVerificationEmailResponse;
   signIn?: Maybe<User>;
-  signInWithEmailCode: User;
+  signInWithEmailCode?: Maybe<User>;
   signOut: Scalars['Boolean']['output'];
   signUp: User;
   signUpWithEmailCode: User;
@@ -6418,6 +7385,7 @@ export type Mutation = {
   updateManyCompany: AffectedRowsOutput;
   updateManyCompanyCategory: AffectedRowsOutput;
   updateManyJobListing: AffectedRowsOutput;
+  updateManyJobListingCategory: AffectedRowsOutput;
   updateManySession: AffectedRowsOutput;
   updateManyUser: AffectedRowsOutput;
   updateManyVerificationToken: AffectedRowsOutput;
@@ -6425,6 +7393,7 @@ export type Mutation = {
   updateOneCompany?: Maybe<Company>;
   updateOneCompanyCategory?: Maybe<CompanyCategory>;
   updateOneJobListing?: Maybe<JobListing>;
+  updateOneJobListingCategory?: Maybe<JobListingCategory>;
   updateOneSession?: Maybe<Session>;
   updateOneUser?: Maybe<User>;
   updateOneVerificationToken?: Maybe<VerificationToken>;
@@ -6432,6 +7401,7 @@ export type Mutation = {
   upsertOneCompany: Company;
   upsertOneCompanyCategory: CompanyCategory;
   upsertOneJobListing: JobListing;
+  upsertOneJobListingCategory: JobListingCategory;
   upsertOneSession: Session;
   upsertOneUser: User;
   upsertOneVerificationToken: VerificationToken;
@@ -6459,6 +7429,12 @@ export type MutationCreateManyCompanyCategoryArgs = {
 
 export type MutationCreateManyJobListingArgs = {
   data: Array<JobListingCreateManyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type MutationCreateManyJobListingCategoryArgs = {
+  data: Array<JobListingCategoryCreateManyInput>;
   skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -6505,6 +7481,12 @@ export type MutationCreateOneJobListingArgs = {
 };
 
 
+export type MutationCreateOneJobListingCategoryArgs = {
+  data: JobListingCategoryCreateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+};
+
+
 export type MutationCreateOneSessionArgs = {
   data: SessionCreateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
@@ -6540,6 +7522,11 @@ export type MutationDeleteManyCompanyCategoryArgs = {
 
 export type MutationDeleteManyJobListingArgs = {
   where?: InputMaybe<JobListingWhereInput>;
+};
+
+
+export type MutationDeleteManyJobListingCategoryArgs = {
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 
@@ -6579,6 +7566,12 @@ export type MutationDeleteOneCompanyCategoryArgs = {
 export type MutationDeleteOneJobListingArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: JobListingWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneJobListingCategoryArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: JobListingCategoryWhereUniqueInput;
 };
 
 
@@ -6660,6 +7653,12 @@ export type MutationUpdateManyJobListingArgs = {
 };
 
 
+export type MutationUpdateManyJobListingCategoryArgs = {
+  data: JobListingCategoryUpdateManyMutationInput;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
 export type MutationUpdateManySessionArgs = {
   data: SessionUpdateManyMutationInput;
   where?: InputMaybe<SessionWhereInput>;
@@ -6703,6 +7702,13 @@ export type MutationUpdateOneJobListingArgs = {
   data: JobListingUpdateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: JobListingWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneJobListingCategoryArgs = {
+  data: JobListingCategoryUpdateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: JobListingCategoryWhereUniqueInput;
 };
 
 
@@ -6756,6 +7762,14 @@ export type MutationUpsertOneJobListingArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   update: JobListingUpdateInput;
   where: JobListingWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneJobListingCategoryArgs = {
+  create: JobListingCategoryCreateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  update: JobListingCategoryUpdateInput;
+  where: JobListingCategoryWhereUniqueInput;
 };
 
 
@@ -7071,6 +8085,7 @@ export type Query = {
   aggregateCompany: AggregateCompany;
   aggregateCompanyCategory: AggregateCompanyCategory;
   aggregateJobListing: AggregateJobListing;
+  aggregateJobListingCategory: AggregateJobListingCategory;
   aggregateSession: AggregateSession;
   aggregateUser: AggregateUser;
   aggregateVerificationToken: AggregateVerificationToken;
@@ -7086,6 +8101,8 @@ export type Query = {
   findFirstCompanyCategoryOrThrow?: Maybe<CompanyCategory>;
   findFirstCompanyOrThrow?: Maybe<Company>;
   findFirstJobListing?: Maybe<JobListing>;
+  findFirstJobListingCategory?: Maybe<JobListingCategory>;
+  findFirstJobListingCategoryOrThrow?: Maybe<JobListingCategory>;
   findFirstJobListingOrThrow?: Maybe<JobListing>;
   findFirstSession?: Maybe<Session>;
   findFirstSessionOrThrow?: Maybe<Session>;
@@ -7097,7 +8114,10 @@ export type Query = {
   getCompany?: Maybe<Company>;
   getCompanyCategory?: Maybe<CompanyCategory>;
   getJobListing?: Maybe<JobListing>;
+  getJobListingCategory?: Maybe<JobListingCategory>;
   getSession?: Maybe<Session>;
+  getTopCompanies: Array<Company>;
+  getTopListingCategories: Array<JobListingCategory>;
   getUser?: Maybe<User>;
   getVerificationToken?: Maybe<VerificationToken>;
   googleLoginUrl: Scalars['String']['output'];
@@ -7105,14 +8125,16 @@ export type Query = {
   groupByCompany: Array<CompanyGroupBy>;
   groupByCompanyCategory: Array<CompanyCategoryGroupBy>;
   groupByJobListing: Array<JobListingGroupBy>;
+  groupByJobListingCategory: Array<JobListingCategoryGroupBy>;
   groupBySession: Array<SessionGroupBy>;
   groupByUser: Array<UserGroupBy>;
   groupByVerificationToken: Array<VerificationTokenGroupBy>;
   jobListing?: Maybe<JobListing>;
+  jobListingCategories: Array<JobListingCategory>;
+  jobListingCategory?: Maybe<JobListingCategory>;
   jobListings: Array<JobListing>;
   me?: Maybe<User>;
   search: Array<UserSearchResponse>;
-  searchMovies: Array<Movie>;
   session?: Maybe<Session>;
   sessions: Array<Session>;
   user?: Maybe<User>;
@@ -7172,6 +8194,15 @@ export type QueryAggregateJobListingArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<JobListingWhereInput>;
+};
+
+
+export type QueryAggregateJobListingCategoryArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 
@@ -7318,6 +8349,28 @@ export type QueryFindFirstJobListingArgs = {
 };
 
 
+export type QueryFindFirstJobListingCategoryArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
+export type QueryFindFirstJobListingCategoryOrThrowArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
 export type QueryFindFirstJobListingOrThrowArgs = {
   cursor?: InputMaybe<JobListingWhereUniqueInput>;
   distinct?: InputMaybe<Array<JobListingScalarFieldEnum>>;
@@ -7419,9 +8472,25 @@ export type QueryGetJobListingArgs = {
 };
 
 
+export type QueryGetJobListingCategoryArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+
 export type QueryGetSessionArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: SessionWhereUniqueInput;
+};
+
+
+export type QueryGetTopCompaniesArgs = {
+  input: GetTopCompaniesInput;
+};
+
+
+export type QueryGetTopListingCategoriesArgs = {
+  input: GetTopListingCategoriesInput;
 };
 
 
@@ -7482,6 +8551,16 @@ export type QueryGroupByJobListingArgs = {
 };
 
 
+export type QueryGroupByJobListingCategoryArgs = {
+  by: Array<JobListingCategoryScalarFieldEnum>;
+  having?: InputMaybe<JobListingCategoryScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
 export type QueryGroupBySessionArgs = {
   by: Array<SessionScalarFieldEnum>;
   having?: InputMaybe<SessionScalarWhereWithAggregatesInput>;
@@ -7518,6 +8597,23 @@ export type QueryJobListingArgs = {
 };
 
 
+export type QueryJobListingCategoriesArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
+export type QueryJobListingCategoryArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
+
 export type QueryJobListingsArgs = {
   cursor?: InputMaybe<JobListingWhereUniqueInput>;
   distinct?: InputMaybe<Array<JobListingScalarFieldEnum>>;
@@ -7531,12 +8627,6 @@ export type QueryJobListingsArgs = {
 
 export type QuerySearchArgs = {
   search?: UsersSearchInput;
-};
-
-
-export type QuerySearchMoviesArgs = {
-  page?: Scalars['Int']['input'];
-  search: Scalars['String']['input'];
 };
 
 
@@ -7980,7 +9070,7 @@ export type User = {
   cookieConsent?: Maybe<Scalars['Boolean']['output']>;
   cookiePreferences?: Maybe<UserCookiePreferences>;
   createdAt: Scalars['DateTimeISO']['output'];
-  email: Scalars['String']['output'];
+  email: Scalars['EmailAddress']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   first_name: Scalars['String']['output'];
   id: Scalars['ID']['output'];
@@ -8286,7 +9376,7 @@ export type UserSearchResponse = {
   cookieConsent?: Maybe<Scalars['Boolean']['output']>;
   cookiePreferences?: Maybe<UserCookiePreferences>;
   createdAt: Scalars['DateTimeISO']['output'];
-  email: Scalars['String']['output'];
+  email: Scalars['EmailAddress']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   first_name: Scalars['String']['output'];
   id: Scalars['ID']['output'];
@@ -8612,6 +9702,27 @@ export enum WorkFromHome {
   Hybrid = 'Hybrid'
 }
 
+export type GetTopJobCategoriesQueryVariables = Exact<{
+  input: GetTopListingCategoriesInput;
+}>;
+
+
+export type GetTopJobCategoriesQuery = { __typename?: 'Query', getTopListingCategories: Array<{ __typename?: 'JobListingCategory', id: string, name: string, description: string, _count?: { __typename?: 'JobListingCategoryCount', listings: number } | null }> };
+
+export type GetTopEmployersQueryVariables = Exact<{
+  input: GetTopCompaniesInput;
+}>;
+
+
+export type GetTopEmployersQuery = { __typename?: 'Query', getTopCompanies: Array<{ __typename?: 'Company', id: string, name: string, banner_image_url?: any | null, brand_image_url?: any | null, _count?: { __typename?: 'CompanyCount', listings: number } | null }> };
+
+export type GetCompanyQueryQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GetCompanyQueryQuery = { __typename?: 'Query', getCompany?: { __typename?: 'Company', id: string, name: string, about_raw: string, career_description_raw: string, benefits: Array<string>, company_values: Array<string>, work_environment: Array<string>, hiring_process: Array<string>, createdAt: any, updatedAt: any, metadata?: any | null, email: any, brand_image_url?: any | null, banner_image_url?: any | null, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string, coordinates?: { __typename?: 'Coordinates', latitude?: any | null, longitude?: any | null } | null }> } | null, local_info?: { __typename?: 'CompanyLocalInfo', since?: any | null, employeeCount?: number | null, locations: Array<string> } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', founded?: any | null, employeeCount?: number | null, headquarters: string, locations: Array<string> } | null } | null };
+
 export type SignInWithEmailCodeMutationVariables = Exact<{
   code: Scalars['Int']['input'];
   email: Scalars['EmailAddress']['input'];
@@ -8619,7 +9730,7 @@ export type SignInWithEmailCodeMutationVariables = Exact<{
 }>;
 
 
-export type SignInWithEmailCodeMutation = { __typename?: 'Mutation', signInWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: string } };
+export type SignInWithEmailCodeMutation = { __typename?: 'Mutation', signInWithEmailCode?: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: any } | null };
 
 export type GenerateEmailCodeMutationVariables = Exact<{
   email: Scalars['EmailAddress']['input'];
@@ -8637,7 +9748,7 @@ export type SignUpWithEmailCodeMutationVariables = Exact<{
 }>;
 
 
-export type SignUpWithEmailCodeMutation = { __typename?: 'Mutation', signUpWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: string } };
+export type SignUpWithEmailCodeMutation = { __typename?: 'Mutation', signUpWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: any } };
 
 export type SignOutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -8649,12 +9760,12 @@ export type SignInMutationVariables = Exact<{
 }>;
 
 
-export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: string, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, createdAt: any, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
+export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: any, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, createdAt: any, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
 
 export type MeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: string, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
+export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: any, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null } | null };
 
 export type GoogleLoginQueryQueryVariables = Exact<{
   redirectUrl: Scalars['String']['input'];

@@ -7,28 +7,28 @@ declare global {
          Functionality: boolean;
       }
 
-      type UserMetadata = {
+      export type UserMetadata = {
          "cookie-consent": boolean
          "cookie-preferences": CookiePreferences
       }
 
-      type CompanyMetadata = {}
+      export type CompanyMetadata = {}
 
 
-      type CompanyWorldwideInfo = {
+      export type CompanyWorldwideInfo = {
          founded?: Date;
          employeeCount?: number;
          headquarters?: string;
          locations: string[]
       }
 
-      type CompanyLocalInfo = {
+      export type CompanyLocalInfo = {
          since?: Date;
          employeeCount?: number;
          locations: string[]
       }
 
-      type CompanyContacts = {
+      export type CompanyContacts = {
          name: string;
          company_bulstat?: string;
 
@@ -44,9 +44,9 @@ declare global {
 
       }
 
-      type CompanyContact = {
-         city:string;
-        address: string;
+      export type CompanyContact = {
+         city: string;
+         address: string;
          coordinates: {
             lat: number;
             lng: number;

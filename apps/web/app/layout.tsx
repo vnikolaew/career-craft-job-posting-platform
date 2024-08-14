@@ -48,6 +48,8 @@ export const metadata: Metadata = {
    applicationName: APP_NAME,
 };
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = `0`;
+
 export default function RootLayout({
                                       children,
                                    }: Readonly<{

@@ -1,0 +1,206 @@
+[
+  {
+    "name": "Information Technology",
+    "description": "Companies involved in software development, IT services, and technology consulting."
+  },
+  {
+    "name": "Healthcare",
+    "description": "Organizations providing medical services, manufacturing medical equipment, and healthcare solutions."
+  },
+  {
+    "name": "Finance",
+    "description": "Businesses engaged in banking, investment, insurance, and other financial services."
+  },
+  {
+    "name": "Education",
+    "description": "Institutions and companies providing educational services, resources, and training programs."
+  },
+  {
+    "name": "Manufacturing",
+    "description": "Companies involved in the production of goods, from raw materials to finished products."
+  },
+  {
+    "name": "Retail",
+    "description": "Businesses engaged in the sale of goods directly to consumers, including online and offline stores."
+  },
+  {
+    "name": "Hospitality",
+    "description": "Organizations offering lodging, food services, and event planning, such as hotels and restaurants."
+  },
+  {
+    "name": "Transportation",
+    "description": "Companies providing transportation services, including logistics, shipping, and public transport."
+  },
+  {
+    "name": "Construction",
+    "description": "Businesses involved in building and infrastructure development, including residential and commercial projects."
+  },
+  {
+    "name": "Real Estate",
+    "description": "Organizations focused on the buying, selling, and management of properties and land."
+  },
+  {
+    "name": "Telecommunications",
+    "description": "Companies providing communication services, including internet, phone, and satellite services."
+  },
+  {
+    "name": "Agriculture",
+    "description": "Businesses involved in farming, crop production, and agricultural technology."
+  },
+  {
+    "name": "Energy",
+    "description": "Companies focused on the production and distribution of energy, including renewable and non-renewable sources."
+  },
+  {
+    "name": "Entertainment",
+    "description": "Organizations involved in film, music, television, gaming, and other forms of entertainment."
+  },
+  {
+    "name": "Legal Services",
+    "description": "Firms and organizations providing legal representation, advice, and documentation services."
+  },
+  {
+    "name": "Consulting",
+    "description": "Companies offering expert advice in various fields, including management, strategy, and IT."
+  },
+  {
+    "name": "Non-Profit",
+    "description": "Organizations that operate for charitable purposes, focusing on social causes and community development."
+  },
+  {
+    "name": "Pharmaceuticals",
+    "description": "Companies involved in the research, development, and production of drugs and medical treatments."
+  },
+  {
+    "name": "Biotechnology",
+    "description": "Businesses focusing on the development of products and technologies using biological systems."
+  },
+  {
+    "name": "Automotive",
+    "description": "Companies involved in the design, manufacturing, and sale of motor vehicles and related parts."
+  },
+  {
+    "name": "Aerospace",
+    "description": "Organizations focused on the design, manufacturing, and maintenance of aircraft and spacecraft."
+  },
+  {
+    "name": "Food & Beverage",
+    "description": "Businesses involved in the production, distribution, and sale of food and drink products."
+  },
+  {
+    "name": "Fashion",
+    "description": "Companies engaged in the design, manufacturing, and sale of clothing, footwear, and accessories."
+  },
+  {
+    "name": "Marketing",
+    "description": "Organizations specializing in advertising, public relations, and marketing strategy development."
+  },
+  {
+    "name": "Publishing",
+    "description": "Companies involved in the production and distribution of books, magazines, and digital content."
+  },
+  {
+    "name": "Architecture",
+    "description": "Firms focusing on the design and planning of buildings and other physical structures."
+  },
+  {
+    "name": "Human Resources",
+    "description": "Companies specializing in recruitment, employee management, and HR consulting services."
+  },
+  {
+    "name": "Chemical",
+    "description": "Organizations involved in the production of chemicals and related products for industrial and consumer use."
+  },
+  {
+    "name": "Mining",
+    "description": "Companies engaged in the extraction of minerals and other geological materials from the earth."
+  },
+  {
+    "name": "Media",
+    "description": "Businesses involved in broadcasting, journalism, and content creation for various platforms."
+  },
+  {
+    "name": "Television",
+    "description": "Companies focused on the production and broadcasting of television content and shows."
+  },
+  {
+    "name": "Video Games",
+    "description": "Organizations involved in the development, publishing, and distribution of video games."
+  },
+  {
+    "name": "Logistics",
+    "description": "Companies specializing in the management of the flow of goods and services from origin to consumption."
+  },
+  {
+    "name": "Security",
+    "description": "Businesses providing physical, digital, and cybersecurity services."
+  },
+  {
+    "name": "Environmental Services",
+    "description": "Companies focused on environmental protection, waste management, and sustainability initiatives."
+  },
+  {
+    "name": "Arts & Culture",
+    "description": "Organizations supporting and promoting the arts, including galleries, museums, and cultural institutions."
+  },
+  {
+    "name": "Tourism",
+    "description": "Businesses offering travel services, tour packages, and other tourism-related activities."
+  },
+  {
+    "name": "Sports",
+    "description": "Organizations involved in professional and amateur sports, including teams, leagues, and equipment manufacturers."
+  },
+  {
+    "name": "Insurance",
+    "description": "Companies providing coverage and risk management services for individuals and businesses."
+  },
+  {
+    "name": "Investment",
+    "description": "Firms engaged in wealth management, asset management, and investment advisory services."
+  },
+  {
+    "name": "Advertising",
+    "description": "Businesses focusing on creating, planning, and executing advertising campaigns."
+  },
+  {
+    "name": "Interior Design",
+    "description": "Firms specializing in the planning and design of interior spaces."
+  },
+  {
+    "name": "Event Planning",
+    "description": "Companies providing services for the planning and execution of events, including weddings, conferences, and festivals."
+  },
+  {
+    "name": "Public Relations",
+    "description": "Organizations specializing in managing the public image of companies and individuals."
+  },
+  {
+    "name": "Civil Engineering",
+    "description": "Firms involved in the design, construction, and maintenance of infrastructure projects."
+  },
+  {
+    "name": "Digital Marketing",
+    "description": "Companies focusing on online marketing strategies, including SEO, social media, and content marketing."
+  },
+  {
+    "name": "E-commerce",
+    "description": "Businesses that operate online platforms for buying and selling products and services."
+  },
+  {
+    "name": "Renewable Energy",
+    "description": "Organizations involved in the production and distribution of renewable energy sources like solar and wind."
+  },
+  {
+    "name": "Consumer Electronics",
+    "description": "Companies involved in the manufacturing and sale of electronic devices and appliances."
+  },
+  {
+    "name": "Luxury Goods",
+    "description": "Businesses specializing in high-end products, including fashion, jewelry, and watches."
+  },
+  {
+    "name": "Data Science",
+    "description": "Companies focusing on the analysis, processing, and utilization of large datasets for various applications."
+  }
+]

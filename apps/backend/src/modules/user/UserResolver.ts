@@ -26,6 +26,7 @@ import { generateCodeVerifier, generateState } from "arctic";
 import { serializeCookie } from "oslo/cookie";
 import { CookieAttributes } from "lucia";
 import { CONSTS } from "@modules/user/consts";
+import { GraphQLEmailAddress } from "graphql-scalars";
 
 @InputType()
 export class UserSignUpInput implements Partial<User> {
@@ -126,6 +127,11 @@ export class UserResolver extends UserRelationsResolver {
    @FieldResolver(_ => String, { nullable: true })
    public async image(@Root() user: User): Promise<JsonValue> {
       return user.image ?? CONSTS.DEFAULT_USER_AVATAR_URL;
+   }
+
+   @FieldResolver(_ => GraphQLEmailAddress, { nullable: false })
+   public async email(@Root() user: User): Promise<string> {
+      return user.email;
    }
 
    @FieldResolver(_ => Boolean, { nullable: true })

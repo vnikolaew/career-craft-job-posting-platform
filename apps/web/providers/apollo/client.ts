@@ -1,6 +1,10 @@
 import { ApolloClient, InMemoryCache, TypePolicies } from "@apollo/client";
 import { splitLink } from "@/providers/apollo/links";
-import { DEFAULT_USER_AVATAR_URL } from "@/providers/apollo/ApolloProvider";
+import {
+   DEFAULT_COMPANY_BANNER_URL,
+   DEFAULT_COMPANY_LOGO_URL,
+   DEFAULT_USER_AVATAR_URL,
+} from "@/providers/apollo/ApolloProvider";
 
 const typePolicies: TypePolicies = {
    TypingRun: {
@@ -8,6 +12,20 @@ const typePolicies: TypePolicies = {
          createdAt: {
             read(value?: Date | string) {
                return typeof value === `string` ? new Date(value) : value;
+            },
+         },
+      },
+   },
+   Company: {
+      fields: {
+         brand_image_url: {
+            read(value?: string | null) {
+               return value ?? DEFAULT_COMPANY_LOGO_URL;
+            },
+         },
+         banner_image_url: {
+            read(value?: string | null) {
+               return value ?? DEFAULT_COMPANY_BANNER_URL;
             },
          },
       },
