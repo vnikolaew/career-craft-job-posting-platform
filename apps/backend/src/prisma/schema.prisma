@@ -118,9 +118,9 @@ model Company {
 
   categories CompanyCategory[]
 
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  JobListing JobListing[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  listings  JobListing[]
 }
 
 model CompanyCategory {

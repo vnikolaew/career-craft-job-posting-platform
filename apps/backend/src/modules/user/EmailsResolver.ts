@@ -27,13 +27,13 @@ export class VerifyEmailResponse extends SendVerificationEmailResponse {
 @ObjectType()
 export class SignUpWithEmailCodeResponse extends SendVerificationEmailResponse {
    @Field(of => Int, { nullable: true })
-   code?: number
+   code?: number;
 
    @Field(of => String, { nullable: true })
-   identifier?: string
+   identifier?: string;
 
    @Field(of => Date, { nullable: true })
-   expires?: Date
+   expires?: Date;
 }
 
 @Resolver()
@@ -41,6 +41,42 @@ export class EmailsResolver {
 
    private generateEmailCode() {
       return Math.floor(100000 + Math.random() * 900000);
+   }
+
+   @Mutation(() => User)
+   public async signInWithEmailCode(
+      @Ctx() { prisma, res, pubSub }: MyContext,
+      @Arg(`code`, of => Int) code: number,
+      @EmailAddress(`email`) email: string,
+      @StringP(`identifier`) identifier: string,
+   ): Promise<User> {
+      const token = await prisma.verificationToken.findUnique({
+         where: {
+            identifier_token: {
+               identifier,
+               token: code.toString(10),
+            },
+            expires: {
+               gte: moment().toDate(),
+            },
+         },
+      });
+      if (!token) return null;
+
+      // Sign in user:
+      let user = await prisma.user.signIn({
+         email: email,
+         password: ``,
+         username: ``,
+      });
+
+      if (!user) return null;
+
+      const serializedCookie = await getUserCookie(user);
+      res.appendHeader(`Set-Cookie`, serializedCookie);
+
+      await pubSub?.publish(`USER_SIGNED_UP`, user);
+      return user;
    }
 
    @Mutation(() => User)
@@ -117,7 +153,10 @@ export class EmailsResolver {
          subject: `${APP_NAME} | Your Verification Code`,
       });
 
-      return response.success ? { success: true, ...token, code: token.token } : { success: false, error: response.error };
+      return response.success ? { success: true, ...token, code: token.token } : {
+         success: false,
+         error: response.error,
+      };
    }
 
    @Mutation(() => SendVerificationEmailResponse)

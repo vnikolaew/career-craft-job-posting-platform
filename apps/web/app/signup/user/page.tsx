@@ -13,9 +13,7 @@ const Page = (props: PageProps) => {
 
    return (
       <section className={`w-full flex flex-col items-center justify-center pt-12`}>
-         {step === `verify` ? (
-            <EmailVerificationCodeForm />
-         ) : <CreateUserAccountForm />}
+         {step === `verify` ? <EmailVerificationCodeForm /> : <CreateUserAccountForm />}
       </section>
    );
 };

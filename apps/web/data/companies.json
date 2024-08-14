@@ -1,0 +1,582 @@
+[
+  {
+    "id": "c1",
+    "name": "Tech Innovators Inc.",
+    "about_raw": "Leading tech company specializing in AI solutions.",
+    "career_description_raw": "Join a dynamic team shaping the future of technology.",
+    "email": "careers@techinnovators.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/tech_innovators_logo.png",
+    "banner_image_url": "https://example.com/tech_innovators_banner.jpg",
+    "local_info": {
+      "since": "2015-01-01T00:00:00Z",
+      "employeeCount": 300,
+      "locations": ["San Francisco"]
+    },
+    "worldwide_info": {
+      "founded": "2010-01-01T00:00:00Z",
+      "employeeCount": 500,
+      "headquarters": "San Francisco",
+      "locations": ["USA", "Germany", "India"]
+    },
+    "benefits": ["Health Insurance", "Paid Time Off", "Retirement Plan"],
+    "company_values": ["Innovation", "Integrity", "Excellence"],
+    "work_environment": ["Collaborative", "Fast-paced", "Inclusive"],
+    "hiring_process": ["Initial Interview", "Technical Test", "Final Interview"],
+    "contacts": {
+      "name": "Jane Doe",
+      "company_bulstat": "123456789",
+      "contacts": [
+        {
+          "city": "San Francisco",
+          "address": "123 Market St",
+          "coordinates": {
+            "lat": 37.7749,
+            "lng": -122.4194
+          },
+          "phone_number": "123-456-7890"
+        }
+      ],
+      "email": "info@techinnovators.com",
+      "phone_number": "123-456-7890",
+      "address": "123 Market St, San Francisco, CA",
+      "website_url": "https://techinnovators.com",
+      "facebook_url": "https://facebook.com/techinnovators",
+      "twitter_url": "https://twitter.com/techinnovators",
+      "linkedin_url": "https://linkedin.com/company/techinnovators",
+      "youtube_url": "https://youtube.com/techinnovators"
+    },
+    "categories": [
+      {
+        "id": "cat1",
+        "name": "Technology",
+        "description": "Tech-related products and services."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  },
+  {
+    "id": "c2",
+    "name": "Eco Green Solutions",
+    "about_raw": "Sustainable energy solutions for a greener planet.",
+    "career_description_raw": "Work with a team dedicated to environmental sustainability.",
+    "email": "jobs@ecogreen.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/eco_green_logo.png",
+    "banner_image_url": "https://example.com/eco_green_banner.jpg",
+    "local_info": {
+      "since": "2018-05-01T00:00:00Z",
+      "employeeCount": 100,
+      "locations": ["Austin"]
+    },
+    "worldwide_info": {
+      "founded": "2015-01-01T00:00:00Z",
+      "employeeCount": 150,
+      "headquarters": "Austin",
+      "locations": ["USA", "Canada"]
+    },
+    "benefits": ["Remote Work", "Health Insurance", "Equity Options"],
+    "company_values": ["Sustainability", "Innovation", "Community"],
+    "work_environment": ["Collaborative", "Flexible", "Mission-driven"],
+    "hiring_process": ["Initial Interview", "Group Interview", "Final Decision"],
+    "contacts": {
+      "name": "John Smith",
+      "company_bulstat": "987654321",
+      "contacts": [
+        {
+          "city": "Austin",
+          "address": "456 Green St",
+          "coordinates": {
+            "lat": 30.2672,
+            "lng": -97.7431
+          },
+          "phone_number": "987-654-3210"
+        }
+      ],
+      "email": "contact@ecogreen.com",
+      "phone_number": "987-654-3210",
+      "address": "456 Green St, Austin, TX",
+      "website_url": "https://ecogreen.com",
+      "facebook_url": "https://facebook.com/ecogreen",
+      "twitter_url": "https://twitter.com/ecogreen",
+      "linkedin_url": "https://linkedin.com/company/ecogreen",
+      "youtube_url": "https://youtube.com/ecogreen"
+    },
+    "categories": [
+      {
+        "id": "cat2",
+        "name": "Energy",
+        "description": "Sustainable and renewable energy solutions."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  },
+  {
+    "id": "c3",
+    "name": "HealthFirst Corp.",
+    "about_raw": "Providing healthcare solutions worldwide.",
+    "career_description_raw": "Make a difference in global healthcare.",
+    "email": "careers@healthfirst.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/healthfirst_logo.png",
+    "banner_image_url": "https://example.com/healthfirst_banner.jpg",
+    "local_info": {
+      "since": "2005-03-01T00:00:00Z",
+      "employeeCount": 600,
+      "locations": ["New York"]
+    },
+    "worldwide_info": {
+      "founded": "2000-01-01T00:00:00Z",
+      "employeeCount": 1000,
+      "headquarters": "New York",
+      "locations": ["USA", "UK", "India"]
+    },
+    "benefits": ["Health Insurance", "Retirement Plan", "Gym Membership"],
+    "company_values": ["Care", "Excellence", "Integrity"],
+    "work_environment": ["Inclusive", "Supportive", "Innovative"],
+    "hiring_process": ["Phone Interview", "Panel Interview", "Final Decision"],
+    "contacts": {
+      "name": "Mary Johnson",
+      "company_bulstat": "234567890",
+      "contacts": [
+        {
+          "city": "New York",
+          "address": "789 Health Ave",
+          "coordinates": {
+            "lat": 40.7128,
+            "lng": -74.0060
+          },
+          "phone_number": "234-567-8901"
+        }
+      ],
+      "email": "info@healthfirst.com",
+      "phone_number": "234-567-8901",
+      "address": "789 Health Ave, New York, NY",
+      "website_url": "https://healthfirst.com",
+      "facebook_url": "https://facebook.com/healthfirst",
+      "twitter_url": "https://twitter.com/healthfirst",
+      "linkedin_url": "https://linkedin.com/company/healthfirst",
+      "youtube_url": "https://youtube.com/healthfirst"
+    },
+    "categories": [
+      {
+        "id": "cat3",
+        "name": "Healthcare",
+        "description": "Healthcare products and services."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  },
+  {
+    "id": "c4",
+    "name": "EduTech Global",
+    "about_raw": "Innovative educational technologies for the modern classroom.",
+    "career_description_raw": "Join us to shape the future of education.",
+    "email": "jobs@edutechglobal.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/edutech_logo.png",
+    "banner_image_url": "https://example.com/edutech_banner.jpg",
+    "local_info": {
+      "since": "2012-09-01T00:00:00Z",
+      "employeeCount": 150,
+      "locations": ["London"]
+    },
+    "worldwide_info": {
+      "founded": "2010-01-01T00:00:00Z",
+      "employeeCount": 200,
+      "headquarters": "London",
+      "locations": ["UK", "USA", "Australia"]
+    },
+    "benefits": ["Remote Work", "Learning Opportunities", "Health Insurance"],
+    "company_values": ["Education", "Innovation", "Growth"],
+    "work_environment": ["Collaborative", "Creative", "Dynamic"],
+    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "contacts": {
+      "name": "David Williams",
+      "company_bulstat": "345678901",
+      "contacts": [
+        {
+          "city": "London",
+          "address": "123 Learning St",
+          "coordinates": {
+            "lat": 51.5074,
+            "lng": -0.1278
+          },
+          "phone_number": "345-678-9012"
+        }
+      ],
+      "email": "info@edutechglobal.com",
+      "phone_number": "345-678-9012",
+      "address": "123 Learning St, London, UK",
+      "website_url": "https://edutechglobal.com",
+      "facebook_url": "https://facebook.com/edutechglobal",
+      "twitter_url": "https://twitter.com/edutechglobal",
+      "linkedin_url": "https://linkedin.com/company/edutechglobal",
+      "youtube_url": "https://youtube.com/edutechglobal"
+    },
+    "categories": [
+      {
+        "id": "cat4",
+        "name": "Education",
+        "description": "Educational technology and services."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  },
+  {
+    "id": "c5",
+    "name": "FinTech Pros",
+    "about_raw": "Cutting-edge financial technology for the modern world.",
+    "career_description_raw": "Be part of the revolution in financial services.",
+    "email": "careers@fintechpros.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/fintech_logo.png",
+    "banner_image_url": "https://example.com/fintech_banner.jpg",
+    "local_info": {
+      "since": "2018-07-01T00:00:00Z",
+      "employeeCount": 200,
+      "locations": ["New York"]
+    },
+    "worldwide_info": {
+      "founded": "2018-01-01T00:00:00Z",
+      "employeeCount": 250,
+      "headquarters": "New York",
+      "locations": ["USA", "UK"]
+    },
+    "benefits": ["Stock Options", "Health Insurance", "401(k)"],
+    "company_values": ["Innovation", "Security", "Trust"],
+    "work_environment": ["Fast-paced", "Innovative", "Collaborative"],
+    "hiring_process": ["Phone Interview", "Technical Test", "Final Decision"],
+    "contacts": {
+      "name": "Michael Brown",
+      "company_bulstat": "456789012",
+      "contacts": [
+        {
+          "city": "New York",
+          "address": "456 Finance Blvd",
+          "coordinates": {
+            "lat": 40.7128,
+            "lng": -74.0060
+          },
+          "phone_number": "456-789-0123"
+        }
+      ],
+      "email": "info@fintechpros.com",
+      "phone_number": "456-789-0123",
+      "address": "456 Finance Blvd, New York, NY",
+      "website_url": "https://fintechpros.com",
+      "facebook_url": "https://facebook.com/fintechpros",
+      "twitter_url": "https://twitter.com/fintechpros",
+      "linkedin_url": "https://linkedin.com/company/fintechpros",
+      "youtube_url": "https://youtube.com/fintechpros"
+    },
+    "categories": [
+      {
+        "id": "cat5",
+        "name": "Finance",
+        "description": "Financial technology services."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  },
+  {
+    "id": "c6",
+    "name": "AutoDrive Co.",
+    "about_raw": "Revolutionizing autonomous driving technology.",
+    "career_description_raw": "Join us in the future of mobility.",
+    "email": "jobs@autodrive.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/autodrive_logo.png",
+    "banner_image_url": "https://example.com/autodrive_banner.jpg",
+    "local_info": {
+      "since": "2016-01-01T00:00:00Z",
+      "employeeCount": 400,
+      "locations": ["Detroit"]
+    },
+    "worldwide_info": {
+      "founded": "2016-01-01T00:00:00Z",
+      "employeeCount": 800,
+      "headquarters": "Detroit",
+      "locations": ["USA", "Germany", "Japan"]
+    },
+    "benefits": ["Health Insurance", "Paid Time Off", "Stock Options"],
+    "company_values": ["Innovation", "Safety", "Sustainability"],
+    "work_environment": ["Collaborative", "Fast-paced", "Innovative"],
+    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "contacts": {
+      "name": "Laura White",
+      "company_bulstat": "567890123",
+      "contacts": [
+        {
+          "city": "Detroit",
+          "address": "789 Auto Way",
+          "coordinates": {
+            "lat": 42.3314,
+            "lng": -83.0458
+          },
+          "phone_number": "567-890-1234"
+        }
+      ],
+      "email": "info@autodrive.com",
+      "phone_number": "567-890-1234",
+      "address": "789 Auto Way, Detroit, MI",
+      "website_url": "https://autodrive.com",
+      "facebook_url": "https://facebook.com/autodrive",
+      "twitter_url": "https://twitter.com/autodrive",
+      "linkedin_url": "https://linkedin.com/company/autodrive",
+      "youtube_url": "https://youtube.com/autodrive"
+    },
+    "categories": [
+      {
+        "id": "cat6",
+        "name": "Automotive",
+        "description": "Autonomous driving technology."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  },
+  {
+    "id": "c7",
+    "name": "GreenEarth Farming",
+    "about_raw": "Organic and sustainable farming solutions.",
+    "career_description_raw": "Work with us to create a sustainable future.",
+    "email": "careers@greenearthfarming.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/greenearth_logo.png",
+    "banner_image_url": "https://example.com/greenearth_banner.jpg",
+    "local_info": {
+      "since": "2014-04-01T00:00:00Z",
+      "employeeCount": 50,
+      "locations": ["Portland"]
+    },
+    "worldwide_info": {
+      "founded": "2012-01-01T00:00:00Z",
+      "employeeCount": 100,
+      "headquarters": "Portland",
+      "locations": ["USA", "Canada"]
+    },
+    "benefits": ["Remote Work", "Health Insurance", "Paid Time Off"],
+    "company_values": ["Sustainability", "Health", "Community"],
+    "work_environment": ["Collaborative", "Mission-driven", "Flexible"],
+    "hiring_process": ["Initial Interview", "Panel Interview", "Final Decision"],
+    "contacts": {
+      "name": "Emma Green",
+      "company_bulstat": "678901234",
+      "contacts": [
+        {
+          "city": "Portland",
+          "address": "123 Green St",
+          "coordinates": {
+            "lat": 45.5051,
+            "lng": -122.6750
+          },
+          "phone_number": "678-901-2345"
+        }
+      ],
+      "email": "info@greenearthfarming.com",
+      "phone_number": "678-901-2345",
+      "address": "123 Green St, Portland, OR",
+      "website_url": "https://greenearthfarming.com",
+      "facebook_url": "https://facebook.com/greenearthfarming",
+      "twitter_url": "https://twitter.com/greenearthfarming",
+      "linkedin_url": "https://linkedin.com/company/greenearthfarming",
+      "youtube_url": "https://youtube.com/greenearthfarming"
+    },
+    "categories": [
+      {
+        "id": "cat7",
+        "name": "Agriculture",
+        "description": "Organic and sustainable farming."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  },
+  {
+    "id": "c8",
+    "name": "SpaceTech Corp.",
+    "about_raw": "Pioneering the future of space exploration.",
+    "career_description_raw": "Join us in reaching for the stars.",
+    "email": "careers@spacetech.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/spacetech_logo.png",
+    "banner_image_url": "https://example.com/spacetech_banner.jpg",
+    "local_info": {
+      "since": "2015-07-01T00:00:00Z",
+      "employeeCount": 500,
+      "locations": ["Los Angeles"]
+    },
+    "worldwide_info": {
+      "founded": "2012-01-01T00:00:00Z",
+      "employeeCount": 1000,
+      "headquarters": "Los Angeles",
+      "locations": ["USA", "Germany", "Japan"]
+    },
+    "benefits": ["Health Insurance", "Paid Time Off", "Stock Options"],
+    "company_values": ["Innovation", "Exploration", "Safety"],
+    "work_environment": ["Collaborative", "Innovative", "Fast-paced"],
+    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "contacts": {
+      "name": "Robert Black",
+      "company_bulstat": "789012345",
+      "contacts": [
+        {
+          "city": "Los Angeles",
+          "address": "123 Space Ave",
+          "coordinates": {
+            "lat": 34.0522,
+            "lng": -118.2437
+          },
+          "phone_number": "789-012-3456"
+        }
+      ],
+      "email": "info@spacetech.com",
+      "phone_number": "789-012-3456",
+      "address": "123 Space Ave, Los Angeles, CA",
+      "website_url": "https://spacetech.com",
+      "facebook_url": "https://facebook.com/spacetech",
+      "twitter_url": "https://twitter.com/spacetech",
+      "linkedin_url": "https://linkedin.com/company/spacetech",
+      "youtube_url": "https://youtube.com/spacetech"
+    },
+    "categories": [
+      {
+        "id": "cat8",
+        "name": "Aerospace",
+        "description": "Space exploration and technology."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  },
+  {
+    "id": "c9",
+    "name": "BioTech Innovations",
+    "about_raw": "Leading the way in biotechnology research and development.",
+    "career_description_raw": "Contribute to groundbreaking biotech solutions.",
+    "email": "careers@biotechinnovations.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/biotech_logo.png",
+    "banner_image_url": "https://example.com/biotech_banner.jpg",
+    "local_info": {
+      "since": "2013-10-01T00:00:00Z",
+      "employeeCount": 200,
+      "locations": ["Boston"]
+    },
+    "worldwide_info": {
+      "founded": "2010-01-01T00:00:00Z",
+      "employeeCount": 400,
+      "headquarters": "Boston",
+      "locations": ["USA", "Germany", "China"]
+    },
+    "benefits": ["Health Insurance", "Paid Time Off", "Stock Options"],
+    "company_values": ["Innovation", "Integrity", "Excellence"],
+    "work_environment": ["Collaborative", "Innovative", "Fast-paced"],
+    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "contacts": {
+      "name": "Rachel White",
+      "company_bulstat": "890123456",
+      "contacts": [
+        {
+          "city": "Boston",
+          "address": "789 Bio St",
+          "coordinates": {
+            "lat": 42.3601,
+            "lng": -71.0589
+          },
+          "phone_number": "890-123-4567"
+        }
+      ],
+      "email": "info@biotechinnovations.com",
+      "phone_number": "890-123-4567",
+      "address": "789 Bio St, Boston, MA",
+      "website_url": "https://biotechinnovations.com",
+      "facebook_url": "https://facebook.com/biotechinnovations",
+      "twitter_url": "https://twitter.com/biotechinnovations",
+      "linkedin_url": "https://linkedin.com/company/biotechinnovations",
+      "youtube_url": "https://youtube.com/biotechinnovations"
+    },
+    "categories": [
+      {
+        "id": "cat9",
+        "name": "Biotechnology",
+        "description": "Biotech research and development."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  },
+  {
+    "id": "c10",
+    "name": "CloudNet Solutions",
+    "about_raw": "Innovative cloud computing services for businesses worldwide.",
+    "career_description_raw": "Join a leader in cloud technology.",
+    "email": "careers@cloudnet.com",
+    "metadata": null,
+    "brand_image_url": "https://example.com/cloudnet_logo.png",
+    "banner_image_url": "https://example.com/cloudnet_banner.jpg",
+    "local_info": {
+      "since": "2016-08-01T00:00:00Z",
+      "employeeCount": 300,
+      "locations": ["Seattle"]
+    },
+    "worldwide_info": {
+      "founded": "2014-01-01T00:00:00Z",
+      "employeeCount": 600,
+      "headquarters": "Seattle",
+      "locations": ["USA", "UK", "India"]
+    },
+    "benefits": ["Health Insurance", "Remote Work", "Stock Options"],
+    "company_values": ["Innovation", "Reliability", "Scalability"],
+    "work_environment": ["Collaborative", "Innovative", "Flexible"],
+    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "contacts": {
+      "name": "Thomas Brown",
+      "company_bulstat": "901234567",
+      "contacts": [
+        {
+          "city": "Seattle",
+          "address": "123 Cloud St",
+          "coordinates": {
+            "lat": 47.6062,
+            "lng": -122.3321
+          },
+          "phone_number": "901-234-5678"
+        }
+      ],
+      "email": "info@cloudnet.com",
+      "phone_number": "901-234-5678",
+      "address": "123 Cloud St, Seattle, WA",
+      "website_url": "https://cloudnet.com",
+      "facebook_url": "https://facebook.com/cloudnet",
+      "twitter_url": "https://twitter.com/cloudnet",
+      "linkedin_url": "https://linkedin.com/company/cloudnet",
+      "youtube_url": "https://youtube.com/cloudnet"
+    },
+    "categories": [
+      {
+        "id": "cat10",
+        "name": "Technology",
+        "description": "Cloud computing and services."
+      }
+    ],
+    "createdAt": "2024-08-14T12:00:00Z",
+    "updatedAt": "2024-08-14T12:00:00Z",
+    "JobListing": []
+  }
+]

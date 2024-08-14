@@ -3,14 +3,14 @@ import Link from "next/link";
 import React, { Fragment } from "react";
 import logo from "@/public/favicon.png";
 import Image from "next/image";
-import { DEFAULT_USER_AVATAR_URL, meIdVar } from "@/providers/ApolloProvider";
+import { DEFAULT_USER_AVATAR_URL, meIdVar } from "@/providers/apollo/ApolloProvider";
 import { gql } from "@/__generated__";
 import { useMutation, useQuery } from "@apollo/client";
 import { UserSignInInput } from "@/__generated__/graphql";
 import { isValidUrl } from "@/lib/utils";
 import Google from "@/components/icons/Google";
 import { Building2, CircleUserRound, LogOut } from "lucide-react";
-import SignedIn from "@/components/common/SignedIn";
+import LoadingButton from "@/components/common/LoadingButton";
 
 export interface NavbarProps {
 }
@@ -134,18 +134,7 @@ const Navbar = ({}: NavbarProps) => {
                      <div className={`h-10 w-10 rounded-full bg-neutral-400 skeleton`} />
                      <div className={`h-4 rounded-md w-24 bg-neutral-400 skeleton mr-4`} />
                   </Fragment>
-               ) : (
-                  <Fragment>
-                     {data?.me?.name && (
-                        <Link className={`!w-fit !h-fit `} href={`/`}>
-                           <Image height={40} width={40} className={`rounded-full shadow-md`}
-                                  src={data?.me?.image ?? DEFAULT_USER_AVATAR_URL}
-                                  alt={``} />
-                        </Link>
-                     )}
-                     <span className={`mr-4`}>{data?.me?.name}</span>
-                  </Fragment>
-               )}
+               ) : <Fragment />}
                <span>
                {data?.me?.id ? (
                   <div className={`flex items-center gap-4`}>
@@ -159,10 +148,11 @@ const Navbar = ({}: NavbarProps) => {
                      <Link onClick={async e => {
                         e.preventDefault();
                         await handleSignOut();
-                     }} className={`btn btn-error !h-fit !min-h-fit !py-2 !px-4 !text-white text-base !gap-3`}
-                           href={`/`}>
-                        Sign out
-                        <LogOut size={18} />
+                     }} href={`/`}>
+                        <LoadingButton loadingText={`Signing out`} loading={signingOut} className={`btn-error !h-fit !min-h-fit !py-2 !px-6 !text-white text-base !gap-3`}>
+                           Sign out
+                           <LogOut size={18} />
+                        </LoadingButton>
                      </Link>
                   </div>
                ) : !loading ? (
@@ -193,11 +183,7 @@ const Navbar = ({}: NavbarProps) => {
                               </li>
                            </ul>
                         </div>
-                        <Link onClick={async e => {
-                           e.preventDefault();
-                           await handleRegularSignIn();
-                        }}
-                              className={`btn btn-info !h-fit !min-h-fit !py-2.5 !px-6 !text-white !bg-green-600 !border-green-600 !shadow-md hover:!opacity-95 duration-100 transition-opacity`}
+                        <Link className={`btn btn-info !h-fit !min-h-fit !py-2.5 !px-6 !text-white !bg-green-600 !border-green-600 !shadow-md hover:!opacity-95 duration-100 transition-opacity`}
                               href={`/signin`}>
                            Sign in
                         </Link>

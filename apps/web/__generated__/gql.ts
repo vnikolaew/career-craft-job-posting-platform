@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n    mutation SignInWithEmailCode($code: Int!, $email: EmailAddress!, $identifier: String!) {\n        signInWithEmailCode(code: $code, email: $email, identifier: $identifier) {\n            id\n            first_name\n            last_name\n            name\n            metadata\n            image\n            email\n        }\n    }\n": types.SignInWithEmailCodeDocument,
     "\n    mutation GenerateEmailCode($email: EmailAddress!) {\n        generateSignUpEmailCode(email: $email) {\n            code\n            error\n            identifier\n            expires\n            success\n        }\n    }\n": types.GenerateEmailCodeDocument,
     "\n    mutation SignUpWithEmailCode($code: Int!, $email: EmailAddress!, $firstName: String!, $lastName: String!, $identifier: String!) {\n        signUpWithEmailCode(code: $code, email: $email, firstName: $firstName, lastName: $lastName, identifier: $identifier) {\n            id\n            first_name\n            last_name\n            name\n            metadata\n            image\n            email\n        }\n    }\n": types.SignUpWithEmailCodeDocument,
     "\n    mutation SignOut {\n        signOut\n    }\n": types.SignOutDocument,
@@ -35,6 +36,10 @@ const documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n    mutation SignInWithEmailCode($code: Int!, $email: EmailAddress!, $identifier: String!) {\n        signInWithEmailCode(code: $code, email: $email, identifier: $identifier) {\n            id\n            first_name\n            last_name\n            name\n            metadata\n            image\n            email\n        }\n    }\n"): (typeof documents)["\n    mutation SignInWithEmailCode($code: Int!, $email: EmailAddress!, $identifier: String!) {\n        signInWithEmailCode(code: $code, email: $email, identifier: $identifier) {\n            id\n            first_name\n            last_name\n            name\n            metadata\n            image\n            email\n        }\n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -803,18 +803,18 @@ export type CompanyCategoryWhereUniqueInput = {
 
 export type CompanyCount = {
   __typename?: 'CompanyCount';
-  JobListing: Scalars['Int']['output'];
   categories: Scalars['Int']['output'];
-};
-
-
-export type CompanyCountJobListingArgs = {
-  where?: InputMaybe<JobListingWhereInput>;
+  listings: Scalars['Int']['output'];
 };
 
 
 export type CompanyCountCategoriesArgs = {
   where?: InputMaybe<CompanyCategoryWhereInput>;
+};
+
+
+export type CompanyCountListingsArgs = {
+  where?: InputMaybe<JobListingWhereInput>;
 };
 
 export type CompanyCountAggregate = {
@@ -858,7 +858,6 @@ export type CompanyCountOrderByAggregateInput = {
 };
 
 export type CompanyCreateInput = {
-  JobListing?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
   about_raw: Scalars['String']['input'];
   banner_image_url?: InputMaybe<Scalars['String']['input']>;
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
@@ -870,6 +869,7 @@ export type CompanyCreateInput = {
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name: Scalars['String']['input'];
@@ -901,10 +901,10 @@ export type CompanyCreateNestedManyWithoutCategoriesInput = {
   create?: InputMaybe<Array<CompanyCreateWithoutCategoriesInput>>;
 };
 
-export type CompanyCreateNestedOneWithoutJobListingInput = {
+export type CompanyCreateNestedOneWithoutListingsInput = {
   connect?: InputMaybe<CompanyWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutJobListingInput>;
-  create?: InputMaybe<CompanyCreateWithoutJobListingInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutListingsInput>;
+  create?: InputMaybe<CompanyCreateWithoutListingsInput>;
 };
 
 export type CompanyCreateOrConnectWithoutCategoriesInput = {
@@ -912,13 +912,12 @@ export type CompanyCreateOrConnectWithoutCategoriesInput = {
   where: CompanyWhereUniqueInput;
 };
 
-export type CompanyCreateOrConnectWithoutJobListingInput = {
-  create: CompanyCreateWithoutJobListingInput;
+export type CompanyCreateOrConnectWithoutListingsInput = {
+  create: CompanyCreateWithoutListingsInput;
   where: CompanyWhereUniqueInput;
 };
 
 export type CompanyCreateWithoutCategoriesInput = {
-  JobListing?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
   about_raw: Scalars['String']['input'];
   banner_image_url?: InputMaybe<Scalars['String']['input']>;
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
@@ -929,6 +928,7 @@ export type CompanyCreateWithoutCategoriesInput = {
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name: Scalars['String']['input'];
@@ -936,7 +936,7 @@ export type CompanyCreateWithoutCategoriesInput = {
   worldwide_info?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type CompanyCreateWithoutJobListingInput = {
+export type CompanyCreateWithoutListingsInput = {
   about_raw: Scalars['String']['input'];
   banner_image_url?: InputMaybe<Scalars['String']['input']>;
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
@@ -1093,7 +1093,6 @@ export type CompanyOrderByWithAggregationInput = {
 };
 
 export type CompanyOrderByWithRelationInput = {
-  JobListing?: InputMaybe<JobListingOrderByRelationAggregateInput>;
   _relevance?: InputMaybe<CompanyOrderByRelevanceInput>;
   about_raw?: InputMaybe<SortOrder>;
   banner_image_url?: InputMaybe<SortOrderInput>;
@@ -1106,6 +1105,7 @@ export type CompanyOrderByWithRelationInput = {
   email?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  listings?: InputMaybe<JobListingOrderByRelationAggregateInput>;
   local_info?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrderInput>;
   name?: InputMaybe<SortOrder>;
@@ -1181,7 +1181,6 @@ export type CompanyScalarWhereWithAggregatesInput = {
 };
 
 export type CompanyUpdateInput = {
-  JobListing?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
   about_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   banner_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
@@ -1193,6 +1192,7 @@ export type CompanyUpdateInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1236,16 +1236,16 @@ export type CompanyUpdateManyWithoutCategoriesNestedInput = {
   upsert?: InputMaybe<Array<CompanyUpsertWithWhereUniqueWithoutCategoriesInput>>;
 };
 
-export type CompanyUpdateOneRequiredWithoutJobListingNestedInput = {
+export type CompanyUpdateOneRequiredWithoutListingsNestedInput = {
   connect?: InputMaybe<CompanyWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutJobListingInput>;
-  create?: InputMaybe<CompanyCreateWithoutJobListingInput>;
-  update?: InputMaybe<CompanyUpdateToOneWithWhereWithoutJobListingInput>;
-  upsert?: InputMaybe<CompanyUpsertWithoutJobListingInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutListingsInput>;
+  create?: InputMaybe<CompanyCreateWithoutListingsInput>;
+  update?: InputMaybe<CompanyUpdateToOneWithWhereWithoutListingsInput>;
+  upsert?: InputMaybe<CompanyUpsertWithoutListingsInput>;
 };
 
-export type CompanyUpdateToOneWithWhereWithoutJobListingInput = {
-  data: CompanyUpdateWithoutJobListingInput;
+export type CompanyUpdateToOneWithWhereWithoutListingsInput = {
+  data: CompanyUpdateWithoutListingsInput;
   where?: InputMaybe<CompanyWhereInput>;
 };
 
@@ -1255,7 +1255,6 @@ export type CompanyUpdateWithWhereUniqueWithoutCategoriesInput = {
 };
 
 export type CompanyUpdateWithoutCategoriesInput = {
-  JobListing?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
   about_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   banner_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
@@ -1266,6 +1265,7 @@ export type CompanyUpdateWithoutCategoriesInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1273,7 +1273,7 @@ export type CompanyUpdateWithoutCategoriesInput = {
   worldwide_info?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type CompanyUpdateWithoutJobListingInput = {
+export type CompanyUpdateWithoutListingsInput = {
   about_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   banner_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
@@ -1318,15 +1318,14 @@ export type CompanyUpsertWithWhereUniqueWithoutCategoriesInput = {
   where: CompanyWhereUniqueInput;
 };
 
-export type CompanyUpsertWithoutJobListingInput = {
-  create: CompanyCreateWithoutJobListingInput;
-  update: CompanyUpdateWithoutJobListingInput;
+export type CompanyUpsertWithoutListingsInput = {
+  create: CompanyCreateWithoutListingsInput;
+  update: CompanyUpdateWithoutListingsInput;
   where?: InputMaybe<CompanyWhereInput>;
 };
 
 export type CompanyWhereInput = {
   AND?: InputMaybe<Array<CompanyWhereInput>>;
-  JobListing?: InputMaybe<JobListingListRelationFilter>;
   NOT?: InputMaybe<Array<CompanyWhereInput>>;
   OR?: InputMaybe<Array<CompanyWhereInput>>;
   about_raw?: InputMaybe<StringFilter>;
@@ -1340,6 +1339,7 @@ export type CompanyWhereInput = {
   email?: InputMaybe<StringFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringFilter>;
+  listings?: InputMaybe<JobListingListRelationFilter>;
   local_info?: InputMaybe<JsonFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   name?: InputMaybe<StringFilter>;
@@ -1349,7 +1349,6 @@ export type CompanyWhereInput = {
 
 export type CompanyWhereUniqueInput = {
   AND?: InputMaybe<Array<CompanyWhereInput>>;
-  JobListing?: InputMaybe<JobListingListRelationFilter>;
   NOT?: InputMaybe<Array<CompanyWhereInput>>;
   OR?: InputMaybe<Array<CompanyWhereInput>>;
   about_raw?: InputMaybe<StringFilter>;
@@ -1363,6 +1362,7 @@ export type CompanyWhereUniqueInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingListRelationFilter>;
   local_info?: InputMaybe<JsonFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   name?: InputMaybe<StringFilter>;
@@ -1555,7 +1555,7 @@ export type JobListingCountOrderByAggregateInput = {
 };
 
 export type JobListingCreateInput = {
-  company: CompanyCreateNestedOneWithoutJobListingInput;
+  company: CompanyCreateNestedOneWithoutListingsInput;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1845,7 +1845,7 @@ export type JobListingScalarWhereWithAggregatesInput = {
 };
 
 export type JobListingUpdateInput = {
-  company?: InputMaybe<CompanyUpdateOneRequiredWithoutJobListingNestedInput>;
+  company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2078,6 +2078,7 @@ export type Mutation = {
   generateSignUpEmailCode: SignUpWithEmailCodeResponse;
   sendVerificationEmail: SendVerificationEmailResponse;
   signIn?: Maybe<User>;
+  signInWithEmailCode: User;
   signOut: Scalars['Boolean']['output'];
   signUp: User;
   signUpWithEmailCode: User;
@@ -2279,6 +2280,13 @@ export type MutationGenerateSignUpEmailCodeArgs = {
 
 export type MutationSignInArgs = {
   signInModel: UserSignInInput;
+};
+
+
+export type MutationSignInWithEmailCodeArgs = {
+  code: Scalars['Int']['input'];
+  email: Scalars['EmailAddress']['input'];
+  identifier: Scalars['String']['input'];
 };
 
 
@@ -4272,6 +4280,15 @@ export enum WorkFromHome {
   Hybrid = 'Hybrid'
 }
 
+export type SignInWithEmailCodeMutationVariables = Exact<{
+  code: Scalars['Int']['input'];
+  email: Scalars['EmailAddress']['input'];
+  identifier: Scalars['String']['input'];
+}>;
+
+
+export type SignInWithEmailCodeMutation = { __typename?: 'Mutation', signInWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: string } };
+
 export type GenerateEmailCodeMutationVariables = Exact<{
   email: Scalars['EmailAddress']['input'];
 }>;
@@ -4315,6 +4332,7 @@ export type GoogleLoginQueryQueryVariables = Exact<{
 export type GoogleLoginQueryQuery = { __typename?: 'Query', googleLoginUrl: string };
 
 
+export const SignInWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignInWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signInWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignInWithEmailCodeMutation, SignInWithEmailCodeMutationVariables>;
 export const GenerateEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GenerateEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generateSignUpEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"expires"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<GenerateEmailCodeMutation, GenerateEmailCodeMutationVariables>;
 export const SignUpWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignUpWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUpWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"Argument","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignUpWithEmailCodeMutation, SignUpWithEmailCodeMutationVariables>;
 export const SignOutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignOut"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signOut"}}]}}]} as unknown as DocumentNode<SignOutMutation, SignOutMutationVariables>;
@@ -5117,18 +5135,18 @@ export type CompanyCategoryWhereUniqueInput = {
 
 export type CompanyCount = {
   __typename?: 'CompanyCount';
-  JobListing: Scalars['Int']['output'];
   categories: Scalars['Int']['output'];
-};
-
-
-export type CompanyCountJobListingArgs = {
-  where?: InputMaybe<JobListingWhereInput>;
+  listings: Scalars['Int']['output'];
 };
 
 
 export type CompanyCountCategoriesArgs = {
   where?: InputMaybe<CompanyCategoryWhereInput>;
+};
+
+
+export type CompanyCountListingsArgs = {
+  where?: InputMaybe<JobListingWhereInput>;
 };
 
 export type CompanyCountAggregate = {
@@ -5172,7 +5190,6 @@ export type CompanyCountOrderByAggregateInput = {
 };
 
 export type CompanyCreateInput = {
-  JobListing?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
   about_raw: Scalars['String']['input'];
   banner_image_url?: InputMaybe<Scalars['String']['input']>;
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
@@ -5184,6 +5201,7 @@ export type CompanyCreateInput = {
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name: Scalars['String']['input'];
@@ -5215,10 +5233,10 @@ export type CompanyCreateNestedManyWithoutCategoriesInput = {
   create?: InputMaybe<Array<CompanyCreateWithoutCategoriesInput>>;
 };
 
-export type CompanyCreateNestedOneWithoutJobListingInput = {
+export type CompanyCreateNestedOneWithoutListingsInput = {
   connect?: InputMaybe<CompanyWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutJobListingInput>;
-  create?: InputMaybe<CompanyCreateWithoutJobListingInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutListingsInput>;
+  create?: InputMaybe<CompanyCreateWithoutListingsInput>;
 };
 
 export type CompanyCreateOrConnectWithoutCategoriesInput = {
@@ -5226,13 +5244,12 @@ export type CompanyCreateOrConnectWithoutCategoriesInput = {
   where: CompanyWhereUniqueInput;
 };
 
-export type CompanyCreateOrConnectWithoutJobListingInput = {
-  create: CompanyCreateWithoutJobListingInput;
+export type CompanyCreateOrConnectWithoutListingsInput = {
+  create: CompanyCreateWithoutListingsInput;
   where: CompanyWhereUniqueInput;
 };
 
 export type CompanyCreateWithoutCategoriesInput = {
-  JobListing?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
   about_raw: Scalars['String']['input'];
   banner_image_url?: InputMaybe<Scalars['String']['input']>;
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
@@ -5243,6 +5260,7 @@ export type CompanyCreateWithoutCategoriesInput = {
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name: Scalars['String']['input'];
@@ -5250,7 +5268,7 @@ export type CompanyCreateWithoutCategoriesInput = {
   worldwide_info?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type CompanyCreateWithoutJobListingInput = {
+export type CompanyCreateWithoutListingsInput = {
   about_raw: Scalars['String']['input'];
   banner_image_url?: InputMaybe<Scalars['String']['input']>;
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
@@ -5407,7 +5425,6 @@ export type CompanyOrderByWithAggregationInput = {
 };
 
 export type CompanyOrderByWithRelationInput = {
-  JobListing?: InputMaybe<JobListingOrderByRelationAggregateInput>;
   _relevance?: InputMaybe<CompanyOrderByRelevanceInput>;
   about_raw?: InputMaybe<SortOrder>;
   banner_image_url?: InputMaybe<SortOrderInput>;
@@ -5420,6 +5437,7 @@ export type CompanyOrderByWithRelationInput = {
   email?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  listings?: InputMaybe<JobListingOrderByRelationAggregateInput>;
   local_info?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrderInput>;
   name?: InputMaybe<SortOrder>;
@@ -5495,7 +5513,6 @@ export type CompanyScalarWhereWithAggregatesInput = {
 };
 
 export type CompanyUpdateInput = {
-  JobListing?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
   about_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   banner_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
@@ -5507,6 +5524,7 @@ export type CompanyUpdateInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5550,16 +5568,16 @@ export type CompanyUpdateManyWithoutCategoriesNestedInput = {
   upsert?: InputMaybe<Array<CompanyUpsertWithWhereUniqueWithoutCategoriesInput>>;
 };
 
-export type CompanyUpdateOneRequiredWithoutJobListingNestedInput = {
+export type CompanyUpdateOneRequiredWithoutListingsNestedInput = {
   connect?: InputMaybe<CompanyWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutJobListingInput>;
-  create?: InputMaybe<CompanyCreateWithoutJobListingInput>;
-  update?: InputMaybe<CompanyUpdateToOneWithWhereWithoutJobListingInput>;
-  upsert?: InputMaybe<CompanyUpsertWithoutJobListingInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutListingsInput>;
+  create?: InputMaybe<CompanyCreateWithoutListingsInput>;
+  update?: InputMaybe<CompanyUpdateToOneWithWhereWithoutListingsInput>;
+  upsert?: InputMaybe<CompanyUpsertWithoutListingsInput>;
 };
 
-export type CompanyUpdateToOneWithWhereWithoutJobListingInput = {
-  data: CompanyUpdateWithoutJobListingInput;
+export type CompanyUpdateToOneWithWhereWithoutListingsInput = {
+  data: CompanyUpdateWithoutListingsInput;
   where?: InputMaybe<CompanyWhereInput>;
 };
 
@@ -5569,7 +5587,6 @@ export type CompanyUpdateWithWhereUniqueWithoutCategoriesInput = {
 };
 
 export type CompanyUpdateWithoutCategoriesInput = {
-  JobListing?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
   about_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   banner_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
@@ -5580,6 +5597,7 @@ export type CompanyUpdateWithoutCategoriesInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5587,7 +5605,7 @@ export type CompanyUpdateWithoutCategoriesInput = {
   worldwide_info?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type CompanyUpdateWithoutJobListingInput = {
+export type CompanyUpdateWithoutListingsInput = {
   about_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   banner_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
@@ -5632,15 +5650,14 @@ export type CompanyUpsertWithWhereUniqueWithoutCategoriesInput = {
   where: CompanyWhereUniqueInput;
 };
 
-export type CompanyUpsertWithoutJobListingInput = {
-  create: CompanyCreateWithoutJobListingInput;
-  update: CompanyUpdateWithoutJobListingInput;
+export type CompanyUpsertWithoutListingsInput = {
+  create: CompanyCreateWithoutListingsInput;
+  update: CompanyUpdateWithoutListingsInput;
   where?: InputMaybe<CompanyWhereInput>;
 };
 
 export type CompanyWhereInput = {
   AND?: InputMaybe<Array<CompanyWhereInput>>;
-  JobListing?: InputMaybe<JobListingListRelationFilter>;
   NOT?: InputMaybe<Array<CompanyWhereInput>>;
   OR?: InputMaybe<Array<CompanyWhereInput>>;
   about_raw?: InputMaybe<StringFilter>;
@@ -5654,6 +5671,7 @@ export type CompanyWhereInput = {
   email?: InputMaybe<StringFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringFilter>;
+  listings?: InputMaybe<JobListingListRelationFilter>;
   local_info?: InputMaybe<JsonFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   name?: InputMaybe<StringFilter>;
@@ -5663,7 +5681,6 @@ export type CompanyWhereInput = {
 
 export type CompanyWhereUniqueInput = {
   AND?: InputMaybe<Array<CompanyWhereInput>>;
-  JobListing?: InputMaybe<JobListingListRelationFilter>;
   NOT?: InputMaybe<Array<CompanyWhereInput>>;
   OR?: InputMaybe<Array<CompanyWhereInput>>;
   about_raw?: InputMaybe<StringFilter>;
@@ -5677,6 +5694,7 @@ export type CompanyWhereUniqueInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<JobListingListRelationFilter>;
   local_info?: InputMaybe<JsonFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   name?: InputMaybe<StringFilter>;
@@ -5869,7 +5887,7 @@ export type JobListingCountOrderByAggregateInput = {
 };
 
 export type JobListingCreateInput = {
-  company: CompanyCreateNestedOneWithoutJobListingInput;
+  company: CompanyCreateNestedOneWithoutListingsInput;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -6159,7 +6177,7 @@ export type JobListingScalarWhereWithAggregatesInput = {
 };
 
 export type JobListingUpdateInput = {
-  company?: InputMaybe<CompanyUpdateOneRequiredWithoutJobListingNestedInput>;
+  company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -6392,6 +6410,7 @@ export type Mutation = {
   generateSignUpEmailCode: SignUpWithEmailCodeResponse;
   sendVerificationEmail: SendVerificationEmailResponse;
   signIn?: Maybe<User>;
+  signInWithEmailCode: User;
   signOut: Scalars['Boolean']['output'];
   signUp: User;
   signUpWithEmailCode: User;
@@ -6593,6 +6612,13 @@ export type MutationGenerateSignUpEmailCodeArgs = {
 
 export type MutationSignInArgs = {
   signInModel: UserSignInInput;
+};
+
+
+export type MutationSignInWithEmailCodeArgs = {
+  code: Scalars['Int']['input'];
+  email: Scalars['EmailAddress']['input'];
+  identifier: Scalars['String']['input'];
 };
 
 
@@ -8585,6 +8611,15 @@ export enum WorkFromHome {
   FullyRemote = 'FullyRemote',
   Hybrid = 'Hybrid'
 }
+
+export type SignInWithEmailCodeMutationVariables = Exact<{
+  code: Scalars['Int']['input'];
+  email: Scalars['EmailAddress']['input'];
+  identifier: Scalars['String']['input'];
+}>;
+
+
+export type SignInWithEmailCodeMutation = { __typename?: 'Mutation', signInWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: string } };
 
 export type GenerateEmailCodeMutationVariables = Exact<{
   email: Scalars['EmailAddress']['input'];

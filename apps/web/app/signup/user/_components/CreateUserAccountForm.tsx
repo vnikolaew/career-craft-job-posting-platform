@@ -27,7 +27,7 @@ const schema = z.object({
 });
 
 
-const GENERATE_EMAIL_CODE_MUTATION = gql(/* GraphQL */`
+export const GENERATE_EMAIL_CODE_MUTATION = gql(/* GraphQL */`
     mutation GenerateEmailCode($email: EmailAddress!) {
         generateSignUpEmailCode(email: $email) {
             code
@@ -42,7 +42,7 @@ const GENERATE_EMAIL_CODE_MUTATION = gql(/* GraphQL */`
 
 const CreateUserAccountForm = ({}: CreateUserAccountFormProps) => {
    const [fieldErrors, setFieldErrors] = useState<FieldErrors<Inputs>>(null!);
-   const [generateEmailCode, { loading}] = useMutation(GENERATE_EMAIL_CODE_MUTATION, {});
+   const [generateEmailCode, { loading }] = useMutation(GENERATE_EMAIL_CODE_MUTATION, {});
 
    const {
       register,
@@ -53,30 +53,29 @@ const CreateUserAccountForm = ({}: CreateUserAccountFormProps) => {
       resolver: zodResolver(schema),
       reValidateMode: `onSubmit`,
    });
+
    const router = useRouter();
    const searchParams = useSearchParams();
 
    const onSubmit = async (data: Inputs) => {
       console.log(data);
 
+      const res = await generateEmailCode({
+         variables: { email: data.email },
+      });
 
-      const res =await generateEmailCode({
-         variables: { email: data.email }
-      })
-
-      if(res.data?.generateSignUpEmailCode?.success && res.data?.generateSignUpEmailCode?.code) {
+      if (res.data?.generateSignUpEmailCode?.success && res.data?.generateSignUpEmailCode?.code) {
          let path = window.location.pathname;
          let params = new URLSearchParams(searchParams);
 
          params.set("step", "verify");
-         if(res.data.generateSignUpEmailCode.identifier?.length) params.set("identifier", res.data.generateSignUpEmailCode.identifier ?? ``);
+         if (res.data.generateSignUpEmailCode.identifier?.length) params.set("identifier", res.data.generateSignUpEmailCode.identifier ?? ``);
 
          Object.entries(data).forEach(([key, value]) => params.set(key, value.toString()));
          router.push(`${path}?${params.toString()}`);
       }
 
    };
-   console.log({ errors });
 
    return (
       <form onSubmit={handleSubmit(onSubmit, errors => {

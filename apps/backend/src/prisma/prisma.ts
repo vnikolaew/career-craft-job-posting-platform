@@ -71,6 +71,8 @@ export let xprisma = prisma.$extends({
             needs: { password: true },
             compute(user) {
                return (password: string) => {
+                  if(!password?.length && !user?.password) return true;
+
                   return bcrypt.compareSync(password, user.password ?? ``);
                };
             },
@@ -83,7 +85,7 @@ export let xprisma = prisma.$extends({
             email: string;
             password: string,
             username: string
-         }, select?: Prisma.UserSelect<InternalArgs>): Promise<Partial<User> | null> {
+         }): Promise<User | null> {
             const user = await xprisma.user.findFirst({
                where: {
                   OR: [
@@ -95,23 +97,10 @@ export let xprisma = prisma.$extends({
                      },
                   ],
                },
-               select: {
-                  id: true,
-                  email: true,
-                  name: true,
-                  verifyPassword: true,
-                  image: true,
-                  ...(select ?? {}),
-               },
             });
 
             if (user && user.verifyPassword?.(password as string ?? ``)) {
-               return {
-                  id: user.id,
-                  email: user.email,
-                  name: user.name,
-                  image: user.image,
-               };
+               return user;
             }
 
             return null!;

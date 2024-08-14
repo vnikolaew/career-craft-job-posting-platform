@@ -1,6 +1,6 @@
 "use client";
 import React, { PropsWithChildren } from "react";
-import ApolloProvider from "@/providers/ApolloProvider";
+import ApolloProvider from "@/providers/apollo/ApolloProvider";
 
 export interface IndexProps extends PropsWithChildren {
 }
