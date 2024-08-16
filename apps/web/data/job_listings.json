@@ -1,0 +1,522 @@
+[
+  {
+    "id": "cl1q6wjdf0001jq71xvj04kf8",
+    "name": "Software Engineer",
+    "description_raw": "Develop and maintain software applications.",
+    "external_application_url": "https://company1.com/jobs/software-engineer",
+    "level": "Staff",
+    "work_from": "Hybrid",
+    "type": "FullTime",
+    "location": "San Francisco, CA",
+    "languages": ["JavaScript", "TypeScript", "Python"],
+    "parameters": {
+      "salary_range": "100000-120000",
+      "benefits": ["Health Insurance", "401(k)"]
+    },
+    "keywords": ["software", "engineering", "fullstack"],
+    "companyId": "cl1q6wjdg0002jq71xvj04kf9",
+    "createdAt": "2024-08-01T10:00:00Z",
+    "updatedAt": "2024-08-10T15:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0003jq71xvj04kfa",
+        "name": "Engineering",
+        "description": "All engineering related jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0002jq71xvj04kf8",
+    "name": "Data Scientist",
+    "description_raw": "Analyze and interpret complex data sets.",
+    "external_application_url": "https://company2.com/jobs/data-scientist",
+    "level": "Experts",
+    "work_from": "FullyRemote",
+    "type": "Permanent",
+    "location": "Remote",
+    "languages": ["Python", "R", "SQL"],
+    "parameters": {
+      "salary_range": "120000-150000",
+      "benefits": ["Health Insurance", "Remote Work"]
+    },
+    "keywords": ["data", "science", "machine learning"],
+    "companyId": "cl1q6wjdg0004jq71xvj04kf9",
+    "createdAt": "2024-08-02T11:00:00Z",
+    "updatedAt": "2024-08-11T16:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0005jq71xvj04kfb",
+        "name": "Data Science",
+        "description": "Jobs related to data science and analytics"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0003jq71xvj04kf8",
+    "name": "Product Manager",
+    "description_raw": "Lead the product development process.",
+    "external_application_url": "https://company3.com/jobs/product-manager",
+    "level": "Management",
+    "work_from": "Hybrid",
+    "type": "FullTime",
+    "location": "New York, NY",
+    "languages": ["English"],
+    "parameters": {
+      "salary_range": "110000-130000",
+      "benefits": ["Stock Options", "401(k)"]
+    },
+    "keywords": ["product", "management", "leadership"],
+    "companyId": "cl1q6wjdg0006jq71xvj04kf9",
+    "createdAt": "2024-08-03T12:00:00Z",
+    "updatedAt": "2024-08-12T17:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0007jq71xvj04kfc",
+        "name": "Management",
+        "description": "Management level positions"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0004jq71xvj04kf8",
+    "name": "UX Designer",
+    "description_raw": "Design user-friendly interfaces and experiences.",
+    "external_application_url": "https://company4.com/jobs/ux-designer",
+    "level": "Staff",
+    "work_from": "FullyRemote",
+    "type": "FreelanceProject",
+    "location": "Remote",
+    "languages": ["English"],
+    "parameters": {
+      "hourly_rate": "50-70",
+      "contract_length": "6 months"
+    },
+    "keywords": ["UX", "design", "interface"],
+    "companyId": "cl1q6wjdg0008jq71xvj04kf9",
+    "createdAt": "2024-08-04T13:00:00Z",
+    "updatedAt": "2024-08-13T18:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0009jq71xvj04kfd",
+        "name": "Design",
+        "description": "Creative design jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0005jq71xvj04kf8",
+    "name": "Marketing Specialist",
+    "description_raw": "Plan and execute marketing campaigns.",
+    "external_application_url": null,
+    "level": "Experts",
+    "work_from": "Hybrid",
+    "type": "FullTime",
+    "location": "Austin, TX",
+    "languages": ["English", "Spanish"],
+    "parameters": {
+      "salary_range": "60000-80000",
+      "benefits": ["Health Insurance", "Paid Time Off"]
+    },
+    "keywords": ["marketing", "campaigns", "advertising"],
+    "companyId": "cl1q6wjdg0010jq71xvj04kf9",
+    "createdAt": "2024-08-05T14:00:00Z",
+    "updatedAt": "2024-08-14T19:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0011jq71xvj04kfe",
+        "name": "Marketing",
+        "description": "All marketing related jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0006jq71xvj04kf8",
+    "name": "DevOps Engineer",
+    "description_raw": "Manage and automate deployment pipelines.",
+    "external_application_url": "https://company5.com/jobs/devops-engineer",
+    "level": "Experts",
+    "work_from": "Hybrid",
+    "type": "FullTime",
+    "location": "Seattle, WA",
+    "languages": ["Python", "Bash", "Docker"],
+    "parameters": {
+      "salary_range": "130000-160000",
+      "benefits": ["Health Insurance", "401(k)", "Remote Work"]
+    },
+    "keywords": ["devops", "automation", "cloud"],
+    "companyId": "cl1q6wjdg0012jq71xvj04kf9",
+    "createdAt": "2024-08-06T15:00:00Z",
+    "updatedAt": "2024-08-15T20:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0013jq71xvj04kff",
+        "name": "Engineering",
+        "description": "All engineering related jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0007jq71xvj04kf8",
+    "name": "Customer Support Representative",
+    "description_raw": "Provide support to customers via phone and email.",
+    "external_application_url": "https://company6.com/jobs/customer-support-rep",
+    "level": "Staff",
+    "work_from": "FullyRemote",
+    "type": "PartTime",
+    "location": "Remote",
+    "languages": ["English"],
+    "parameters": {
+      "hourly_rate": "20-25",
+      "shift_times": ["Evening", "Weekend"]
+    },
+    "keywords": ["customer support", "help desk", "service"],
+    "companyId": "cl1q6wjdg0014jq71xvj04kf9",
+    "createdAt": "2024-08-07T16:00:00Z",
+    "updatedAt": "2024-08-16T21:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0015jq71xvj04kfg",
+        "name": "Customer Support",
+        "description": "Customer service and support roles"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0008jq71xvj04kf8",
+    "name": "Graphic Designer",
+    "description_raw": "Create visual content for various media.",
+    "external_application_url": "https://company7.com/jobs/graphic-designer",
+    "level": "Experts",
+    "work_from": "Hybrid",
+    "type": "Permanent",
+    "location": "Los Angeles, CA",
+    "languages": ["English"],
+    "parameters": {
+      "salary_range": "70000-90000",
+      "benefits": ["Health Insurance", "Paid Time Off"]
+    },
+    "keywords": ["design", "graphic", "visual"],
+    "companyId": "cl1q6wjdg0016jq71xvj04kf9",
+    "createdAt": "2024-08-08T17:00:00Z",
+    "updatedAt": "2024-08-17T22:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0017jq71xvj04kfh",
+        "name": "Design",
+        "description": "Creative design jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0009jq71xvj04kf8",
+    "name": "HR Manager",
+    "description_raw": "Oversee and manage the HR department.",
+    "external_application_url": null,
+    "level": "Management",
+    "work_from": "Hybrid",
+    "type": "Permanent",
+    "location": "Chicago, IL",
+    "languages": ["English"],
+    "parameters": {
+      "salary_range": "90000-110000",
+      "benefits": ["Health Insurance", "401(k)", "Paid Time Off"]
+    },
+    "keywords": ["human resources", "management", "recruitment"],
+    "companyId": "cl1q6wjdg0018jq71xvj04kf9",
+    "createdAt": "2024-08-09T18:00:00Z",
+    "updatedAt": "2024-08-18T23:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0019jq71xvj04kfi",
+        "name": "Human Resources",
+        "description": "HR and recruitment jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0010jq71xvj04kf8",
+    "name": "Sales Executive",
+    "description_raw": "Drive sales and business development.",
+    "external_application_url": "https://company8.com/jobs/sales-executive",
+    "level": "Experts",
+    "work_from": "Hybrid",
+    "type": "FullTime",
+    "location": "Boston, MA",
+    "languages": ["English"],
+    "parameters": {
+      "salary_range": "80000-100000",
+      "benefits": ["Commission", "401(k)"]
+    },
+    "keywords": ["sales", "business development", "negotiation"],
+    "companyId": "cl1q6wjdg0020jq71xvj04kf9",
+    "createdAt": "2024-08-10T19:00:00Z",
+    "updatedAt": "2024-08-19T24:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0021jq71xvj04kfj",
+        "name": "Sales",
+        "description": "All sales related jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0011jq71xvj04kf8",
+    "name": "Content Writer",
+    "description_raw": "Write content for blogs, articles, and social media.",
+    "external_application_url": "https://company9.com/jobs/content-writer",
+    "level": "Staff",
+    "work_from": "FullyRemote",
+    "type": "FreelanceProject",
+    "location": "Remote",
+    "languages": ["English"],
+    "parameters": {
+      "hourly_rate": "30-40",
+      "contract_length": "3 months"
+    },
+    "keywords": ["writing", "content", "blogging"],
+    "companyId": "cl1q6wjdg0022jq71xvj04kf9",
+    "createdAt": "2024-08-11T20:00:00Z",
+    "updatedAt": "2024-08-20T01:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0023jq71xvj04kfk",
+        "name": "Content Creation",
+        "description": "Jobs related to content writing and media"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0012jq71xvj04kf8",
+    "name": "Front-End Developer",
+    "description_raw": "Develop responsive web interfaces.",
+    "external_application_url": "https://company10.com/jobs/front-end-developer",
+    "level": "Staff",
+    "work_from": "FullyRemote",
+    "type": "Permanent",
+    "location": "Remote",
+    "languages": ["JavaScript", "HTML", "CSS"],
+    "parameters": {
+      "salary_range": "95000-115000",
+      "benefits": ["Health Insurance", "Remote Work"]
+    },
+    "keywords": ["frontend", "development", "web"],
+    "companyId": "cl1q6wjdg0024jq71xvj04kf9",
+    "createdAt": "2024-08-12T21:00:00Z",
+    "updatedAt": "2024-08-21T02:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0025jq71xvj04kfl",
+        "name": "Engineering",
+        "description": "All engineering related jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0013jq71xvj04kf8",
+    "name": "Operations Manager",
+    "description_raw": "Oversee day-to-day operations.",
+    "external_application_url": "https://company11.com/jobs/operations-manager",
+    "level": "Management",
+    "work_from": "Hybrid",
+    "type": "FullTime",
+    "location": "Atlanta, GA",
+    "languages": ["English"],
+    "parameters": {
+      "salary_range": "95000-120000",
+      "benefits": ["Health Insurance", "401(k)"]
+    },
+    "keywords": ["operations", "management", "efficiency"],
+    "companyId": "cl1q6wjdg0026jq71xvj04kf9",
+    "createdAt": "2024-08-13T22:00:00Z",
+    "updatedAt": "2024-08-22T03:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0027jq71xvj04kfm",
+        "name": "Management",
+        "description": "Management level positions"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0014jq71xvj04kf8",
+    "name": "Financial Analyst",
+    "description_raw": "Analyze financial data and prepare reports.",
+    "external_application_url": "https://company12.com/jobs/financial-analyst",
+    "level": "Experts",
+    "work_from": "Hybrid",
+    "type": "FullTime",
+    "location": "Denver, CO",
+    "languages": ["English"],
+    "parameters": {
+      "salary_range": "85000-105000",
+      "benefits": ["Health Insurance", "401(k)", "Paid Time Off"]
+    },
+    "keywords": ["finance", "analysis", "reporting"],
+    "companyId": "cl1q6wjdg0028jq71xvj04kf9",
+    "createdAt": "2024-08-14T23:00:00Z",
+    "updatedAt": "2024-08-23T04:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0029jq71xvj04kfn",
+        "name": "Finance",
+        "description": "Jobs related to finance and accounting"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0015jq71xvj04kf8",
+    "name": "IT Support Specialist",
+    "description_raw": "Provide technical support for IT issues.",
+    "external_application_url": null,
+    "level": "Staff",
+    "work_from": "Hybrid",
+    "type": "FullTime",
+    "location": "Houston, TX",
+    "languages": ["English"],
+    "parameters": {
+      "salary_range": "60000-75000",
+      "benefits": ["Health Insurance", "401(k)", "Paid Time Off"]
+    },
+    "keywords": ["IT", "support", "technical"],
+    "companyId": "cl1q6wjdg0030jq71xvj04kf9",
+    "createdAt": "2024-08-15T24:00:00Z",
+    "updatedAt": "2024-08-24T05:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0031jq71xvj04kfo",
+        "name": "IT",
+        "description": "Information technology jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0016jq71xvj04kf8",
+    "name": "Mobile App Developer",
+    "description_raw": "Develop and maintain mobile applications.",
+    "external_application_url": "https://company13.com/jobs/mobile-app-developer",
+    "level": "Staff",
+    "work_from": "FullyRemote",
+    "type": "Permanent",
+    "location": "Remote",
+    "languages": ["Swift", "Kotlin"],
+    "parameters": {
+      "salary_range": "100000-130000",
+      "benefits": ["Health Insurance", "Remote Work"]
+    },
+    "keywords": ["mobile", "development", "apps"],
+    "companyId": "cl1q6wjdg0032jq71xvj04kf9",
+    "createdAt": "2024-08-16T25:00:00Z",
+    "updatedAt": "2024-08-25T06:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0033jq71xvj04kfp",
+        "name": "Mobile Development",
+        "description": "Jobs related to mobile app development"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0017jq71xvj04kf8",
+    "name": "System Administrator",
+    "description_raw": "Manage and maintain IT infrastructure.",
+    "external_application_url": "https://company14.com/jobs/system-admin",
+    "level": "Experts",
+    "work_from": "Hybrid",
+    "type": "FullTime",
+    "location": "Phoenix, AZ",
+    "languages": ["Linux", "Windows", "Python"],
+    "parameters": {
+      "salary_range": "110000-130000",
+      "benefits": ["Health Insurance", "401(k)", "Remote Work"]
+    },
+    "keywords": ["systems", "administration", "infrastructure"],
+    "companyId": "cl1q6wjdg0034jq71xvj04kf9",
+    "createdAt": "2024-08-17T26:00:00Z",
+    "updatedAt": "2024-08-26T07:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0035jq71xvj04kfq",
+        "name": "IT",
+        "description": "Information technology jobs"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0018jq71xvj04kf8",
+    "name": "Project Manager",
+    "description_raw": "Manage projects from inception to completion.",
+    "external_application_url": "https://company15.com/jobs/project-manager",
+    "level": "Management",
+    "work_from": "Hybrid",
+    "type": "Permanent",
+    "location": "San Diego, CA",
+    "languages": ["English"],
+    "parameters": {
+      "salary_range": "90000-110000",
+      "benefits": ["Health Insurance", "401(k)", "Paid Time Off"]
+    },
+    "keywords": ["project", "management", "leadership"],
+    "companyId": "cl1q6wjdg0036jq71xvj04kf9",
+    "createdAt": "2024-08-18T27:00:00Z",
+    "updatedAt": "2024-08-27T08:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0037jq71xvj04kfr",
+        "name": "Management",
+        "description": "Management level positions"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0019jq71xvj04kf8",
+    "name": "Quality Assurance Engineer",
+    "description_raw": "Test software to ensure quality and functionality.",
+    "external_application_url": "https://company16.com/jobs/qa-engineer",
+    "level": "Staff",
+    "work_from": "FullyRemote",
+    "type": "Permanent",
+    "location": "Remote",
+    "languages": ["Java", "Selenium"],
+    "parameters": {
+      "salary_range": "95000-110000",
+      "benefits": ["Health Insurance", "Remote Work"]
+    },
+    "keywords": ["QA", "testing", "automation"],
+    "companyId": "cl1q6wjdg0038jq71xvj04kf9",
+    "createdAt": "2024-08-19T28:00:00Z",
+    "updatedAt": "2024-08-28T09:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0039jq71xvj04kfs",
+        "name": "Quality Assurance",
+        "description": "Jobs related to software testing and QA"
+      }
+    ]
+  },
+  {
+    "id": "cl1q6wjdf0020jq71xvj04kf8",
+    "name": "Business Analyst",
+    "description_raw": "Analyze business processes and recommend improvements.",
+    "external_application_url": "https://company17.com/jobs/business-analyst",
+    "level": "Experts",
+    "work_from": "Hybrid",
+    "type": "Permanent",
+    "location": "Miami, FL",
+    "languages": ["English"],
+    "parameters": {
+      "salary_range": "80000-100000",
+      "benefits": ["Health Insurance", "401(k)"]
+    },
+    "keywords": ["business", "analysis", "process improvement"],
+    "companyId": "cl1q6wjdg0040jq71xvj04kf9",
+    "createdAt": "2024-08-20T29:00:00Z",
+    "updatedAt": "2024-08-29T10:00:00Z",
+    "categories": [
+      {
+        "id": "cl1q6wjdc0041jq71xvj04kft",
+        "name": "Business Analysis",
+        "description": "Jobs related to business analysis and process improvement"
+      }
+    ]
+  }
+]

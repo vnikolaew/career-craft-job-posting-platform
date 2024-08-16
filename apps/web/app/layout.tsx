@@ -1,6 +1,22 @@
 import type { Metadata } from "next";
-import { Inter, Oswald, Rubik, Rubik_Mono_One, PT_Sans, Work_Sans, Raleway, Montserrat, Roboto_Mono, Open_Sans, Dancing_Script, Merriweather, Lato, Noto_Sans } from "next/font/google";
+import {
+   Inter,
+   Oswald,
+   Rubik,
+   Rubik_Mono_One,
+   PT_Sans,
+   Work_Sans,
+   Raleway,
+   Montserrat,
+   Roboto_Mono,
+   Open_Sans,
+   Dancing_Script,
+   Merriweather,
+   Lato,
+   Noto_Sans,
+} from "next/font/google";
 import "./globals.css";
+import "leaflet/dist/leaflet.css";
 
 import { APP_DESCRIPTION_LONGER, APP_KEYWORDS, APP_NAME, AUTHOR, AUTHOR_WEBSITE } from "@/config/site";
 import Navbar from "@/components/Navbar";
@@ -56,7 +72,16 @@ export default function RootLayout({
    children: React.ReactNode;
 }>) {
    return (
-      <html className={`${dancingScript.variable}`} style={{}} color={`dark`} suppressHydrationWarning lang="en">
+      <html
+         // data-theme={`corporate`}
+            className={`${dancingScript.variable}`} style={{}} color={`dark`} suppressHydrationWarning lang="en">
+      <head>
+         <script src="https://leaflet-extras.github.com/leaflet.css/dist/leaflet.css.bundle.min.js"></script>
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+               integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+               crossOrigin="" />
+         <title>{APP_NAME} | {APP_DESCRIPTION_LONGER}</title>
+      </head>
       <body>
       <Providers>
          <Navbar />

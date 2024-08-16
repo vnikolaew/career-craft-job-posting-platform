@@ -1,13 +1,15 @@
 import { CompanyRelationsResolver } from "@generated/resolvers/relations";
 import { Company } from "@generated/models/Company";
+import { JobListing } from "@generated/models/JobListing";
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, ObjectType, Query, Resolver, Root } from "type-graphql";
 import { MyContext } from "@types";
 import { Max, Min } from "class-validator";
 import jsonCompanies from "@/data/companies.json";
-import crypto from "crypto";
+import jsonJobListings from "@/data/job_listings.json";
 import moment from "moment";
 import { JsonValue } from "@prisma/client/runtime/library";
 import { GraphQLEmailAddress, GraphQLLatitude, GraphQLLongitude, GraphQLURL } from "graphql-scalars";
+import { JobListingEmploymentType, JobListingLevel, WorkFromHome } from "@prisma/client";
 
 @InputType()
 class GetTopCompaniesInput {
@@ -52,7 +54,7 @@ export class CompanyContact {
 }
 
 @ObjectType()
-export class CompanyWorldwideInfo  {
+export class CompanyWorldwideInfo {
    @Field(() => Date, { nullable: true })
    founded?: Date;
 
@@ -63,7 +65,7 @@ export class CompanyWorldwideInfo  {
    headquarters?: string;
 
    @Field(() => [String], { nullable: false })
-   locations: string[]
+   locations: string[];
 }
 
 
@@ -76,7 +78,7 @@ export class CompanyLocalInfo {
    employeeCount?: number;
 
    @Field(() => [String], { nullable: false })
-   locations: string[]
+   locations: string[];
 }
 
 
@@ -117,8 +119,39 @@ export class CompanyContacts {
 
 }
 
+function getRandomItems<T>(array: T[], n: number): T[] {
+   // Shuffle the array using Fisher-Yates algorithm
+   let shuffledArray = [...array];
+   for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+   }
+
+   // Return the first n elements of the shuffled array
+   return shuffledArray.slice(0, n);
+}
+
 @Resolver(of => Company)
 export class CompanyResolver extends CompanyRelationsResolver {
+
+   @FieldResolver(_ => [JobListing], { nullable: true })
+   public async listings(@Root() company: Company): Promise<JobListing[]> {
+      let listings = company.listings;
+      if (!listings?.length) {
+         return getRandomItems(jsonJobListings, 5)
+            .map(l => ({
+               ...l,
+               work_from: l.work_from as WorkFromHome,
+               level: l.level as JobListingLevel,
+               type: l.type as JobListingEmploymentType,
+               createdAt: moment(l.createdAt).toDate(),
+               updatedAt: moment(l.updatedAt).toDate(),
+               companyId: company.id,
+               company: { ...company },
+            }));
+
+      } else return listings;
+   }
 
    @FieldResolver(_ => Object, { nullable: true })
    public async metadata(@Root() company: Company): Promise<JsonValue> {
@@ -127,7 +160,7 @@ export class CompanyResolver extends CompanyRelationsResolver {
 
    @FieldResolver(_ => GraphQLEmailAddress, { nullable: false })
    public async email(@Root() company: Company): Promise<string> {
-      return company.email
+      return company.email;
    }
 
    @FieldResolver(_ => GraphQLURL, { nullable: true })
@@ -151,7 +184,7 @@ export class CompanyResolver extends CompanyRelationsResolver {
    }
 
    @FieldResolver(_ => CompanyWorldwideInfo, { nullable: true })
-   public async worldwide_info (@Root() company: Company): Promise<CompanyWorldwideInfo> {
+   public async worldwide_info(@Root() company: Company): Promise<CompanyWorldwideInfo> {
       return company.worldwide_info as unknown as CompanyWorldwideInfo ?? null;
    }
 
@@ -170,7 +203,6 @@ export class CompanyResolver extends CompanyRelationsResolver {
          ...c,
          createdAt: moment(c.createdAt).toDate(),
          updatedAt: moment(c.updatedAt).toDate(),
-         id: crypto.randomUUID(),
       })) : companies;
    }
 }

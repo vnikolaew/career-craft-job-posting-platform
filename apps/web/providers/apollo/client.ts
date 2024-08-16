@@ -7,15 +7,6 @@ import {
 } from "@/providers/apollo/ApolloProvider";
 
 const typePolicies: TypePolicies = {
-   TypingRun: {
-      fields: {
-         createdAt: {
-            read(value?: Date | string) {
-               return typeof value === `string` ? new Date(value) : value;
-            },
-         },
-      },
-   },
    Company: {
       fields: {
          brand_image_url: {
@@ -26,6 +17,15 @@ const typePolicies: TypePolicies = {
          banner_image_url: {
             read(value?: string | null) {
                return value ?? DEFAULT_COMPANY_BANNER_URL;
+            },
+         },
+      },
+   },
+   JobListing: {
+      fields: {
+         isSaved: {
+            read(value?: boolean | null) {
+               return false
             },
          },
       },

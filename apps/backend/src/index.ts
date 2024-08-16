@@ -5,7 +5,6 @@ import { UserCrudResolver } from "@generated/resolvers/crud/User/UserCrudResolve
 import * as CrudResolvers from "@generated/resolvers/crud";
 import { CustomApolloServer } from "@server";
 import { BuildSchemaOptions } from "type-graphql";
-import { UserResolver } from "@modules/user/UserResolver";
 import { GraphQLJSONObject, resolvers as scalarResolvers } from "graphql-scalars";
 import { GraphQLUpload, Upload } from "@infrastructure/scalars/Upload";
 import { __IS_DEV__ } from "@consts";
@@ -15,17 +14,16 @@ import {
    ComplexityMiddleware,
    ACExposeHeadersMiddleware,
    AuthMiddleware,
-} from "src/infrastructure/middleware";
+} from "@infrastructure/middleware";
 import { MyContext } from "@types";
-import { EmailsResolver } from "@modules/user/EmailsResolver";
-import { CompanyResolver } from "@modules/companies/CompanyResolver";
-import { CategoriesResolver } from "@modules/categories/CategoriesResolver";
+import { JobListingSavesResolver, CategoriesResolver, EmailsResolver, UserResolver, CompanyResolver } from "@modules";
+import { JobListingCrudResolver } from "@modules/job_listings/JobListingResolver";
 
 async function main() {
    const PORT = isNaN(Number.parseInt(process.env.PORT ?? ``)) ? 4000 : +process.env.PORT!;
 
    const schema: BuildSchemaOptions = {
-      resolvers: [UserResolver, CompanyResolver, CategoriesResolver, EmailsResolver, UserCrudResolver, ...Object.entries(CrudResolvers).filter(([key, _]) => key.endsWith(`Resolver`)).map(([_, resolver]) => resolver as Function),
+      resolvers: [UserResolver, CompanyResolver, JobListingCrudResolver, JobListingSavesResolver, CategoriesResolver, EmailsResolver, UserCrudResolver, ...Object.entries(CrudResolvers).filter(([key, _]) => key.endsWith(`Resolver`)).map(([_, resolver]) => resolver as Function),
          // @ts-ignore
          ...Object.entries(scalarResolvers).map(([_, resolver]) => resolver as Function)],
       scalarsMap: [

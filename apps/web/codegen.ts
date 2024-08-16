@@ -1,9 +1,11 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
 
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = `0`
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = `0`;
 
 const config: CodegenConfig = {
-   schema: "https:/api.career-craft.com:4000",
+   schema: [
+      "https:/api.career-craft.com:4000",
+      ],
    documents: ["**/*.{tsx,ts,graphql}"],
    generates: {
       "./__generated__/": {
@@ -19,15 +21,13 @@ const config: CodegenConfig = {
       },
       "./graphql.schema.json": {
          plugins: [`introspection`],
-      }
+      },
    },
    ignoreNoDocuments: true,
-   config: {
-
-   },
+   config: {},
    skipDocumentValidation: {
-      skipValidationAgainstSchema: true
-   }
+      skipValidationAgainstSchema: true,
+   },
 };
 
 export default config;

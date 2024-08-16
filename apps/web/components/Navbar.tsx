@@ -66,6 +66,12 @@ export const ME_QUERY = gql(/* GraphQL */`
                 necessary
                 statistics
             }
+            saved_listings {
+                id
+                listingId
+                metadata
+                createdAt
+            }
         }
     }
 `);
@@ -193,7 +199,7 @@ const Navbar = ({}: NavbarProps) => {
                         }}
                               className={`text-neutral-500 inline-flex items-center gap-2 text-nowrap btn btn-ghost !h-fit !min-h-fit !py-2.5 !px-6 `}
                               href={`/`}>
-                           <Google className={`fill-neutral-500`} />
+                           <Google className={`fill-neutral-700`} />
                            Continue with Google
                         </Link>
                      </div>

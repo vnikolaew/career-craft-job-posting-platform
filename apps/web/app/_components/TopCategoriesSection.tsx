@@ -49,7 +49,7 @@ const CategoryBadge = ({ category }: { category: JobListingCategory }) => (
       <Link href={`/`}
             className={`text-neutral-500 btn btn-outline !rounded-full !min-h-fit !h-fit !py-3 flex items-center justify-start gap-2 !w-fit !px-6 hover:!bg-neutral-400 transition-all duration-100 !border-neutral-400`}>
          <ShoppingCart size={18} />
-         <span className={`font-semibold text-lg text-neutral-700`}>
+         <span className={`font-semibold text-base text-neutral-700`}>
             {category.name}
          </span>
          <span className={`text-neutral-500`}>{category._count?.listings ?? 0}</span>

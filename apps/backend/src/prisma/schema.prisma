@@ -45,6 +45,22 @@ model User {
   accounts Account[]
   sessions Session[]
 
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  saved_listings SavedListing[]
+}
+
+model SavedListing {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  listingId String
+  listing   JobListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  metadata Json? @default("null") @db.JsonB
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -173,6 +189,7 @@ model JobListing {
   updatedAt DateTime @updatedAt
 
   categories JobListingCategory[]
+  saves      SavedListing[]
 }
 
 enum JobListingLevel {

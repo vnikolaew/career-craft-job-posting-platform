@@ -9,7 +9,7 @@ export interface LoadingButtonProps extends ComponentProps<"button"> {
 
 const LoadingButton = ({ loading, loadingText, className, children, ...rest }: LoadingButtonProps) => {
    return (
-      <button className={cn(`btn btn-neutral flex items-center gap-2 disabled:!opacity-70 disabled:!cursor-not-allowed !px-8`, className, loading && `disabled cursor-not-allowed opacity-50`)} {...rest}>
+      <button disabled={loading} className={cn(`btn flex items-center gap-2 disabled:!opacity-70 disabled:!cursor-not-allowed !px-8`, className, loading && `disabled cursor-not-allowed opacity-50`)} {...rest}>
          {loading ? (
             <Fragment>
                <span className={`loading loading-spinner`}></span>
