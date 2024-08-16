@@ -17,7 +17,7 @@ const GET_COMPANY_JOB_LISTING = gql(/* GraphQL */`
             languages
             parameters
             keywords
-            companyId
+            company_id    
             createdAt
             updatedAt
         }

@@ -101,8 +101,8 @@ const CompanyInfoLeftSection = ({ company }: CompanyInfoLeftSectionProps) => {
                         <div className={`flex items-center gap-2 !text-green-600`}>
                            <Map size={18} />
                            <CompanyLocationMapModal id={`${company.name}-${c.address}`} coordinates={{
-                              lng: c.coordinates?.longitude,
-                              lat: c.coordinates?.latitude!
+                              lng: c.coordinates?.longitude ?? 0,
+                              lat: c.coordinates?.latitude! ?? 0
                            }} />
                            <Link onClick={e => {
                               e.preventDefault()

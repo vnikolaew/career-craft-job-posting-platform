@@ -1,5 +1,6 @@
 import { CompanyRelationsResolver } from "@generated/resolvers/relations";
 import { Company } from "@generated/models/Company";
+import { CompanyCategory } from "@generated/models/CompanyCategory";
 import { JobListing } from "@generated/models/JobListing";
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, ObjectType, Query, Resolver, Root } from "type-graphql";
 import { MyContext } from "@types";
@@ -134,6 +135,14 @@ function getRandomItems<T>(array: T[], n: number): T[] {
 @Resolver(of => Company)
 export class CompanyResolver extends CompanyRelationsResolver {
 
+   @FieldResolver(_ => Int, { nullable: false })
+   public async listingsCount(@Root() company: Company, @Ctx() { prisma }: MyContext): Promise<number> {
+      let count = company._count?.listings ?? company.listings?.length;
+      if (count === null || count === undefined) {
+         return await prisma.jobListing.count({ where: { company_id: company.id } });
+      }
+   }
+
    @FieldResolver(_ => [JobListing], { nullable: true })
    public async listings(@Root() company: Company): Promise<JobListing[]> {
       let listings = company.listings;
@@ -146,11 +155,37 @@ export class CompanyResolver extends CompanyRelationsResolver {
                type: l.type as JobListingEmploymentType,
                createdAt: moment(l.createdAt).toDate(),
                updatedAt: moment(l.updatedAt).toDate(),
-               companyId: company.id,
+               company_id: company.id,
                company: { ...company },
             }));
 
       } else return listings;
+   }
+
+   @FieldResolver(_ => [CompanyCategory], { nullable: true })
+   public async companyCategories(@Root() company: Company, @Ctx() { prisma }: MyContext): Promise<CompanyCategory[]> {
+      let fetched = company.categories?.map(c => c.category) ?? [];
+      if (!!fetched?.length && fetched?.every(Boolean)) return fetched;
+
+      let companyCategories = await prisma.company.findFirst({
+         where: { id: company.id },
+         select: {
+            categories: {
+               select: {
+                  category_id: true,
+               },
+            },
+         },
+      });
+      const categories = await prisma.companyCategory.findMany({
+         where: {
+            id: {
+               in: companyCategories.categories.map(c => c.category_id),
+            },
+         },
+      });
+      console.log({ categories });
+      return categories;
    }
 
    @FieldResolver(_ => Object, { nullable: true })

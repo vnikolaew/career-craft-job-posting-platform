@@ -68,7 +68,7 @@ export const ME_QUERY = gql(/* GraphQL */`
             }
             saved_listings {
                 id
-                listingId
+                listing_id
                 metadata
                 createdAt
             }

@@ -7,13 +7,14 @@ import Skeleton from "@/components/common/Skeleton";
 import HomePageSection from "@/app/_components/HomePageSection";
 import TopCategoriesSection from "@/app/_components/TopCategoriesSection";
 import TopEmployersSection from "./_components/TopEmployersSection";
+import List from "@/components/common/List";
 
 export default function Home() {
    const { data: me, loading } = useQuery(ME_QUERY, {});
-   const signedOut = useMemo(() => !loading && !me?.me, [loading, me])
+   const signedOut = useMemo(() => !loading && !me?.me, [loading, me]);
 
    const username = useMemo(() => {
-      if(!me?.me) return null
+      if (!me?.me) return null;
       return me?.me?.name?.length ? me?.me?.name : `${me?.me?.first_name} ${me?.me?.last_name}`;
    }, [me]);
 
@@ -25,32 +26,23 @@ export default function Home() {
          <div className={`mt-24`}>
             {loading && <Skeleton className={`h-8 w-64`} />}
             {!loading && username && (
-                <h2 className={`text-xl`}>{message}, <b>{username}</b>.</h2>
+               <h2 className={`text-xl`}>{message}, <b>{username}</b>.</h2>
             )}
             {signedOut && (
-                <h2 className={`text-3xl mt-24`}>Welcome to <b>{APP_NAME}</b>.</h2>
+               <h2 className={`text-3xl mt-24`}>Welcome to <b>{APP_NAME}</b>.</h2>
             )}
          </div>
          <div className={`w-full bg-neutral-300 mt-12`}>
-            <div className={`mt-8 w-2/3 mx-auto`}>
+            <div className={`my-8 w-2/3 mx-auto !mb-16`}>
                <section className={`grid w-full grid-cols-[2fr_3fr_2fr] gap-4`}>
-                  <div>
-                     <TopCategoriesSection />
-                  </div>
-                  <div>
-                     <TopEmployersSection/>
-                  </div>
-                  <div>
-                     <HomePageSection heading={"News & Articles"}>
-                        <Skeleton className={`w-1/2 h-4`} />
-                     </HomePageSection>
-                  </div>
+                  <TopCategoriesSection />
+                  <TopEmployersSection />
+                  <HomePageSection heading={"News & Articles"}>
+                     <List count={3} render={key => <Skeleton key={key} className={`w-1/2 h-6 mt-4`} />} />
+                  </HomePageSection>
                </section>
-
             </div>
-
          </div>
-
       </section>
    );
 }

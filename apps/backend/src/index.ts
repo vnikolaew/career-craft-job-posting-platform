@@ -23,7 +23,8 @@ async function main() {
    const PORT = isNaN(Number.parseInt(process.env.PORT ?? ``)) ? 4000 : +process.env.PORT!;
 
    const schema: BuildSchemaOptions = {
-      resolvers: [UserResolver, CompanyResolver, JobListingCrudResolver, JobListingSavesResolver, CategoriesResolver, EmailsResolver, UserCrudResolver, ...Object.entries(CrudResolvers).filter(([key, _]) => key.endsWith(`Resolver`)).map(([_, resolver]) => resolver as Function),
+      resolvers: [UserResolver, CompanyResolver, JobListingCrudResolver, JobListingSavesResolver, CategoriesResolver, EmailsResolver, UserCrudResolver,
+         ...Object.entries(CrudResolvers).filter(([key, _]) => key.endsWith(`Resolver`) && !key.includes(`CategoryOn`)).map(([_, resolver]) => resolver as Function),
          // @ts-ignore
          ...Object.entries(scalarResolvers).map(([_, resolver]) => resolver as Function)],
       scalarsMap: [
@@ -33,7 +34,7 @@ async function main() {
             scalar: GraphQLUpload,
          },
       ],
-      validate: true,
+      validate: false,
       authChecker: AuthMiddleware.authChecker,
       globalMiddlewares: [...(__IS_DEV__ && process.env.USE_SLEEP === `true` ? [DevOnlyMiddleware] : []), LoggingMiddleware, AuthMiddleware, ComplexityMiddleware, ACExposeHeadersMiddleware],
       emitSchemaFile: true,

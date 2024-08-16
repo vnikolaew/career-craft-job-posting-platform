@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { DEFAULT_COMPANY_BANNER_URL } from "@/providers/apollo/ApolloProvider";
 import { getCompanyDetailsWithListings } from "@/app/company/[id]/_queries";
-import { JobListingsList } from "@/app/company/[id]/jobs/_components/JobListingCard";
+import { JobListingsList } from "@/app/company/[id]/(layout)/jobs/_components/JobListingCard";
 
 export interface PageProps {
    params: { id: string };

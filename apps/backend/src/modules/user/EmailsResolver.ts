@@ -5,10 +5,12 @@ import { User } from "@generated/models/User";
 import { APP_HOST_NAME, APP_NAME, COMPANY_DETAILS } from "@consts";
 import moment from "moment";
 import { xprisma } from "@prisma/prisma";
-import { EmailService, AccountVerificationEmail } from "@repo/emails";
+import { AccountVerificationEmail } from "@repo/emails";
 import { EmailAddress, StringP } from "@infrastructure/decorators";
 import { getUserCookie } from "@lib/auth";
 import { CONSTS } from "@modules/user/consts";
+import { Service } from "typedi";
+import { EmailService } from "./services/EmailService";
 
 
 @ObjectType()
@@ -36,8 +38,15 @@ export class SignUpWithEmailCodeResponse extends SendVerificationEmailResponse {
    expires?: Date;
 }
 
+@Service()
 @Resolver()
 export class EmailsResolver {
+
+   private readonly emailService: EmailService;
+
+   constructor() {
+      this.emailService = new EmailService()
+   }
 
    private generateEmailCode() {
       return Math.floor(100000 + Math.random() * 900000);
@@ -132,9 +141,8 @@ export class EmailsResolver {
             identifier: crypto.randomUUID(),
          },
       });
-      const emailService = new EmailService();
 
-      const response = await emailService.sendMail({
+      const response = await this.emailService.sendMail({
          to: email,
          html: `
            <h2>Welcome to ${APP_NAME}!</h2>
@@ -187,10 +195,8 @@ export class EmailsResolver {
          },
       });
 
-      const emailService = new EmailService();
-
       // Send the actual confirmation e-mail
-      const response = await emailService.sendMail({
+      const response = await this.emailService.sendMail({
          to: user!.email,
          react: AccountVerificationEmail({
             verificationToken: verificationToken.token,

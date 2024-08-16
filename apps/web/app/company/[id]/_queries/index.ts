@@ -1,4 +1,5 @@
-import { client } from "@/providers/apollo/client";
+"use server"
+
 import { gql } from "@/__generated__";
 import companies from "@/data/companies.json";
 import jsonJobListings from "@/data/job_listings.json";
@@ -8,32 +9,8 @@ import {
 } from "@/__generated__/graphql";
 import { cache } from "react";
 import moment from "moment/moment";
-
-export const GET_COMPANY_LISTINGS_QUERY = gql(/* GraphQL */`
-    query GetCompanyWithListingsQuery($id: String!) {
-        getCompany(where: {id: $id}) {
-            id
-            name
-            brand_image_url
-            banner_image_url
-            listings {
-                id
-                name
-                location
-                languages
-                createdAt
-                description_raw
-                keywords
-                level
-                parameters
-                type
-                work_from
-                isSaved @client
-            }
-        }
-    }
-`);
-
+import { GET_COMPANY_LISTINGS_QUERY } from "@/app/company/[id]/_queries/graphql";
+import { client } from "@/providers/apollo/client";
 
 const GET_ALL_COMPANIES = gql(/* GraphQL */`
     query GetAllCompanies {
@@ -61,7 +38,7 @@ const GET_COMPANY_QUERY = gql(/* GraphQL */`
             email
             brand_image_url
             banner_image_url
-            categories {
+            companyCategories {
                 id
                 name
                 description
@@ -145,8 +122,10 @@ export const getCompanyDetailsWithListings = cache(async (id: string): Promise<G
          query: GET_COMPANY_LISTINGS_QUERY,
          variables: { id },
       });
+      console.log({ data });
       return data?.getCompany! as GetCompanyWithListingsQueryQuery["getCompany"];
    } catch (err) {
+      console.error({ err });
 
       let company: Company = {
          ...companies[Math.floor(Math.random() * companies.length)]!,
@@ -158,7 +137,7 @@ export const getCompanyDetailsWithListings = cache(async (id: string): Promise<G
                type: l.type as JobListingEmploymentType,
                createdAt: moment(l.createdAt).toDate(),
                updatedAt: moment(l.updatedAt).toDate(),
-               companyId: ``,
+               company_id: ``,
                isSaved: false
             })),
       };
@@ -166,7 +145,7 @@ export const getCompanyDetailsWithListings = cache(async (id: string): Promise<G
       const { listings, ...rest } = company;
       company.listings.forEach(l => {
          l.company = rest;
-         l.companyId = company.id;
+         l.company_id = company.id;
       });
       return { ...company };
    }

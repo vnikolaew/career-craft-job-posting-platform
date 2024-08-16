@@ -7,7 +7,6 @@ import { MyContext } from "@types";
 export class JobListingCrudResolver extends Base {
    constructor() {
       super();
-      console.log(`we are here`);
    }
 
    @FieldResolver(of => Boolean, { nullable: true })
@@ -18,9 +17,9 @@ export class JobListingCrudResolver extends Base {
 
       let savedListings = await prisma.savedListing.findMany({
          where: { userId },
-         select: { id: true, listingId: true },
+         select: { id: true, listing_id: true },
       });
 
-      return savedListings?.some(l => l?.listingId === jobListing.id);
+      return savedListings?.some(l => l?.listing_id === jobListing.id);
    }
 }

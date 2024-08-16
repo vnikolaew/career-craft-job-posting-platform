@@ -12,13 +12,13 @@ export class JobListingSavesResolver extends SavedListingRelationsResolver {
       @Ctx() { prisma, userId }: MyContext,
       @Arg("listingId", of => String) listingId: string): Promise<SavedListing | null> {
       let save = await prisma.savedListing.findFirst({
-         where: { listingId, userId },
+         where: { listing_id: listingId, userId },
       });
       if (save) return null;
 
       save = await prisma.savedListing.create({
          data: {
-            listingId,
+            listing_id: listingId,
             userId,
             metadata: {},
          },
@@ -33,7 +33,7 @@ export class JobListingSavesResolver extends SavedListingRelationsResolver {
       @Ctx() { prisma, userId }: MyContext,
       @Arg("listingId", of => String) listingId: string): Promise<boolean | null> {
       let save = await prisma.savedListing.findFirst({
-         where: { listingId, userId },
+         where: { listing_id: listingId, userId },
       });
       if (!save) return false;
 

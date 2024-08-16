@@ -48,6 +48,7 @@ type AccountCountAggregate {
 
 input AccountCountOrderByAggregateInput {
   access_token: SortOrder
+  createdAt: SortOrder
   expires_at: SortOrder
   id_token: SortOrder
   metadata: SortOrder
@@ -63,6 +64,7 @@ input AccountCountOrderByAggregateInput {
 
 input AccountCreateInput {
   access_token: String
+  createdAt: DateTimeISO
   expires_at: Int
   id_token: String
   metadata: JSON
@@ -78,6 +80,7 @@ input AccountCreateInput {
 
 input AccountCreateManyInput {
   access_token: String
+  createdAt: DateTimeISO
   expires_at: Int
   id_token: String
   metadata: JSON
@@ -93,6 +96,7 @@ input AccountCreateManyInput {
 
 input AccountCreateManyUserInput {
   access_token: String
+  createdAt: DateTimeISO
   expires_at: Int
   id_token: String
   metadata: JSON
@@ -124,6 +128,7 @@ input AccountCreateOrConnectWithoutUserInput {
 
 input AccountCreateWithoutUserInput {
   access_token: String
+  createdAt: DateTimeISO
   expires_at: Int
   id_token: String
   metadata: JSON
@@ -182,6 +187,7 @@ type AccountMaxAggregate {
 
 input AccountMaxOrderByAggregateInput {
   access_token: SortOrder
+  createdAt: SortOrder
   expires_at: SortOrder
   id_token: SortOrder
   provider: SortOrder
@@ -212,6 +218,7 @@ type AccountMinAggregate {
 
 input AccountMinOrderByAggregateInput {
   access_token: SortOrder
+  createdAt: SortOrder
   expires_at: SortOrder
   id_token: SortOrder
   provider: SortOrder
@@ -254,6 +261,7 @@ input AccountOrderByWithAggregationInput {
   _min: AccountMinOrderByAggregateInput
   _sum: AccountSumOrderByAggregateInput
   access_token: SortOrderInput
+  createdAt: SortOrder
   expires_at: SortOrderInput
   id_token: SortOrderInput
   metadata: SortOrderInput
@@ -270,6 +278,7 @@ input AccountOrderByWithAggregationInput {
 input AccountOrderByWithRelationInput {
   _relevance: AccountOrderByRelevanceInput
   access_token: SortOrderInput
+  createdAt: SortOrder
   expires_at: SortOrderInput
   id_token: SortOrderInput
   metadata: SortOrderInput
@@ -311,6 +320,7 @@ input AccountScalarWhereInput {
   NOT: [AccountScalarWhereInput!]
   OR: [AccountScalarWhereInput!]
   access_token: StringNullableFilter
+  createdAt: DateTimeFilter
   expires_at: IntNullableFilter
   id_token: StringNullableFilter
   metadata: JsonNullableFilter
@@ -329,6 +339,7 @@ input AccountScalarWhereWithAggregatesInput {
   NOT: [AccountScalarWhereWithAggregatesInput!]
   OR: [AccountScalarWhereWithAggregatesInput!]
   access_token: StringNullableWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
   expires_at: IntNullableWithAggregatesFilter
   id_token: StringNullableWithAggregatesFilter
   metadata: JsonNullableWithAggregatesFilter
@@ -352,6 +363,7 @@ input AccountSumOrderByAggregateInput {
 
 input AccountUpdateInput {
   access_token: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   expires_at: NullableIntFieldUpdateOperationsInput
   id_token: NullableStringFieldUpdateOperationsInput
   metadata: JSON
@@ -367,6 +379,7 @@ input AccountUpdateInput {
 
 input AccountUpdateManyMutationInput {
   access_token: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   expires_at: NullableIntFieldUpdateOperationsInput
   id_token: NullableStringFieldUpdateOperationsInput
   metadata: JSON
@@ -405,6 +418,7 @@ input AccountUpdateWithWhereUniqueWithoutUserInput {
 
 input AccountUpdateWithoutUserInput {
   access_token: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   expires_at: NullableIntFieldUpdateOperationsInput
   id_token: NullableStringFieldUpdateOperationsInput
   metadata: JSON
@@ -428,6 +442,7 @@ input AccountWhereInput {
   NOT: [AccountWhereInput!]
   OR: [AccountWhereInput!]
   access_token: StringNullableFilter
+  createdAt: DateTimeFilter
   expires_at: IntNullableFilter
   id_token: StringNullableFilter
   metadata: JsonNullableFilter
@@ -447,6 +462,7 @@ input AccountWhereUniqueInput {
   NOT: [AccountWhereInput!]
   OR: [AccountWhereInput!]
   access_token: StringNullableFilter
+  createdAt: DateTimeFilter
   expires_at: IntNullableFilter
   id_token: StringNullableFilter
   metadata: JsonNullableFilter
@@ -522,6 +538,390 @@ type AggregateVerificationToken {
   _min: VerificationTokenMinAggregate
 }
 
+type CategoryOnCompany {
+  category_id: String!
+  company_id: String!
+  createdAt: DateTimeISO!
+  updatedAt: DateTimeISO!
+}
+
+input CategoryOnCompanyCompany_idCategory_idCompoundUniqueInput {
+  category_id: String!
+  company_id: String!
+}
+
+input CategoryOnCompanyCreateManyCategoryInput {
+  company_id: String!
+  createdAt: DateTimeISO
+}
+
+input CategoryOnCompanyCreateManyCategoryInputEnvelope {
+  data: [CategoryOnCompanyCreateManyCategoryInput!]!
+  skipDuplicates: Boolean
+}
+
+input CategoryOnCompanyCreateManyCompanyInput {
+  category_id: String!
+  createdAt: DateTimeISO
+}
+
+input CategoryOnCompanyCreateManyCompanyInputEnvelope {
+  data: [CategoryOnCompanyCreateManyCompanyInput!]!
+  skipDuplicates: Boolean
+}
+
+input CategoryOnCompanyCreateNestedManyWithoutCategoryInput {
+  connect: [CategoryOnCompanyWhereUniqueInput!]
+  connectOrCreate: [CategoryOnCompanyCreateOrConnectWithoutCategoryInput!]
+  create: [CategoryOnCompanyCreateWithoutCategoryInput!]
+  createMany: CategoryOnCompanyCreateManyCategoryInputEnvelope
+}
+
+input CategoryOnCompanyCreateNestedManyWithoutCompanyInput {
+  connect: [CategoryOnCompanyWhereUniqueInput!]
+  connectOrCreate: [CategoryOnCompanyCreateOrConnectWithoutCompanyInput!]
+  create: [CategoryOnCompanyCreateWithoutCompanyInput!]
+  createMany: CategoryOnCompanyCreateManyCompanyInputEnvelope
+}
+
+input CategoryOnCompanyCreateOrConnectWithoutCategoryInput {
+  create: CategoryOnCompanyCreateWithoutCategoryInput!
+  where: CategoryOnCompanyWhereUniqueInput!
+}
+
+input CategoryOnCompanyCreateOrConnectWithoutCompanyInput {
+  create: CategoryOnCompanyCreateWithoutCompanyInput!
+  where: CategoryOnCompanyWhereUniqueInput!
+}
+
+input CategoryOnCompanyCreateWithoutCategoryInput {
+  company: CompanyCreateNestedOneWithoutCategoriesInput!
+  createdAt: DateTimeISO
+}
+
+input CategoryOnCompanyCreateWithoutCompanyInput {
+  category: CompanyCategoryCreateNestedOneWithoutCompaniesInput!
+  createdAt: DateTimeISO
+}
+
+input CategoryOnCompanyListRelationFilter {
+  every: CategoryOnCompanyWhereInput
+  none: CategoryOnCompanyWhereInput
+  some: CategoryOnCompanyWhereInput
+}
+
+input CategoryOnCompanyOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+enum CategoryOnCompanyOrderByRelevanceFieldEnum {
+  category_id
+  company_id
+}
+
+input CategoryOnCompanyOrderByRelevanceInput {
+  fields: [CategoryOnCompanyOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input CategoryOnCompanyOrderByWithRelationInput {
+  _relevance: CategoryOnCompanyOrderByRelevanceInput
+  category: CompanyCategoryOrderByWithRelationInput
+  category_id: SortOrder
+  company: CompanyOrderByWithRelationInput
+  company_id: SortOrder
+  createdAt: SortOrder
+}
+
+enum CategoryOnCompanyScalarFieldEnum {
+  category_id
+  company_id
+  createdAt
+  updatedAt
+}
+
+input CategoryOnCompanyScalarWhereInput {
+  AND: [CategoryOnCompanyScalarWhereInput!]
+  NOT: [CategoryOnCompanyScalarWhereInput!]
+  OR: [CategoryOnCompanyScalarWhereInput!]
+  category_id: StringFilter
+  company_id: StringFilter
+  createdAt: DateTimeFilter
+}
+
+input CategoryOnCompanyUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CategoryOnCompanyUpdateManyWithWhereWithoutCategoryInput {
+  data: CategoryOnCompanyUpdateManyMutationInput!
+  where: CategoryOnCompanyScalarWhereInput!
+}
+
+input CategoryOnCompanyUpdateManyWithWhereWithoutCompanyInput {
+  data: CategoryOnCompanyUpdateManyMutationInput!
+  where: CategoryOnCompanyScalarWhereInput!
+}
+
+input CategoryOnCompanyUpdateManyWithoutCategoryNestedInput {
+  connect: [CategoryOnCompanyWhereUniqueInput!]
+  connectOrCreate: [CategoryOnCompanyCreateOrConnectWithoutCategoryInput!]
+  create: [CategoryOnCompanyCreateWithoutCategoryInput!]
+  createMany: CategoryOnCompanyCreateManyCategoryInputEnvelope
+  delete: [CategoryOnCompanyWhereUniqueInput!]
+  deleteMany: [CategoryOnCompanyScalarWhereInput!]
+  disconnect: [CategoryOnCompanyWhereUniqueInput!]
+  set: [CategoryOnCompanyWhereUniqueInput!]
+  update: [CategoryOnCompanyUpdateWithWhereUniqueWithoutCategoryInput!]
+  updateMany: [CategoryOnCompanyUpdateManyWithWhereWithoutCategoryInput!]
+  upsert: [CategoryOnCompanyUpsertWithWhereUniqueWithoutCategoryInput!]
+}
+
+input CategoryOnCompanyUpdateManyWithoutCompanyNestedInput {
+  connect: [CategoryOnCompanyWhereUniqueInput!]
+  connectOrCreate: [CategoryOnCompanyCreateOrConnectWithoutCompanyInput!]
+  create: [CategoryOnCompanyCreateWithoutCompanyInput!]
+  createMany: CategoryOnCompanyCreateManyCompanyInputEnvelope
+  delete: [CategoryOnCompanyWhereUniqueInput!]
+  deleteMany: [CategoryOnCompanyScalarWhereInput!]
+  disconnect: [CategoryOnCompanyWhereUniqueInput!]
+  set: [CategoryOnCompanyWhereUniqueInput!]
+  update: [CategoryOnCompanyUpdateWithWhereUniqueWithoutCompanyInput!]
+  updateMany: [CategoryOnCompanyUpdateManyWithWhereWithoutCompanyInput!]
+  upsert: [CategoryOnCompanyUpsertWithWhereUniqueWithoutCompanyInput!]
+}
+
+input CategoryOnCompanyUpdateWithWhereUniqueWithoutCategoryInput {
+  data: CategoryOnCompanyUpdateWithoutCategoryInput!
+  where: CategoryOnCompanyWhereUniqueInput!
+}
+
+input CategoryOnCompanyUpdateWithWhereUniqueWithoutCompanyInput {
+  data: CategoryOnCompanyUpdateWithoutCompanyInput!
+  where: CategoryOnCompanyWhereUniqueInput!
+}
+
+input CategoryOnCompanyUpdateWithoutCategoryInput {
+  company: CompanyUpdateOneRequiredWithoutCategoriesNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CategoryOnCompanyUpdateWithoutCompanyInput {
+  category: CompanyCategoryUpdateOneRequiredWithoutCompaniesNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CategoryOnCompanyUpsertWithWhereUniqueWithoutCategoryInput {
+  create: CategoryOnCompanyCreateWithoutCategoryInput!
+  update: CategoryOnCompanyUpdateWithoutCategoryInput!
+  where: CategoryOnCompanyWhereUniqueInput!
+}
+
+input CategoryOnCompanyUpsertWithWhereUniqueWithoutCompanyInput {
+  create: CategoryOnCompanyCreateWithoutCompanyInput!
+  update: CategoryOnCompanyUpdateWithoutCompanyInput!
+  where: CategoryOnCompanyWhereUniqueInput!
+}
+
+input CategoryOnCompanyWhereInput {
+  AND: [CategoryOnCompanyWhereInput!]
+  NOT: [CategoryOnCompanyWhereInput!]
+  OR: [CategoryOnCompanyWhereInput!]
+  category: CompanyCategoryRelationFilter
+  category_id: StringFilter
+  company: CompanyRelationFilter
+  company_id: StringFilter
+  createdAt: DateTimeFilter
+}
+
+input CategoryOnCompanyWhereUniqueInput {
+  AND: [CategoryOnCompanyWhereInput!]
+  NOT: [CategoryOnCompanyWhereInput!]
+  OR: [CategoryOnCompanyWhereInput!]
+  category: CompanyCategoryRelationFilter
+  category_id: StringFilter
+  company: CompanyRelationFilter
+  company_id: StringFilter
+  company_id_category_id: CategoryOnCompanyCompany_idCategory_idCompoundUniqueInput
+  createdAt: DateTimeFilter
+}
+
+input CategoryOnJobListingCreateManyCategoryInput {
+  createdAt: DateTimeISO
+  listing_id: String!
+}
+
+input CategoryOnJobListingCreateManyCategoryInputEnvelope {
+  data: [CategoryOnJobListingCreateManyCategoryInput!]!
+  skipDuplicates: Boolean
+}
+
+input CategoryOnJobListingCreateManyListingInput {
+  category_id: String!
+  createdAt: DateTimeISO
+}
+
+input CategoryOnJobListingCreateManyListingInputEnvelope {
+  data: [CategoryOnJobListingCreateManyListingInput!]!
+  skipDuplicates: Boolean
+}
+
+input CategoryOnJobListingCreateNestedManyWithoutCategoryInput {
+  connect: [CategoryOnJobListingWhereUniqueInput!]
+  connectOrCreate: [CategoryOnJobListingCreateOrConnectWithoutCategoryInput!]
+  create: [CategoryOnJobListingCreateWithoutCategoryInput!]
+  createMany: CategoryOnJobListingCreateManyCategoryInputEnvelope
+}
+
+input CategoryOnJobListingCreateNestedManyWithoutListingInput {
+  connect: [CategoryOnJobListingWhereUniqueInput!]
+  connectOrCreate: [CategoryOnJobListingCreateOrConnectWithoutListingInput!]
+  create: [CategoryOnJobListingCreateWithoutListingInput!]
+  createMany: CategoryOnJobListingCreateManyListingInputEnvelope
+}
+
+input CategoryOnJobListingCreateOrConnectWithoutCategoryInput {
+  create: CategoryOnJobListingCreateWithoutCategoryInput!
+  where: CategoryOnJobListingWhereUniqueInput!
+}
+
+input CategoryOnJobListingCreateOrConnectWithoutListingInput {
+  create: CategoryOnJobListingCreateWithoutListingInput!
+  where: CategoryOnJobListingWhereUniqueInput!
+}
+
+input CategoryOnJobListingCreateWithoutCategoryInput {
+  createdAt: DateTimeISO
+  listing: JobListingCreateNestedOneWithoutCategoriesInput!
+}
+
+input CategoryOnJobListingCreateWithoutListingInput {
+  category: JobListingCategoryCreateNestedOneWithoutListingsInput!
+  createdAt: DateTimeISO
+}
+
+input CategoryOnJobListingListRelationFilter {
+  every: CategoryOnJobListingWhereInput
+  none: CategoryOnJobListingWhereInput
+  some: CategoryOnJobListingWhereInput
+}
+
+input CategoryOnJobListingListing_idCategory_idCompoundUniqueInput {
+  category_id: String!
+  listing_id: String!
+}
+
+input CategoryOnJobListingOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input CategoryOnJobListingScalarWhereInput {
+  AND: [CategoryOnJobListingScalarWhereInput!]
+  NOT: [CategoryOnJobListingScalarWhereInput!]
+  OR: [CategoryOnJobListingScalarWhereInput!]
+  category_id: StringFilter
+  createdAt: DateTimeFilter
+  listing_id: StringFilter
+}
+
+input CategoryOnJobListingUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CategoryOnJobListingUpdateManyWithWhereWithoutCategoryInput {
+  data: CategoryOnJobListingUpdateManyMutationInput!
+  where: CategoryOnJobListingScalarWhereInput!
+}
+
+input CategoryOnJobListingUpdateManyWithWhereWithoutListingInput {
+  data: CategoryOnJobListingUpdateManyMutationInput!
+  where: CategoryOnJobListingScalarWhereInput!
+}
+
+input CategoryOnJobListingUpdateManyWithoutCategoryNestedInput {
+  connect: [CategoryOnJobListingWhereUniqueInput!]
+  connectOrCreate: [CategoryOnJobListingCreateOrConnectWithoutCategoryInput!]
+  create: [CategoryOnJobListingCreateWithoutCategoryInput!]
+  createMany: CategoryOnJobListingCreateManyCategoryInputEnvelope
+  delete: [CategoryOnJobListingWhereUniqueInput!]
+  deleteMany: [CategoryOnJobListingScalarWhereInput!]
+  disconnect: [CategoryOnJobListingWhereUniqueInput!]
+  set: [CategoryOnJobListingWhereUniqueInput!]
+  update: [CategoryOnJobListingUpdateWithWhereUniqueWithoutCategoryInput!]
+  updateMany: [CategoryOnJobListingUpdateManyWithWhereWithoutCategoryInput!]
+  upsert: [CategoryOnJobListingUpsertWithWhereUniqueWithoutCategoryInput!]
+}
+
+input CategoryOnJobListingUpdateManyWithoutListingNestedInput {
+  connect: [CategoryOnJobListingWhereUniqueInput!]
+  connectOrCreate: [CategoryOnJobListingCreateOrConnectWithoutListingInput!]
+  create: [CategoryOnJobListingCreateWithoutListingInput!]
+  createMany: CategoryOnJobListingCreateManyListingInputEnvelope
+  delete: [CategoryOnJobListingWhereUniqueInput!]
+  deleteMany: [CategoryOnJobListingScalarWhereInput!]
+  disconnect: [CategoryOnJobListingWhereUniqueInput!]
+  set: [CategoryOnJobListingWhereUniqueInput!]
+  update: [CategoryOnJobListingUpdateWithWhereUniqueWithoutListingInput!]
+  updateMany: [CategoryOnJobListingUpdateManyWithWhereWithoutListingInput!]
+  upsert: [CategoryOnJobListingUpsertWithWhereUniqueWithoutListingInput!]
+}
+
+input CategoryOnJobListingUpdateWithWhereUniqueWithoutCategoryInput {
+  data: CategoryOnJobListingUpdateWithoutCategoryInput!
+  where: CategoryOnJobListingWhereUniqueInput!
+}
+
+input CategoryOnJobListingUpdateWithWhereUniqueWithoutListingInput {
+  data: CategoryOnJobListingUpdateWithoutListingInput!
+  where: CategoryOnJobListingWhereUniqueInput!
+}
+
+input CategoryOnJobListingUpdateWithoutCategoryInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  listing: JobListingUpdateOneRequiredWithoutCategoriesNestedInput
+}
+
+input CategoryOnJobListingUpdateWithoutListingInput {
+  category: JobListingCategoryUpdateOneRequiredWithoutListingsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CategoryOnJobListingUpsertWithWhereUniqueWithoutCategoryInput {
+  create: CategoryOnJobListingCreateWithoutCategoryInput!
+  update: CategoryOnJobListingUpdateWithoutCategoryInput!
+  where: CategoryOnJobListingWhereUniqueInput!
+}
+
+input CategoryOnJobListingUpsertWithWhereUniqueWithoutListingInput {
+  create: CategoryOnJobListingCreateWithoutListingInput!
+  update: CategoryOnJobListingUpdateWithoutListingInput!
+  where: CategoryOnJobListingWhereUniqueInput!
+}
+
+input CategoryOnJobListingWhereInput {
+  AND: [CategoryOnJobListingWhereInput!]
+  NOT: [CategoryOnJobListingWhereInput!]
+  OR: [CategoryOnJobListingWhereInput!]
+  category: JobListingCategoryRelationFilter
+  category_id: StringFilter
+  createdAt: DateTimeFilter
+  listing: JobListingRelationFilter
+  listing_id: StringFilter
+}
+
+input CategoryOnJobListingWhereUniqueInput {
+  AND: [CategoryOnJobListingWhereInput!]
+  NOT: [CategoryOnJobListingWhereInput!]
+  OR: [CategoryOnJobListingWhereInput!]
+  category: JobListingCategoryRelationFilter
+  category_id: StringFilter
+  createdAt: DateTimeFilter
+  listing: JobListingRelationFilter
+  listing_id: StringFilter
+  listing_id_category_id: CategoryOnJobListingListing_idCategory_idCompoundUniqueInput
+}
+
 type Company {
   _count: CompanyCount
   about_raw: String!
@@ -529,7 +929,7 @@ type Company {
   benefits: [String!]!
   brand_image_url: URL
   career_description_raw: String!
-  categories(cursor: CompanyCategoryWhereUniqueInput, distinct: [CompanyCategoryScalarFieldEnum!], orderBy: [CompanyCategoryOrderByWithRelationInput!], skip: Int, take: Int, where: CompanyCategoryWhereInput): [CompanyCategory!]!
+  companyCategories: [CompanyCategory!]
   company_values: [String!]!
   contacts: CompanyContacts
   createdAt: DateTimeISO!
@@ -537,6 +937,7 @@ type Company {
   hiring_process: [String!]!
   id: ID!
   listings(cursor: JobListingWhereUniqueInput, distinct: [JobListingScalarFieldEnum!], orderBy: [JobListingOrderByWithRelationInput!], skip: Int, take: Int, where: JobListingWhereInput): [JobListing!]!
+  listingsCount: Int!
   local_info: CompanyLocalInfo
   metadata: JSONObject
   name: String!
@@ -547,14 +948,14 @@ type Company {
 
 type CompanyCategory {
   _count: CompanyCategoryCount
-  companies(cursor: CompanyWhereUniqueInput, distinct: [CompanyScalarFieldEnum!], orderBy: [CompanyOrderByWithRelationInput!], skip: Int, take: Int, where: CompanyWhereInput): [Company!]!
+  companies(cursor: CategoryOnCompanyWhereUniqueInput, distinct: [CategoryOnCompanyScalarFieldEnum!], orderBy: [CategoryOnCompanyOrderByWithRelationInput!], skip: Int, take: Int, where: CategoryOnCompanyWhereInput): [CategoryOnCompany!]!
   description: String!
   id: ID!
   name: String!
 }
 
 type CompanyCategoryCount {
-  companies(where: CompanyWhereInput): Int!
+  companies(where: CategoryOnCompanyWhereInput): Int!
 }
 
 type CompanyCategoryCountAggregate {
@@ -571,7 +972,7 @@ input CompanyCategoryCountOrderByAggregateInput {
 }
 
 input CompanyCategoryCreateInput {
-  companies: CompanyCreateNestedManyWithoutCategoriesInput
+  companies: CategoryOnCompanyCreateNestedManyWithoutCategoryInput
   description: String!
   id: String
   name: String!
@@ -583,10 +984,10 @@ input CompanyCategoryCreateManyInput {
   name: String!
 }
 
-input CompanyCategoryCreateNestedManyWithoutCompaniesInput {
-  connect: [CompanyCategoryWhereUniqueInput!]
-  connectOrCreate: [CompanyCategoryCreateOrConnectWithoutCompaniesInput!]
-  create: [CompanyCategoryCreateWithoutCompaniesInput!]
+input CompanyCategoryCreateNestedOneWithoutCompaniesInput {
+  connect: CompanyCategoryWhereUniqueInput
+  connectOrCreate: CompanyCategoryCreateOrConnectWithoutCompaniesInput
+  create: CompanyCategoryCreateWithoutCompaniesInput
 }
 
 input CompanyCategoryCreateOrConnectWithoutCompaniesInput {
@@ -607,12 +1008,6 @@ type CompanyCategoryGroupBy {
   description: String!
   id: String!
   name: String!
-}
-
-input CompanyCategoryListRelationFilter {
-  every: CompanyCategoryWhereInput
-  none: CompanyCategoryWhereInput
-  some: CompanyCategoryWhereInput
 }
 
 type CompanyCategoryMaxAggregate {
@@ -639,10 +1034,6 @@ input CompanyCategoryMinOrderByAggregateInput {
   name: SortOrder
 }
 
-input CompanyCategoryOrderByRelationAggregateInput {
-  _count: SortOrder
-}
-
 enum CompanyCategoryOrderByRelevanceFieldEnum {
   description
   id
@@ -666,25 +1057,21 @@ input CompanyCategoryOrderByWithAggregationInput {
 
 input CompanyCategoryOrderByWithRelationInput {
   _relevance: CompanyCategoryOrderByRelevanceInput
-  companies: CompanyOrderByRelationAggregateInput
+  companies: CategoryOnCompanyOrderByRelationAggregateInput
   description: SortOrder
   id: SortOrder
   name: SortOrder
+}
+
+input CompanyCategoryRelationFilter {
+  is: CompanyCategoryWhereInput
+  isNot: CompanyCategoryWhereInput
 }
 
 enum CompanyCategoryScalarFieldEnum {
   description
   id
   name
-}
-
-input CompanyCategoryScalarWhereInput {
-  AND: [CompanyCategoryScalarWhereInput!]
-  NOT: [CompanyCategoryScalarWhereInput!]
-  OR: [CompanyCategoryScalarWhereInput!]
-  description: StringFilter
-  id: StringFilter
-  name: StringFilter
 }
 
 input CompanyCategoryScalarWhereWithAggregatesInput {
@@ -697,7 +1084,7 @@ input CompanyCategoryScalarWhereWithAggregatesInput {
 }
 
 input CompanyCategoryUpdateInput {
-  companies: CompanyUpdateManyWithoutCategoriesNestedInput
+  companies: CategoryOnCompanyUpdateManyWithoutCategoryNestedInput
   description: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
@@ -709,27 +1096,17 @@ input CompanyCategoryUpdateManyMutationInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input CompanyCategoryUpdateManyWithWhereWithoutCompaniesInput {
-  data: CompanyCategoryUpdateManyMutationInput!
-  where: CompanyCategoryScalarWhereInput!
+input CompanyCategoryUpdateOneRequiredWithoutCompaniesNestedInput {
+  connect: CompanyCategoryWhereUniqueInput
+  connectOrCreate: CompanyCategoryCreateOrConnectWithoutCompaniesInput
+  create: CompanyCategoryCreateWithoutCompaniesInput
+  update: CompanyCategoryUpdateToOneWithWhereWithoutCompaniesInput
+  upsert: CompanyCategoryUpsertWithoutCompaniesInput
 }
 
-input CompanyCategoryUpdateManyWithoutCompaniesNestedInput {
-  connect: [CompanyCategoryWhereUniqueInput!]
-  connectOrCreate: [CompanyCategoryCreateOrConnectWithoutCompaniesInput!]
-  create: [CompanyCategoryCreateWithoutCompaniesInput!]
-  delete: [CompanyCategoryWhereUniqueInput!]
-  deleteMany: [CompanyCategoryScalarWhereInput!]
-  disconnect: [CompanyCategoryWhereUniqueInput!]
-  set: [CompanyCategoryWhereUniqueInput!]
-  update: [CompanyCategoryUpdateWithWhereUniqueWithoutCompaniesInput!]
-  updateMany: [CompanyCategoryUpdateManyWithWhereWithoutCompaniesInput!]
-  upsert: [CompanyCategoryUpsertWithWhereUniqueWithoutCompaniesInput!]
-}
-
-input CompanyCategoryUpdateWithWhereUniqueWithoutCompaniesInput {
+input CompanyCategoryUpdateToOneWithWhereWithoutCompaniesInput {
   data: CompanyCategoryUpdateWithoutCompaniesInput!
-  where: CompanyCategoryWhereUniqueInput!
+  where: CompanyCategoryWhereInput
 }
 
 input CompanyCategoryUpdateWithoutCompaniesInput {
@@ -738,17 +1115,17 @@ input CompanyCategoryUpdateWithoutCompaniesInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input CompanyCategoryUpsertWithWhereUniqueWithoutCompaniesInput {
+input CompanyCategoryUpsertWithoutCompaniesInput {
   create: CompanyCategoryCreateWithoutCompaniesInput!
   update: CompanyCategoryUpdateWithoutCompaniesInput!
-  where: CompanyCategoryWhereUniqueInput!
+  where: CompanyCategoryWhereInput
 }
 
 input CompanyCategoryWhereInput {
   AND: [CompanyCategoryWhereInput!]
   NOT: [CompanyCategoryWhereInput!]
   OR: [CompanyCategoryWhereInput!]
-  companies: CompanyListRelationFilter
+  companies: CategoryOnCompanyListRelationFilter
   description: StringFilter
   id: StringFilter
   name: StringFilter
@@ -758,7 +1135,7 @@ input CompanyCategoryWhereUniqueInput {
   AND: [CompanyCategoryWhereInput!]
   NOT: [CompanyCategoryWhereInput!]
   OR: [CompanyCategoryWhereInput!]
-  companies: CompanyListRelationFilter
+  companies: CategoryOnCompanyListRelationFilter
   description: StringFilter
   id: String
   name: StringFilter
@@ -786,7 +1163,7 @@ type CompanyContacts {
 }
 
 type CompanyCount {
-  categories(where: CompanyCategoryWhereInput): Int!
+  categories(where: CategoryOnCompanyWhereInput): Int!
   listings(where: JobListingWhereInput): Int!
 }
 
@@ -819,6 +1196,7 @@ input CompanyCountOrderByAggregateInput {
   career_description_raw: SortOrder
   company_values: SortOrder
   contacts: SortOrder
+  createdAt: SortOrder
   email: SortOrder
   hiring_process: SortOrder
   id: SortOrder
@@ -835,9 +1213,10 @@ input CompanyCreateInput {
   benefits: CompanyCreatebenefitsInput
   brand_image_url: String
   career_description_raw: String!
-  categories: CompanyCategoryCreateNestedManyWithoutCompaniesInput
+  categories: CategoryOnCompanyCreateNestedManyWithoutCompanyInput
   company_values: CompanyCreatecompany_valuesInput
   contacts: JSON
+  createdAt: DateTimeISO
   email: String!
   hiring_process: CompanyCreatehiring_processInput
   id: String
@@ -857,6 +1236,7 @@ input CompanyCreateManyInput {
   career_description_raw: String!
   company_values: CompanyCreatecompany_valuesInput
   contacts: JSON
+  createdAt: DateTimeISO
   email: String!
   hiring_process: CompanyCreatehiring_processInput
   id: String
@@ -867,10 +1247,10 @@ input CompanyCreateManyInput {
   worldwide_info: JSON
 }
 
-input CompanyCreateNestedManyWithoutCategoriesInput {
-  connect: [CompanyWhereUniqueInput!]
-  connectOrCreate: [CompanyCreateOrConnectWithoutCategoriesInput!]
-  create: [CompanyCreateWithoutCategoriesInput!]
+input CompanyCreateNestedOneWithoutCategoriesInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutCategoriesInput
+  create: CompanyCreateWithoutCategoriesInput
 }
 
 input CompanyCreateNestedOneWithoutListingsInput {
@@ -897,6 +1277,7 @@ input CompanyCreateWithoutCategoriesInput {
   career_description_raw: String!
   company_values: CompanyCreatecompany_valuesInput
   contacts: JSON
+  createdAt: DateTimeISO
   email: String!
   hiring_process: CompanyCreatehiring_processInput
   id: String
@@ -914,9 +1295,10 @@ input CompanyCreateWithoutListingsInput {
   benefits: CompanyCreatebenefitsInput
   brand_image_url: String
   career_description_raw: String!
-  categories: CompanyCategoryCreateNestedManyWithoutCompaniesInput
+  categories: CategoryOnCompanyCreateNestedManyWithoutCompanyInput
   company_values: CompanyCreatecompany_valuesInput
   contacts: JSON
+  createdAt: DateTimeISO
   email: String!
   hiring_process: CompanyCreatehiring_processInput
   id: String
@@ -966,12 +1348,6 @@ type CompanyGroupBy {
   worldwide_info: JSON!
 }
 
-input CompanyListRelationFilter {
-  every: CompanyWhereInput
-  none: CompanyWhereInput
-  some: CompanyWhereInput
-}
-
 type CompanyLocalInfo {
   employeeCount: Int
   locations: [String!]!
@@ -995,6 +1371,7 @@ input CompanyMaxOrderByAggregateInput {
   banner_image_url: SortOrder
   brand_image_url: SortOrder
   career_description_raw: SortOrder
+  createdAt: SortOrder
   email: SortOrder
   id: SortOrder
   name: SortOrder
@@ -1017,13 +1394,10 @@ input CompanyMinOrderByAggregateInput {
   banner_image_url: SortOrder
   brand_image_url: SortOrder
   career_description_raw: SortOrder
+  createdAt: SortOrder
   email: SortOrder
   id: SortOrder
   name: SortOrder
-}
-
-input CompanyOrderByRelationAggregateInput {
-  _count: SortOrder
 }
 
 enum CompanyOrderByRelevanceFieldEnum {
@@ -1057,6 +1431,7 @@ input CompanyOrderByWithAggregationInput {
   career_description_raw: SortOrder
   company_values: SortOrder
   contacts: SortOrder
+  createdAt: SortOrder
   email: SortOrder
   hiring_process: SortOrder
   id: SortOrder
@@ -1074,9 +1449,10 @@ input CompanyOrderByWithRelationInput {
   benefits: SortOrder
   brand_image_url: SortOrderInput
   career_description_raw: SortOrder
-  categories: CompanyCategoryOrderByRelationAggregateInput
+  categories: CategoryOnCompanyOrderByRelationAggregateInput
   company_values: SortOrder
   contacts: SortOrder
+  createdAt: SortOrder
   email: SortOrder
   hiring_process: SortOrder
   id: SortOrder
@@ -1113,27 +1489,6 @@ enum CompanyScalarFieldEnum {
   worldwide_info
 }
 
-input CompanyScalarWhereInput {
-  AND: [CompanyScalarWhereInput!]
-  NOT: [CompanyScalarWhereInput!]
-  OR: [CompanyScalarWhereInput!]
-  about_raw: StringFilter
-  banner_image_url: StringNullableFilter
-  benefits: StringNullableListFilter
-  brand_image_url: StringNullableFilter
-  career_description_raw: StringFilter
-  company_values: StringNullableListFilter
-  contacts: JsonFilter
-  email: StringFilter
-  hiring_process: StringNullableListFilter
-  id: StringFilter
-  local_info: JsonFilter
-  metadata: JsonNullableFilter
-  name: StringFilter
-  work_environment: StringNullableListFilter
-  worldwide_info: JsonFilter
-}
-
 input CompanyScalarWhereWithAggregatesInput {
   AND: [CompanyScalarWhereWithAggregatesInput!]
   NOT: [CompanyScalarWhereWithAggregatesInput!]
@@ -1145,6 +1500,7 @@ input CompanyScalarWhereWithAggregatesInput {
   career_description_raw: StringWithAggregatesFilter
   company_values: StringNullableListFilter
   contacts: JsonWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
   email: StringWithAggregatesFilter
   hiring_process: StringNullableListFilter
   id: StringWithAggregatesFilter
@@ -1161,9 +1517,10 @@ input CompanyUpdateInput {
   benefits: CompanyUpdatebenefitsInput
   brand_image_url: NullableStringFieldUpdateOperationsInput
   career_description_raw: StringFieldUpdateOperationsInput
-  categories: CompanyCategoryUpdateManyWithoutCompaniesNestedInput
+  categories: CategoryOnCompanyUpdateManyWithoutCompanyNestedInput
   company_values: CompanyUpdatecompany_valuesInput
   contacts: JSON
+  createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
@@ -1183,6 +1540,7 @@ input CompanyUpdateManyMutationInput {
   career_description_raw: StringFieldUpdateOperationsInput
   company_values: CompanyUpdatecompany_valuesInput
   contacts: JSON
+  createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
@@ -1193,22 +1551,12 @@ input CompanyUpdateManyMutationInput {
   worldwide_info: JSON
 }
 
-input CompanyUpdateManyWithWhereWithoutCategoriesInput {
-  data: CompanyUpdateManyMutationInput!
-  where: CompanyScalarWhereInput!
-}
-
-input CompanyUpdateManyWithoutCategoriesNestedInput {
-  connect: [CompanyWhereUniqueInput!]
-  connectOrCreate: [CompanyCreateOrConnectWithoutCategoriesInput!]
-  create: [CompanyCreateWithoutCategoriesInput!]
-  delete: [CompanyWhereUniqueInput!]
-  deleteMany: [CompanyScalarWhereInput!]
-  disconnect: [CompanyWhereUniqueInput!]
-  set: [CompanyWhereUniqueInput!]
-  update: [CompanyUpdateWithWhereUniqueWithoutCategoriesInput!]
-  updateMany: [CompanyUpdateManyWithWhereWithoutCategoriesInput!]
-  upsert: [CompanyUpsertWithWhereUniqueWithoutCategoriesInput!]
+input CompanyUpdateOneRequiredWithoutCategoriesNestedInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutCategoriesInput
+  create: CompanyCreateWithoutCategoriesInput
+  update: CompanyUpdateToOneWithWhereWithoutCategoriesInput
+  upsert: CompanyUpsertWithoutCategoriesInput
 }
 
 input CompanyUpdateOneRequiredWithoutListingsNestedInput {
@@ -1219,14 +1567,14 @@ input CompanyUpdateOneRequiredWithoutListingsNestedInput {
   upsert: CompanyUpsertWithoutListingsInput
 }
 
-input CompanyUpdateToOneWithWhereWithoutListingsInput {
-  data: CompanyUpdateWithoutListingsInput!
+input CompanyUpdateToOneWithWhereWithoutCategoriesInput {
+  data: CompanyUpdateWithoutCategoriesInput!
   where: CompanyWhereInput
 }
 
-input CompanyUpdateWithWhereUniqueWithoutCategoriesInput {
-  data: CompanyUpdateWithoutCategoriesInput!
-  where: CompanyWhereUniqueInput!
+input CompanyUpdateToOneWithWhereWithoutListingsInput {
+  data: CompanyUpdateWithoutListingsInput!
+  where: CompanyWhereInput
 }
 
 input CompanyUpdateWithoutCategoriesInput {
@@ -1237,6 +1585,7 @@ input CompanyUpdateWithoutCategoriesInput {
   career_description_raw: StringFieldUpdateOperationsInput
   company_values: CompanyUpdatecompany_valuesInput
   contacts: JSON
+  createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
@@ -1254,9 +1603,10 @@ input CompanyUpdateWithoutListingsInput {
   benefits: CompanyUpdatebenefitsInput
   brand_image_url: NullableStringFieldUpdateOperationsInput
   career_description_raw: StringFieldUpdateOperationsInput
-  categories: CompanyCategoryUpdateManyWithoutCompaniesNestedInput
+  categories: CategoryOnCompanyUpdateManyWithoutCompanyNestedInput
   company_values: CompanyUpdatecompany_valuesInput
   contacts: JSON
+  createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
@@ -1287,10 +1637,10 @@ input CompanyUpdatework_environmentInput {
   set: [String!]
 }
 
-input CompanyUpsertWithWhereUniqueWithoutCategoriesInput {
+input CompanyUpsertWithoutCategoriesInput {
   create: CompanyCreateWithoutCategoriesInput!
   update: CompanyUpdateWithoutCategoriesInput!
-  where: CompanyWhereUniqueInput!
+  where: CompanyWhereInput
 }
 
 input CompanyUpsertWithoutListingsInput {
@@ -1308,9 +1658,10 @@ input CompanyWhereInput {
   benefits: StringNullableListFilter
   brand_image_url: StringNullableFilter
   career_description_raw: StringFilter
-  categories: CompanyCategoryListRelationFilter
+  categories: CategoryOnCompanyListRelationFilter
   company_values: StringNullableListFilter
   contacts: JsonFilter
+  createdAt: DateTimeFilter
   email: StringFilter
   hiring_process: StringNullableListFilter
   id: StringFilter
@@ -1331,9 +1682,10 @@ input CompanyWhereUniqueInput {
   benefits: StringNullableListFilter
   brand_image_url: StringNullableFilter
   career_description_raw: StringFilter
-  categories: CompanyCategoryListRelationFilter
+  categories: CategoryOnCompanyListRelationFilter
   company_values: StringNullableListFilter
   contacts: JsonFilter
+  createdAt: DateTimeFilter
   email: String
   hiring_process: StringNullableListFilter
   id: String
@@ -1521,7 +1873,7 @@ scalar JSONObject @specifiedBy(url: "http://www.ecma-international.org/publicati
 
 type JobListing {
   _count: JobListingCount
-  companyId: String!
+  company_id: String!
   createdAt: DateTimeISO!
   description_raw: String!
   external_application_url: String
@@ -1532,6 +1884,8 @@ type JobListing {
   level: JobListingLevel
   location: String!
   name: String!
+
+  """[JobListingParameters]"""
   parameters: JSON!
   type: JobListingEmploymentType
   updatedAt: DateTimeISO!
@@ -1546,7 +1900,7 @@ type JobListingCategory {
 }
 
 type JobListingCategoryCount {
-  listings(where: JobListingWhereInput): Int!
+  listings(where: CategoryOnJobListingWhereInput): Int!
 }
 
 type JobListingCategoryCountAggregate {
@@ -1565,7 +1919,7 @@ input JobListingCategoryCountOrderByAggregateInput {
 input JobListingCategoryCreateInput {
   description: String!
   id: String
-  listings: JobListingCreateNestedManyWithoutCategoriesInput
+  listings: CategoryOnJobListingCreateNestedManyWithoutCategoryInput
   name: String!
 }
 
@@ -1575,10 +1929,10 @@ input JobListingCategoryCreateManyInput {
   name: String!
 }
 
-input JobListingCategoryCreateNestedManyWithoutListingsInput {
-  connect: [JobListingCategoryWhereUniqueInput!]
-  connectOrCreate: [JobListingCategoryCreateOrConnectWithoutListingsInput!]
-  create: [JobListingCategoryCreateWithoutListingsInput!]
+input JobListingCategoryCreateNestedOneWithoutListingsInput {
+  connect: JobListingCategoryWhereUniqueInput
+  connectOrCreate: JobListingCategoryCreateOrConnectWithoutListingsInput
+  create: JobListingCategoryCreateWithoutListingsInput
 }
 
 input JobListingCategoryCreateOrConnectWithoutListingsInput {
@@ -1599,12 +1953,6 @@ type JobListingCategoryGroupBy {
   description: String!
   id: String!
   name: String!
-}
-
-input JobListingCategoryListRelationFilter {
-  every: JobListingCategoryWhereInput
-  none: JobListingCategoryWhereInput
-  some: JobListingCategoryWhereInput
 }
 
 type JobListingCategoryMaxAggregate {
@@ -1629,10 +1977,6 @@ input JobListingCategoryMinOrderByAggregateInput {
   description: SortOrder
   id: SortOrder
   name: SortOrder
-}
-
-input JobListingCategoryOrderByRelationAggregateInput {
-  _count: SortOrder
 }
 
 enum JobListingCategoryOrderByRelevanceFieldEnum {
@@ -1660,23 +2004,19 @@ input JobListingCategoryOrderByWithRelationInput {
   _relevance: JobListingCategoryOrderByRelevanceInput
   description: SortOrder
   id: SortOrder
-  listings: JobListingOrderByRelationAggregateInput
+  listings: CategoryOnJobListingOrderByRelationAggregateInput
   name: SortOrder
+}
+
+input JobListingCategoryRelationFilter {
+  is: JobListingCategoryWhereInput
+  isNot: JobListingCategoryWhereInput
 }
 
 enum JobListingCategoryScalarFieldEnum {
   description
   id
   name
-}
-
-input JobListingCategoryScalarWhereInput {
-  AND: [JobListingCategoryScalarWhereInput!]
-  NOT: [JobListingCategoryScalarWhereInput!]
-  OR: [JobListingCategoryScalarWhereInput!]
-  description: StringFilter
-  id: StringFilter
-  name: StringFilter
 }
 
 input JobListingCategoryScalarWhereWithAggregatesInput {
@@ -1691,7 +2031,7 @@ input JobListingCategoryScalarWhereWithAggregatesInput {
 input JobListingCategoryUpdateInput {
   description: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
-  listings: JobListingUpdateManyWithoutCategoriesNestedInput
+  listings: CategoryOnJobListingUpdateManyWithoutCategoryNestedInput
   name: StringFieldUpdateOperationsInput
 }
 
@@ -1701,27 +2041,17 @@ input JobListingCategoryUpdateManyMutationInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input JobListingCategoryUpdateManyWithWhereWithoutListingsInput {
-  data: JobListingCategoryUpdateManyMutationInput!
-  where: JobListingCategoryScalarWhereInput!
+input JobListingCategoryUpdateOneRequiredWithoutListingsNestedInput {
+  connect: JobListingCategoryWhereUniqueInput
+  connectOrCreate: JobListingCategoryCreateOrConnectWithoutListingsInput
+  create: JobListingCategoryCreateWithoutListingsInput
+  update: JobListingCategoryUpdateToOneWithWhereWithoutListingsInput
+  upsert: JobListingCategoryUpsertWithoutListingsInput
 }
 
-input JobListingCategoryUpdateManyWithoutListingsNestedInput {
-  connect: [JobListingCategoryWhereUniqueInput!]
-  connectOrCreate: [JobListingCategoryCreateOrConnectWithoutListingsInput!]
-  create: [JobListingCategoryCreateWithoutListingsInput!]
-  delete: [JobListingCategoryWhereUniqueInput!]
-  deleteMany: [JobListingCategoryScalarWhereInput!]
-  disconnect: [JobListingCategoryWhereUniqueInput!]
-  set: [JobListingCategoryWhereUniqueInput!]
-  update: [JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput!]
-  updateMany: [JobListingCategoryUpdateManyWithWhereWithoutListingsInput!]
-  upsert: [JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput!]
-}
-
-input JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput {
+input JobListingCategoryUpdateToOneWithWhereWithoutListingsInput {
   data: JobListingCategoryUpdateWithoutListingsInput!
-  where: JobListingCategoryWhereUniqueInput!
+  where: JobListingCategoryWhereInput
 }
 
 input JobListingCategoryUpdateWithoutListingsInput {
@@ -1730,10 +2060,10 @@ input JobListingCategoryUpdateWithoutListingsInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput {
+input JobListingCategoryUpsertWithoutListingsInput {
   create: JobListingCategoryCreateWithoutListingsInput!
   update: JobListingCategoryUpdateWithoutListingsInput!
-  where: JobListingCategoryWhereUniqueInput!
+  where: JobListingCategoryWhereInput
 }
 
 input JobListingCategoryWhereInput {
@@ -1742,7 +2072,7 @@ input JobListingCategoryWhereInput {
   OR: [JobListingCategoryWhereInput!]
   description: StringFilter
   id: StringFilter
-  listings: JobListingListRelationFilter
+  listings: CategoryOnJobListingListRelationFilter
   name: StringFilter
 }
 
@@ -1752,18 +2082,18 @@ input JobListingCategoryWhereUniqueInput {
   OR: [JobListingCategoryWhereInput!]
   description: StringFilter
   id: String
-  listings: JobListingListRelationFilter
+  listings: CategoryOnJobListingListRelationFilter
   name: StringFilter
 }
 
 type JobListingCount {
-  categories(where: JobListingCategoryWhereInput): Int!
+  categories(where: CategoryOnJobListingWhereInput): Int!
   saves(where: SavedListingWhereInput): Int!
 }
 
 type JobListingCountAggregate {
   _all: Int!
-  companyId: Int!
+  company_id: Int!
   createdAt: Int!
   description_raw: Int!
   external_application_url: Int!
@@ -1780,7 +2110,8 @@ type JobListingCountAggregate {
 }
 
 input JobListingCountOrderByAggregateInput {
-  companyId: SortOrder
+  company_id: SortOrder
+  createdAt: SortOrder
   description_raw: SortOrder
   external_application_url: SortOrder
   id: SortOrder
@@ -1795,8 +2126,9 @@ input JobListingCountOrderByAggregateInput {
 }
 
 input JobListingCreateInput {
-  categories: JobListingCategoryCreateNestedManyWithoutListingsInput
+  categories: CategoryOnJobListingCreateNestedManyWithoutListingInput
   company: CompanyCreateNestedOneWithoutListingsInput!
+  createdAt: DateTimeISO
   description_raw: String!
   external_application_url: String
   id: String
@@ -1812,6 +2144,7 @@ input JobListingCreateInput {
 }
 
 input JobListingCreateManyCompanyInput {
+  createdAt: DateTimeISO
   description_raw: String!
   external_application_url: String
   id: String
@@ -1831,7 +2164,8 @@ input JobListingCreateManyCompanyInputEnvelope {
 }
 
 input JobListingCreateManyInput {
-  companyId: String!
+  company_id: String!
+  createdAt: DateTimeISO
   description_raw: String!
   external_application_url: String
   id: String
@@ -1845,17 +2179,17 @@ input JobListingCreateManyInput {
   work_from: WorkFromHome
 }
 
-input JobListingCreateNestedManyWithoutCategoriesInput {
-  connect: [JobListingWhereUniqueInput!]
-  connectOrCreate: [JobListingCreateOrConnectWithoutCategoriesInput!]
-  create: [JobListingCreateWithoutCategoriesInput!]
-}
-
 input JobListingCreateNestedManyWithoutCompanyInput {
   connect: [JobListingWhereUniqueInput!]
   connectOrCreate: [JobListingCreateOrConnectWithoutCompanyInput!]
   create: [JobListingCreateWithoutCompanyInput!]
   createMany: JobListingCreateManyCompanyInputEnvelope
+}
+
+input JobListingCreateNestedOneWithoutCategoriesInput {
+  connect: JobListingWhereUniqueInput
+  connectOrCreate: JobListingCreateOrConnectWithoutCategoriesInput
+  create: JobListingCreateWithoutCategoriesInput
 }
 
 input JobListingCreateNestedOneWithoutSavesInput {
@@ -1881,6 +2215,7 @@ input JobListingCreateOrConnectWithoutSavesInput {
 
 input JobListingCreateWithoutCategoriesInput {
   company: CompanyCreateNestedOneWithoutListingsInput!
+  createdAt: DateTimeISO
   description_raw: String!
   external_application_url: String
   id: String
@@ -1896,7 +2231,8 @@ input JobListingCreateWithoutCategoriesInput {
 }
 
 input JobListingCreateWithoutCompanyInput {
-  categories: JobListingCategoryCreateNestedManyWithoutListingsInput
+  categories: CategoryOnJobListingCreateNestedManyWithoutListingInput
+  createdAt: DateTimeISO
   description_raw: String!
   external_application_url: String
   id: String
@@ -1912,8 +2248,9 @@ input JobListingCreateWithoutCompanyInput {
 }
 
 input JobListingCreateWithoutSavesInput {
-  categories: JobListingCategoryCreateNestedManyWithoutListingsInput
+  categories: CategoryOnJobListingCreateNestedManyWithoutListingInput
   company: CompanyCreateNestedOneWithoutListingsInput!
+  createdAt: DateTimeISO
   description_raw: String!
   external_application_url: String
   id: String
@@ -1950,7 +2287,7 @@ type JobListingGroupBy {
   _count: JobListingCountAggregate
   _max: JobListingMaxAggregate
   _min: JobListingMinAggregate
-  companyId: String!
+  company_id: String!
   createdAt: DateTimeISO!
   description_raw: String!
   external_application_url: String
@@ -1979,7 +2316,7 @@ input JobListingListRelationFilter {
 }
 
 type JobListingMaxAggregate {
-  companyId: String
+  company_id: String
   createdAt: DateTimeISO
   description_raw: String
   external_application_url: String
@@ -1993,7 +2330,8 @@ type JobListingMaxAggregate {
 }
 
 input JobListingMaxOrderByAggregateInput {
-  companyId: SortOrder
+  company_id: SortOrder
+  createdAt: SortOrder
   description_raw: SortOrder
   external_application_url: SortOrder
   id: SortOrder
@@ -2005,7 +2343,7 @@ input JobListingMaxOrderByAggregateInput {
 }
 
 type JobListingMinAggregate {
-  companyId: String
+  company_id: String
   createdAt: DateTimeISO
   description_raw: String
   external_application_url: String
@@ -2019,7 +2357,8 @@ type JobListingMinAggregate {
 }
 
 input JobListingMinOrderByAggregateInput {
-  companyId: SortOrder
+  company_id: SortOrder
+  createdAt: SortOrder
   description_raw: SortOrder
   external_application_url: SortOrder
   id: SortOrder
@@ -2035,7 +2374,7 @@ input JobListingOrderByRelationAggregateInput {
 }
 
 enum JobListingOrderByRelevanceFieldEnum {
-  companyId
+  company_id
   description_raw
   external_application_url
   id
@@ -2055,7 +2394,8 @@ input JobListingOrderByWithAggregationInput {
   _count: JobListingCountOrderByAggregateInput
   _max: JobListingMaxOrderByAggregateInput
   _min: JobListingMinOrderByAggregateInput
-  companyId: SortOrder
+  company_id: SortOrder
+  createdAt: SortOrder
   description_raw: SortOrder
   external_application_url: SortOrderInput
   id: SortOrder
@@ -2071,9 +2411,10 @@ input JobListingOrderByWithAggregationInput {
 
 input JobListingOrderByWithRelationInput {
   _relevance: JobListingOrderByRelevanceInput
-  categories: JobListingCategoryOrderByRelationAggregateInput
+  categories: CategoryOnJobListingOrderByRelationAggregateInput
   company: CompanyOrderByWithRelationInput
-  companyId: SortOrder
+  company_id: SortOrder
+  createdAt: SortOrder
   description_raw: SortOrder
   external_application_url: SortOrderInput
   id: SortOrder
@@ -2094,7 +2435,7 @@ input JobListingRelationFilter {
 }
 
 enum JobListingScalarFieldEnum {
-  companyId
+  company_id
   createdAt
   description_raw
   external_application_url
@@ -2114,7 +2455,8 @@ input JobListingScalarWhereInput {
   AND: [JobListingScalarWhereInput!]
   NOT: [JobListingScalarWhereInput!]
   OR: [JobListingScalarWhereInput!]
-  companyId: StringFilter
+  company_id: StringFilter
+  createdAt: DateTimeFilter
   description_raw: StringFilter
   external_application_url: StringNullableFilter
   id: StringFilter
@@ -2132,7 +2474,8 @@ input JobListingScalarWhereWithAggregatesInput {
   AND: [JobListingScalarWhereWithAggregatesInput!]
   NOT: [JobListingScalarWhereWithAggregatesInput!]
   OR: [JobListingScalarWhereWithAggregatesInput!]
-  companyId: StringWithAggregatesFilter
+  company_id: StringWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
   description_raw: StringWithAggregatesFilter
   external_application_url: StringNullableWithAggregatesFilter
   id: StringWithAggregatesFilter
@@ -2147,8 +2490,9 @@ input JobListingScalarWhereWithAggregatesInput {
 }
 
 input JobListingUpdateInput {
-  categories: JobListingCategoryUpdateManyWithoutListingsNestedInput
+  categories: CategoryOnJobListingUpdateManyWithoutListingNestedInput
   company: CompanyUpdateOneRequiredWithoutListingsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   description_raw: StringFieldUpdateOperationsInput
   external_application_url: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -2164,6 +2508,7 @@ input JobListingUpdateInput {
 }
 
 input JobListingUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   description_raw: StringFieldUpdateOperationsInput
   external_application_url: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -2177,27 +2522,9 @@ input JobListingUpdateManyMutationInput {
   work_from: NullableEnumWorkFromHomeFieldUpdateOperationsInput
 }
 
-input JobListingUpdateManyWithWhereWithoutCategoriesInput {
-  data: JobListingUpdateManyMutationInput!
-  where: JobListingScalarWhereInput!
-}
-
 input JobListingUpdateManyWithWhereWithoutCompanyInput {
   data: JobListingUpdateManyMutationInput!
   where: JobListingScalarWhereInput!
-}
-
-input JobListingUpdateManyWithoutCategoriesNestedInput {
-  connect: [JobListingWhereUniqueInput!]
-  connectOrCreate: [JobListingCreateOrConnectWithoutCategoriesInput!]
-  create: [JobListingCreateWithoutCategoriesInput!]
-  delete: [JobListingWhereUniqueInput!]
-  deleteMany: [JobListingScalarWhereInput!]
-  disconnect: [JobListingWhereUniqueInput!]
-  set: [JobListingWhereUniqueInput!]
-  update: [JobListingUpdateWithWhereUniqueWithoutCategoriesInput!]
-  updateMany: [JobListingUpdateManyWithWhereWithoutCategoriesInput!]
-  upsert: [JobListingUpsertWithWhereUniqueWithoutCategoriesInput!]
 }
 
 input JobListingUpdateManyWithoutCompanyNestedInput {
@@ -2214,6 +2541,14 @@ input JobListingUpdateManyWithoutCompanyNestedInput {
   upsert: [JobListingUpsertWithWhereUniqueWithoutCompanyInput!]
 }
 
+input JobListingUpdateOneRequiredWithoutCategoriesNestedInput {
+  connect: JobListingWhereUniqueInput
+  connectOrCreate: JobListingCreateOrConnectWithoutCategoriesInput
+  create: JobListingCreateWithoutCategoriesInput
+  update: JobListingUpdateToOneWithWhereWithoutCategoriesInput
+  upsert: JobListingUpsertWithoutCategoriesInput
+}
+
 input JobListingUpdateOneRequiredWithoutSavesNestedInput {
   connect: JobListingWhereUniqueInput
   connectOrCreate: JobListingCreateOrConnectWithoutSavesInput
@@ -2222,14 +2557,14 @@ input JobListingUpdateOneRequiredWithoutSavesNestedInput {
   upsert: JobListingUpsertWithoutSavesInput
 }
 
-input JobListingUpdateToOneWithWhereWithoutSavesInput {
-  data: JobListingUpdateWithoutSavesInput!
+input JobListingUpdateToOneWithWhereWithoutCategoriesInput {
+  data: JobListingUpdateWithoutCategoriesInput!
   where: JobListingWhereInput
 }
 
-input JobListingUpdateWithWhereUniqueWithoutCategoriesInput {
-  data: JobListingUpdateWithoutCategoriesInput!
-  where: JobListingWhereUniqueInput!
+input JobListingUpdateToOneWithWhereWithoutSavesInput {
+  data: JobListingUpdateWithoutSavesInput!
+  where: JobListingWhereInput
 }
 
 input JobListingUpdateWithWhereUniqueWithoutCompanyInput {
@@ -2239,6 +2574,7 @@ input JobListingUpdateWithWhereUniqueWithoutCompanyInput {
 
 input JobListingUpdateWithoutCategoriesInput {
   company: CompanyUpdateOneRequiredWithoutListingsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   description_raw: StringFieldUpdateOperationsInput
   external_application_url: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -2254,7 +2590,8 @@ input JobListingUpdateWithoutCategoriesInput {
 }
 
 input JobListingUpdateWithoutCompanyInput {
-  categories: JobListingCategoryUpdateManyWithoutListingsNestedInput
+  categories: CategoryOnJobListingUpdateManyWithoutListingNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   description_raw: StringFieldUpdateOperationsInput
   external_application_url: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -2270,8 +2607,9 @@ input JobListingUpdateWithoutCompanyInput {
 }
 
 input JobListingUpdateWithoutSavesInput {
-  categories: JobListingCategoryUpdateManyWithoutListingsNestedInput
+  categories: CategoryOnJobListingUpdateManyWithoutListingNestedInput
   company: CompanyUpdateOneRequiredWithoutListingsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   description_raw: StringFieldUpdateOperationsInput
   external_application_url: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -2295,16 +2633,16 @@ input JobListingUpdatelanguagesInput {
   set: [String!]
 }
 
-input JobListingUpsertWithWhereUniqueWithoutCategoriesInput {
-  create: JobListingCreateWithoutCategoriesInput!
-  update: JobListingUpdateWithoutCategoriesInput!
-  where: JobListingWhereUniqueInput!
-}
-
 input JobListingUpsertWithWhereUniqueWithoutCompanyInput {
   create: JobListingCreateWithoutCompanyInput!
   update: JobListingUpdateWithoutCompanyInput!
   where: JobListingWhereUniqueInput!
+}
+
+input JobListingUpsertWithoutCategoriesInput {
+  create: JobListingCreateWithoutCategoriesInput!
+  update: JobListingUpdateWithoutCategoriesInput!
+  where: JobListingWhereInput
 }
 
 input JobListingUpsertWithoutSavesInput {
@@ -2317,9 +2655,10 @@ input JobListingWhereInput {
   AND: [JobListingWhereInput!]
   NOT: [JobListingWhereInput!]
   OR: [JobListingWhereInput!]
-  categories: JobListingCategoryListRelationFilter
+  categories: CategoryOnJobListingListRelationFilter
   company: CompanyRelationFilter
-  companyId: StringFilter
+  company_id: StringFilter
+  createdAt: DateTimeFilter
   description_raw: StringFilter
   external_application_url: StringNullableFilter
   id: StringFilter
@@ -2338,9 +2677,10 @@ input JobListingWhereUniqueInput {
   AND: [JobListingWhereInput!]
   NOT: [JobListingWhereInput!]
   OR: [JobListingWhereInput!]
-  categories: JobListingCategoryListRelationFilter
+  categories: CategoryOnJobListingListRelationFilter
   company: CompanyRelationFilter
-  companyId: StringFilter
+  company_id: StringFilter
+  createdAt: DateTimeFilter
   description_raw: StringFilter
   external_application_url: StringNullableFilter
   id: String
@@ -2879,7 +3219,7 @@ type SavedListing {
   createdAt: DateTimeISO!
   id: ID!
   listing: JobListing!
-  listingId: String!
+  listing_id: String!
   metadata: JSON
   updatedAt: DateTimeISO!
   user: User!
@@ -2890,20 +3230,22 @@ type SavedListingCountAggregate {
   _all: Int!
   createdAt: Int!
   id: Int!
-  listingId: Int!
+  listing_id: Int!
   metadata: Int!
   updatedAt: Int!
   userId: Int!
 }
 
 input SavedListingCountOrderByAggregateInput {
+  createdAt: SortOrder
   id: SortOrder
-  listingId: SortOrder
+  listing_id: SortOrder
   metadata: SortOrder
   userId: SortOrder
 }
 
 input SavedListingCreateInput {
+  createdAt: DateTimeISO
   id: String
   listing: JobListingCreateNestedOneWithoutSavesInput!
   metadata: JSON
@@ -2911,13 +3253,15 @@ input SavedListingCreateInput {
 }
 
 input SavedListingCreateManyInput {
+  createdAt: DateTimeISO
   id: String
-  listingId: String!
+  listing_id: String!
   metadata: JSON
   userId: String!
 }
 
 input SavedListingCreateManyListingInput {
+  createdAt: DateTimeISO
   id: String
   metadata: JSON
   userId: String!
@@ -2929,8 +3273,9 @@ input SavedListingCreateManyListingInputEnvelope {
 }
 
 input SavedListingCreateManyUserInput {
+  createdAt: DateTimeISO
   id: String
-  listingId: String!
+  listing_id: String!
   metadata: JSON
 }
 
@@ -2964,12 +3309,14 @@ input SavedListingCreateOrConnectWithoutUserInput {
 }
 
 input SavedListingCreateWithoutListingInput {
+  createdAt: DateTimeISO
   id: String
   metadata: JSON
   user: UserCreateNestedOneWithoutSaved_listingsInput!
 }
 
 input SavedListingCreateWithoutUserInput {
+  createdAt: DateTimeISO
   id: String
   listing: JobListingCreateNestedOneWithoutSavesInput!
   metadata: JSON
@@ -2981,7 +3328,7 @@ type SavedListingGroupBy {
   _min: SavedListingMinAggregate
   createdAt: DateTimeISO!
   id: String!
-  listingId: String!
+  listing_id: String!
   metadata: JSON
   updatedAt: DateTimeISO!
   userId: String!
@@ -2996,28 +3343,30 @@ input SavedListingListRelationFilter {
 type SavedListingMaxAggregate {
   createdAt: DateTimeISO
   id: String
-  listingId: String
+  listing_id: String
   updatedAt: DateTimeISO
   userId: String
 }
 
 input SavedListingMaxOrderByAggregateInput {
+  createdAt: SortOrder
   id: SortOrder
-  listingId: SortOrder
+  listing_id: SortOrder
   userId: SortOrder
 }
 
 type SavedListingMinAggregate {
   createdAt: DateTimeISO
   id: String
-  listingId: String
+  listing_id: String
   updatedAt: DateTimeISO
   userId: String
 }
 
 input SavedListingMinOrderByAggregateInput {
+  createdAt: SortOrder
   id: SortOrder
-  listingId: SortOrder
+  listing_id: SortOrder
   userId: SortOrder
 }
 
@@ -3027,7 +3376,7 @@ input SavedListingOrderByRelationAggregateInput {
 
 enum SavedListingOrderByRelevanceFieldEnum {
   id
-  listingId
+  listing_id
   userId
 }
 
@@ -3041,17 +3390,19 @@ input SavedListingOrderByWithAggregationInput {
   _count: SavedListingCountOrderByAggregateInput
   _max: SavedListingMaxOrderByAggregateInput
   _min: SavedListingMinOrderByAggregateInput
+  createdAt: SortOrder
   id: SortOrder
-  listingId: SortOrder
+  listing_id: SortOrder
   metadata: SortOrderInput
   userId: SortOrder
 }
 
 input SavedListingOrderByWithRelationInput {
   _relevance: SavedListingOrderByRelevanceInput
+  createdAt: SortOrder
   id: SortOrder
   listing: JobListingOrderByWithRelationInput
-  listingId: SortOrder
+  listing_id: SortOrder
   metadata: SortOrderInput
   user: UserOrderByWithRelationInput
   userId: SortOrder
@@ -3060,7 +3411,7 @@ input SavedListingOrderByWithRelationInput {
 enum SavedListingScalarFieldEnum {
   createdAt
   id
-  listingId
+  listing_id
   metadata
   updatedAt
   userId
@@ -3070,8 +3421,9 @@ input SavedListingScalarWhereInput {
   AND: [SavedListingScalarWhereInput!]
   NOT: [SavedListingScalarWhereInput!]
   OR: [SavedListingScalarWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
-  listingId: StringFilter
+  listing_id: StringFilter
   metadata: JsonNullableFilter
   userId: StringFilter
 }
@@ -3080,13 +3432,15 @@ input SavedListingScalarWhereWithAggregatesInput {
   AND: [SavedListingScalarWhereWithAggregatesInput!]
   NOT: [SavedListingScalarWhereWithAggregatesInput!]
   OR: [SavedListingScalarWhereWithAggregatesInput!]
+  createdAt: DateTimeWithAggregatesFilter
   id: StringWithAggregatesFilter
-  listingId: StringWithAggregatesFilter
+  listing_id: StringWithAggregatesFilter
   metadata: JsonNullableWithAggregatesFilter
   userId: StringWithAggregatesFilter
 }
 
 input SavedListingUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   listing: JobListingUpdateOneRequiredWithoutSavesNestedInput
   metadata: JSON
@@ -3094,6 +3448,7 @@ input SavedListingUpdateInput {
 }
 
 input SavedListingUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   metadata: JSON
 }
@@ -3147,12 +3502,14 @@ input SavedListingUpdateWithWhereUniqueWithoutUserInput {
 }
 
 input SavedListingUpdateWithoutListingInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   metadata: JSON
   user: UserUpdateOneRequiredWithoutSaved_listingsNestedInput
 }
 
 input SavedListingUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   listing: JobListingUpdateOneRequiredWithoutSavesNestedInput
   metadata: JSON
@@ -3174,9 +3531,10 @@ input SavedListingWhereInput {
   AND: [SavedListingWhereInput!]
   NOT: [SavedListingWhereInput!]
   OR: [SavedListingWhereInput!]
+  createdAt: DateTimeFilter
   id: StringFilter
   listing: JobListingRelationFilter
-  listingId: StringFilter
+  listing_id: StringFilter
   metadata: JsonNullableFilter
   user: UserRelationFilter
   userId: StringFilter
@@ -3186,9 +3544,10 @@ input SavedListingWhereUniqueInput {
   AND: [SavedListingWhereInput!]
   NOT: [SavedListingWhereInput!]
   OR: [SavedListingWhereInput!]
+  createdAt: DateTimeFilter
   id: String
   listing: JobListingRelationFilter
-  listingId: StringFilter
+  listing_id: StringFilter
   metadata: JsonNullableFilter
   user: UserRelationFilter
   userId: StringFilter
@@ -3219,6 +3578,7 @@ type SessionCountAggregate {
 }
 
 input SessionCountOrderByAggregateInput {
+  createdAt: SortOrder
   expiresAt: SortOrder
   id: SortOrder
   sessionToken: SortOrder
@@ -3226,6 +3586,7 @@ input SessionCountOrderByAggregateInput {
 }
 
 input SessionCreateInput {
+  createdAt: DateTimeISO
   expiresAt: DateTimeISO!
   id: String
   sessionToken: String!
@@ -3233,6 +3594,7 @@ input SessionCreateInput {
 }
 
 input SessionCreateManyInput {
+  createdAt: DateTimeISO
   expiresAt: DateTimeISO!
   id: String
   sessionToken: String!
@@ -3240,6 +3602,7 @@ input SessionCreateManyInput {
 }
 
 input SessionCreateManyUserInput {
+  createdAt: DateTimeISO
   expiresAt: DateTimeISO!
   id: String
   sessionToken: String!
@@ -3263,6 +3626,7 @@ input SessionCreateOrConnectWithoutUserInput {
 }
 
 input SessionCreateWithoutUserInput {
+  createdAt: DateTimeISO
   expiresAt: DateTimeISO!
   id: String
   sessionToken: String!
@@ -3296,6 +3660,7 @@ type SessionMaxAggregate {
 }
 
 input SessionMaxOrderByAggregateInput {
+  createdAt: SortOrder
   expiresAt: SortOrder
   id: SortOrder
   sessionToken: SortOrder
@@ -3312,6 +3677,7 @@ type SessionMinAggregate {
 }
 
 input SessionMinOrderByAggregateInput {
+  createdAt: SortOrder
   expiresAt: SortOrder
   id: SortOrder
   sessionToken: SortOrder
@@ -3338,6 +3704,7 @@ input SessionOrderByWithAggregationInput {
   _count: SessionCountOrderByAggregateInput
   _max: SessionMaxOrderByAggregateInput
   _min: SessionMinOrderByAggregateInput
+  createdAt: SortOrder
   expiresAt: SortOrder
   id: SortOrder
   sessionToken: SortOrder
@@ -3346,6 +3713,7 @@ input SessionOrderByWithAggregationInput {
 
 input SessionOrderByWithRelationInput {
   _relevance: SessionOrderByRelevanceInput
+  createdAt: SortOrder
   expiresAt: SortOrder
   id: SortOrder
   sessionToken: SortOrder
@@ -3366,6 +3734,7 @@ input SessionScalarWhereInput {
   AND: [SessionScalarWhereInput!]
   NOT: [SessionScalarWhereInput!]
   OR: [SessionScalarWhereInput!]
+  createdAt: DateTimeFilter
   expiresAt: DateTimeFilter
   id: StringFilter
   sessionToken: StringFilter
@@ -3376,6 +3745,7 @@ input SessionScalarWhereWithAggregatesInput {
   AND: [SessionScalarWhereWithAggregatesInput!]
   NOT: [SessionScalarWhereWithAggregatesInput!]
   OR: [SessionScalarWhereWithAggregatesInput!]
+  createdAt: DateTimeWithAggregatesFilter
   expiresAt: DateTimeWithAggregatesFilter
   id: StringWithAggregatesFilter
   sessionToken: StringWithAggregatesFilter
@@ -3383,6 +3753,7 @@ input SessionScalarWhereWithAggregatesInput {
 }
 
 input SessionUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   expiresAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   sessionToken: StringFieldUpdateOperationsInput
@@ -3390,6 +3761,7 @@ input SessionUpdateInput {
 }
 
 input SessionUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   expiresAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   sessionToken: StringFieldUpdateOperationsInput
@@ -3420,6 +3792,7 @@ input SessionUpdateWithWhereUniqueWithoutUserInput {
 }
 
 input SessionUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   expiresAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   sessionToken: StringFieldUpdateOperationsInput
@@ -3435,6 +3808,7 @@ input SessionWhereInput {
   AND: [SessionWhereInput!]
   NOT: [SessionWhereInput!]
   OR: [SessionWhereInput!]
+  createdAt: DateTimeFilter
   expiresAt: DateTimeFilter
   id: StringFilter
   sessionToken: StringFilter
@@ -3446,6 +3820,7 @@ input SessionWhereUniqueInput {
   AND: [SessionWhereInput!]
   NOT: [SessionWhereInput!]
   OR: [SessionWhereInput!]
+  createdAt: DateTimeFilter
   expiresAt: DateTimeFilter
   id: String
   sessionToken: String
@@ -3617,6 +3992,7 @@ type UserCountAggregate {
 }
 
 input UserCountOrderByAggregateInput {
+  createdAt: SortOrder
   email: SortOrder
   emailVerified: SortOrder
   first_name: SortOrder
@@ -3629,6 +4005,7 @@ input UserCountOrderByAggregateInput {
 
 input UserCreateInput {
   accounts: AccountCreateNestedManyWithoutUserInput
+  createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
   first_name: String!
@@ -3642,6 +4019,7 @@ input UserCreateInput {
 }
 
 input UserCreateManyInput {
+  createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
   first_name: String!
@@ -3686,6 +4064,7 @@ input UserCreateOrConnectWithoutSessionsInput {
 }
 
 input UserCreateWithoutAccountsInput {
+  createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
   first_name: String!
@@ -3700,6 +4079,7 @@ input UserCreateWithoutAccountsInput {
 
 input UserCreateWithoutSaved_listingsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
+  createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
   first_name: String!
@@ -3713,6 +4093,7 @@ input UserCreateWithoutSaved_listingsInput {
 
 input UserCreateWithoutSessionsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
+  createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
   first_name: String!
@@ -3755,6 +4136,7 @@ type UserMaxAggregate {
 }
 
 input UserMaxOrderByAggregateInput {
+  createdAt: SortOrder
   email: SortOrder
   emailVerified: SortOrder
   first_name: SortOrder
@@ -3778,6 +4160,7 @@ type UserMinAggregate {
 }
 
 input UserMinOrderByAggregateInput {
+  createdAt: SortOrder
   email: SortOrder
   emailVerified: SortOrder
   first_name: SortOrder
@@ -3807,6 +4190,7 @@ input UserOrderByWithAggregationInput {
   _count: UserCountOrderByAggregateInput
   _max: UserMaxOrderByAggregateInput
   _min: UserMinOrderByAggregateInput
+  createdAt: SortOrder
   email: SortOrder
   emailVerified: SortOrderInput
   first_name: SortOrder
@@ -3820,6 +4204,7 @@ input UserOrderByWithAggregationInput {
 input UserOrderByWithRelationInput {
   _relevance: UserOrderByRelevanceInput
   accounts: AccountOrderByRelationAggregateInput
+  createdAt: SortOrder
   email: SortOrder
   emailVerified: SortOrderInput
   first_name: SortOrder
@@ -3855,6 +4240,7 @@ input UserScalarWhereWithAggregatesInput {
   AND: [UserScalarWhereWithAggregatesInput!]
   NOT: [UserScalarWhereWithAggregatesInput!]
   OR: [UserScalarWhereWithAggregatesInput!]
+  createdAt: DateTimeWithAggregatesFilter
   email: StringWithAggregatesFilter
   emailVerified: DateTimeNullableWithAggregatesFilter
   first_name: StringWithAggregatesFilter
@@ -3900,6 +4286,7 @@ input UserSignUpInput {
 
 input UserUpdateInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   first_name: StringFieldUpdateOperationsInput
@@ -3913,6 +4300,7 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   first_name: StringFieldUpdateOperationsInput
@@ -3963,6 +4351,7 @@ input UserUpdateToOneWithWhereWithoutSessionsInput {
 }
 
 input UserUpdateWithoutAccountsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   first_name: StringFieldUpdateOperationsInput
@@ -3977,6 +4366,7 @@ input UserUpdateWithoutAccountsInput {
 
 input UserUpdateWithoutSaved_listingsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   first_name: StringFieldUpdateOperationsInput
@@ -3990,6 +4380,7 @@ input UserUpdateWithoutSaved_listingsInput {
 
 input UserUpdateWithoutSessionsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   first_name: StringFieldUpdateOperationsInput
@@ -4024,6 +4415,7 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   accounts: AccountListRelationFilter
+  createdAt: DateTimeFilter
   email: StringFilter
   emailVerified: DateTimeNullableFilter
   first_name: StringFilter
@@ -4041,6 +4433,7 @@ input UserWhereUniqueInput {
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   accounts: AccountListRelationFilter
+  createdAt: DateTimeFilter
   email: String
   emailVerified: DateTimeNullableFilter
   first_name: StringFilter

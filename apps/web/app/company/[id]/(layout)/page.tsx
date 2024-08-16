@@ -15,15 +15,17 @@ export interface PageProps {
    searchParams: Record<string, string>
 }
 
-export async function generateStaticParams() {
-   const companyIds = await getAllCompanyIds();
-   return companyIds.map(id => ({ id }));
-}
+// export async function generateStaticParams() {
+//    const companyIds = await getAllCompanyIds();
+//    return companyIds.map(id => ({ id }));
+// }
 
 export const revalidate = 1800;
 
 export async function generateMetadata({ params: { id } }: PageProps, _: ResolvingMetadata): Promise<Metadata> {
    let company = await getCompanyDetails(id);
+
+   if(!company) notFound()
 
    return {
       title: `${APP_NAME} - ${company?.name ?? ``}`,

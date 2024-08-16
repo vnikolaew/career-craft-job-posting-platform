@@ -31,7 +31,7 @@ const TopCategoriesSection = ({}: TopCategoriesSectionProps) => {
       <HomePageSection heading={"Categories"}>
          <div className={`flex flex-col items-start gap-4`}>
             {loading ? (
-               Array.from({ length: 30 }).map((_, index) => <Skeleton key={index} className={`w-1/2 h-4`} />)
+               Array.from({ length: 10 }).map((_, index) => <Skeleton key={index} className={`w-3/5 h-10 shadow-sm `} />)
             ) : (
                <Fragment>
                   {data?.getTopListingCategories?.map((category) => (

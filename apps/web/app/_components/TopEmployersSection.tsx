@@ -8,6 +8,7 @@ import Skeleton from "@/components/common/Skeleton";
 import { Company } from "@/__generated__/graphql";
 import { isValidUrl } from "@/lib/utils";
 import Image from "next/image";
+import { DEFAULT_COMPANY_LOGO_URL } from "@/providers/apollo/ApolloProvider";
 
 export interface TopEmployersSectionProps {
 }
@@ -19,6 +20,7 @@ const GET_TOP_EMPLOYERS = gql(/* GraphQL */`
             name
             banner_image_url
             brand_image_url
+            listingsCount
             _count {
                 listings
             }
@@ -34,7 +36,7 @@ const TopEmployersSection = ({}: TopEmployersSectionProps) => {
       <HomePageSection heading={"Top Employers"}>
          <div className={`grid gap-4 grid-cols-3`}>
             {loading ? (
-               Array.from({ length: 30 }).map((_, index) => <Skeleton key={index} className={`w-full !h-8 `} />)
+               Array.from({ length: 10 }).map((_, index) => <Skeleton key={index} className={`w-full !h-20 !rounded-md`} />)
             ) : (
                <Fragment>
                   {data?.getTopCompanies?.map((company) => (
@@ -49,11 +51,13 @@ const TopEmployersSection = ({}: TopEmployersSectionProps) => {
 
 const TopEmployerPreview = ({ company }: { company: Company }) => {
    return (
-      <Link href={`/company/${company.id}`} className="indicator !bg-transparent !w-full">
-         <span className="indicator-item badge badge-neutral">{company?._count?.listings ?? 0}</span>
+      <Link href={`/company/${company.id}`} className="indicator !bg-neutral-200/100 !w-full">
+         <span className="indicator-item badge badge-neutral">{company?._count?.listings ?? company.listingsCount ?? 0}</span>
          <div className="btn !bg-transparent !border-none !text-neutral-500 !flex !items-center !justify-center p-4 !min-h-[100px] !w-full">
             {isValidUrl(company.brand_image_url) ? (
-              <Image height={100} width={100} alt={company.name} src={company.brand_image_url} />
+              <Image title={company.name} height={100} width={100} alt={company.name}
+                     src={DEFAULT_COMPANY_LOGO_URL}
+              />
             ) : <span>{company.name}</span>}
          </div>
       </Link>

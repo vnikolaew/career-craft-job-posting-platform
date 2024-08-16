@@ -16,7 +16,7 @@ generator typegraphql {
   emitIdAsIDType           = true
   emitTranspiledCode       = true
   formatGeneratedCode      = true
-  omitInputFieldsByDefault = ["createdAt", "updatedAt"]
+  omitInputFieldsByDefault = ["updatedAt"]
   output                   = "../../node_modules/@generated"
 }
 
@@ -56,8 +56,8 @@ model SavedListing {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  listingId String
-  listing   JobListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  listing_id String
+  listing    JobListing @relation(fields: [listing_id], references: [id], onDelete: Cascade)
 
   metadata Json? @default("null") @db.JsonB
 
@@ -66,7 +66,7 @@ model SavedListing {
 }
 
 model Account {
-  userId            String
+  userId            String  @map("user_id")
   type              String
   provider          String
   providerAccountId String
@@ -90,7 +90,7 @@ model Account {
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
-  userId       String
+  userId       String   @map("user_id")
   expiresAt    DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -143,11 +143,26 @@ model Company {
   /// @TypeGraphQL.omit(output: true)
   contacts Json @default("null") @db.JsonB
 
-  categories CompanyCategory[]
-
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
   listings  JobListing[]
+
+  /// @TypeGraphQL.omit(output: true)
+  categories CategoryOnCompany[]
+}
+
+/// @@TypeGraphQL.omit(input: ["create", "update", "where", "orderBy"])
+model CategoryOnCompany {
+  company_id String
+  company    Company @relation(fields: [company_id], references: [id])
+
+  category_id String
+  category    CompanyCategory @relation(fields: [category_id], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([company_id, category_id])
 }
 
 model CompanyCategory {
@@ -155,7 +170,21 @@ model CompanyCategory {
   name        String
   description String
 
-  companies Company[]
+  companies CategoryOnCompany[]
+}
+
+/// @@TypeGraphQL.omit(input: ["create", "update", "where", "orderBy"])
+model CategoryOnJobListing {
+  listing_id String
+  listing    JobListing @relation(fields: [listing_id], references: [id])
+
+  category_id String
+  category    JobListingCategory @relation(fields: [category_id], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([listing_id, category_id])
 }
 
 model JobListingCategory {
@@ -163,7 +192,7 @@ model JobListingCategory {
   name        String
   description String
 
-  listings JobListing[]
+  listings CategoryOnJobListing[]
 }
 
 model JobListing {
@@ -177,19 +206,21 @@ model JobListing {
   work_from WorkFromHome?
   type      JobListingEmploymentType?
 
-  location   String
-  languages  String[]
+  location  String
+  languages String[]
+
+  /// [JobListingParameters]
   parameters Json     @default("null") @db.JsonB
   keywords   String[]
 
-  company   Company @relation(fields: [companyId], references: [id])
-  companyId String
+  company    Company @relation(fields: [company_id], references: [id])
+  company_id String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  categories JobListingCategory[]
   saves      SavedListing[]
+  categories CategoryOnJobListing[]
 }
 
 enum JobListingLevel {

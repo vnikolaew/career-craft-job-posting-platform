@@ -1,5 +1,5 @@
-import { ApolloClient, InMemoryCache, TypePolicies } from "@apollo/client";
 import { splitLink } from "@/providers/apollo/links";
+import { ApolloClient, InMemoryCache, TypePolicies } from "@apollo/client";
 import {
    DEFAULT_COMPANY_BANNER_URL,
    DEFAULT_COMPANY_LOGO_URL,
@@ -50,8 +50,10 @@ const typePolicies: TypePolicies = {
    },
 };
 
+
 export const client = new ApolloClient({
    link: splitLink,
    uri: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
    cache: new InMemoryCache({ typePolicies }),
+   devtools: { enabled: true },
 });

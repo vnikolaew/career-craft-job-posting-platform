@@ -92,7 +92,6 @@ export class UserResolver extends UserRelationsResolver {
 
    @Subscription(() => Int, {
       subscribe: async ({ context }: SubscribeResolverData<any, any, MyContext>) => {
-         console.log(`we are here`);
          return asyncIteratorToIterable(context.pubSub.asyncIterator<number>(`RANDOM_NUMBER`));
       },
    })

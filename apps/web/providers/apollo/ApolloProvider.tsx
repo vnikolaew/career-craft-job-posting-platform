@@ -4,6 +4,7 @@ import {
    ApolloProvider,
    makeVar,
 } from "@apollo/client";
+
 import { client } from "@/providers/apollo/client";
 
 export interface ApolloProviderProps extends PropsWithChildren {
@@ -11,9 +12,10 @@ export interface ApolloProviderProps extends PropsWithChildren {
 
 export const DEFAULT_USER_AVATAR_URL = `https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg`;
 export const DEFAULT_COMPANY_LOGO_URL = `/mcdonalds-logo.png`;
-export const DEFAULT_COMPANY_BANNER_URL  = `/mcdonalds-banner.png`;
+export const DEFAULT_COMPANY_BANNER_URL = `/mcdonalds-banner.png`;
 
 export const meIdVar = makeVar<string>(null!);
+
 
 const ApolloProviderC = ({ children }: ApolloProviderProps) => {
    return (

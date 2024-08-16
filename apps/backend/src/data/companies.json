@@ -11,18 +11,40 @@
     "local_info": {
       "since": "2015-01-01T00:00:00Z",
       "employeeCount": 300,
-      "locations": ["San Francisco"]
+      "locations": [
+        "San Francisco"
+      ]
     },
     "worldwide_info": {
       "founded": "2010-01-01T00:00:00Z",
       "employeeCount": 500,
       "headquarters": "San Francisco",
-      "locations": ["USA", "Germany", "India"]
+      "locations": [
+        "USA",
+        "Germany",
+        "India"
+      ]
     },
-    "benefits": ["Health Insurance", "Paid Time Off", "Retirement Plan"],
-    "company_values": ["Innovation", "Integrity", "Excellence"],
-    "work_environment": ["Collaborative", "Fast-paced", "Inclusive"],
-    "hiring_process": ["Initial Interview", "Technical Test", "Final Interview"],
+    "benefits": [
+      "Health Insurance",
+      "Paid Time Off",
+      "Retirement Plan"
+    ],
+    "company_values": [
+      "Innovation",
+      "Integrity",
+      "Excellence"
+    ],
+    "work_environment": [
+      "Collaborative",
+      "Fast-paced",
+      "Inclusive"
+    ],
+    "hiring_process": [
+      "Initial Interview",
+      "Technical Test",
+      "Final Interview"
+    ],
     "contacts": {
       "name": "Jane Doe",
       "company_bulstat": "123456789",
@@ -55,7 +77,7 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   },
   {
     "id": "c2",
@@ -69,18 +91,39 @@
     "local_info": {
       "since": "2018-05-01T00:00:00Z",
       "employeeCount": 100,
-      "locations": ["Austin"]
+      "locations": [
+        "Austin"
+      ]
     },
     "worldwide_info": {
       "founded": "2015-01-01T00:00:00Z",
       "employeeCount": 150,
       "headquarters": "Austin",
-      "locations": ["USA", "Canada"]
+      "locations": [
+        "USA",
+        "Canada"
+      ]
     },
-    "benefits": ["Remote Work", "Health Insurance", "Equity Options"],
-    "company_values": ["Sustainability", "Innovation", "Community"],
-    "work_environment": ["Collaborative", "Flexible", "Mission-driven"],
-    "hiring_process": ["Initial Interview", "Group Interview", "Final Decision"],
+    "benefits": [
+      "Remote Work",
+      "Health Insurance",
+      "Equity Options"
+    ],
+    "company_values": [
+      "Sustainability",
+      "Innovation",
+      "Community"
+    ],
+    "work_environment": [
+      "Collaborative",
+      "Flexible",
+      "Mission-driven"
+    ],
+    "hiring_process": [
+      "Initial Interview",
+      "Group Interview",
+      "Final Decision"
+    ],
     "contacts": {
       "name": "John Smith",
       "company_bulstat": "987654321",
@@ -113,7 +156,7 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   },
   {
     "id": "c3",
@@ -127,18 +170,40 @@
     "local_info": {
       "since": "2005-03-01T00:00:00Z",
       "employeeCount": 600,
-      "locations": ["New York"]
+      "locations": [
+        "New York"
+      ]
     },
     "worldwide_info": {
       "founded": "2000-01-01T00:00:00Z",
       "employeeCount": 1000,
       "headquarters": "New York",
-      "locations": ["USA", "UK", "India"]
+      "locations": [
+        "USA",
+        "UK",
+        "India"
+      ]
     },
-    "benefits": ["Health Insurance", "Retirement Plan", "Gym Membership"],
-    "company_values": ["Care", "Excellence", "Integrity"],
-    "work_environment": ["Inclusive", "Supportive", "Innovative"],
-    "hiring_process": ["Phone Interview", "Panel Interview", "Final Decision"],
+    "benefits": [
+      "Health Insurance",
+      "Retirement Plan",
+      "Gym Membership"
+    ],
+    "company_values": [
+      "Care",
+      "Excellence",
+      "Integrity"
+    ],
+    "work_environment": [
+      "Inclusive",
+      "Supportive",
+      "Innovative"
+    ],
+    "hiring_process": [
+      "Phone Interview",
+      "Panel Interview",
+      "Final Decision"
+    ],
     "contacts": {
       "name": "Mary Johnson",
       "company_bulstat": "234567890",
@@ -171,7 +236,7 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   },
   {
     "id": "c4",
@@ -185,18 +250,40 @@
     "local_info": {
       "since": "2012-09-01T00:00:00Z",
       "employeeCount": 150,
-      "locations": ["London"]
+      "locations": [
+        "London"
+      ]
     },
     "worldwide_info": {
       "founded": "2010-01-01T00:00:00Z",
       "employeeCount": 200,
       "headquarters": "London",
-      "locations": ["UK", "USA", "Australia"]
+      "locations": [
+        "UK",
+        "USA",
+        "Australia"
+      ]
     },
-    "benefits": ["Remote Work", "Learning Opportunities", "Health Insurance"],
-    "company_values": ["Education", "Innovation", "Growth"],
-    "work_environment": ["Collaborative", "Creative", "Dynamic"],
-    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "benefits": [
+      "Remote Work",
+      "Learning Opportunities",
+      "Health Insurance"
+    ],
+    "company_values": [
+      "Education",
+      "Innovation",
+      "Growth"
+    ],
+    "work_environment": [
+      "Collaborative",
+      "Creative",
+      "Dynamic"
+    ],
+    "hiring_process": [
+      "Phone Interview",
+      "Technical Test",
+      "Final Interview"
+    ],
     "contacts": {
       "name": "David Williams",
       "company_bulstat": "345678901",
@@ -229,7 +316,7 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   },
   {
     "id": "c5",
@@ -243,18 +330,39 @@
     "local_info": {
       "since": "2018-07-01T00:00:00Z",
       "employeeCount": 200,
-      "locations": ["New York"]
+      "locations": [
+        "New York"
+      ]
     },
     "worldwide_info": {
       "founded": "2018-01-01T00:00:00Z",
       "employeeCount": 250,
       "headquarters": "New York",
-      "locations": ["USA", "UK"]
+      "locations": [
+        "USA",
+        "UK"
+      ]
     },
-    "benefits": ["Stock Options", "Health Insurance", "401(k)"],
-    "company_values": ["Innovation", "Security", "Trust"],
-    "work_environment": ["Fast-paced", "Innovative", "Collaborative"],
-    "hiring_process": ["Phone Interview", "Technical Test", "Final Decision"],
+    "benefits": [
+      "Stock Options",
+      "Health Insurance",
+      "401(k)"
+    ],
+    "company_values": [
+      "Innovation",
+      "Security",
+      "Trust"
+    ],
+    "work_environment": [
+      "Fast-paced",
+      "Innovative",
+      "Collaborative"
+    ],
+    "hiring_process": [
+      "Phone Interview",
+      "Technical Test",
+      "Final Decision"
+    ],
     "contacts": {
       "name": "Michael Brown",
       "company_bulstat": "456789012",
@@ -287,7 +395,7 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   },
   {
     "id": "c6",
@@ -301,18 +409,40 @@
     "local_info": {
       "since": "2016-01-01T00:00:00Z",
       "employeeCount": 400,
-      "locations": ["Detroit"]
+      "locations": [
+        "Detroit"
+      ]
     },
     "worldwide_info": {
       "founded": "2016-01-01T00:00:00Z",
       "employeeCount": 800,
       "headquarters": "Detroit",
-      "locations": ["USA", "Germany", "Japan"]
+      "locations": [
+        "USA",
+        "Germany",
+        "Japan"
+      ]
     },
-    "benefits": ["Health Insurance", "Paid Time Off", "Stock Options"],
-    "company_values": ["Innovation", "Safety", "Sustainability"],
-    "work_environment": ["Collaborative", "Fast-paced", "Innovative"],
-    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "benefits": [
+      "Health Insurance",
+      "Paid Time Off",
+      "Stock Options"
+    ],
+    "company_values": [
+      "Innovation",
+      "Safety",
+      "Sustainability"
+    ],
+    "work_environment": [
+      "Collaborative",
+      "Fast-paced",
+      "Innovative"
+    ],
+    "hiring_process": [
+      "Phone Interview",
+      "Technical Test",
+      "Final Interview"
+    ],
     "contacts": {
       "name": "Laura White",
       "company_bulstat": "567890123",
@@ -345,7 +475,7 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   },
   {
     "id": "c7",
@@ -359,18 +489,39 @@
     "local_info": {
       "since": "2014-04-01T00:00:00Z",
       "employeeCount": 50,
-      "locations": ["Portland"]
+      "locations": [
+        "Portland"
+      ]
     },
     "worldwide_info": {
       "founded": "2012-01-01T00:00:00Z",
       "employeeCount": 100,
       "headquarters": "Portland",
-      "locations": ["USA", "Canada"]
+      "locations": [
+        "USA",
+        "Canada"
+      ]
     },
-    "benefits": ["Remote Work", "Health Insurance", "Paid Time Off"],
-    "company_values": ["Sustainability", "Health", "Community"],
-    "work_environment": ["Collaborative", "Mission-driven", "Flexible"],
-    "hiring_process": ["Initial Interview", "Panel Interview", "Final Decision"],
+    "benefits": [
+      "Remote Work",
+      "Health Insurance",
+      "Paid Time Off"
+    ],
+    "company_values": [
+      "Sustainability",
+      "Health",
+      "Community"
+    ],
+    "work_environment": [
+      "Collaborative",
+      "Mission-driven",
+      "Flexible"
+    ],
+    "hiring_process": [
+      "Initial Interview",
+      "Panel Interview",
+      "Final Decision"
+    ],
     "contacts": {
       "name": "Emma Green",
       "company_bulstat": "678901234",
@@ -403,7 +554,7 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   },
   {
     "id": "c8",
@@ -417,18 +568,40 @@
     "local_info": {
       "since": "2015-07-01T00:00:00Z",
       "employeeCount": 500,
-      "locations": ["Los Angeles"]
+      "locations": [
+        "Los Angeles"
+      ]
     },
     "worldwide_info": {
       "founded": "2012-01-01T00:00:00Z",
       "employeeCount": 1000,
       "headquarters": "Los Angeles",
-      "locations": ["USA", "Germany", "Japan"]
+      "locations": [
+        "USA",
+        "Germany",
+        "Japan"
+      ]
     },
-    "benefits": ["Health Insurance", "Paid Time Off", "Stock Options"],
-    "company_values": ["Innovation", "Exploration", "Safety"],
-    "work_environment": ["Collaborative", "Innovative", "Fast-paced"],
-    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "benefits": [
+      "Health Insurance",
+      "Paid Time Off",
+      "Stock Options"
+    ],
+    "company_values": [
+      "Innovation",
+      "Exploration",
+      "Safety"
+    ],
+    "work_environment": [
+      "Collaborative",
+      "Innovative",
+      "Fast-paced"
+    ],
+    "hiring_process": [
+      "Phone Interview",
+      "Technical Test",
+      "Final Interview"
+    ],
     "contacts": {
       "name": "Robert Black",
       "company_bulstat": "789012345",
@@ -461,7 +634,7 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   },
   {
     "id": "c9",
@@ -475,18 +648,40 @@
     "local_info": {
       "since": "2013-10-01T00:00:00Z",
       "employeeCount": 200,
-      "locations": ["Boston"]
+      "locations": [
+        "Boston"
+      ]
     },
     "worldwide_info": {
       "founded": "2010-01-01T00:00:00Z",
       "employeeCount": 400,
       "headquarters": "Boston",
-      "locations": ["USA", "Germany", "China"]
+      "locations": [
+        "USA",
+        "Germany",
+        "China"
+      ]
     },
-    "benefits": ["Health Insurance", "Paid Time Off", "Stock Options"],
-    "company_values": ["Innovation", "Integrity", "Excellence"],
-    "work_environment": ["Collaborative", "Innovative", "Fast-paced"],
-    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "benefits": [
+      "Health Insurance",
+      "Paid Time Off",
+      "Stock Options"
+    ],
+    "company_values": [
+      "Innovation",
+      "Integrity",
+      "Excellence"
+    ],
+    "work_environment": [
+      "Collaborative",
+      "Innovative",
+      "Fast-paced"
+    ],
+    "hiring_process": [
+      "Phone Interview",
+      "Technical Test",
+      "Final Interview"
+    ],
     "contacts": {
       "name": "Rachel White",
       "company_bulstat": "890123456",
@@ -519,7 +714,7 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   },
   {
     "id": "c10",
@@ -533,18 +728,40 @@
     "local_info": {
       "since": "2016-08-01T00:00:00Z",
       "employeeCount": 300,
-      "locations": ["Seattle"]
+      "locations": [
+        "Seattle"
+      ]
     },
     "worldwide_info": {
       "founded": "2014-01-01T00:00:00Z",
       "employeeCount": 600,
       "headquarters": "Seattle",
-      "locations": ["USA", "UK", "India"]
+      "locations": [
+        "USA",
+        "UK",
+        "India"
+      ]
     },
-    "benefits": ["Health Insurance", "Remote Work", "Stock Options"],
-    "company_values": ["Innovation", "Reliability", "Scalability"],
-    "work_environment": ["Collaborative", "Innovative", "Flexible"],
-    "hiring_process": ["Phone Interview", "Technical Test", "Final Interview"],
+    "benefits": [
+      "Health Insurance",
+      "Remote Work",
+      "Stock Options"
+    ],
+    "company_values": [
+      "Innovation",
+      "Reliability",
+      "Scalability"
+    ],
+    "work_environment": [
+      "Collaborative",
+      "Innovative",
+      "Flexible"
+    ],
+    "hiring_process": [
+      "Phone Interview",
+      "Technical Test",
+      "Final Interview"
+    ],
     "contacts": {
       "name": "Thomas Brown",
       "company_bulstat": "901234567",
@@ -577,6 +794,6 @@
     ],
     "createdAt": "2024-08-14T12:00:00Z",
     "updatedAt": "2024-08-14T12:00:00Z",
-    "JobListing": []
+    "listings": []
   }
 ]

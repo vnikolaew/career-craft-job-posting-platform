@@ -53,5 +53,18 @@ declare global {
          },
          phone_number?: string;
       }
+
+      export type JobListingSalaryType = `range` | `fixed`
+
+      export type JobListingSalary = { currency: string } & ({
+         type: `range`,
+         min: number
+         max: number
+      } | { type: `fixed`, value: number })
+
+      export type JobListingParameters = {
+         salary: JobListingSalary
+      }
+
    }
 }

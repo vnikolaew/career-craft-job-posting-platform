@@ -80,6 +80,7 @@ export type AccountCountAggregate = {
 
 export type AccountCountOrderByAggregateInput = {
   access_token?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrder>;
   id_token?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrder>;
@@ -95,6 +96,7 @@ export type AccountCountOrderByAggregateInput = {
 
 export type AccountCreateInput = {
   access_token?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expires_at?: InputMaybe<Scalars['Int']['input']>;
   id_token?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -110,6 +112,7 @@ export type AccountCreateInput = {
 
 export type AccountCreateManyInput = {
   access_token?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expires_at?: InputMaybe<Scalars['Int']['input']>;
   id_token?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -125,6 +128,7 @@ export type AccountCreateManyInput = {
 
 export type AccountCreateManyUserInput = {
   access_token?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expires_at?: InputMaybe<Scalars['Int']['input']>;
   id_token?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -156,6 +160,7 @@ export type AccountCreateOrConnectWithoutUserInput = {
 
 export type AccountCreateWithoutUserInput = {
   access_token?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expires_at?: InputMaybe<Scalars['Int']['input']>;
   id_token?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -216,6 +221,7 @@ export type AccountMaxAggregate = {
 
 export type AccountMaxOrderByAggregateInput = {
   access_token?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrder>;
   id_token?: InputMaybe<SortOrder>;
   provider?: InputMaybe<SortOrder>;
@@ -247,6 +253,7 @@ export type AccountMinAggregate = {
 
 export type AccountMinOrderByAggregateInput = {
   access_token?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrder>;
   id_token?: InputMaybe<SortOrder>;
   provider?: InputMaybe<SortOrder>;
@@ -289,6 +296,7 @@ export type AccountOrderByWithAggregationInput = {
   _min?: InputMaybe<AccountMinOrderByAggregateInput>;
   _sum?: InputMaybe<AccountSumOrderByAggregateInput>;
   access_token?: InputMaybe<SortOrderInput>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrderInput>;
   id_token?: InputMaybe<SortOrderInput>;
   metadata?: InputMaybe<SortOrderInput>;
@@ -305,6 +313,7 @@ export type AccountOrderByWithAggregationInput = {
 export type AccountOrderByWithRelationInput = {
   _relevance?: InputMaybe<AccountOrderByRelevanceInput>;
   access_token?: InputMaybe<SortOrderInput>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrderInput>;
   id_token?: InputMaybe<SortOrderInput>;
   metadata?: InputMaybe<SortOrderInput>;
@@ -346,6 +355,7 @@ export type AccountScalarWhereInput = {
   NOT?: InputMaybe<Array<AccountScalarWhereInput>>;
   OR?: InputMaybe<Array<AccountScalarWhereInput>>;
   access_token?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expires_at?: InputMaybe<IntNullableFilter>;
   id_token?: InputMaybe<StringNullableFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
@@ -364,6 +374,7 @@ export type AccountScalarWhereWithAggregatesInput = {
   NOT?: InputMaybe<Array<AccountScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<AccountScalarWhereWithAggregatesInput>>;
   access_token?: InputMaybe<StringNullableWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   expires_at?: InputMaybe<IntNullableWithAggregatesFilter>;
   id_token?: InputMaybe<StringNullableWithAggregatesFilter>;
   metadata?: InputMaybe<JsonNullableWithAggregatesFilter>;
@@ -388,6 +399,7 @@ export type AccountSumOrderByAggregateInput = {
 
 export type AccountUpdateInput = {
   access_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expires_at?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   id_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -403,6 +415,7 @@ export type AccountUpdateInput = {
 
 export type AccountUpdateManyMutationInput = {
   access_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expires_at?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   id_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -441,6 +454,7 @@ export type AccountUpdateWithWhereUniqueWithoutUserInput = {
 
 export type AccountUpdateWithoutUserInput = {
   access_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expires_at?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   id_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -464,6 +478,7 @@ export type AccountWhereInput = {
   NOT?: InputMaybe<Array<AccountWhereInput>>;
   OR?: InputMaybe<Array<AccountWhereInput>>;
   access_token?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expires_at?: InputMaybe<IntNullableFilter>;
   id_token?: InputMaybe<StringNullableFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
@@ -483,6 +498,7 @@ export type AccountWhereUniqueInput = {
   NOT?: InputMaybe<Array<AccountWhereInput>>;
   OR?: InputMaybe<Array<AccountWhereInput>>;
   access_token?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expires_at?: InputMaybe<IntNullableFilter>;
   id_token?: InputMaybe<StringNullableFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
@@ -568,6 +584,391 @@ export type AggregateVerificationToken = {
   _min?: Maybe<VerificationTokenMinAggregate>;
 };
 
+export type CategoryOnCompany = {
+  __typename?: 'CategoryOnCompany';
+  category_id: Scalars['String']['output'];
+  company_id: Scalars['String']['output'];
+  createdAt: Scalars['DateTimeISO']['output'];
+  updatedAt: Scalars['DateTimeISO']['output'];
+};
+
+export type CategoryOnCompanyCompany_IdCategory_IdCompoundUniqueInput = {
+  category_id: Scalars['String']['input'];
+  company_id: Scalars['String']['input'];
+};
+
+export type CategoryOnCompanyCreateManyCategoryInput = {
+  company_id: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnCompanyCreateManyCategoryInputEnvelope = {
+  data: Array<CategoryOnCompanyCreateManyCategoryInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CategoryOnCompanyCreateManyCompanyInput = {
+  category_id: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnCompanyCreateManyCompanyInputEnvelope = {
+  data: Array<CategoryOnCompanyCreateManyCompanyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CategoryOnCompanyCreateNestedManyWithoutCategoryInput = {
+  connect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnCompanyCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<CategoryOnCompanyCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<CategoryOnCompanyCreateManyCategoryInputEnvelope>;
+};
+
+export type CategoryOnCompanyCreateNestedManyWithoutCompanyInput = {
+  connect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnCompanyCreateOrConnectWithoutCompanyInput>>;
+  create?: InputMaybe<Array<CategoryOnCompanyCreateWithoutCompanyInput>>;
+  createMany?: InputMaybe<CategoryOnCompanyCreateManyCompanyInputEnvelope>;
+};
+
+export type CategoryOnCompanyCreateOrConnectWithoutCategoryInput = {
+  create: CategoryOnCompanyCreateWithoutCategoryInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyCreateOrConnectWithoutCompanyInput = {
+  create: CategoryOnCompanyCreateWithoutCompanyInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyCreateWithoutCategoryInput = {
+  company: CompanyCreateNestedOneWithoutCategoriesInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnCompanyCreateWithoutCompanyInput = {
+  category: CompanyCategoryCreateNestedOneWithoutCompaniesInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnCompanyListRelationFilter = {
+  every?: InputMaybe<CategoryOnCompanyWhereInput>;
+  none?: InputMaybe<CategoryOnCompanyWhereInput>;
+  some?: InputMaybe<CategoryOnCompanyWhereInput>;
+};
+
+export type CategoryOnCompanyOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export enum CategoryOnCompanyOrderByRelevanceFieldEnum {
+  CategoryId = 'category_id',
+  CompanyId = 'company_id'
+}
+
+export type CategoryOnCompanyOrderByRelevanceInput = {
+  fields: Array<CategoryOnCompanyOrderByRelevanceFieldEnum>;
+  search: Scalars['String']['input'];
+  sort: SortOrder;
+};
+
+export type CategoryOnCompanyOrderByWithRelationInput = {
+  _relevance?: InputMaybe<CategoryOnCompanyOrderByRelevanceInput>;
+  category?: InputMaybe<CompanyCategoryOrderByWithRelationInput>;
+  category_id?: InputMaybe<SortOrder>;
+  company?: InputMaybe<CompanyOrderByWithRelationInput>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+};
+
+export enum CategoryOnCompanyScalarFieldEnum {
+  CategoryId = 'category_id',
+  CompanyId = 'company_id',
+  CreatedAt = 'createdAt',
+  UpdatedAt = 'updatedAt'
+}
+
+export type CategoryOnCompanyScalarWhereInput = {
+  AND?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  category_id?: InputMaybe<StringFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CategoryOnCompanyUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnCompanyUpdateManyWithWhereWithoutCategoryInput = {
+  data: CategoryOnCompanyUpdateManyMutationInput;
+  where: CategoryOnCompanyScalarWhereInput;
+};
+
+export type CategoryOnCompanyUpdateManyWithWhereWithoutCompanyInput = {
+  data: CategoryOnCompanyUpdateManyMutationInput;
+  where: CategoryOnCompanyScalarWhereInput;
+};
+
+export type CategoryOnCompanyUpdateManyWithoutCategoryNestedInput = {
+  connect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnCompanyCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<CategoryOnCompanyCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<CategoryOnCompanyCreateManyCategoryInputEnvelope>;
+  delete?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  set?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  update?: InputMaybe<Array<CategoryOnCompanyUpdateWithWhereUniqueWithoutCategoryInput>>;
+  updateMany?: InputMaybe<Array<CategoryOnCompanyUpdateManyWithWhereWithoutCategoryInput>>;
+  upsert?: InputMaybe<Array<CategoryOnCompanyUpsertWithWhereUniqueWithoutCategoryInput>>;
+};
+
+export type CategoryOnCompanyUpdateManyWithoutCompanyNestedInput = {
+  connect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnCompanyCreateOrConnectWithoutCompanyInput>>;
+  create?: InputMaybe<Array<CategoryOnCompanyCreateWithoutCompanyInput>>;
+  createMany?: InputMaybe<CategoryOnCompanyCreateManyCompanyInputEnvelope>;
+  delete?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  set?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  update?: InputMaybe<Array<CategoryOnCompanyUpdateWithWhereUniqueWithoutCompanyInput>>;
+  updateMany?: InputMaybe<Array<CategoryOnCompanyUpdateManyWithWhereWithoutCompanyInput>>;
+  upsert?: InputMaybe<Array<CategoryOnCompanyUpsertWithWhereUniqueWithoutCompanyInput>>;
+};
+
+export type CategoryOnCompanyUpdateWithWhereUniqueWithoutCategoryInput = {
+  data: CategoryOnCompanyUpdateWithoutCategoryInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyUpdateWithWhereUniqueWithoutCompanyInput = {
+  data: CategoryOnCompanyUpdateWithoutCompanyInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyUpdateWithoutCategoryInput = {
+  company?: InputMaybe<CompanyUpdateOneRequiredWithoutCategoriesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnCompanyUpdateWithoutCompanyInput = {
+  category?: InputMaybe<CompanyCategoryUpdateOneRequiredWithoutCompaniesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnCompanyUpsertWithWhereUniqueWithoutCategoryInput = {
+  create: CategoryOnCompanyCreateWithoutCategoryInput;
+  update: CategoryOnCompanyUpdateWithoutCategoryInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyUpsertWithWhereUniqueWithoutCompanyInput = {
+  create: CategoryOnCompanyCreateWithoutCompanyInput;
+  update: CategoryOnCompanyUpdateWithoutCompanyInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyWhereInput = {
+  AND?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  category?: InputMaybe<CompanyCategoryRelationFilter>;
+  category_id?: InputMaybe<StringFilter>;
+  company?: InputMaybe<CompanyRelationFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CategoryOnCompanyWhereUniqueInput = {
+  AND?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  category?: InputMaybe<CompanyCategoryRelationFilter>;
+  category_id?: InputMaybe<StringFilter>;
+  company?: InputMaybe<CompanyRelationFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  company_id_category_id?: InputMaybe<CategoryOnCompanyCompany_IdCategory_IdCompoundUniqueInput>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CategoryOnJobListingCreateManyCategoryInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  listing_id: Scalars['String']['input'];
+};
+
+export type CategoryOnJobListingCreateManyCategoryInputEnvelope = {
+  data: Array<CategoryOnJobListingCreateManyCategoryInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CategoryOnJobListingCreateManyListingInput = {
+  category_id: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnJobListingCreateManyListingInputEnvelope = {
+  data: Array<CategoryOnJobListingCreateManyListingInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CategoryOnJobListingCreateNestedManyWithoutCategoryInput = {
+  connect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnJobListingCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<CategoryOnJobListingCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<CategoryOnJobListingCreateManyCategoryInputEnvelope>;
+};
+
+export type CategoryOnJobListingCreateNestedManyWithoutListingInput = {
+  connect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnJobListingCreateOrConnectWithoutListingInput>>;
+  create?: InputMaybe<Array<CategoryOnJobListingCreateWithoutListingInput>>;
+  createMany?: InputMaybe<CategoryOnJobListingCreateManyListingInputEnvelope>;
+};
+
+export type CategoryOnJobListingCreateOrConnectWithoutCategoryInput = {
+  create: CategoryOnJobListingCreateWithoutCategoryInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingCreateOrConnectWithoutListingInput = {
+  create: CategoryOnJobListingCreateWithoutListingInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingCreateWithoutCategoryInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  listing: JobListingCreateNestedOneWithoutCategoriesInput;
+};
+
+export type CategoryOnJobListingCreateWithoutListingInput = {
+  category: JobListingCategoryCreateNestedOneWithoutListingsInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnJobListingListRelationFilter = {
+  every?: InputMaybe<CategoryOnJobListingWhereInput>;
+  none?: InputMaybe<CategoryOnJobListingWhereInput>;
+  some?: InputMaybe<CategoryOnJobListingWhereInput>;
+};
+
+export type CategoryOnJobListingListing_IdCategory_IdCompoundUniqueInput = {
+  category_id: Scalars['String']['input'];
+  listing_id: Scalars['String']['input'];
+};
+
+export type CategoryOnJobListingOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type CategoryOnJobListingScalarWhereInput = {
+  AND?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  category_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  listing_id?: InputMaybe<StringFilter>;
+};
+
+export type CategoryOnJobListingUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnJobListingUpdateManyWithWhereWithoutCategoryInput = {
+  data: CategoryOnJobListingUpdateManyMutationInput;
+  where: CategoryOnJobListingScalarWhereInput;
+};
+
+export type CategoryOnJobListingUpdateManyWithWhereWithoutListingInput = {
+  data: CategoryOnJobListingUpdateManyMutationInput;
+  where: CategoryOnJobListingScalarWhereInput;
+};
+
+export type CategoryOnJobListingUpdateManyWithoutCategoryNestedInput = {
+  connect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnJobListingCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<CategoryOnJobListingCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<CategoryOnJobListingCreateManyCategoryInputEnvelope>;
+  delete?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  set?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  update?: InputMaybe<Array<CategoryOnJobListingUpdateWithWhereUniqueWithoutCategoryInput>>;
+  updateMany?: InputMaybe<Array<CategoryOnJobListingUpdateManyWithWhereWithoutCategoryInput>>;
+  upsert?: InputMaybe<Array<CategoryOnJobListingUpsertWithWhereUniqueWithoutCategoryInput>>;
+};
+
+export type CategoryOnJobListingUpdateManyWithoutListingNestedInput = {
+  connect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnJobListingCreateOrConnectWithoutListingInput>>;
+  create?: InputMaybe<Array<CategoryOnJobListingCreateWithoutListingInput>>;
+  createMany?: InputMaybe<CategoryOnJobListingCreateManyListingInputEnvelope>;
+  delete?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  set?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  update?: InputMaybe<Array<CategoryOnJobListingUpdateWithWhereUniqueWithoutListingInput>>;
+  updateMany?: InputMaybe<Array<CategoryOnJobListingUpdateManyWithWhereWithoutListingInput>>;
+  upsert?: InputMaybe<Array<CategoryOnJobListingUpsertWithWhereUniqueWithoutListingInput>>;
+};
+
+export type CategoryOnJobListingUpdateWithWhereUniqueWithoutCategoryInput = {
+  data: CategoryOnJobListingUpdateWithoutCategoryInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingUpdateWithWhereUniqueWithoutListingInput = {
+  data: CategoryOnJobListingUpdateWithoutListingInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingUpdateWithoutCategoryInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  listing?: InputMaybe<JobListingUpdateOneRequiredWithoutCategoriesNestedInput>;
+};
+
+export type CategoryOnJobListingUpdateWithoutListingInput = {
+  category?: InputMaybe<JobListingCategoryUpdateOneRequiredWithoutListingsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnJobListingUpsertWithWhereUniqueWithoutCategoryInput = {
+  create: CategoryOnJobListingCreateWithoutCategoryInput;
+  update: CategoryOnJobListingUpdateWithoutCategoryInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingUpsertWithWhereUniqueWithoutListingInput = {
+  create: CategoryOnJobListingCreateWithoutListingInput;
+  update: CategoryOnJobListingUpdateWithoutListingInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingWhereInput = {
+  AND?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  category?: InputMaybe<JobListingCategoryRelationFilter>;
+  category_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  listing?: InputMaybe<JobListingRelationFilter>;
+  listing_id?: InputMaybe<StringFilter>;
+};
+
+export type CategoryOnJobListingWhereUniqueInput = {
+  AND?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  category?: InputMaybe<JobListingCategoryRelationFilter>;
+  category_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  listing?: InputMaybe<JobListingRelationFilter>;
+  listing_id?: InputMaybe<StringFilter>;
+  listing_id_category_id?: InputMaybe<CategoryOnJobListingListing_IdCategory_IdCompoundUniqueInput>;
+};
+
 export type Company = {
   __typename?: 'Company';
   _count?: Maybe<CompanyCount>;
@@ -576,7 +977,7 @@ export type Company = {
   benefits: Array<Scalars['String']['output']>;
   brand_image_url?: Maybe<Scalars['URL']['output']>;
   career_description_raw: Scalars['String']['output'];
-  categories: Array<CompanyCategory>;
+  companyCategories?: Maybe<Array<CompanyCategory>>;
   company_values: Array<Scalars['String']['output']>;
   contacts?: Maybe<CompanyContacts>;
   createdAt: Scalars['DateTimeISO']['output'];
@@ -584,22 +985,13 @@ export type Company = {
   hiring_process: Array<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   listings: Array<JobListing>;
+  listingsCount: Scalars['Int']['output'];
   local_info?: Maybe<CompanyLocalInfo>;
   metadata?: Maybe<Scalars['JSONObject']['output']>;
   name: Scalars['String']['output'];
   updatedAt: Scalars['DateTimeISO']['output'];
   work_environment: Array<Scalars['String']['output']>;
   worldwide_info?: Maybe<CompanyWorldwideInfo>;
-};
-
-
-export type CompanyCategoriesArgs = {
-  cursor?: InputMaybe<CompanyCategoryWhereUniqueInput>;
-  distinct?: InputMaybe<Array<CompanyCategoryScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<CompanyCategoryOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  take?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 
@@ -615,7 +1007,7 @@ export type CompanyListingsArgs = {
 export type CompanyCategory = {
   __typename?: 'CompanyCategory';
   _count?: Maybe<CompanyCategoryCount>;
-  companies: Array<Company>;
+  companies: Array<CategoryOnCompany>;
   description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
@@ -623,12 +1015,12 @@ export type CompanyCategory = {
 
 
 export type CompanyCategoryCompaniesArgs = {
-  cursor?: InputMaybe<CompanyWhereUniqueInput>;
-  distinct?: InputMaybe<Array<CompanyScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<CompanyOrderByWithRelationInput>>;
+  cursor?: InputMaybe<CategoryOnCompanyWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CategoryOnCompanyScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CategoryOnCompanyOrderByWithRelationInput>>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<CompanyWhereInput>;
+  where?: InputMaybe<CategoryOnCompanyWhereInput>;
 };
 
 export type CompanyCategoryCount = {
@@ -638,7 +1030,7 @@ export type CompanyCategoryCount = {
 
 
 export type CompanyCategoryCountCompaniesArgs = {
-  where?: InputMaybe<CompanyWhereInput>;
+  where?: InputMaybe<CategoryOnCompanyWhereInput>;
 };
 
 export type CompanyCategoryCountAggregate = {
@@ -656,7 +1048,7 @@ export type CompanyCategoryCountOrderByAggregateInput = {
 };
 
 export type CompanyCategoryCreateInput = {
-  companies?: InputMaybe<CompanyCreateNestedManyWithoutCategoriesInput>;
+  companies?: InputMaybe<CategoryOnCompanyCreateNestedManyWithoutCategoryInput>;
   description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -668,10 +1060,10 @@ export type CompanyCategoryCreateManyInput = {
   name: Scalars['String']['input'];
 };
 
-export type CompanyCategoryCreateNestedManyWithoutCompaniesInput = {
-  connect?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CompanyCategoryCreateOrConnectWithoutCompaniesInput>>;
-  create?: InputMaybe<Array<CompanyCategoryCreateWithoutCompaniesInput>>;
+export type CompanyCategoryCreateNestedOneWithoutCompaniesInput = {
+  connect?: InputMaybe<CompanyCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCategoryCreateOrConnectWithoutCompaniesInput>;
+  create?: InputMaybe<CompanyCategoryCreateWithoutCompaniesInput>;
 };
 
 export type CompanyCategoryCreateOrConnectWithoutCompaniesInput = {
@@ -693,12 +1085,6 @@ export type CompanyCategoryGroupBy = {
   description: Scalars['String']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
-};
-
-export type CompanyCategoryListRelationFilter = {
-  every?: InputMaybe<CompanyCategoryWhereInput>;
-  none?: InputMaybe<CompanyCategoryWhereInput>;
-  some?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 export type CompanyCategoryMaxAggregate = {
@@ -727,10 +1113,6 @@ export type CompanyCategoryMinOrderByAggregateInput = {
   name?: InputMaybe<SortOrder>;
 };
 
-export type CompanyCategoryOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
-};
-
 export enum CompanyCategoryOrderByRelevanceFieldEnum {
   Description = 'description',
   Id = 'id',
@@ -754,10 +1136,15 @@ export type CompanyCategoryOrderByWithAggregationInput = {
 
 export type CompanyCategoryOrderByWithRelationInput = {
   _relevance?: InputMaybe<CompanyCategoryOrderByRelevanceInput>;
-  companies?: InputMaybe<CompanyOrderByRelationAggregateInput>;
+  companies?: InputMaybe<CategoryOnCompanyOrderByRelationAggregateInput>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+};
+
+export type CompanyCategoryRelationFilter = {
+  is?: InputMaybe<CompanyCategoryWhereInput>;
+  isNot?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 export enum CompanyCategoryScalarFieldEnum {
@@ -765,15 +1152,6 @@ export enum CompanyCategoryScalarFieldEnum {
   Id = 'id',
   Name = 'name'
 }
-
-export type CompanyCategoryScalarWhereInput = {
-  AND?: InputMaybe<Array<CompanyCategoryScalarWhereInput>>;
-  NOT?: InputMaybe<Array<CompanyCategoryScalarWhereInput>>;
-  OR?: InputMaybe<Array<CompanyCategoryScalarWhereInput>>;
-  description?: InputMaybe<StringFilter>;
-  id?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-};
 
 export type CompanyCategoryScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<CompanyCategoryScalarWhereWithAggregatesInput>>;
@@ -785,7 +1163,7 @@ export type CompanyCategoryScalarWhereWithAggregatesInput = {
 };
 
 export type CompanyCategoryUpdateInput = {
-  companies?: InputMaybe<CompanyUpdateManyWithoutCategoriesNestedInput>;
+  companies?: InputMaybe<CategoryOnCompanyUpdateManyWithoutCategoryNestedInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -797,27 +1175,17 @@ export type CompanyCategoryUpdateManyMutationInput = {
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
-export type CompanyCategoryUpdateManyWithWhereWithoutCompaniesInput = {
-  data: CompanyCategoryUpdateManyMutationInput;
-  where: CompanyCategoryScalarWhereInput;
+export type CompanyCategoryUpdateOneRequiredWithoutCompaniesNestedInput = {
+  connect?: InputMaybe<CompanyCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCategoryCreateOrConnectWithoutCompaniesInput>;
+  create?: InputMaybe<CompanyCategoryCreateWithoutCompaniesInput>;
+  update?: InputMaybe<CompanyCategoryUpdateToOneWithWhereWithoutCompaniesInput>;
+  upsert?: InputMaybe<CompanyCategoryUpsertWithoutCompaniesInput>;
 };
 
-export type CompanyCategoryUpdateManyWithoutCompaniesNestedInput = {
-  connect?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CompanyCategoryCreateOrConnectWithoutCompaniesInput>>;
-  create?: InputMaybe<Array<CompanyCategoryCreateWithoutCompaniesInput>>;
-  delete?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<CompanyCategoryScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  set?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  update?: InputMaybe<Array<CompanyCategoryUpdateWithWhereUniqueWithoutCompaniesInput>>;
-  updateMany?: InputMaybe<Array<CompanyCategoryUpdateManyWithWhereWithoutCompaniesInput>>;
-  upsert?: InputMaybe<Array<CompanyCategoryUpsertWithWhereUniqueWithoutCompaniesInput>>;
-};
-
-export type CompanyCategoryUpdateWithWhereUniqueWithoutCompaniesInput = {
+export type CompanyCategoryUpdateToOneWithWhereWithoutCompaniesInput = {
   data: CompanyCategoryUpdateWithoutCompaniesInput;
-  where: CompanyCategoryWhereUniqueInput;
+  where?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 export type CompanyCategoryUpdateWithoutCompaniesInput = {
@@ -826,17 +1194,17 @@ export type CompanyCategoryUpdateWithoutCompaniesInput = {
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
-export type CompanyCategoryUpsertWithWhereUniqueWithoutCompaniesInput = {
+export type CompanyCategoryUpsertWithoutCompaniesInput = {
   create: CompanyCategoryCreateWithoutCompaniesInput;
   update: CompanyCategoryUpdateWithoutCompaniesInput;
-  where: CompanyCategoryWhereUniqueInput;
+  where?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 export type CompanyCategoryWhereInput = {
   AND?: InputMaybe<Array<CompanyCategoryWhereInput>>;
   NOT?: InputMaybe<Array<CompanyCategoryWhereInput>>;
   OR?: InputMaybe<Array<CompanyCategoryWhereInput>>;
-  companies?: InputMaybe<CompanyListRelationFilter>;
+  companies?: InputMaybe<CategoryOnCompanyListRelationFilter>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
@@ -846,7 +1214,7 @@ export type CompanyCategoryWhereUniqueInput = {
   AND?: InputMaybe<Array<CompanyCategoryWhereInput>>;
   NOT?: InputMaybe<Array<CompanyCategoryWhereInput>>;
   OR?: InputMaybe<Array<CompanyCategoryWhereInput>>;
-  companies?: InputMaybe<CompanyListRelationFilter>;
+  companies?: InputMaybe<CategoryOnCompanyListRelationFilter>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<StringFilter>;
@@ -883,7 +1251,7 @@ export type CompanyCount = {
 
 
 export type CompanyCountCategoriesArgs = {
-  where?: InputMaybe<CompanyCategoryWhereInput>;
+  where?: InputMaybe<CategoryOnCompanyWhereInput>;
 };
 
 
@@ -921,6 +1289,7 @@ export type CompanyCountOrderByAggregateInput = {
   career_description_raw?: InputMaybe<SortOrder>;
   company_values?: InputMaybe<SortOrder>;
   contacts?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -937,9 +1306,10 @@ export type CompanyCreateInput = {
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
   brand_image_url?: InputMaybe<Scalars['String']['input']>;
   career_description_raw: Scalars['String']['input'];
-  categories?: InputMaybe<CompanyCategoryCreateNestedManyWithoutCompaniesInput>;
+  categories?: InputMaybe<CategoryOnCompanyCreateNestedManyWithoutCompanyInput>;
   company_values?: InputMaybe<CompanyCreatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -959,6 +1329,7 @@ export type CompanyCreateManyInput = {
   career_description_raw: Scalars['String']['input'];
   company_values?: InputMaybe<CompanyCreatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -969,10 +1340,10 @@ export type CompanyCreateManyInput = {
   worldwide_info?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type CompanyCreateNestedManyWithoutCategoriesInput = {
-  connect?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CompanyCreateOrConnectWithoutCategoriesInput>>;
-  create?: InputMaybe<Array<CompanyCreateWithoutCategoriesInput>>;
+export type CompanyCreateNestedOneWithoutCategoriesInput = {
+  connect?: InputMaybe<CompanyWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutCategoriesInput>;
+  create?: InputMaybe<CompanyCreateWithoutCategoriesInput>;
 };
 
 export type CompanyCreateNestedOneWithoutListingsInput = {
@@ -999,6 +1370,7 @@ export type CompanyCreateWithoutCategoriesInput = {
   career_description_raw: Scalars['String']['input'];
   company_values?: InputMaybe<CompanyCreatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1016,9 +1388,10 @@ export type CompanyCreateWithoutListingsInput = {
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
   brand_image_url?: InputMaybe<Scalars['String']['input']>;
   career_description_raw: Scalars['String']['input'];
-  categories?: InputMaybe<CompanyCategoryCreateNestedManyWithoutCompaniesInput>;
+  categories?: InputMaybe<CategoryOnCompanyCreateNestedManyWithoutCompanyInput>;
   company_values?: InputMaybe<CompanyCreatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1069,12 +1442,6 @@ export type CompanyGroupBy = {
   worldwide_info: Scalars['JSON']['output'];
 };
 
-export type CompanyListRelationFilter = {
-  every?: InputMaybe<CompanyWhereInput>;
-  none?: InputMaybe<CompanyWhereInput>;
-  some?: InputMaybe<CompanyWhereInput>;
-};
-
 export type CompanyLocalInfo = {
   __typename?: 'CompanyLocalInfo';
   employeeCount?: Maybe<Scalars['Int']['output']>;
@@ -1100,6 +1467,7 @@ export type CompanyMaxOrderByAggregateInput = {
   banner_image_url?: InputMaybe<SortOrder>;
   brand_image_url?: InputMaybe<SortOrder>;
   career_description_raw?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -1123,13 +1491,10 @@ export type CompanyMinOrderByAggregateInput = {
   banner_image_url?: InputMaybe<SortOrder>;
   brand_image_url?: InputMaybe<SortOrder>;
   career_description_raw?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
-};
-
-export type CompanyOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
 };
 
 export enum CompanyOrderByRelevanceFieldEnum {
@@ -1163,6 +1528,7 @@ export type CompanyOrderByWithAggregationInput = {
   career_description_raw?: InputMaybe<SortOrder>;
   company_values?: InputMaybe<SortOrder>;
   contacts?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -1180,9 +1546,10 @@ export type CompanyOrderByWithRelationInput = {
   benefits?: InputMaybe<SortOrder>;
   brand_image_url?: InputMaybe<SortOrderInput>;
   career_description_raw?: InputMaybe<SortOrder>;
-  categories?: InputMaybe<CompanyCategoryOrderByRelationAggregateInput>;
+  categories?: InputMaybe<CategoryOnCompanyOrderByRelationAggregateInput>;
   company_values?: InputMaybe<SortOrder>;
   contacts?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -1219,27 +1586,6 @@ export enum CompanyScalarFieldEnum {
   WorldwideInfo = 'worldwide_info'
 }
 
-export type CompanyScalarWhereInput = {
-  AND?: InputMaybe<Array<CompanyScalarWhereInput>>;
-  NOT?: InputMaybe<Array<CompanyScalarWhereInput>>;
-  OR?: InputMaybe<Array<CompanyScalarWhereInput>>;
-  about_raw?: InputMaybe<StringFilter>;
-  banner_image_url?: InputMaybe<StringNullableFilter>;
-  benefits?: InputMaybe<StringNullableListFilter>;
-  brand_image_url?: InputMaybe<StringNullableFilter>;
-  career_description_raw?: InputMaybe<StringFilter>;
-  company_values?: InputMaybe<StringNullableListFilter>;
-  contacts?: InputMaybe<JsonFilter>;
-  email?: InputMaybe<StringFilter>;
-  hiring_process?: InputMaybe<StringNullableListFilter>;
-  id?: InputMaybe<StringFilter>;
-  local_info?: InputMaybe<JsonFilter>;
-  metadata?: InputMaybe<JsonNullableFilter>;
-  name?: InputMaybe<StringFilter>;
-  work_environment?: InputMaybe<StringNullableListFilter>;
-  worldwide_info?: InputMaybe<JsonFilter>;
-};
-
 export type CompanyScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<CompanyScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<CompanyScalarWhereWithAggregatesInput>>;
@@ -1251,6 +1597,7 @@ export type CompanyScalarWhereWithAggregatesInput = {
   career_description_raw?: InputMaybe<StringWithAggregatesFilter>;
   company_values?: InputMaybe<StringNullableListFilter>;
   contacts?: InputMaybe<JsonWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
@@ -1267,9 +1614,10 @@ export type CompanyUpdateInput = {
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
   brand_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   career_description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
-  categories?: InputMaybe<CompanyCategoryUpdateManyWithoutCompaniesNestedInput>;
+  categories?: InputMaybe<CategoryOnCompanyUpdateManyWithoutCompanyNestedInput>;
   company_values?: InputMaybe<CompanyUpdatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1289,6 +1637,7 @@ export type CompanyUpdateManyMutationInput = {
   career_description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   company_values?: InputMaybe<CompanyUpdatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1299,22 +1648,12 @@ export type CompanyUpdateManyMutationInput = {
   worldwide_info?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type CompanyUpdateManyWithWhereWithoutCategoriesInput = {
-  data: CompanyUpdateManyMutationInput;
-  where: CompanyScalarWhereInput;
-};
-
-export type CompanyUpdateManyWithoutCategoriesNestedInput = {
-  connect?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CompanyCreateOrConnectWithoutCategoriesInput>>;
-  create?: InputMaybe<Array<CompanyCreateWithoutCategoriesInput>>;
-  delete?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<CompanyScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  set?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  update?: InputMaybe<Array<CompanyUpdateWithWhereUniqueWithoutCategoriesInput>>;
-  updateMany?: InputMaybe<Array<CompanyUpdateManyWithWhereWithoutCategoriesInput>>;
-  upsert?: InputMaybe<Array<CompanyUpsertWithWhereUniqueWithoutCategoriesInput>>;
+export type CompanyUpdateOneRequiredWithoutCategoriesNestedInput = {
+  connect?: InputMaybe<CompanyWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutCategoriesInput>;
+  create?: InputMaybe<CompanyCreateWithoutCategoriesInput>;
+  update?: InputMaybe<CompanyUpdateToOneWithWhereWithoutCategoriesInput>;
+  upsert?: InputMaybe<CompanyUpsertWithoutCategoriesInput>;
 };
 
 export type CompanyUpdateOneRequiredWithoutListingsNestedInput = {
@@ -1325,14 +1664,14 @@ export type CompanyUpdateOneRequiredWithoutListingsNestedInput = {
   upsert?: InputMaybe<CompanyUpsertWithoutListingsInput>;
 };
 
-export type CompanyUpdateToOneWithWhereWithoutListingsInput = {
-  data: CompanyUpdateWithoutListingsInput;
+export type CompanyUpdateToOneWithWhereWithoutCategoriesInput = {
+  data: CompanyUpdateWithoutCategoriesInput;
   where?: InputMaybe<CompanyWhereInput>;
 };
 
-export type CompanyUpdateWithWhereUniqueWithoutCategoriesInput = {
-  data: CompanyUpdateWithoutCategoriesInput;
-  where: CompanyWhereUniqueInput;
+export type CompanyUpdateToOneWithWhereWithoutListingsInput = {
+  data: CompanyUpdateWithoutListingsInput;
+  where?: InputMaybe<CompanyWhereInput>;
 };
 
 export type CompanyUpdateWithoutCategoriesInput = {
@@ -1343,6 +1682,7 @@ export type CompanyUpdateWithoutCategoriesInput = {
   career_description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   company_values?: InputMaybe<CompanyUpdatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1360,9 +1700,10 @@ export type CompanyUpdateWithoutListingsInput = {
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
   brand_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   career_description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
-  categories?: InputMaybe<CompanyCategoryUpdateManyWithoutCompaniesNestedInput>;
+  categories?: InputMaybe<CategoryOnCompanyUpdateManyWithoutCompanyNestedInput>;
   company_values?: InputMaybe<CompanyUpdatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1393,10 +1734,10 @@ export type CompanyUpdatework_EnvironmentInput = {
   set?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
-export type CompanyUpsertWithWhereUniqueWithoutCategoriesInput = {
+export type CompanyUpsertWithoutCategoriesInput = {
   create: CompanyCreateWithoutCategoriesInput;
   update: CompanyUpdateWithoutCategoriesInput;
-  where: CompanyWhereUniqueInput;
+  where?: InputMaybe<CompanyWhereInput>;
 };
 
 export type CompanyUpsertWithoutListingsInput = {
@@ -1414,9 +1755,10 @@ export type CompanyWhereInput = {
   benefits?: InputMaybe<StringNullableListFilter>;
   brand_image_url?: InputMaybe<StringNullableFilter>;
   career_description_raw?: InputMaybe<StringFilter>;
-  categories?: InputMaybe<CompanyCategoryListRelationFilter>;
+  categories?: InputMaybe<CategoryOnCompanyListRelationFilter>;
   company_values?: InputMaybe<StringNullableListFilter>;
   contacts?: InputMaybe<JsonFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringFilter>;
@@ -1437,9 +1779,10 @@ export type CompanyWhereUniqueInput = {
   benefits?: InputMaybe<StringNullableListFilter>;
   brand_image_url?: InputMaybe<StringNullableFilter>;
   career_description_raw?: InputMaybe<StringFilter>;
-  categories?: InputMaybe<CompanyCategoryListRelationFilter>;
+  categories?: InputMaybe<CategoryOnCompanyListRelationFilter>;
   company_values?: InputMaybe<StringNullableListFilter>;
   contacts?: InputMaybe<JsonFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1610,7 +1953,7 @@ export type IntNullableWithAggregatesFilter = {
 export type JobListing = {
   __typename?: 'JobListing';
   _count?: Maybe<JobListingCount>;
-  companyId: Scalars['String']['output'];
+  company_id: Scalars['String']['output'];
   createdAt: Scalars['DateTimeISO']['output'];
   description_raw: Scalars['String']['output'];
   external_application_url?: Maybe<Scalars['String']['output']>;
@@ -1621,6 +1964,7 @@ export type JobListing = {
   level?: Maybe<JobListingLevel>;
   location: Scalars['String']['output'];
   name: Scalars['String']['output'];
+  /** [JobListingParameters] */
   parameters: Scalars['JSON']['output'];
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
@@ -1642,7 +1986,7 @@ export type JobListingCategoryCount = {
 
 
 export type JobListingCategoryCountListingsArgs = {
-  where?: InputMaybe<JobListingWhereInput>;
+  where?: InputMaybe<CategoryOnJobListingWhereInput>;
 };
 
 export type JobListingCategoryCountAggregate = {
@@ -1662,7 +2006,7 @@ export type JobListingCategoryCountOrderByAggregateInput = {
 export type JobListingCategoryCreateInput = {
   description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
-  listings?: InputMaybe<JobListingCreateNestedManyWithoutCategoriesInput>;
+  listings?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutCategoryInput>;
   name: Scalars['String']['input'];
 };
 
@@ -1672,10 +2016,10 @@ export type JobListingCategoryCreateManyInput = {
   name: Scalars['String']['input'];
 };
 
-export type JobListingCategoryCreateNestedManyWithoutListingsInput = {
-  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutListingsInput>>;
-  create?: InputMaybe<Array<JobListingCategoryCreateWithoutListingsInput>>;
+export type JobListingCategoryCreateNestedOneWithoutListingsInput = {
+  connect?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<JobListingCategoryCreateOrConnectWithoutListingsInput>;
+  create?: InputMaybe<JobListingCategoryCreateWithoutListingsInput>;
 };
 
 export type JobListingCategoryCreateOrConnectWithoutListingsInput = {
@@ -1697,12 +2041,6 @@ export type JobListingCategoryGroupBy = {
   description: Scalars['String']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
-};
-
-export type JobListingCategoryListRelationFilter = {
-  every?: InputMaybe<JobListingCategoryWhereInput>;
-  none?: InputMaybe<JobListingCategoryWhereInput>;
-  some?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCategoryMaxAggregate = {
@@ -1731,10 +2069,6 @@ export type JobListingCategoryMinOrderByAggregateInput = {
   name?: InputMaybe<SortOrder>;
 };
 
-export type JobListingCategoryOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
-};
-
 export enum JobListingCategoryOrderByRelevanceFieldEnum {
   Description = 'description',
   Id = 'id',
@@ -1760,8 +2094,13 @@ export type JobListingCategoryOrderByWithRelationInput = {
   _relevance?: InputMaybe<JobListingCategoryOrderByRelevanceInput>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listings?: InputMaybe<JobListingOrderByRelationAggregateInput>;
+  listings?: InputMaybe<CategoryOnJobListingOrderByRelationAggregateInput>;
   name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryRelationFilter = {
+  is?: InputMaybe<JobListingCategoryWhereInput>;
+  isNot?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export enum JobListingCategoryScalarFieldEnum {
@@ -1769,15 +2108,6 @@ export enum JobListingCategoryScalarFieldEnum {
   Id = 'id',
   Name = 'name'
 }
-
-export type JobListingCategoryScalarWhereInput = {
-  AND?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
-  NOT?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
-  OR?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
-  description?: InputMaybe<StringFilter>;
-  id?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-};
 
 export type JobListingCategoryScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
@@ -1791,7 +2121,7 @@ export type JobListingCategoryScalarWhereWithAggregatesInput = {
 export type JobListingCategoryUpdateInput = {
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  listings?: InputMaybe<JobListingUpdateManyWithoutCategoriesNestedInput>;
+  listings?: InputMaybe<CategoryOnJobListingUpdateManyWithoutCategoryNestedInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
@@ -1801,27 +2131,17 @@ export type JobListingCategoryUpdateManyMutationInput = {
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
-export type JobListingCategoryUpdateManyWithWhereWithoutListingsInput = {
-  data: JobListingCategoryUpdateManyMutationInput;
-  where: JobListingCategoryScalarWhereInput;
+export type JobListingCategoryUpdateOneRequiredWithoutListingsNestedInput = {
+  connect?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<JobListingCategoryCreateOrConnectWithoutListingsInput>;
+  create?: InputMaybe<JobListingCategoryCreateWithoutListingsInput>;
+  update?: InputMaybe<JobListingCategoryUpdateToOneWithWhereWithoutListingsInput>;
+  upsert?: InputMaybe<JobListingCategoryUpsertWithoutListingsInput>;
 };
 
-export type JobListingCategoryUpdateManyWithoutListingsNestedInput = {
-  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutListingsInput>>;
-  create?: InputMaybe<Array<JobListingCategoryCreateWithoutListingsInput>>;
-  delete?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  set?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  update?: InputMaybe<Array<JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput>>;
-  updateMany?: InputMaybe<Array<JobListingCategoryUpdateManyWithWhereWithoutListingsInput>>;
-  upsert?: InputMaybe<Array<JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput>>;
-};
-
-export type JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput = {
+export type JobListingCategoryUpdateToOneWithWhereWithoutListingsInput = {
   data: JobListingCategoryUpdateWithoutListingsInput;
-  where: JobListingCategoryWhereUniqueInput;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCategoryUpdateWithoutListingsInput = {
@@ -1830,10 +2150,10 @@ export type JobListingCategoryUpdateWithoutListingsInput = {
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
-export type JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput = {
+export type JobListingCategoryUpsertWithoutListingsInput = {
   create: JobListingCategoryCreateWithoutListingsInput;
   update: JobListingCategoryUpdateWithoutListingsInput;
-  where: JobListingCategoryWhereUniqueInput;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCategoryWhereInput = {
@@ -1842,7 +2162,7 @@ export type JobListingCategoryWhereInput = {
   OR?: InputMaybe<Array<JobListingCategoryWhereInput>>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
-  listings?: InputMaybe<JobListingListRelationFilter>;
+  listings?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   name?: InputMaybe<StringFilter>;
 };
 
@@ -1852,7 +2172,7 @@ export type JobListingCategoryWhereUniqueInput = {
   OR?: InputMaybe<Array<JobListingCategoryWhereInput>>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
-  listings?: InputMaybe<JobListingListRelationFilter>;
+  listings?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   name?: InputMaybe<StringFilter>;
 };
 
@@ -1864,7 +2184,7 @@ export type JobListingCount = {
 
 
 export type JobListingCountCategoriesArgs = {
-  where?: InputMaybe<JobListingCategoryWhereInput>;
+  where?: InputMaybe<CategoryOnJobListingWhereInput>;
 };
 
 
@@ -1875,7 +2195,7 @@ export type JobListingCountSavesArgs = {
 export type JobListingCountAggregate = {
   __typename?: 'JobListingCountAggregate';
   _all: Scalars['Int']['output'];
-  companyId: Scalars['Int']['output'];
+  company_id: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
   description_raw: Scalars['Int']['output'];
   external_application_url: Scalars['Int']['output'];
@@ -1892,7 +2212,8 @@ export type JobListingCountAggregate = {
 };
 
 export type JobListingCountOrderByAggregateInput = {
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -1907,8 +2228,9 @@ export type JobListingCountOrderByAggregateInput = {
 };
 
 export type JobListingCreateInput = {
-  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
+  categories?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutListingInput>;
   company: CompanyCreateNestedOneWithoutListingsInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1924,6 +2246,7 @@ export type JobListingCreateInput = {
 };
 
 export type JobListingCreateManyCompanyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1943,7 +2266,8 @@ export type JobListingCreateManyCompanyInputEnvelope = {
 };
 
 export type JobListingCreateManyInput = {
-  companyId: Scalars['String']['input'];
+  company_id: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1957,17 +2281,17 @@ export type JobListingCreateManyInput = {
   work_from?: InputMaybe<WorkFromHome>;
 };
 
-export type JobListingCreateNestedManyWithoutCategoriesInput = {
-  connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCategoriesInput>>;
-  create?: InputMaybe<Array<JobListingCreateWithoutCategoriesInput>>;
-};
-
 export type JobListingCreateNestedManyWithoutCompanyInput = {
   connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCompanyInput>>;
   create?: InputMaybe<Array<JobListingCreateWithoutCompanyInput>>;
   createMany?: InputMaybe<JobListingCreateManyCompanyInputEnvelope>;
+};
+
+export type JobListingCreateNestedOneWithoutCategoriesInput = {
+  connect?: InputMaybe<JobListingWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<JobListingCreateOrConnectWithoutCategoriesInput>;
+  create?: InputMaybe<JobListingCreateWithoutCategoriesInput>;
 };
 
 export type JobListingCreateNestedOneWithoutSavesInput = {
@@ -1993,6 +2317,7 @@ export type JobListingCreateOrConnectWithoutSavesInput = {
 
 export type JobListingCreateWithoutCategoriesInput = {
   company: CompanyCreateNestedOneWithoutListingsInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -2008,7 +2333,8 @@ export type JobListingCreateWithoutCategoriesInput = {
 };
 
 export type JobListingCreateWithoutCompanyInput = {
-  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
+  categories?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutListingInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -2024,8 +2350,9 @@ export type JobListingCreateWithoutCompanyInput = {
 };
 
 export type JobListingCreateWithoutSavesInput = {
-  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
+  categories?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutListingInput>;
   company: CompanyCreateNestedOneWithoutListingsInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -2063,7 +2390,7 @@ export type JobListingGroupBy = {
   _count?: Maybe<JobListingCountAggregate>;
   _max?: Maybe<JobListingMaxAggregate>;
   _min?: Maybe<JobListingMinAggregate>;
-  companyId: Scalars['String']['output'];
+  company_id: Scalars['String']['output'];
   createdAt: Scalars['DateTimeISO']['output'];
   description_raw: Scalars['String']['output'];
   external_application_url?: Maybe<Scalars['String']['output']>;
@@ -2093,7 +2420,7 @@ export type JobListingListRelationFilter = {
 
 export type JobListingMaxAggregate = {
   __typename?: 'JobListingMaxAggregate';
-  companyId?: Maybe<Scalars['String']['output']>;
+  company_id?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   description_raw?: Maybe<Scalars['String']['output']>;
   external_application_url?: Maybe<Scalars['String']['output']>;
@@ -2107,7 +2434,8 @@ export type JobListingMaxAggregate = {
 };
 
 export type JobListingMaxOrderByAggregateInput = {
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -2120,7 +2448,7 @@ export type JobListingMaxOrderByAggregateInput = {
 
 export type JobListingMinAggregate = {
   __typename?: 'JobListingMinAggregate';
-  companyId?: Maybe<Scalars['String']['output']>;
+  company_id?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   description_raw?: Maybe<Scalars['String']['output']>;
   external_application_url?: Maybe<Scalars['String']['output']>;
@@ -2134,7 +2462,8 @@ export type JobListingMinAggregate = {
 };
 
 export type JobListingMinOrderByAggregateInput = {
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -2150,7 +2479,7 @@ export type JobListingOrderByRelationAggregateInput = {
 };
 
 export enum JobListingOrderByRelevanceFieldEnum {
-  CompanyId = 'companyId',
+  CompanyId = 'company_id',
   DescriptionRaw = 'description_raw',
   ExternalApplicationUrl = 'external_application_url',
   Id = 'id',
@@ -2170,7 +2499,8 @@ export type JobListingOrderByWithAggregationInput = {
   _count?: InputMaybe<JobListingCountOrderByAggregateInput>;
   _max?: InputMaybe<JobListingMaxOrderByAggregateInput>;
   _min?: InputMaybe<JobListingMinOrderByAggregateInput>;
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrderInput>;
   id?: InputMaybe<SortOrder>;
@@ -2186,9 +2516,10 @@ export type JobListingOrderByWithAggregationInput = {
 
 export type JobListingOrderByWithRelationInput = {
   _relevance?: InputMaybe<JobListingOrderByRelevanceInput>;
-  categories?: InputMaybe<JobListingCategoryOrderByRelationAggregateInput>;
+  categories?: InputMaybe<CategoryOnJobListingOrderByRelationAggregateInput>;
   company?: InputMaybe<CompanyOrderByWithRelationInput>;
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrderInput>;
   id?: InputMaybe<SortOrder>;
@@ -2209,7 +2540,7 @@ export type JobListingRelationFilter = {
 };
 
 export enum JobListingScalarFieldEnum {
-  CompanyId = 'companyId',
+  CompanyId = 'company_id',
   CreatedAt = 'createdAt',
   DescriptionRaw = 'description_raw',
   ExternalApplicationUrl = 'external_application_url',
@@ -2229,7 +2560,8 @@ export type JobListingScalarWhereInput = {
   AND?: InputMaybe<Array<JobListingScalarWhereInput>>;
   NOT?: InputMaybe<Array<JobListingScalarWhereInput>>;
   OR?: InputMaybe<Array<JobListingScalarWhereInput>>;
-  companyId?: InputMaybe<StringFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   description_raw?: InputMaybe<StringFilter>;
   external_application_url?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
@@ -2247,7 +2579,8 @@ export type JobListingScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<JobListingScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<JobListingScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<JobListingScalarWhereWithAggregatesInput>>;
-  companyId?: InputMaybe<StringWithAggregatesFilter>;
+  company_id?: InputMaybe<StringWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   description_raw?: InputMaybe<StringWithAggregatesFilter>;
   external_application_url?: InputMaybe<StringNullableWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
@@ -2262,8 +2595,9 @@ export type JobListingScalarWhereWithAggregatesInput = {
 };
 
 export type JobListingUpdateInput = {
-  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
+  categories?: InputMaybe<CategoryOnJobListingUpdateManyWithoutListingNestedInput>;
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2279,6 +2613,7 @@ export type JobListingUpdateInput = {
 };
 
 export type JobListingUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2292,27 +2627,9 @@ export type JobListingUpdateManyMutationInput = {
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
-export type JobListingUpdateManyWithWhereWithoutCategoriesInput = {
-  data: JobListingUpdateManyMutationInput;
-  where: JobListingScalarWhereInput;
-};
-
 export type JobListingUpdateManyWithWhereWithoutCompanyInput = {
   data: JobListingUpdateManyMutationInput;
   where: JobListingScalarWhereInput;
-};
-
-export type JobListingUpdateManyWithoutCategoriesNestedInput = {
-  connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCategoriesInput>>;
-  create?: InputMaybe<Array<JobListingCreateWithoutCategoriesInput>>;
-  delete?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<JobListingScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  set?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  update?: InputMaybe<Array<JobListingUpdateWithWhereUniqueWithoutCategoriesInput>>;
-  updateMany?: InputMaybe<Array<JobListingUpdateManyWithWhereWithoutCategoriesInput>>;
-  upsert?: InputMaybe<Array<JobListingUpsertWithWhereUniqueWithoutCategoriesInput>>;
 };
 
 export type JobListingUpdateManyWithoutCompanyNestedInput = {
@@ -2329,6 +2646,14 @@ export type JobListingUpdateManyWithoutCompanyNestedInput = {
   upsert?: InputMaybe<Array<JobListingUpsertWithWhereUniqueWithoutCompanyInput>>;
 };
 
+export type JobListingUpdateOneRequiredWithoutCategoriesNestedInput = {
+  connect?: InputMaybe<JobListingWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<JobListingCreateOrConnectWithoutCategoriesInput>;
+  create?: InputMaybe<JobListingCreateWithoutCategoriesInput>;
+  update?: InputMaybe<JobListingUpdateToOneWithWhereWithoutCategoriesInput>;
+  upsert?: InputMaybe<JobListingUpsertWithoutCategoriesInput>;
+};
+
 export type JobListingUpdateOneRequiredWithoutSavesNestedInput = {
   connect?: InputMaybe<JobListingWhereUniqueInput>;
   connectOrCreate?: InputMaybe<JobListingCreateOrConnectWithoutSavesInput>;
@@ -2337,14 +2662,14 @@ export type JobListingUpdateOneRequiredWithoutSavesNestedInput = {
   upsert?: InputMaybe<JobListingUpsertWithoutSavesInput>;
 };
 
-export type JobListingUpdateToOneWithWhereWithoutSavesInput = {
-  data: JobListingUpdateWithoutSavesInput;
+export type JobListingUpdateToOneWithWhereWithoutCategoriesInput = {
+  data: JobListingUpdateWithoutCategoriesInput;
   where?: InputMaybe<JobListingWhereInput>;
 };
 
-export type JobListingUpdateWithWhereUniqueWithoutCategoriesInput = {
-  data: JobListingUpdateWithoutCategoriesInput;
-  where: JobListingWhereUniqueInput;
+export type JobListingUpdateToOneWithWhereWithoutSavesInput = {
+  data: JobListingUpdateWithoutSavesInput;
+  where?: InputMaybe<JobListingWhereInput>;
 };
 
 export type JobListingUpdateWithWhereUniqueWithoutCompanyInput = {
@@ -2354,6 +2679,7 @@ export type JobListingUpdateWithWhereUniqueWithoutCompanyInput = {
 
 export type JobListingUpdateWithoutCategoriesInput = {
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2369,7 +2695,8 @@ export type JobListingUpdateWithoutCategoriesInput = {
 };
 
 export type JobListingUpdateWithoutCompanyInput = {
-  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
+  categories?: InputMaybe<CategoryOnJobListingUpdateManyWithoutListingNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2385,8 +2712,9 @@ export type JobListingUpdateWithoutCompanyInput = {
 };
 
 export type JobListingUpdateWithoutSavesInput = {
-  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
+  categories?: InputMaybe<CategoryOnJobListingUpdateManyWithoutListingNestedInput>;
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2410,16 +2738,16 @@ export type JobListingUpdatelanguagesInput = {
   set?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
-export type JobListingUpsertWithWhereUniqueWithoutCategoriesInput = {
-  create: JobListingCreateWithoutCategoriesInput;
-  update: JobListingUpdateWithoutCategoriesInput;
-  where: JobListingWhereUniqueInput;
-};
-
 export type JobListingUpsertWithWhereUniqueWithoutCompanyInput = {
   create: JobListingCreateWithoutCompanyInput;
   update: JobListingUpdateWithoutCompanyInput;
   where: JobListingWhereUniqueInput;
+};
+
+export type JobListingUpsertWithoutCategoriesInput = {
+  create: JobListingCreateWithoutCategoriesInput;
+  update: JobListingUpdateWithoutCategoriesInput;
+  where?: InputMaybe<JobListingWhereInput>;
 };
 
 export type JobListingUpsertWithoutSavesInput = {
@@ -2432,9 +2760,10 @@ export type JobListingWhereInput = {
   AND?: InputMaybe<Array<JobListingWhereInput>>;
   NOT?: InputMaybe<Array<JobListingWhereInput>>;
   OR?: InputMaybe<Array<JobListingWhereInput>>;
-  categories?: InputMaybe<JobListingCategoryListRelationFilter>;
+  categories?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
-  companyId?: InputMaybe<StringFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   description_raw?: InputMaybe<StringFilter>;
   external_application_url?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
@@ -2453,9 +2782,10 @@ export type JobListingWhereUniqueInput = {
   AND?: InputMaybe<Array<JobListingWhereInput>>;
   NOT?: InputMaybe<Array<JobListingWhereInput>>;
   OR?: InputMaybe<Array<JobListingWhereInput>>;
-  categories?: InputMaybe<JobListingCategoryListRelationFilter>;
+  categories?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
-  companyId?: InputMaybe<StringFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   description_raw?: InputMaybe<StringFilter>;
   external_application_url?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -4030,7 +4360,7 @@ export type SavedListing = {
   createdAt: Scalars['DateTimeISO']['output'];
   id: Scalars['ID']['output'];
   listing: JobListing;
-  listingId: Scalars['String']['output'];
+  listing_id: Scalars['String']['output'];
   metadata?: Maybe<Scalars['JSON']['output']>;
   updatedAt: Scalars['DateTimeISO']['output'];
   user: User;
@@ -4042,20 +4372,22 @@ export type SavedListingCountAggregate = {
   _all: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
-  listingId: Scalars['Int']['output'];
+  listing_id: Scalars['Int']['output'];
   metadata: Scalars['Int']['output'];
   updatedAt: Scalars['Int']['output'];
   userId: Scalars['Int']['output'];
 };
 
 export type SavedListingCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type SavedListingCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   listing: JobListingCreateNestedOneWithoutSavesInput;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -4063,13 +4395,15 @@ export type SavedListingCreateInput = {
 };
 
 export type SavedListingCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  listingId: Scalars['String']['input'];
+  listing_id: Scalars['String']['input'];
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   userId: Scalars['String']['input'];
 };
 
 export type SavedListingCreateManyListingInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   userId: Scalars['String']['input'];
@@ -4081,8 +4415,9 @@ export type SavedListingCreateManyListingInputEnvelope = {
 };
 
 export type SavedListingCreateManyUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  listingId: Scalars['String']['input'];
+  listing_id: Scalars['String']['input'];
   metadata?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -4116,12 +4451,14 @@ export type SavedListingCreateOrConnectWithoutUserInput = {
 };
 
 export type SavedListingCreateWithoutListingInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   user: UserCreateNestedOneWithoutSaved_ListingsInput;
 };
 
 export type SavedListingCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   listing: JobListingCreateNestedOneWithoutSavesInput;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -4134,7 +4471,7 @@ export type SavedListingGroupBy = {
   _min?: Maybe<SavedListingMinAggregate>;
   createdAt: Scalars['DateTimeISO']['output'];
   id: Scalars['String']['output'];
-  listingId: Scalars['String']['output'];
+  listing_id: Scalars['String']['output'];
   metadata?: Maybe<Scalars['JSON']['output']>;
   updatedAt: Scalars['DateTimeISO']['output'];
   userId: Scalars['String']['output'];
@@ -4150,14 +4487,15 @@ export type SavedListingMaxAggregate = {
   __typename?: 'SavedListingMaxAggregate';
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   id?: Maybe<Scalars['String']['output']>;
-  listingId?: Maybe<Scalars['String']['output']>;
+  listing_id?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type SavedListingMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
@@ -4165,14 +4503,15 @@ export type SavedListingMinAggregate = {
   __typename?: 'SavedListingMinAggregate';
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   id?: Maybe<Scalars['String']['output']>;
-  listingId?: Maybe<Scalars['String']['output']>;
+  listing_id?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type SavedListingMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
@@ -4182,7 +4521,7 @@ export type SavedListingOrderByRelationAggregateInput = {
 
 export enum SavedListingOrderByRelevanceFieldEnum {
   Id = 'id',
-  ListingId = 'listingId',
+  ListingId = 'listing_id',
   UserId = 'userId'
 }
 
@@ -4196,17 +4535,19 @@ export type SavedListingOrderByWithAggregationInput = {
   _count?: InputMaybe<SavedListingCountOrderByAggregateInput>;
   _max?: InputMaybe<SavedListingMaxOrderByAggregateInput>;
   _min?: InputMaybe<SavedListingMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrderInput>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type SavedListingOrderByWithRelationInput = {
   _relevance?: InputMaybe<SavedListingOrderByRelevanceInput>;
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   listing?: InputMaybe<JobListingOrderByWithRelationInput>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrderInput>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userId?: InputMaybe<SortOrder>;
@@ -4215,7 +4556,7 @@ export type SavedListingOrderByWithRelationInput = {
 export enum SavedListingScalarFieldEnum {
   CreatedAt = 'createdAt',
   Id = 'id',
-  ListingId = 'listingId',
+  ListingId = 'listing_id',
   Metadata = 'metadata',
   UpdatedAt = 'updatedAt',
   UserId = 'userId'
@@ -4225,8 +4566,9 @@ export type SavedListingScalarWhereInput = {
   AND?: InputMaybe<Array<SavedListingScalarWhereInput>>;
   NOT?: InputMaybe<Array<SavedListingScalarWhereInput>>;
   OR?: InputMaybe<Array<SavedListingScalarWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
-  listingId?: InputMaybe<StringFilter>;
+  listing_id?: InputMaybe<StringFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   userId?: InputMaybe<StringFilter>;
 };
@@ -4235,13 +4577,15 @@ export type SavedListingScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<SavedListingScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<SavedListingScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<SavedListingScalarWhereWithAggregatesInput>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
-  listingId?: InputMaybe<StringWithAggregatesFilter>;
+  listing_id?: InputMaybe<StringWithAggregatesFilter>;
   metadata?: InputMaybe<JsonNullableWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
 };
 
 export type SavedListingUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listing?: InputMaybe<JobListingUpdateOneRequiredWithoutSavesNestedInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -4249,6 +4593,7 @@ export type SavedListingUpdateInput = {
 };
 
 export type SavedListingUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
 };
@@ -4302,12 +4647,14 @@ export type SavedListingUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type SavedListingUpdateWithoutListingInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutSaved_ListingsNestedInput>;
 };
 
 export type SavedListingUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listing?: InputMaybe<JobListingUpdateOneRequiredWithoutSavesNestedInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -4329,9 +4676,10 @@ export type SavedListingWhereInput = {
   AND?: InputMaybe<Array<SavedListingWhereInput>>;
   NOT?: InputMaybe<Array<SavedListingWhereInput>>;
   OR?: InputMaybe<Array<SavedListingWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   listing?: InputMaybe<JobListingRelationFilter>;
-  listingId?: InputMaybe<StringFilter>;
+  listing_id?: InputMaybe<StringFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
@@ -4341,9 +4689,10 @@ export type SavedListingWhereUniqueInput = {
   AND?: InputMaybe<Array<SavedListingWhereInput>>;
   NOT?: InputMaybe<Array<SavedListingWhereInput>>;
   OR?: InputMaybe<Array<SavedListingWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   listing?: InputMaybe<JobListingRelationFilter>;
-  listingId?: InputMaybe<StringFilter>;
+  listing_id?: InputMaybe<StringFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
@@ -4377,6 +4726,7 @@ export type SessionCountAggregate = {
 };
 
 export type SessionCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -4384,6 +4734,7 @@ export type SessionCountOrderByAggregateInput = {
 };
 
 export type SessionCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expiresAt: Scalars['DateTimeISO']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken: Scalars['String']['input'];
@@ -4391,6 +4742,7 @@ export type SessionCreateInput = {
 };
 
 export type SessionCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expiresAt: Scalars['DateTimeISO']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken: Scalars['String']['input'];
@@ -4398,6 +4750,7 @@ export type SessionCreateManyInput = {
 };
 
 export type SessionCreateManyUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expiresAt: Scalars['DateTimeISO']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken: Scalars['String']['input'];
@@ -4421,6 +4774,7 @@ export type SessionCreateOrConnectWithoutUserInput = {
 };
 
 export type SessionCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expiresAt: Scalars['DateTimeISO']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken: Scalars['String']['input'];
@@ -4456,6 +4810,7 @@ export type SessionMaxAggregate = {
 };
 
 export type SessionMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -4473,6 +4828,7 @@ export type SessionMinAggregate = {
 };
 
 export type SessionMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -4499,6 +4855,7 @@ export type SessionOrderByWithAggregationInput = {
   _count?: InputMaybe<SessionCountOrderByAggregateInput>;
   _max?: InputMaybe<SessionMaxOrderByAggregateInput>;
   _min?: InputMaybe<SessionMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -4507,6 +4864,7 @@ export type SessionOrderByWithAggregationInput = {
 
 export type SessionOrderByWithRelationInput = {
   _relevance?: InputMaybe<SessionOrderByRelevanceInput>;
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -4527,6 +4885,7 @@ export type SessionScalarWhereInput = {
   AND?: InputMaybe<Array<SessionScalarWhereInput>>;
   NOT?: InputMaybe<Array<SessionScalarWhereInput>>;
   OR?: InputMaybe<Array<SessionScalarWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expiresAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   sessionToken?: InputMaybe<StringFilter>;
@@ -4537,6 +4896,7 @@ export type SessionScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<SessionScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<SessionScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<SessionScalarWhereWithAggregatesInput>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   expiresAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   sessionToken?: InputMaybe<StringWithAggregatesFilter>;
@@ -4544,6 +4904,7 @@ export type SessionScalarWhereWithAggregatesInput = {
 };
 
 export type SessionUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expiresAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   sessionToken?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -4551,6 +4912,7 @@ export type SessionUpdateInput = {
 };
 
 export type SessionUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expiresAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   sessionToken?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -4581,6 +4943,7 @@ export type SessionUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type SessionUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expiresAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   sessionToken?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -4596,6 +4959,7 @@ export type SessionWhereInput = {
   AND?: InputMaybe<Array<SessionWhereInput>>;
   NOT?: InputMaybe<Array<SessionWhereInput>>;
   OR?: InputMaybe<Array<SessionWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expiresAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   sessionToken?: InputMaybe<StringFilter>;
@@ -4607,6 +4971,7 @@ export type SessionWhereUniqueInput = {
   AND?: InputMaybe<Array<SessionWhereInput>>;
   NOT?: InputMaybe<Array<SessionWhereInput>>;
   OR?: InputMaybe<Array<SessionWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expiresAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken?: InputMaybe<Scalars['String']['input']>;
@@ -4823,6 +5188,7 @@ export type UserCountAggregate = {
 };
 
 export type UserCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -4835,6 +5201,7 @@ export type UserCountOrderByAggregateInput = {
 
 export type UserCreateInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -4848,6 +5215,7 @@ export type UserCreateInput = {
 };
 
 export type UserCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -4892,6 +5260,7 @@ export type UserCreateOrConnectWithoutSessionsInput = {
 };
 
 export type UserCreateWithoutAccountsInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -4906,6 +5275,7 @@ export type UserCreateWithoutAccountsInput = {
 
 export type UserCreateWithoutSaved_ListingsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -4919,6 +5289,7 @@ export type UserCreateWithoutSaved_ListingsInput = {
 
 export type UserCreateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -4963,6 +5334,7 @@ export type UserMaxAggregate = {
 };
 
 export type UserMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -4987,6 +5359,7 @@ export type UserMinAggregate = {
 };
 
 export type UserMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -5016,6 +5389,7 @@ export type UserOrderByWithAggregationInput = {
   _count?: InputMaybe<UserCountOrderByAggregateInput>;
   _max?: InputMaybe<UserMaxOrderByAggregateInput>;
   _min?: InputMaybe<UserMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrderInput>;
   first_name?: InputMaybe<SortOrder>;
@@ -5029,6 +5403,7 @@ export type UserOrderByWithAggregationInput = {
 export type UserOrderByWithRelationInput = {
   _relevance?: InputMaybe<UserOrderByRelevanceInput>;
   accounts?: InputMaybe<AccountOrderByRelationAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrderInput>;
   first_name?: InputMaybe<SortOrder>;
@@ -5064,6 +5439,7 @@ export type UserScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
   emailVerified?: InputMaybe<DateTimeNullableWithAggregatesFilter>;
   first_name?: InputMaybe<StringWithAggregatesFilter>;
@@ -5139,6 +5515,7 @@ export type UserSignUpInput = {
 
 export type UserUpdateInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5152,6 +5529,7 @@ export type UserUpdateInput = {
 };
 
 export type UserUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5202,6 +5580,7 @@ export type UserUpdateToOneWithWhereWithoutSessionsInput = {
 };
 
 export type UserUpdateWithoutAccountsInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5216,6 +5595,7 @@ export type UserUpdateWithoutAccountsInput = {
 
 export type UserUpdateWithoutSaved_ListingsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5229,6 +5609,7 @@ export type UserUpdateWithoutSaved_ListingsInput = {
 
 export type UserUpdateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5263,6 +5644,7 @@ export type UserWhereInput = {
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
   accounts?: InputMaybe<AccountListRelationFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   emailVerified?: InputMaybe<DateTimeNullableFilter>;
   first_name?: InputMaybe<StringFilter>;
@@ -5280,6 +5662,7 @@ export type UserWhereUniqueInput = {
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
   accounts?: InputMaybe<AccountListRelationFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
   emailVerified?: InputMaybe<DateTimeNullableFilter>;
   first_name?: InputMaybe<StringFilter>;
@@ -5467,7 +5850,21 @@ export type GetTopEmployersQueryVariables = Exact<{
 }>;
 
 
-export type GetTopEmployersQuery = { __typename?: 'Query', getTopCompanies: Array<{ __typename?: 'Company', id: string, name: string, banner_image_url?: any | null, brand_image_url?: any | null, _count?: { __typename?: 'CompanyCount', listings: number } | null }> };
+export type GetTopEmployersQuery = { __typename?: 'Query', getTopCompanies: Array<{ __typename?: 'Company', id: string, name: string, banner_image_url?: any | null, brand_image_url?: any | null, listingsCount: number, _count?: { __typename?: 'CompanyCount', listings: number } | null }> };
+
+export type UnSaveJobListingMutationVariables = Exact<{
+  jobListingId: Scalars['String']['input'];
+}>;
+
+
+export type UnSaveJobListingMutation = { __typename?: 'Mutation', unSaveJobListing?: boolean | null };
+
+export type SaveJobListingMutationVariables = Exact<{
+  jobListingId: Scalars['String']['input'];
+}>;
+
+
+export type SaveJobListingMutation = { __typename?: 'Mutation', saveJobListing?: { __typename?: 'SavedListing', id: string, listing_id: string, userId: string, metadata?: any | null, createdAt: any } | null };
 
 export type GetCompanyWithListingsQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -5486,28 +5883,14 @@ export type GetCompanyQueryQueryVariables = Exact<{
 }>;
 
 
-export type GetCompanyQueryQuery = { __typename?: 'Query', getCompany?: { __typename?: 'Company', id: string, name: string, about_raw: string, career_description_raw: string, benefits: Array<string>, company_values: Array<string>, work_environment: Array<string>, hiring_process: Array<string>, createdAt: any, updatedAt: any, metadata?: any | null, email: any, brand_image_url?: any | null, banner_image_url?: any | null, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }>, listings: Array<{ __typename?: 'JobListing', id: string, name: string, location: string, languages: Array<string>, createdAt: any, description_raw: string, keywords: Array<string>, level?: JobListingLevel | null, parameters: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null }>, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string, coordinates?: { __typename?: 'Coordinates', latitude?: any | null, longitude?: any | null } | null }> } | null, local_info?: { __typename?: 'CompanyLocalInfo', since?: any | null, employeeCount?: number | null, locations: Array<string> } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', founded?: any | null, employeeCount?: number | null, headquarters: string, locations: Array<string> } | null } | null };
-
-export type UnSaveJobListingMutationVariables = Exact<{
-  jobListingId: Scalars['String']['input'];
-}>;
-
-
-export type UnSaveJobListingMutation = { __typename?: 'Mutation', unSaveJobListing?: boolean | null };
-
-export type SaveJobListingMutationVariables = Exact<{
-  jobListingId: Scalars['String']['input'];
-}>;
-
-
-export type SaveJobListingMutation = { __typename?: 'Mutation', saveJobListing?: { __typename?: 'SavedListing', id: string, listingId: string, userId: string, metadata?: any | null, createdAt: any } | null };
+export type GetCompanyQueryQuery = { __typename?: 'Query', getCompany?: { __typename?: 'Company', id: string, name: string, about_raw: string, career_description_raw: string, benefits: Array<string>, company_values: Array<string>, work_environment: Array<string>, hiring_process: Array<string>, createdAt: any, updatedAt: any, metadata?: any | null, email: any, brand_image_url?: any | null, banner_image_url?: any | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> | null, listings: Array<{ __typename?: 'JobListing', id: string, name: string, location: string, languages: Array<string>, createdAt: any, description_raw: string, keywords: Array<string>, level?: JobListingLevel | null, parameters: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null }>, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string, coordinates?: { __typename?: 'Coordinates', latitude?: any | null, longitude?: any | null } | null }> } | null, local_info?: { __typename?: 'CompanyLocalInfo', since?: any | null, employeeCount?: number | null, locations: Array<string> } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', founded?: any | null, employeeCount?: number | null, headquarters: string, locations: Array<string> } | null } | null };
 
 export type GetCompanyJobQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type GetCompanyJobQuery = { __typename?: 'Query', getJobListing?: { __typename?: 'JobListing', id: string, name: string, description_raw: string, external_application_url?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, location: string, languages: Array<string>, parameters: any, keywords: Array<string>, companyId: string, createdAt: any, updatedAt: any } | null };
+export type GetCompanyJobQuery = { __typename?: 'Query', getJobListing?: { __typename?: 'JobListing', id: string, name: string, description_raw: string, external_application_url?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, location: string, languages: Array<string>, parameters: any, keywords: Array<string>, company_id: string, createdAt: any, updatedAt: any } | null };
 
 export type SignInWithEmailCodeMutationVariables = Exact<{
   code: Scalars['Int']['input'];
@@ -5551,7 +5934,7 @@ export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 
 export type MeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: any, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null, saved_listings: Array<{ __typename?: 'SavedListing', id: string, listingId: string, metadata?: any | null, createdAt: any }> } | null };
+export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: any, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null, saved_listings: Array<{ __typename?: 'SavedListing', id: string, listing_id: string, metadata?: any | null, createdAt: any }> } | null };
 
 export type GoogleLoginQueryQueryVariables = Exact<{
   redirectUrl: Scalars['String']['input'];
@@ -5562,19 +5945,19 @@ export type GoogleLoginQueryQuery = { __typename?: 'Query', googleLoginUrl: stri
 
 
 export const GetTopJobCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTopJobCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetTopListingCategoriesInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTopListingCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]} as unknown as DocumentNode<GetTopJobCategoriesQuery, GetTopJobCategoriesQueryVariables>;
-export const GetTopEmployersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTopEmployers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetTopCompaniesInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTopCompanies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]} as unknown as DocumentNode<GetTopEmployersQuery, GetTopEmployersQueryVariables>;
+export const GetTopEmployersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTopEmployers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetTopCompaniesInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTopCompanies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"listingsCount"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]} as unknown as DocumentNode<GetTopEmployersQuery, GetTopEmployersQueryVariables>;
+export const UnSaveJobListingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnSaveJobListing"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"jobListingId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unSaveJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"listingId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"jobListingId"}}}]}]}}]} as unknown as DocumentNode<UnSaveJobListingMutation, UnSaveJobListingMutationVariables>;
+export const SaveJobListingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SaveJobListing"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"jobListingId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"saveJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"listingId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"jobListingId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"listing_id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<SaveJobListingMutation, SaveJobListingMutationVariables>;
 export const GetCompanyWithListingsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyWithListingsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCompany"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"listings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"isSaved"},"directives":[{"kind":"Directive","name":{"kind":"Name","value":"client"}}]}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyWithListingsQueryQuery, GetCompanyWithListingsQueryQueryVariables>;
 export const GetAllCompaniesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllCompanies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"companies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetAllCompaniesQuery, GetAllCompaniesQueryVariables>;
-export const GetCompanyQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCompany"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"about_raw"}},{"kind":"Field","name":{"kind":"Name","value":"career_description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"benefits"}},{"kind":"Field","name":{"kind":"Name","value":"company_values"}},{"kind":"Field","name":{"kind":"Name","value":"work_environment"}},{"kind":"Field","name":{"kind":"Name","value":"hiring_process"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"listings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"coordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company_bulstat"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"website_url"}},{"kind":"Field","name":{"kind":"Name","value":"facebook_url"}},{"kind":"Field","name":{"kind":"Name","value":"twitter_url"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin_url"}},{"kind":"Field","name":{"kind":"Name","value":"youtube_url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"local_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"since"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldwide_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"headquarters"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyQueryQuery, GetCompanyQueryQueryVariables>;
-export const UnSaveJobListingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnSaveJobListing"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"jobListingId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unSaveJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"listingId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"jobListingId"}}}]}]}}]} as unknown as DocumentNode<UnSaveJobListingMutation, UnSaveJobListingMutationVariables>;
-export const SaveJobListingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SaveJobListing"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"jobListingId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"saveJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"listingId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"jobListingId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"listingId"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<SaveJobListingMutation, SaveJobListingMutationVariables>;
-export const GetCompanyJobDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyJob"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"companyId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetCompanyJobQuery, GetCompanyJobQueryVariables>;
+export const GetCompanyQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCompany"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"about_raw"}},{"kind":"Field","name":{"kind":"Name","value":"career_description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"benefits"}},{"kind":"Field","name":{"kind":"Name","value":"company_values"}},{"kind":"Field","name":{"kind":"Name","value":"work_environment"}},{"kind":"Field","name":{"kind":"Name","value":"hiring_process"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"listings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"coordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company_bulstat"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"website_url"}},{"kind":"Field","name":{"kind":"Name","value":"facebook_url"}},{"kind":"Field","name":{"kind":"Name","value":"twitter_url"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin_url"}},{"kind":"Field","name":{"kind":"Name","value":"youtube_url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"local_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"since"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldwide_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"headquarters"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyQueryQuery, GetCompanyQueryQueryVariables>;
+export const GetCompanyJobDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyJob"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetCompanyJobQuery, GetCompanyJobQueryVariables>;
 export const SignInWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignInWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signInWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignInWithEmailCodeMutation, SignInWithEmailCodeMutationVariables>;
 export const GenerateEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GenerateEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generateSignUpEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"expires"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<GenerateEmailCodeMutation, GenerateEmailCodeMutationVariables>;
 export const SignUpWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignUpWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUpWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"Argument","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignUpWithEmailCodeMutation, SignUpWithEmailCodeMutationVariables>;
 export const SignOutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignOut"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signOut"}}]}}]} as unknown as DocumentNode<SignOutMutation, SignOutMutationVariables>;
 export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"signInModel"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserSignInInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signInModel"},"value":{"kind":"Variable","name":{"kind":"Name","value":"signInModel"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"cookieConsent"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"functionality"}},{"kind":"Field","name":{"kind":"Name","value":"marketing"}},{"kind":"Field","name":{"kind":"Name","value":"necessary"}},{"kind":"Field","name":{"kind":"Name","value":"statistics"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
-export const MeQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MeQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"cookieConsent"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"functionality"}},{"kind":"Field","name":{"kind":"Name","value":"marketing"}},{"kind":"Field","name":{"kind":"Name","value":"necessary"}},{"kind":"Field","name":{"kind":"Name","value":"statistics"}}]}},{"kind":"Field","name":{"kind":"Name","value":"saved_listings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"listingId"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]}}]} as unknown as DocumentNode<MeQueryQuery, MeQueryQueryVariables>;
+export const MeQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MeQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"cookieConsent"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"functionality"}},{"kind":"Field","name":{"kind":"Name","value":"marketing"}},{"kind":"Field","name":{"kind":"Name","value":"necessary"}},{"kind":"Field","name":{"kind":"Name","value":"statistics"}}]}},{"kind":"Field","name":{"kind":"Name","value":"saved_listings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"listing_id"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]}}]} as unknown as DocumentNode<MeQueryQuery, MeQueryQueryVariables>;
 export const GoogleLoginQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GoogleLoginQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"redirectUrl"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"googleLoginUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"redirect_url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"redirectUrl"}}}]}]}}]} as unknown as DocumentNode<GoogleLoginQueryQuery, GoogleLoginQueryQueryVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -5649,6 +6032,7 @@ export type AccountCountAggregate = {
 
 export type AccountCountOrderByAggregateInput = {
   access_token?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrder>;
   id_token?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrder>;
@@ -5664,6 +6048,7 @@ export type AccountCountOrderByAggregateInput = {
 
 export type AccountCreateInput = {
   access_token?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expires_at?: InputMaybe<Scalars['Int']['input']>;
   id_token?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -5679,6 +6064,7 @@ export type AccountCreateInput = {
 
 export type AccountCreateManyInput = {
   access_token?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expires_at?: InputMaybe<Scalars['Int']['input']>;
   id_token?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -5694,6 +6080,7 @@ export type AccountCreateManyInput = {
 
 export type AccountCreateManyUserInput = {
   access_token?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expires_at?: InputMaybe<Scalars['Int']['input']>;
   id_token?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -5725,6 +6112,7 @@ export type AccountCreateOrConnectWithoutUserInput = {
 
 export type AccountCreateWithoutUserInput = {
   access_token?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expires_at?: InputMaybe<Scalars['Int']['input']>;
   id_token?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -5785,6 +6173,7 @@ export type AccountMaxAggregate = {
 
 export type AccountMaxOrderByAggregateInput = {
   access_token?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrder>;
   id_token?: InputMaybe<SortOrder>;
   provider?: InputMaybe<SortOrder>;
@@ -5816,6 +6205,7 @@ export type AccountMinAggregate = {
 
 export type AccountMinOrderByAggregateInput = {
   access_token?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrder>;
   id_token?: InputMaybe<SortOrder>;
   provider?: InputMaybe<SortOrder>;
@@ -5858,6 +6248,7 @@ export type AccountOrderByWithAggregationInput = {
   _min?: InputMaybe<AccountMinOrderByAggregateInput>;
   _sum?: InputMaybe<AccountSumOrderByAggregateInput>;
   access_token?: InputMaybe<SortOrderInput>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrderInput>;
   id_token?: InputMaybe<SortOrderInput>;
   metadata?: InputMaybe<SortOrderInput>;
@@ -5874,6 +6265,7 @@ export type AccountOrderByWithAggregationInput = {
 export type AccountOrderByWithRelationInput = {
   _relevance?: InputMaybe<AccountOrderByRelevanceInput>;
   access_token?: InputMaybe<SortOrderInput>;
+  createdAt?: InputMaybe<SortOrder>;
   expires_at?: InputMaybe<SortOrderInput>;
   id_token?: InputMaybe<SortOrderInput>;
   metadata?: InputMaybe<SortOrderInput>;
@@ -5915,6 +6307,7 @@ export type AccountScalarWhereInput = {
   NOT?: InputMaybe<Array<AccountScalarWhereInput>>;
   OR?: InputMaybe<Array<AccountScalarWhereInput>>;
   access_token?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expires_at?: InputMaybe<IntNullableFilter>;
   id_token?: InputMaybe<StringNullableFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
@@ -5933,6 +6326,7 @@ export type AccountScalarWhereWithAggregatesInput = {
   NOT?: InputMaybe<Array<AccountScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<AccountScalarWhereWithAggregatesInput>>;
   access_token?: InputMaybe<StringNullableWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   expires_at?: InputMaybe<IntNullableWithAggregatesFilter>;
   id_token?: InputMaybe<StringNullableWithAggregatesFilter>;
   metadata?: InputMaybe<JsonNullableWithAggregatesFilter>;
@@ -5957,6 +6351,7 @@ export type AccountSumOrderByAggregateInput = {
 
 export type AccountUpdateInput = {
   access_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expires_at?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   id_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -5972,6 +6367,7 @@ export type AccountUpdateInput = {
 
 export type AccountUpdateManyMutationInput = {
   access_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expires_at?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   id_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -6010,6 +6406,7 @@ export type AccountUpdateWithWhereUniqueWithoutUserInput = {
 
 export type AccountUpdateWithoutUserInput = {
   access_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expires_at?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   id_token?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -6033,6 +6430,7 @@ export type AccountWhereInput = {
   NOT?: InputMaybe<Array<AccountWhereInput>>;
   OR?: InputMaybe<Array<AccountWhereInput>>;
   access_token?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expires_at?: InputMaybe<IntNullableFilter>;
   id_token?: InputMaybe<StringNullableFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
@@ -6052,6 +6450,7 @@ export type AccountWhereUniqueInput = {
   NOT?: InputMaybe<Array<AccountWhereInput>>;
   OR?: InputMaybe<Array<AccountWhereInput>>;
   access_token?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expires_at?: InputMaybe<IntNullableFilter>;
   id_token?: InputMaybe<StringNullableFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
@@ -6137,6 +6536,391 @@ export type AggregateVerificationToken = {
   _min?: Maybe<VerificationTokenMinAggregate>;
 };
 
+export type CategoryOnCompany = {
+  __typename?: 'CategoryOnCompany';
+  category_id: Scalars['String']['output'];
+  company_id: Scalars['String']['output'];
+  createdAt: Scalars['DateTimeISO']['output'];
+  updatedAt: Scalars['DateTimeISO']['output'];
+};
+
+export type CategoryOnCompanyCompany_IdCategory_IdCompoundUniqueInput = {
+  category_id: Scalars['String']['input'];
+  company_id: Scalars['String']['input'];
+};
+
+export type CategoryOnCompanyCreateManyCategoryInput = {
+  company_id: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnCompanyCreateManyCategoryInputEnvelope = {
+  data: Array<CategoryOnCompanyCreateManyCategoryInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CategoryOnCompanyCreateManyCompanyInput = {
+  category_id: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnCompanyCreateManyCompanyInputEnvelope = {
+  data: Array<CategoryOnCompanyCreateManyCompanyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CategoryOnCompanyCreateNestedManyWithoutCategoryInput = {
+  connect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnCompanyCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<CategoryOnCompanyCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<CategoryOnCompanyCreateManyCategoryInputEnvelope>;
+};
+
+export type CategoryOnCompanyCreateNestedManyWithoutCompanyInput = {
+  connect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnCompanyCreateOrConnectWithoutCompanyInput>>;
+  create?: InputMaybe<Array<CategoryOnCompanyCreateWithoutCompanyInput>>;
+  createMany?: InputMaybe<CategoryOnCompanyCreateManyCompanyInputEnvelope>;
+};
+
+export type CategoryOnCompanyCreateOrConnectWithoutCategoryInput = {
+  create: CategoryOnCompanyCreateWithoutCategoryInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyCreateOrConnectWithoutCompanyInput = {
+  create: CategoryOnCompanyCreateWithoutCompanyInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyCreateWithoutCategoryInput = {
+  company: CompanyCreateNestedOneWithoutCategoriesInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnCompanyCreateWithoutCompanyInput = {
+  category: CompanyCategoryCreateNestedOneWithoutCompaniesInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnCompanyListRelationFilter = {
+  every?: InputMaybe<CategoryOnCompanyWhereInput>;
+  none?: InputMaybe<CategoryOnCompanyWhereInput>;
+  some?: InputMaybe<CategoryOnCompanyWhereInput>;
+};
+
+export type CategoryOnCompanyOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export enum CategoryOnCompanyOrderByRelevanceFieldEnum {
+  CategoryId = 'category_id',
+  CompanyId = 'company_id'
+}
+
+export type CategoryOnCompanyOrderByRelevanceInput = {
+  fields: Array<CategoryOnCompanyOrderByRelevanceFieldEnum>;
+  search: Scalars['String']['input'];
+  sort: SortOrder;
+};
+
+export type CategoryOnCompanyOrderByWithRelationInput = {
+  _relevance?: InputMaybe<CategoryOnCompanyOrderByRelevanceInput>;
+  category?: InputMaybe<CompanyCategoryOrderByWithRelationInput>;
+  category_id?: InputMaybe<SortOrder>;
+  company?: InputMaybe<CompanyOrderByWithRelationInput>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+};
+
+export enum CategoryOnCompanyScalarFieldEnum {
+  CategoryId = 'category_id',
+  CompanyId = 'company_id',
+  CreatedAt = 'createdAt',
+  UpdatedAt = 'updatedAt'
+}
+
+export type CategoryOnCompanyScalarWhereInput = {
+  AND?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  category_id?: InputMaybe<StringFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CategoryOnCompanyUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnCompanyUpdateManyWithWhereWithoutCategoryInput = {
+  data: CategoryOnCompanyUpdateManyMutationInput;
+  where: CategoryOnCompanyScalarWhereInput;
+};
+
+export type CategoryOnCompanyUpdateManyWithWhereWithoutCompanyInput = {
+  data: CategoryOnCompanyUpdateManyMutationInput;
+  where: CategoryOnCompanyScalarWhereInput;
+};
+
+export type CategoryOnCompanyUpdateManyWithoutCategoryNestedInput = {
+  connect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnCompanyCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<CategoryOnCompanyCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<CategoryOnCompanyCreateManyCategoryInputEnvelope>;
+  delete?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  set?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  update?: InputMaybe<Array<CategoryOnCompanyUpdateWithWhereUniqueWithoutCategoryInput>>;
+  updateMany?: InputMaybe<Array<CategoryOnCompanyUpdateManyWithWhereWithoutCategoryInput>>;
+  upsert?: InputMaybe<Array<CategoryOnCompanyUpsertWithWhereUniqueWithoutCategoryInput>>;
+};
+
+export type CategoryOnCompanyUpdateManyWithoutCompanyNestedInput = {
+  connect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnCompanyCreateOrConnectWithoutCompanyInput>>;
+  create?: InputMaybe<Array<CategoryOnCompanyCreateWithoutCompanyInput>>;
+  createMany?: InputMaybe<CategoryOnCompanyCreateManyCompanyInputEnvelope>;
+  delete?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CategoryOnCompanyScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  set?: InputMaybe<Array<CategoryOnCompanyWhereUniqueInput>>;
+  update?: InputMaybe<Array<CategoryOnCompanyUpdateWithWhereUniqueWithoutCompanyInput>>;
+  updateMany?: InputMaybe<Array<CategoryOnCompanyUpdateManyWithWhereWithoutCompanyInput>>;
+  upsert?: InputMaybe<Array<CategoryOnCompanyUpsertWithWhereUniqueWithoutCompanyInput>>;
+};
+
+export type CategoryOnCompanyUpdateWithWhereUniqueWithoutCategoryInput = {
+  data: CategoryOnCompanyUpdateWithoutCategoryInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyUpdateWithWhereUniqueWithoutCompanyInput = {
+  data: CategoryOnCompanyUpdateWithoutCompanyInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyUpdateWithoutCategoryInput = {
+  company?: InputMaybe<CompanyUpdateOneRequiredWithoutCategoriesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnCompanyUpdateWithoutCompanyInput = {
+  category?: InputMaybe<CompanyCategoryUpdateOneRequiredWithoutCompaniesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnCompanyUpsertWithWhereUniqueWithoutCategoryInput = {
+  create: CategoryOnCompanyCreateWithoutCategoryInput;
+  update: CategoryOnCompanyUpdateWithoutCategoryInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyUpsertWithWhereUniqueWithoutCompanyInput = {
+  create: CategoryOnCompanyCreateWithoutCompanyInput;
+  update: CategoryOnCompanyUpdateWithoutCompanyInput;
+  where: CategoryOnCompanyWhereUniqueInput;
+};
+
+export type CategoryOnCompanyWhereInput = {
+  AND?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  category?: InputMaybe<CompanyCategoryRelationFilter>;
+  category_id?: InputMaybe<StringFilter>;
+  company?: InputMaybe<CompanyRelationFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CategoryOnCompanyWhereUniqueInput = {
+  AND?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnCompanyWhereInput>>;
+  category?: InputMaybe<CompanyCategoryRelationFilter>;
+  category_id?: InputMaybe<StringFilter>;
+  company?: InputMaybe<CompanyRelationFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  company_id_category_id?: InputMaybe<CategoryOnCompanyCompany_IdCategory_IdCompoundUniqueInput>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CategoryOnJobListingCreateManyCategoryInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  listing_id: Scalars['String']['input'];
+};
+
+export type CategoryOnJobListingCreateManyCategoryInputEnvelope = {
+  data: Array<CategoryOnJobListingCreateManyCategoryInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CategoryOnJobListingCreateManyListingInput = {
+  category_id: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnJobListingCreateManyListingInputEnvelope = {
+  data: Array<CategoryOnJobListingCreateManyListingInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CategoryOnJobListingCreateNestedManyWithoutCategoryInput = {
+  connect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnJobListingCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<CategoryOnJobListingCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<CategoryOnJobListingCreateManyCategoryInputEnvelope>;
+};
+
+export type CategoryOnJobListingCreateNestedManyWithoutListingInput = {
+  connect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnJobListingCreateOrConnectWithoutListingInput>>;
+  create?: InputMaybe<Array<CategoryOnJobListingCreateWithoutListingInput>>;
+  createMany?: InputMaybe<CategoryOnJobListingCreateManyListingInputEnvelope>;
+};
+
+export type CategoryOnJobListingCreateOrConnectWithoutCategoryInput = {
+  create: CategoryOnJobListingCreateWithoutCategoryInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingCreateOrConnectWithoutListingInput = {
+  create: CategoryOnJobListingCreateWithoutListingInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingCreateWithoutCategoryInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  listing: JobListingCreateNestedOneWithoutCategoriesInput;
+};
+
+export type CategoryOnJobListingCreateWithoutListingInput = {
+  category: JobListingCategoryCreateNestedOneWithoutListingsInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
+export type CategoryOnJobListingListRelationFilter = {
+  every?: InputMaybe<CategoryOnJobListingWhereInput>;
+  none?: InputMaybe<CategoryOnJobListingWhereInput>;
+  some?: InputMaybe<CategoryOnJobListingWhereInput>;
+};
+
+export type CategoryOnJobListingListing_IdCategory_IdCompoundUniqueInput = {
+  category_id: Scalars['String']['input'];
+  listing_id: Scalars['String']['input'];
+};
+
+export type CategoryOnJobListingOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type CategoryOnJobListingScalarWhereInput = {
+  AND?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  category_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  listing_id?: InputMaybe<StringFilter>;
+};
+
+export type CategoryOnJobListingUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnJobListingUpdateManyWithWhereWithoutCategoryInput = {
+  data: CategoryOnJobListingUpdateManyMutationInput;
+  where: CategoryOnJobListingScalarWhereInput;
+};
+
+export type CategoryOnJobListingUpdateManyWithWhereWithoutListingInput = {
+  data: CategoryOnJobListingUpdateManyMutationInput;
+  where: CategoryOnJobListingScalarWhereInput;
+};
+
+export type CategoryOnJobListingUpdateManyWithoutCategoryNestedInput = {
+  connect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnJobListingCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<CategoryOnJobListingCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<CategoryOnJobListingCreateManyCategoryInputEnvelope>;
+  delete?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  set?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  update?: InputMaybe<Array<CategoryOnJobListingUpdateWithWhereUniqueWithoutCategoryInput>>;
+  updateMany?: InputMaybe<Array<CategoryOnJobListingUpdateManyWithWhereWithoutCategoryInput>>;
+  upsert?: InputMaybe<Array<CategoryOnJobListingUpsertWithWhereUniqueWithoutCategoryInput>>;
+};
+
+export type CategoryOnJobListingUpdateManyWithoutListingNestedInput = {
+  connect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryOnJobListingCreateOrConnectWithoutListingInput>>;
+  create?: InputMaybe<Array<CategoryOnJobListingCreateWithoutListingInput>>;
+  createMany?: InputMaybe<CategoryOnJobListingCreateManyListingInputEnvelope>;
+  delete?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CategoryOnJobListingScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  set?: InputMaybe<Array<CategoryOnJobListingWhereUniqueInput>>;
+  update?: InputMaybe<Array<CategoryOnJobListingUpdateWithWhereUniqueWithoutListingInput>>;
+  updateMany?: InputMaybe<Array<CategoryOnJobListingUpdateManyWithWhereWithoutListingInput>>;
+  upsert?: InputMaybe<Array<CategoryOnJobListingUpsertWithWhereUniqueWithoutListingInput>>;
+};
+
+export type CategoryOnJobListingUpdateWithWhereUniqueWithoutCategoryInput = {
+  data: CategoryOnJobListingUpdateWithoutCategoryInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingUpdateWithWhereUniqueWithoutListingInput = {
+  data: CategoryOnJobListingUpdateWithoutListingInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingUpdateWithoutCategoryInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  listing?: InputMaybe<JobListingUpdateOneRequiredWithoutCategoriesNestedInput>;
+};
+
+export type CategoryOnJobListingUpdateWithoutListingInput = {
+  category?: InputMaybe<JobListingCategoryUpdateOneRequiredWithoutListingsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryOnJobListingUpsertWithWhereUniqueWithoutCategoryInput = {
+  create: CategoryOnJobListingCreateWithoutCategoryInput;
+  update: CategoryOnJobListingUpdateWithoutCategoryInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingUpsertWithWhereUniqueWithoutListingInput = {
+  create: CategoryOnJobListingCreateWithoutListingInput;
+  update: CategoryOnJobListingUpdateWithoutListingInput;
+  where: CategoryOnJobListingWhereUniqueInput;
+};
+
+export type CategoryOnJobListingWhereInput = {
+  AND?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  category?: InputMaybe<JobListingCategoryRelationFilter>;
+  category_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  listing?: InputMaybe<JobListingRelationFilter>;
+  listing_id?: InputMaybe<StringFilter>;
+};
+
+export type CategoryOnJobListingWhereUniqueInput = {
+  AND?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  OR?: InputMaybe<Array<CategoryOnJobListingWhereInput>>;
+  category?: InputMaybe<JobListingCategoryRelationFilter>;
+  category_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  listing?: InputMaybe<JobListingRelationFilter>;
+  listing_id?: InputMaybe<StringFilter>;
+  listing_id_category_id?: InputMaybe<CategoryOnJobListingListing_IdCategory_IdCompoundUniqueInput>;
+};
+
 export type Company = {
   __typename?: 'Company';
   _count?: Maybe<CompanyCount>;
@@ -6145,7 +6929,7 @@ export type Company = {
   benefits: Array<Scalars['String']['output']>;
   brand_image_url?: Maybe<Scalars['URL']['output']>;
   career_description_raw: Scalars['String']['output'];
-  categories: Array<CompanyCategory>;
+  companyCategories?: Maybe<Array<CompanyCategory>>;
   company_values: Array<Scalars['String']['output']>;
   contacts?: Maybe<CompanyContacts>;
   createdAt: Scalars['DateTimeISO']['output'];
@@ -6153,22 +6937,13 @@ export type Company = {
   hiring_process: Array<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   listings: Array<JobListing>;
+  listingsCount: Scalars['Int']['output'];
   local_info?: Maybe<CompanyLocalInfo>;
   metadata?: Maybe<Scalars['JSONObject']['output']>;
   name: Scalars['String']['output'];
   updatedAt: Scalars['DateTimeISO']['output'];
   work_environment: Array<Scalars['String']['output']>;
   worldwide_info?: Maybe<CompanyWorldwideInfo>;
-};
-
-
-export type CompanyCategoriesArgs = {
-  cursor?: InputMaybe<CompanyCategoryWhereUniqueInput>;
-  distinct?: InputMaybe<Array<CompanyCategoryScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<CompanyCategoryOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  take?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 
@@ -6184,7 +6959,7 @@ export type CompanyListingsArgs = {
 export type CompanyCategory = {
   __typename?: 'CompanyCategory';
   _count?: Maybe<CompanyCategoryCount>;
-  companies: Array<Company>;
+  companies: Array<CategoryOnCompany>;
   description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
@@ -6192,12 +6967,12 @@ export type CompanyCategory = {
 
 
 export type CompanyCategoryCompaniesArgs = {
-  cursor?: InputMaybe<CompanyWhereUniqueInput>;
-  distinct?: InputMaybe<Array<CompanyScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<CompanyOrderByWithRelationInput>>;
+  cursor?: InputMaybe<CategoryOnCompanyWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CategoryOnCompanyScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CategoryOnCompanyOrderByWithRelationInput>>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<CompanyWhereInput>;
+  where?: InputMaybe<CategoryOnCompanyWhereInput>;
 };
 
 export type CompanyCategoryCount = {
@@ -6207,7 +6982,7 @@ export type CompanyCategoryCount = {
 
 
 export type CompanyCategoryCountCompaniesArgs = {
-  where?: InputMaybe<CompanyWhereInput>;
+  where?: InputMaybe<CategoryOnCompanyWhereInput>;
 };
 
 export type CompanyCategoryCountAggregate = {
@@ -6225,7 +7000,7 @@ export type CompanyCategoryCountOrderByAggregateInput = {
 };
 
 export type CompanyCategoryCreateInput = {
-  companies?: InputMaybe<CompanyCreateNestedManyWithoutCategoriesInput>;
+  companies?: InputMaybe<CategoryOnCompanyCreateNestedManyWithoutCategoryInput>;
   description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -6237,10 +7012,10 @@ export type CompanyCategoryCreateManyInput = {
   name: Scalars['String']['input'];
 };
 
-export type CompanyCategoryCreateNestedManyWithoutCompaniesInput = {
-  connect?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CompanyCategoryCreateOrConnectWithoutCompaniesInput>>;
-  create?: InputMaybe<Array<CompanyCategoryCreateWithoutCompaniesInput>>;
+export type CompanyCategoryCreateNestedOneWithoutCompaniesInput = {
+  connect?: InputMaybe<CompanyCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCategoryCreateOrConnectWithoutCompaniesInput>;
+  create?: InputMaybe<CompanyCategoryCreateWithoutCompaniesInput>;
 };
 
 export type CompanyCategoryCreateOrConnectWithoutCompaniesInput = {
@@ -6262,12 +7037,6 @@ export type CompanyCategoryGroupBy = {
   description: Scalars['String']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
-};
-
-export type CompanyCategoryListRelationFilter = {
-  every?: InputMaybe<CompanyCategoryWhereInput>;
-  none?: InputMaybe<CompanyCategoryWhereInput>;
-  some?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 export type CompanyCategoryMaxAggregate = {
@@ -6296,10 +7065,6 @@ export type CompanyCategoryMinOrderByAggregateInput = {
   name?: InputMaybe<SortOrder>;
 };
 
-export type CompanyCategoryOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
-};
-
 export enum CompanyCategoryOrderByRelevanceFieldEnum {
   Description = 'description',
   Id = 'id',
@@ -6323,10 +7088,15 @@ export type CompanyCategoryOrderByWithAggregationInput = {
 
 export type CompanyCategoryOrderByWithRelationInput = {
   _relevance?: InputMaybe<CompanyCategoryOrderByRelevanceInput>;
-  companies?: InputMaybe<CompanyOrderByRelationAggregateInput>;
+  companies?: InputMaybe<CategoryOnCompanyOrderByRelationAggregateInput>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+};
+
+export type CompanyCategoryRelationFilter = {
+  is?: InputMaybe<CompanyCategoryWhereInput>;
+  isNot?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 export enum CompanyCategoryScalarFieldEnum {
@@ -6334,15 +7104,6 @@ export enum CompanyCategoryScalarFieldEnum {
   Id = 'id',
   Name = 'name'
 }
-
-export type CompanyCategoryScalarWhereInput = {
-  AND?: InputMaybe<Array<CompanyCategoryScalarWhereInput>>;
-  NOT?: InputMaybe<Array<CompanyCategoryScalarWhereInput>>;
-  OR?: InputMaybe<Array<CompanyCategoryScalarWhereInput>>;
-  description?: InputMaybe<StringFilter>;
-  id?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-};
 
 export type CompanyCategoryScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<CompanyCategoryScalarWhereWithAggregatesInput>>;
@@ -6354,7 +7115,7 @@ export type CompanyCategoryScalarWhereWithAggregatesInput = {
 };
 
 export type CompanyCategoryUpdateInput = {
-  companies?: InputMaybe<CompanyUpdateManyWithoutCategoriesNestedInput>;
+  companies?: InputMaybe<CategoryOnCompanyUpdateManyWithoutCategoryNestedInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -6366,27 +7127,17 @@ export type CompanyCategoryUpdateManyMutationInput = {
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
-export type CompanyCategoryUpdateManyWithWhereWithoutCompaniesInput = {
-  data: CompanyCategoryUpdateManyMutationInput;
-  where: CompanyCategoryScalarWhereInput;
+export type CompanyCategoryUpdateOneRequiredWithoutCompaniesNestedInput = {
+  connect?: InputMaybe<CompanyCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCategoryCreateOrConnectWithoutCompaniesInput>;
+  create?: InputMaybe<CompanyCategoryCreateWithoutCompaniesInput>;
+  update?: InputMaybe<CompanyCategoryUpdateToOneWithWhereWithoutCompaniesInput>;
+  upsert?: InputMaybe<CompanyCategoryUpsertWithoutCompaniesInput>;
 };
 
-export type CompanyCategoryUpdateManyWithoutCompaniesNestedInput = {
-  connect?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CompanyCategoryCreateOrConnectWithoutCompaniesInput>>;
-  create?: InputMaybe<Array<CompanyCategoryCreateWithoutCompaniesInput>>;
-  delete?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<CompanyCategoryScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  set?: InputMaybe<Array<CompanyCategoryWhereUniqueInput>>;
-  update?: InputMaybe<Array<CompanyCategoryUpdateWithWhereUniqueWithoutCompaniesInput>>;
-  updateMany?: InputMaybe<Array<CompanyCategoryUpdateManyWithWhereWithoutCompaniesInput>>;
-  upsert?: InputMaybe<Array<CompanyCategoryUpsertWithWhereUniqueWithoutCompaniesInput>>;
-};
-
-export type CompanyCategoryUpdateWithWhereUniqueWithoutCompaniesInput = {
+export type CompanyCategoryUpdateToOneWithWhereWithoutCompaniesInput = {
   data: CompanyCategoryUpdateWithoutCompaniesInput;
-  where: CompanyCategoryWhereUniqueInput;
+  where?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 export type CompanyCategoryUpdateWithoutCompaniesInput = {
@@ -6395,17 +7146,17 @@ export type CompanyCategoryUpdateWithoutCompaniesInput = {
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
-export type CompanyCategoryUpsertWithWhereUniqueWithoutCompaniesInput = {
+export type CompanyCategoryUpsertWithoutCompaniesInput = {
   create: CompanyCategoryCreateWithoutCompaniesInput;
   update: CompanyCategoryUpdateWithoutCompaniesInput;
-  where: CompanyCategoryWhereUniqueInput;
+  where?: InputMaybe<CompanyCategoryWhereInput>;
 };
 
 export type CompanyCategoryWhereInput = {
   AND?: InputMaybe<Array<CompanyCategoryWhereInput>>;
   NOT?: InputMaybe<Array<CompanyCategoryWhereInput>>;
   OR?: InputMaybe<Array<CompanyCategoryWhereInput>>;
-  companies?: InputMaybe<CompanyListRelationFilter>;
+  companies?: InputMaybe<CategoryOnCompanyListRelationFilter>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
@@ -6415,7 +7166,7 @@ export type CompanyCategoryWhereUniqueInput = {
   AND?: InputMaybe<Array<CompanyCategoryWhereInput>>;
   NOT?: InputMaybe<Array<CompanyCategoryWhereInput>>;
   OR?: InputMaybe<Array<CompanyCategoryWhereInput>>;
-  companies?: InputMaybe<CompanyListRelationFilter>;
+  companies?: InputMaybe<CategoryOnCompanyListRelationFilter>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<StringFilter>;
@@ -6452,7 +7203,7 @@ export type CompanyCount = {
 
 
 export type CompanyCountCategoriesArgs = {
-  where?: InputMaybe<CompanyCategoryWhereInput>;
+  where?: InputMaybe<CategoryOnCompanyWhereInput>;
 };
 
 
@@ -6490,6 +7241,7 @@ export type CompanyCountOrderByAggregateInput = {
   career_description_raw?: InputMaybe<SortOrder>;
   company_values?: InputMaybe<SortOrder>;
   contacts?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -6506,9 +7258,10 @@ export type CompanyCreateInput = {
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
   brand_image_url?: InputMaybe<Scalars['String']['input']>;
   career_description_raw: Scalars['String']['input'];
-  categories?: InputMaybe<CompanyCategoryCreateNestedManyWithoutCompaniesInput>;
+  categories?: InputMaybe<CategoryOnCompanyCreateNestedManyWithoutCompanyInput>;
   company_values?: InputMaybe<CompanyCreatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -6528,6 +7281,7 @@ export type CompanyCreateManyInput = {
   career_description_raw: Scalars['String']['input'];
   company_values?: InputMaybe<CompanyCreatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -6538,10 +7292,10 @@ export type CompanyCreateManyInput = {
   worldwide_info?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type CompanyCreateNestedManyWithoutCategoriesInput = {
-  connect?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CompanyCreateOrConnectWithoutCategoriesInput>>;
-  create?: InputMaybe<Array<CompanyCreateWithoutCategoriesInput>>;
+export type CompanyCreateNestedOneWithoutCategoriesInput = {
+  connect?: InputMaybe<CompanyWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutCategoriesInput>;
+  create?: InputMaybe<CompanyCreateWithoutCategoriesInput>;
 };
 
 export type CompanyCreateNestedOneWithoutListingsInput = {
@@ -6568,6 +7322,7 @@ export type CompanyCreateWithoutCategoriesInput = {
   career_description_raw: Scalars['String']['input'];
   company_values?: InputMaybe<CompanyCreatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -6585,9 +7340,10 @@ export type CompanyCreateWithoutListingsInput = {
   benefits?: InputMaybe<CompanyCreatebenefitsInput>;
   brand_image_url?: InputMaybe<Scalars['String']['input']>;
   career_description_raw: Scalars['String']['input'];
-  categories?: InputMaybe<CompanyCategoryCreateNestedManyWithoutCompaniesInput>;
+  categories?: InputMaybe<CategoryOnCompanyCreateNestedManyWithoutCompanyInput>;
   company_values?: InputMaybe<CompanyCreatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -6638,12 +7394,6 @@ export type CompanyGroupBy = {
   worldwide_info: Scalars['JSON']['output'];
 };
 
-export type CompanyListRelationFilter = {
-  every?: InputMaybe<CompanyWhereInput>;
-  none?: InputMaybe<CompanyWhereInput>;
-  some?: InputMaybe<CompanyWhereInput>;
-};
-
 export type CompanyLocalInfo = {
   __typename?: 'CompanyLocalInfo';
   employeeCount?: Maybe<Scalars['Int']['output']>;
@@ -6669,6 +7419,7 @@ export type CompanyMaxOrderByAggregateInput = {
   banner_image_url?: InputMaybe<SortOrder>;
   brand_image_url?: InputMaybe<SortOrder>;
   career_description_raw?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -6692,13 +7443,10 @@ export type CompanyMinOrderByAggregateInput = {
   banner_image_url?: InputMaybe<SortOrder>;
   brand_image_url?: InputMaybe<SortOrder>;
   career_description_raw?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
-};
-
-export type CompanyOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
 };
 
 export enum CompanyOrderByRelevanceFieldEnum {
@@ -6732,6 +7480,7 @@ export type CompanyOrderByWithAggregationInput = {
   career_description_raw?: InputMaybe<SortOrder>;
   company_values?: InputMaybe<SortOrder>;
   contacts?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -6749,9 +7498,10 @@ export type CompanyOrderByWithRelationInput = {
   benefits?: InputMaybe<SortOrder>;
   brand_image_url?: InputMaybe<SortOrderInput>;
   career_description_raw?: InputMaybe<SortOrder>;
-  categories?: InputMaybe<CompanyCategoryOrderByRelationAggregateInput>;
+  categories?: InputMaybe<CategoryOnCompanyOrderByRelationAggregateInput>;
   company_values?: InputMaybe<SortOrder>;
   contacts?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -6788,27 +7538,6 @@ export enum CompanyScalarFieldEnum {
   WorldwideInfo = 'worldwide_info'
 }
 
-export type CompanyScalarWhereInput = {
-  AND?: InputMaybe<Array<CompanyScalarWhereInput>>;
-  NOT?: InputMaybe<Array<CompanyScalarWhereInput>>;
-  OR?: InputMaybe<Array<CompanyScalarWhereInput>>;
-  about_raw?: InputMaybe<StringFilter>;
-  banner_image_url?: InputMaybe<StringNullableFilter>;
-  benefits?: InputMaybe<StringNullableListFilter>;
-  brand_image_url?: InputMaybe<StringNullableFilter>;
-  career_description_raw?: InputMaybe<StringFilter>;
-  company_values?: InputMaybe<StringNullableListFilter>;
-  contacts?: InputMaybe<JsonFilter>;
-  email?: InputMaybe<StringFilter>;
-  hiring_process?: InputMaybe<StringNullableListFilter>;
-  id?: InputMaybe<StringFilter>;
-  local_info?: InputMaybe<JsonFilter>;
-  metadata?: InputMaybe<JsonNullableFilter>;
-  name?: InputMaybe<StringFilter>;
-  work_environment?: InputMaybe<StringNullableListFilter>;
-  worldwide_info?: InputMaybe<JsonFilter>;
-};
-
 export type CompanyScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<CompanyScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<CompanyScalarWhereWithAggregatesInput>>;
@@ -6820,6 +7549,7 @@ export type CompanyScalarWhereWithAggregatesInput = {
   career_description_raw?: InputMaybe<StringWithAggregatesFilter>;
   company_values?: InputMaybe<StringNullableListFilter>;
   contacts?: InputMaybe<JsonWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
@@ -6836,9 +7566,10 @@ export type CompanyUpdateInput = {
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
   brand_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   career_description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
-  categories?: InputMaybe<CompanyCategoryUpdateManyWithoutCompaniesNestedInput>;
+  categories?: InputMaybe<CategoryOnCompanyUpdateManyWithoutCompanyNestedInput>;
   company_values?: InputMaybe<CompanyUpdatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -6858,6 +7589,7 @@ export type CompanyUpdateManyMutationInput = {
   career_description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   company_values?: InputMaybe<CompanyUpdatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -6868,22 +7600,12 @@ export type CompanyUpdateManyMutationInput = {
   worldwide_info?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type CompanyUpdateManyWithWhereWithoutCategoriesInput = {
-  data: CompanyUpdateManyMutationInput;
-  where: CompanyScalarWhereInput;
-};
-
-export type CompanyUpdateManyWithoutCategoriesNestedInput = {
-  connect?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CompanyCreateOrConnectWithoutCategoriesInput>>;
-  create?: InputMaybe<Array<CompanyCreateWithoutCategoriesInput>>;
-  delete?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<CompanyScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  set?: InputMaybe<Array<CompanyWhereUniqueInput>>;
-  update?: InputMaybe<Array<CompanyUpdateWithWhereUniqueWithoutCategoriesInput>>;
-  updateMany?: InputMaybe<Array<CompanyUpdateManyWithWhereWithoutCategoriesInput>>;
-  upsert?: InputMaybe<Array<CompanyUpsertWithWhereUniqueWithoutCategoriesInput>>;
+export type CompanyUpdateOneRequiredWithoutCategoriesNestedInput = {
+  connect?: InputMaybe<CompanyWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutCategoriesInput>;
+  create?: InputMaybe<CompanyCreateWithoutCategoriesInput>;
+  update?: InputMaybe<CompanyUpdateToOneWithWhereWithoutCategoriesInput>;
+  upsert?: InputMaybe<CompanyUpsertWithoutCategoriesInput>;
 };
 
 export type CompanyUpdateOneRequiredWithoutListingsNestedInput = {
@@ -6894,14 +7616,14 @@ export type CompanyUpdateOneRequiredWithoutListingsNestedInput = {
   upsert?: InputMaybe<CompanyUpsertWithoutListingsInput>;
 };
 
-export type CompanyUpdateToOneWithWhereWithoutListingsInput = {
-  data: CompanyUpdateWithoutListingsInput;
+export type CompanyUpdateToOneWithWhereWithoutCategoriesInput = {
+  data: CompanyUpdateWithoutCategoriesInput;
   where?: InputMaybe<CompanyWhereInput>;
 };
 
-export type CompanyUpdateWithWhereUniqueWithoutCategoriesInput = {
-  data: CompanyUpdateWithoutCategoriesInput;
-  where: CompanyWhereUniqueInput;
+export type CompanyUpdateToOneWithWhereWithoutListingsInput = {
+  data: CompanyUpdateWithoutListingsInput;
+  where?: InputMaybe<CompanyWhereInput>;
 };
 
 export type CompanyUpdateWithoutCategoriesInput = {
@@ -6912,6 +7634,7 @@ export type CompanyUpdateWithoutCategoriesInput = {
   career_description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   company_values?: InputMaybe<CompanyUpdatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -6929,9 +7652,10 @@ export type CompanyUpdateWithoutListingsInput = {
   benefits?: InputMaybe<CompanyUpdatebenefitsInput>;
   brand_image_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   career_description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
-  categories?: InputMaybe<CompanyCategoryUpdateManyWithoutCompaniesNestedInput>;
+  categories?: InputMaybe<CategoryOnCompanyUpdateManyWithoutCompanyNestedInput>;
   company_values?: InputMaybe<CompanyUpdatecompany_ValuesInput>;
   contacts?: InputMaybe<Scalars['JSON']['input']>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -6962,10 +7686,10 @@ export type CompanyUpdatework_EnvironmentInput = {
   set?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
-export type CompanyUpsertWithWhereUniqueWithoutCategoriesInput = {
+export type CompanyUpsertWithoutCategoriesInput = {
   create: CompanyCreateWithoutCategoriesInput;
   update: CompanyUpdateWithoutCategoriesInput;
-  where: CompanyWhereUniqueInput;
+  where?: InputMaybe<CompanyWhereInput>;
 };
 
 export type CompanyUpsertWithoutListingsInput = {
@@ -6983,9 +7707,10 @@ export type CompanyWhereInput = {
   benefits?: InputMaybe<StringNullableListFilter>;
   brand_image_url?: InputMaybe<StringNullableFilter>;
   career_description_raw?: InputMaybe<StringFilter>;
-  categories?: InputMaybe<CompanyCategoryListRelationFilter>;
+  categories?: InputMaybe<CategoryOnCompanyListRelationFilter>;
   company_values?: InputMaybe<StringNullableListFilter>;
   contacts?: InputMaybe<JsonFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringFilter>;
@@ -7006,9 +7731,10 @@ export type CompanyWhereUniqueInput = {
   benefits?: InputMaybe<StringNullableListFilter>;
   brand_image_url?: InputMaybe<StringNullableFilter>;
   career_description_raw?: InputMaybe<StringFilter>;
-  categories?: InputMaybe<CompanyCategoryListRelationFilter>;
+  categories?: InputMaybe<CategoryOnCompanyListRelationFilter>;
   company_values?: InputMaybe<StringNullableListFilter>;
   contacts?: InputMaybe<JsonFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -7179,7 +7905,7 @@ export type IntNullableWithAggregatesFilter = {
 export type JobListing = {
   __typename?: 'JobListing';
   _count?: Maybe<JobListingCount>;
-  companyId: Scalars['String']['output'];
+  company_id: Scalars['String']['output'];
   createdAt: Scalars['DateTimeISO']['output'];
   description_raw: Scalars['String']['output'];
   external_application_url?: Maybe<Scalars['String']['output']>;
@@ -7190,6 +7916,7 @@ export type JobListing = {
   level?: Maybe<JobListingLevel>;
   location: Scalars['String']['output'];
   name: Scalars['String']['output'];
+  /** [JobListingParameters] */
   parameters: Scalars['JSON']['output'];
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
@@ -7211,7 +7938,7 @@ export type JobListingCategoryCount = {
 
 
 export type JobListingCategoryCountListingsArgs = {
-  where?: InputMaybe<JobListingWhereInput>;
+  where?: InputMaybe<CategoryOnJobListingWhereInput>;
 };
 
 export type JobListingCategoryCountAggregate = {
@@ -7231,7 +7958,7 @@ export type JobListingCategoryCountOrderByAggregateInput = {
 export type JobListingCategoryCreateInput = {
   description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
-  listings?: InputMaybe<JobListingCreateNestedManyWithoutCategoriesInput>;
+  listings?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutCategoryInput>;
   name: Scalars['String']['input'];
 };
 
@@ -7241,10 +7968,10 @@ export type JobListingCategoryCreateManyInput = {
   name: Scalars['String']['input'];
 };
 
-export type JobListingCategoryCreateNestedManyWithoutListingsInput = {
-  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutListingsInput>>;
-  create?: InputMaybe<Array<JobListingCategoryCreateWithoutListingsInput>>;
+export type JobListingCategoryCreateNestedOneWithoutListingsInput = {
+  connect?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<JobListingCategoryCreateOrConnectWithoutListingsInput>;
+  create?: InputMaybe<JobListingCategoryCreateWithoutListingsInput>;
 };
 
 export type JobListingCategoryCreateOrConnectWithoutListingsInput = {
@@ -7266,12 +7993,6 @@ export type JobListingCategoryGroupBy = {
   description: Scalars['String']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
-};
-
-export type JobListingCategoryListRelationFilter = {
-  every?: InputMaybe<JobListingCategoryWhereInput>;
-  none?: InputMaybe<JobListingCategoryWhereInput>;
-  some?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCategoryMaxAggregate = {
@@ -7300,10 +8021,6 @@ export type JobListingCategoryMinOrderByAggregateInput = {
   name?: InputMaybe<SortOrder>;
 };
 
-export type JobListingCategoryOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
-};
-
 export enum JobListingCategoryOrderByRelevanceFieldEnum {
   Description = 'description',
   Id = 'id',
@@ -7329,8 +8046,13 @@ export type JobListingCategoryOrderByWithRelationInput = {
   _relevance?: InputMaybe<JobListingCategoryOrderByRelevanceInput>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listings?: InputMaybe<JobListingOrderByRelationAggregateInput>;
+  listings?: InputMaybe<CategoryOnJobListingOrderByRelationAggregateInput>;
   name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryRelationFilter = {
+  is?: InputMaybe<JobListingCategoryWhereInput>;
+  isNot?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export enum JobListingCategoryScalarFieldEnum {
@@ -7338,15 +8060,6 @@ export enum JobListingCategoryScalarFieldEnum {
   Id = 'id',
   Name = 'name'
 }
-
-export type JobListingCategoryScalarWhereInput = {
-  AND?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
-  NOT?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
-  OR?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
-  description?: InputMaybe<StringFilter>;
-  id?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-};
 
 export type JobListingCategoryScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
@@ -7360,7 +8073,7 @@ export type JobListingCategoryScalarWhereWithAggregatesInput = {
 export type JobListingCategoryUpdateInput = {
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  listings?: InputMaybe<JobListingUpdateManyWithoutCategoriesNestedInput>;
+  listings?: InputMaybe<CategoryOnJobListingUpdateManyWithoutCategoryNestedInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
@@ -7370,27 +8083,17 @@ export type JobListingCategoryUpdateManyMutationInput = {
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
-export type JobListingCategoryUpdateManyWithWhereWithoutListingsInput = {
-  data: JobListingCategoryUpdateManyMutationInput;
-  where: JobListingCategoryScalarWhereInput;
+export type JobListingCategoryUpdateOneRequiredWithoutListingsNestedInput = {
+  connect?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<JobListingCategoryCreateOrConnectWithoutListingsInput>;
+  create?: InputMaybe<JobListingCategoryCreateWithoutListingsInput>;
+  update?: InputMaybe<JobListingCategoryUpdateToOneWithWhereWithoutListingsInput>;
+  upsert?: InputMaybe<JobListingCategoryUpsertWithoutListingsInput>;
 };
 
-export type JobListingCategoryUpdateManyWithoutListingsNestedInput = {
-  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutListingsInput>>;
-  create?: InputMaybe<Array<JobListingCategoryCreateWithoutListingsInput>>;
-  delete?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  set?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
-  update?: InputMaybe<Array<JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput>>;
-  updateMany?: InputMaybe<Array<JobListingCategoryUpdateManyWithWhereWithoutListingsInput>>;
-  upsert?: InputMaybe<Array<JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput>>;
-};
-
-export type JobListingCategoryUpdateWithWhereUniqueWithoutListingsInput = {
+export type JobListingCategoryUpdateToOneWithWhereWithoutListingsInput = {
   data: JobListingCategoryUpdateWithoutListingsInput;
-  where: JobListingCategoryWhereUniqueInput;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCategoryUpdateWithoutListingsInput = {
@@ -7399,10 +8102,10 @@ export type JobListingCategoryUpdateWithoutListingsInput = {
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
-export type JobListingCategoryUpsertWithWhereUniqueWithoutListingsInput = {
+export type JobListingCategoryUpsertWithoutListingsInput = {
   create: JobListingCategoryCreateWithoutListingsInput;
   update: JobListingCategoryUpdateWithoutListingsInput;
-  where: JobListingCategoryWhereUniqueInput;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCategoryWhereInput = {
@@ -7411,7 +8114,7 @@ export type JobListingCategoryWhereInput = {
   OR?: InputMaybe<Array<JobListingCategoryWhereInput>>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
-  listings?: InputMaybe<JobListingListRelationFilter>;
+  listings?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   name?: InputMaybe<StringFilter>;
 };
 
@@ -7421,7 +8124,7 @@ export type JobListingCategoryWhereUniqueInput = {
   OR?: InputMaybe<Array<JobListingCategoryWhereInput>>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
-  listings?: InputMaybe<JobListingListRelationFilter>;
+  listings?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   name?: InputMaybe<StringFilter>;
 };
 
@@ -7433,7 +8136,7 @@ export type JobListingCount = {
 
 
 export type JobListingCountCategoriesArgs = {
-  where?: InputMaybe<JobListingCategoryWhereInput>;
+  where?: InputMaybe<CategoryOnJobListingWhereInput>;
 };
 
 
@@ -7444,7 +8147,7 @@ export type JobListingCountSavesArgs = {
 export type JobListingCountAggregate = {
   __typename?: 'JobListingCountAggregate';
   _all: Scalars['Int']['output'];
-  companyId: Scalars['Int']['output'];
+  company_id: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
   description_raw: Scalars['Int']['output'];
   external_application_url: Scalars['Int']['output'];
@@ -7461,7 +8164,8 @@ export type JobListingCountAggregate = {
 };
 
 export type JobListingCountOrderByAggregateInput = {
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -7476,8 +8180,9 @@ export type JobListingCountOrderByAggregateInput = {
 };
 
 export type JobListingCreateInput = {
-  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
+  categories?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutListingInput>;
   company: CompanyCreateNestedOneWithoutListingsInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -7493,6 +8198,7 @@ export type JobListingCreateInput = {
 };
 
 export type JobListingCreateManyCompanyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -7512,7 +8218,8 @@ export type JobListingCreateManyCompanyInputEnvelope = {
 };
 
 export type JobListingCreateManyInput = {
-  companyId: Scalars['String']['input'];
+  company_id: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -7526,17 +8233,17 @@ export type JobListingCreateManyInput = {
   work_from?: InputMaybe<WorkFromHome>;
 };
 
-export type JobListingCreateNestedManyWithoutCategoriesInput = {
-  connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCategoriesInput>>;
-  create?: InputMaybe<Array<JobListingCreateWithoutCategoriesInput>>;
-};
-
 export type JobListingCreateNestedManyWithoutCompanyInput = {
   connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCompanyInput>>;
   create?: InputMaybe<Array<JobListingCreateWithoutCompanyInput>>;
   createMany?: InputMaybe<JobListingCreateManyCompanyInputEnvelope>;
+};
+
+export type JobListingCreateNestedOneWithoutCategoriesInput = {
+  connect?: InputMaybe<JobListingWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<JobListingCreateOrConnectWithoutCategoriesInput>;
+  create?: InputMaybe<JobListingCreateWithoutCategoriesInput>;
 };
 
 export type JobListingCreateNestedOneWithoutSavesInput = {
@@ -7562,6 +8269,7 @@ export type JobListingCreateOrConnectWithoutSavesInput = {
 
 export type JobListingCreateWithoutCategoriesInput = {
   company: CompanyCreateNestedOneWithoutListingsInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -7577,7 +8285,8 @@ export type JobListingCreateWithoutCategoriesInput = {
 };
 
 export type JobListingCreateWithoutCompanyInput = {
-  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
+  categories?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutListingInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -7593,8 +8302,9 @@ export type JobListingCreateWithoutCompanyInput = {
 };
 
 export type JobListingCreateWithoutSavesInput = {
-  categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutListingsInput>;
+  categories?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutListingInput>;
   company: CompanyCreateNestedOneWithoutListingsInput;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   description_raw: Scalars['String']['input'];
   external_application_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -7632,7 +8342,7 @@ export type JobListingGroupBy = {
   _count?: Maybe<JobListingCountAggregate>;
   _max?: Maybe<JobListingMaxAggregate>;
   _min?: Maybe<JobListingMinAggregate>;
-  companyId: Scalars['String']['output'];
+  company_id: Scalars['String']['output'];
   createdAt: Scalars['DateTimeISO']['output'];
   description_raw: Scalars['String']['output'];
   external_application_url?: Maybe<Scalars['String']['output']>;
@@ -7662,7 +8372,7 @@ export type JobListingListRelationFilter = {
 
 export type JobListingMaxAggregate = {
   __typename?: 'JobListingMaxAggregate';
-  companyId?: Maybe<Scalars['String']['output']>;
+  company_id?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   description_raw?: Maybe<Scalars['String']['output']>;
   external_application_url?: Maybe<Scalars['String']['output']>;
@@ -7676,7 +8386,8 @@ export type JobListingMaxAggregate = {
 };
 
 export type JobListingMaxOrderByAggregateInput = {
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -7689,7 +8400,7 @@ export type JobListingMaxOrderByAggregateInput = {
 
 export type JobListingMinAggregate = {
   __typename?: 'JobListingMinAggregate';
-  companyId?: Maybe<Scalars['String']['output']>;
+  company_id?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   description_raw?: Maybe<Scalars['String']['output']>;
   external_application_url?: Maybe<Scalars['String']['output']>;
@@ -7703,7 +8414,8 @@ export type JobListingMinAggregate = {
 };
 
 export type JobListingMinOrderByAggregateInput = {
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -7719,7 +8431,7 @@ export type JobListingOrderByRelationAggregateInput = {
 };
 
 export enum JobListingOrderByRelevanceFieldEnum {
-  CompanyId = 'companyId',
+  CompanyId = 'company_id',
   DescriptionRaw = 'description_raw',
   ExternalApplicationUrl = 'external_application_url',
   Id = 'id',
@@ -7739,7 +8451,8 @@ export type JobListingOrderByWithAggregationInput = {
   _count?: InputMaybe<JobListingCountOrderByAggregateInput>;
   _max?: InputMaybe<JobListingMaxOrderByAggregateInput>;
   _min?: InputMaybe<JobListingMinOrderByAggregateInput>;
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrderInput>;
   id?: InputMaybe<SortOrder>;
@@ -7755,9 +8468,10 @@ export type JobListingOrderByWithAggregationInput = {
 
 export type JobListingOrderByWithRelationInput = {
   _relevance?: InputMaybe<JobListingOrderByRelevanceInput>;
-  categories?: InputMaybe<JobListingCategoryOrderByRelationAggregateInput>;
+  categories?: InputMaybe<CategoryOnJobListingOrderByRelationAggregateInput>;
   company?: InputMaybe<CompanyOrderByWithRelationInput>;
-  companyId?: InputMaybe<SortOrder>;
+  company_id?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   description_raw?: InputMaybe<SortOrder>;
   external_application_url?: InputMaybe<SortOrderInput>;
   id?: InputMaybe<SortOrder>;
@@ -7778,7 +8492,7 @@ export type JobListingRelationFilter = {
 };
 
 export enum JobListingScalarFieldEnum {
-  CompanyId = 'companyId',
+  CompanyId = 'company_id',
   CreatedAt = 'createdAt',
   DescriptionRaw = 'description_raw',
   ExternalApplicationUrl = 'external_application_url',
@@ -7798,7 +8512,8 @@ export type JobListingScalarWhereInput = {
   AND?: InputMaybe<Array<JobListingScalarWhereInput>>;
   NOT?: InputMaybe<Array<JobListingScalarWhereInput>>;
   OR?: InputMaybe<Array<JobListingScalarWhereInput>>;
-  companyId?: InputMaybe<StringFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   description_raw?: InputMaybe<StringFilter>;
   external_application_url?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
@@ -7816,7 +8531,8 @@ export type JobListingScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<JobListingScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<JobListingScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<JobListingScalarWhereWithAggregatesInput>>;
-  companyId?: InputMaybe<StringWithAggregatesFilter>;
+  company_id?: InputMaybe<StringWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   description_raw?: InputMaybe<StringWithAggregatesFilter>;
   external_application_url?: InputMaybe<StringNullableWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
@@ -7831,8 +8547,9 @@ export type JobListingScalarWhereWithAggregatesInput = {
 };
 
 export type JobListingUpdateInput = {
-  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
+  categories?: InputMaybe<CategoryOnJobListingUpdateManyWithoutListingNestedInput>;
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -7848,6 +8565,7 @@ export type JobListingUpdateInput = {
 };
 
 export type JobListingUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -7861,27 +8579,9 @@ export type JobListingUpdateManyMutationInput = {
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
-export type JobListingUpdateManyWithWhereWithoutCategoriesInput = {
-  data: JobListingUpdateManyMutationInput;
-  where: JobListingScalarWhereInput;
-};
-
 export type JobListingUpdateManyWithWhereWithoutCompanyInput = {
   data: JobListingUpdateManyMutationInput;
   where: JobListingScalarWhereInput;
-};
-
-export type JobListingUpdateManyWithoutCategoriesNestedInput = {
-  connect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<JobListingCreateOrConnectWithoutCategoriesInput>>;
-  create?: InputMaybe<Array<JobListingCreateWithoutCategoriesInput>>;
-  delete?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<JobListingScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  set?: InputMaybe<Array<JobListingWhereUniqueInput>>;
-  update?: InputMaybe<Array<JobListingUpdateWithWhereUniqueWithoutCategoriesInput>>;
-  updateMany?: InputMaybe<Array<JobListingUpdateManyWithWhereWithoutCategoriesInput>>;
-  upsert?: InputMaybe<Array<JobListingUpsertWithWhereUniqueWithoutCategoriesInput>>;
 };
 
 export type JobListingUpdateManyWithoutCompanyNestedInput = {
@@ -7898,6 +8598,14 @@ export type JobListingUpdateManyWithoutCompanyNestedInput = {
   upsert?: InputMaybe<Array<JobListingUpsertWithWhereUniqueWithoutCompanyInput>>;
 };
 
+export type JobListingUpdateOneRequiredWithoutCategoriesNestedInput = {
+  connect?: InputMaybe<JobListingWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<JobListingCreateOrConnectWithoutCategoriesInput>;
+  create?: InputMaybe<JobListingCreateWithoutCategoriesInput>;
+  update?: InputMaybe<JobListingUpdateToOneWithWhereWithoutCategoriesInput>;
+  upsert?: InputMaybe<JobListingUpsertWithoutCategoriesInput>;
+};
+
 export type JobListingUpdateOneRequiredWithoutSavesNestedInput = {
   connect?: InputMaybe<JobListingWhereUniqueInput>;
   connectOrCreate?: InputMaybe<JobListingCreateOrConnectWithoutSavesInput>;
@@ -7906,14 +8614,14 @@ export type JobListingUpdateOneRequiredWithoutSavesNestedInput = {
   upsert?: InputMaybe<JobListingUpsertWithoutSavesInput>;
 };
 
-export type JobListingUpdateToOneWithWhereWithoutSavesInput = {
-  data: JobListingUpdateWithoutSavesInput;
+export type JobListingUpdateToOneWithWhereWithoutCategoriesInput = {
+  data: JobListingUpdateWithoutCategoriesInput;
   where?: InputMaybe<JobListingWhereInput>;
 };
 
-export type JobListingUpdateWithWhereUniqueWithoutCategoriesInput = {
-  data: JobListingUpdateWithoutCategoriesInput;
-  where: JobListingWhereUniqueInput;
+export type JobListingUpdateToOneWithWhereWithoutSavesInput = {
+  data: JobListingUpdateWithoutSavesInput;
+  where?: InputMaybe<JobListingWhereInput>;
 };
 
 export type JobListingUpdateWithWhereUniqueWithoutCompanyInput = {
@@ -7923,6 +8631,7 @@ export type JobListingUpdateWithWhereUniqueWithoutCompanyInput = {
 
 export type JobListingUpdateWithoutCategoriesInput = {
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -7938,7 +8647,8 @@ export type JobListingUpdateWithoutCategoriesInput = {
 };
 
 export type JobListingUpdateWithoutCompanyInput = {
-  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
+  categories?: InputMaybe<CategoryOnJobListingUpdateManyWithoutListingNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -7954,8 +8664,9 @@ export type JobListingUpdateWithoutCompanyInput = {
 };
 
 export type JobListingUpdateWithoutSavesInput = {
-  categories?: InputMaybe<JobListingCategoryUpdateManyWithoutListingsNestedInput>;
+  categories?: InputMaybe<CategoryOnJobListingUpdateManyWithoutListingNestedInput>;
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutListingsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description_raw?: InputMaybe<StringFieldUpdateOperationsInput>;
   external_application_url?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -7979,16 +8690,16 @@ export type JobListingUpdatelanguagesInput = {
   set?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
-export type JobListingUpsertWithWhereUniqueWithoutCategoriesInput = {
-  create: JobListingCreateWithoutCategoriesInput;
-  update: JobListingUpdateWithoutCategoriesInput;
-  where: JobListingWhereUniqueInput;
-};
-
 export type JobListingUpsertWithWhereUniqueWithoutCompanyInput = {
   create: JobListingCreateWithoutCompanyInput;
   update: JobListingUpdateWithoutCompanyInput;
   where: JobListingWhereUniqueInput;
+};
+
+export type JobListingUpsertWithoutCategoriesInput = {
+  create: JobListingCreateWithoutCategoriesInput;
+  update: JobListingUpdateWithoutCategoriesInput;
+  where?: InputMaybe<JobListingWhereInput>;
 };
 
 export type JobListingUpsertWithoutSavesInput = {
@@ -8001,9 +8712,10 @@ export type JobListingWhereInput = {
   AND?: InputMaybe<Array<JobListingWhereInput>>;
   NOT?: InputMaybe<Array<JobListingWhereInput>>;
   OR?: InputMaybe<Array<JobListingWhereInput>>;
-  categories?: InputMaybe<JobListingCategoryListRelationFilter>;
+  categories?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
-  companyId?: InputMaybe<StringFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   description_raw?: InputMaybe<StringFilter>;
   external_application_url?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
@@ -8022,9 +8734,10 @@ export type JobListingWhereUniqueInput = {
   AND?: InputMaybe<Array<JobListingWhereInput>>;
   NOT?: InputMaybe<Array<JobListingWhereInput>>;
   OR?: InputMaybe<Array<JobListingWhereInput>>;
-  categories?: InputMaybe<JobListingCategoryListRelationFilter>;
+  categories?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
-  companyId?: InputMaybe<StringFilter>;
+  company_id?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   description_raw?: InputMaybe<StringFilter>;
   external_application_url?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -9599,7 +10312,7 @@ export type SavedListing = {
   createdAt: Scalars['DateTimeISO']['output'];
   id: Scalars['ID']['output'];
   listing: JobListing;
-  listingId: Scalars['String']['output'];
+  listing_id: Scalars['String']['output'];
   metadata?: Maybe<Scalars['JSON']['output']>;
   updatedAt: Scalars['DateTimeISO']['output'];
   user: User;
@@ -9611,20 +10324,22 @@ export type SavedListingCountAggregate = {
   _all: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
-  listingId: Scalars['Int']['output'];
+  listing_id: Scalars['Int']['output'];
   metadata: Scalars['Int']['output'];
   updatedAt: Scalars['Int']['output'];
   userId: Scalars['Int']['output'];
 };
 
 export type SavedListingCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type SavedListingCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   listing: JobListingCreateNestedOneWithoutSavesInput;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -9632,13 +10347,15 @@ export type SavedListingCreateInput = {
 };
 
 export type SavedListingCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  listingId: Scalars['String']['input'];
+  listing_id: Scalars['String']['input'];
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   userId: Scalars['String']['input'];
 };
 
 export type SavedListingCreateManyListingInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   userId: Scalars['String']['input'];
@@ -9650,8 +10367,9 @@ export type SavedListingCreateManyListingInputEnvelope = {
 };
 
 export type SavedListingCreateManyUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  listingId: Scalars['String']['input'];
+  listing_id: Scalars['String']['input'];
   metadata?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -9685,12 +10403,14 @@ export type SavedListingCreateOrConnectWithoutUserInput = {
 };
 
 export type SavedListingCreateWithoutListingInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   user: UserCreateNestedOneWithoutSaved_ListingsInput;
 };
 
 export type SavedListingCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   listing: JobListingCreateNestedOneWithoutSavesInput;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -9703,7 +10423,7 @@ export type SavedListingGroupBy = {
   _min?: Maybe<SavedListingMinAggregate>;
   createdAt: Scalars['DateTimeISO']['output'];
   id: Scalars['String']['output'];
-  listingId: Scalars['String']['output'];
+  listing_id: Scalars['String']['output'];
   metadata?: Maybe<Scalars['JSON']['output']>;
   updatedAt: Scalars['DateTimeISO']['output'];
   userId: Scalars['String']['output'];
@@ -9719,14 +10439,15 @@ export type SavedListingMaxAggregate = {
   __typename?: 'SavedListingMaxAggregate';
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   id?: Maybe<Scalars['String']['output']>;
-  listingId?: Maybe<Scalars['String']['output']>;
+  listing_id?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type SavedListingMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
@@ -9734,14 +10455,15 @@ export type SavedListingMinAggregate = {
   __typename?: 'SavedListingMinAggregate';
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   id?: Maybe<Scalars['String']['output']>;
-  listingId?: Maybe<Scalars['String']['output']>;
+  listing_id?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type SavedListingMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
@@ -9751,7 +10473,7 @@ export type SavedListingOrderByRelationAggregateInput = {
 
 export enum SavedListingOrderByRelevanceFieldEnum {
   Id = 'id',
-  ListingId = 'listingId',
+  ListingId = 'listing_id',
   UserId = 'userId'
 }
 
@@ -9765,17 +10487,19 @@ export type SavedListingOrderByWithAggregationInput = {
   _count?: InputMaybe<SavedListingCountOrderByAggregateInput>;
   _max?: InputMaybe<SavedListingMaxOrderByAggregateInput>;
   _min?: InputMaybe<SavedListingMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrderInput>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type SavedListingOrderByWithRelationInput = {
   _relevance?: InputMaybe<SavedListingOrderByRelevanceInput>;
+  createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   listing?: InputMaybe<JobListingOrderByWithRelationInput>;
-  listingId?: InputMaybe<SortOrder>;
+  listing_id?: InputMaybe<SortOrder>;
   metadata?: InputMaybe<SortOrderInput>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userId?: InputMaybe<SortOrder>;
@@ -9784,7 +10508,7 @@ export type SavedListingOrderByWithRelationInput = {
 export enum SavedListingScalarFieldEnum {
   CreatedAt = 'createdAt',
   Id = 'id',
-  ListingId = 'listingId',
+  ListingId = 'listing_id',
   Metadata = 'metadata',
   UpdatedAt = 'updatedAt',
   UserId = 'userId'
@@ -9794,8 +10518,9 @@ export type SavedListingScalarWhereInput = {
   AND?: InputMaybe<Array<SavedListingScalarWhereInput>>;
   NOT?: InputMaybe<Array<SavedListingScalarWhereInput>>;
   OR?: InputMaybe<Array<SavedListingScalarWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
-  listingId?: InputMaybe<StringFilter>;
+  listing_id?: InputMaybe<StringFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   userId?: InputMaybe<StringFilter>;
 };
@@ -9804,13 +10529,15 @@ export type SavedListingScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<SavedListingScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<SavedListingScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<SavedListingScalarWhereWithAggregatesInput>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
-  listingId?: InputMaybe<StringWithAggregatesFilter>;
+  listing_id?: InputMaybe<StringWithAggregatesFilter>;
   metadata?: InputMaybe<JsonNullableWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
 };
 
 export type SavedListingUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listing?: InputMaybe<JobListingUpdateOneRequiredWithoutSavesNestedInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -9818,6 +10545,7 @@ export type SavedListingUpdateInput = {
 };
 
 export type SavedListingUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
 };
@@ -9871,12 +10599,14 @@ export type SavedListingUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type SavedListingUpdateWithoutListingInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutSaved_ListingsNestedInput>;
 };
 
 export type SavedListingUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listing?: InputMaybe<JobListingUpdateOneRequiredWithoutSavesNestedInput>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
@@ -9898,9 +10628,10 @@ export type SavedListingWhereInput = {
   AND?: InputMaybe<Array<SavedListingWhereInput>>;
   NOT?: InputMaybe<Array<SavedListingWhereInput>>;
   OR?: InputMaybe<Array<SavedListingWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   listing?: InputMaybe<JobListingRelationFilter>;
-  listingId?: InputMaybe<StringFilter>;
+  listing_id?: InputMaybe<StringFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
@@ -9910,9 +10641,10 @@ export type SavedListingWhereUniqueInput = {
   AND?: InputMaybe<Array<SavedListingWhereInput>>;
   NOT?: InputMaybe<Array<SavedListingWhereInput>>;
   OR?: InputMaybe<Array<SavedListingWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   listing?: InputMaybe<JobListingRelationFilter>;
-  listingId?: InputMaybe<StringFilter>;
+  listing_id?: InputMaybe<StringFilter>;
   metadata?: InputMaybe<JsonNullableFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
@@ -9946,6 +10678,7 @@ export type SessionCountAggregate = {
 };
 
 export type SessionCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -9953,6 +10686,7 @@ export type SessionCountOrderByAggregateInput = {
 };
 
 export type SessionCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expiresAt: Scalars['DateTimeISO']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken: Scalars['String']['input'];
@@ -9960,6 +10694,7 @@ export type SessionCreateInput = {
 };
 
 export type SessionCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expiresAt: Scalars['DateTimeISO']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken: Scalars['String']['input'];
@@ -9967,6 +10702,7 @@ export type SessionCreateManyInput = {
 };
 
 export type SessionCreateManyUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expiresAt: Scalars['DateTimeISO']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken: Scalars['String']['input'];
@@ -9990,6 +10726,7 @@ export type SessionCreateOrConnectWithoutUserInput = {
 };
 
 export type SessionCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   expiresAt: Scalars['DateTimeISO']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken: Scalars['String']['input'];
@@ -10025,6 +10762,7 @@ export type SessionMaxAggregate = {
 };
 
 export type SessionMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -10042,6 +10780,7 @@ export type SessionMinAggregate = {
 };
 
 export type SessionMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -10068,6 +10807,7 @@ export type SessionOrderByWithAggregationInput = {
   _count?: InputMaybe<SessionCountOrderByAggregateInput>;
   _max?: InputMaybe<SessionMaxOrderByAggregateInput>;
   _min?: InputMaybe<SessionMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -10076,6 +10816,7 @@ export type SessionOrderByWithAggregationInput = {
 
 export type SessionOrderByWithRelationInput = {
   _relevance?: InputMaybe<SessionOrderByRelevanceInput>;
+  createdAt?: InputMaybe<SortOrder>;
   expiresAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   sessionToken?: InputMaybe<SortOrder>;
@@ -10096,6 +10837,7 @@ export type SessionScalarWhereInput = {
   AND?: InputMaybe<Array<SessionScalarWhereInput>>;
   NOT?: InputMaybe<Array<SessionScalarWhereInput>>;
   OR?: InputMaybe<Array<SessionScalarWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expiresAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   sessionToken?: InputMaybe<StringFilter>;
@@ -10106,6 +10848,7 @@ export type SessionScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<SessionScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<SessionScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<SessionScalarWhereWithAggregatesInput>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   expiresAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   sessionToken?: InputMaybe<StringWithAggregatesFilter>;
@@ -10113,6 +10856,7 @@ export type SessionScalarWhereWithAggregatesInput = {
 };
 
 export type SessionUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expiresAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   sessionToken?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -10120,6 +10864,7 @@ export type SessionUpdateInput = {
 };
 
 export type SessionUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expiresAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   sessionToken?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -10150,6 +10895,7 @@ export type SessionUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type SessionUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   expiresAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   sessionToken?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -10165,6 +10911,7 @@ export type SessionWhereInput = {
   AND?: InputMaybe<Array<SessionWhereInput>>;
   NOT?: InputMaybe<Array<SessionWhereInput>>;
   OR?: InputMaybe<Array<SessionWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expiresAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   sessionToken?: InputMaybe<StringFilter>;
@@ -10176,6 +10923,7 @@ export type SessionWhereUniqueInput = {
   AND?: InputMaybe<Array<SessionWhereInput>>;
   NOT?: InputMaybe<Array<SessionWhereInput>>;
   OR?: InputMaybe<Array<SessionWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   expiresAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   sessionToken?: InputMaybe<Scalars['String']['input']>;
@@ -10392,6 +11140,7 @@ export type UserCountAggregate = {
 };
 
 export type UserCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -10404,6 +11153,7 @@ export type UserCountOrderByAggregateInput = {
 
 export type UserCreateInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -10417,6 +11167,7 @@ export type UserCreateInput = {
 };
 
 export type UserCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -10461,6 +11212,7 @@ export type UserCreateOrConnectWithoutSessionsInput = {
 };
 
 export type UserCreateWithoutAccountsInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -10475,6 +11227,7 @@ export type UserCreateWithoutAccountsInput = {
 
 export type UserCreateWithoutSaved_ListingsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -10488,6 +11241,7 @@ export type UserCreateWithoutSaved_ListingsInput = {
 
 export type UserCreateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   first_name: Scalars['String']['input'];
@@ -10532,6 +11286,7 @@ export type UserMaxAggregate = {
 };
 
 export type UserMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -10556,6 +11311,7 @@ export type UserMinAggregate = {
 };
 
 export type UserMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -10585,6 +11341,7 @@ export type UserOrderByWithAggregationInput = {
   _count?: InputMaybe<UserCountOrderByAggregateInput>;
   _max?: InputMaybe<UserMaxOrderByAggregateInput>;
   _min?: InputMaybe<UserMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrderInput>;
   first_name?: InputMaybe<SortOrder>;
@@ -10598,6 +11355,7 @@ export type UserOrderByWithAggregationInput = {
 export type UserOrderByWithRelationInput = {
   _relevance?: InputMaybe<UserOrderByRelevanceInput>;
   accounts?: InputMaybe<AccountOrderByRelationAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrderInput>;
   first_name?: InputMaybe<SortOrder>;
@@ -10633,6 +11391,7 @@ export type UserScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
   emailVerified?: InputMaybe<DateTimeNullableWithAggregatesFilter>;
   first_name?: InputMaybe<StringWithAggregatesFilter>;
@@ -10708,6 +11467,7 @@ export type UserSignUpInput = {
 
 export type UserUpdateInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -10721,6 +11481,7 @@ export type UserUpdateInput = {
 };
 
 export type UserUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -10771,6 +11532,7 @@ export type UserUpdateToOneWithWhereWithoutSessionsInput = {
 };
 
 export type UserUpdateWithoutAccountsInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -10785,6 +11547,7 @@ export type UserUpdateWithoutAccountsInput = {
 
 export type UserUpdateWithoutSaved_ListingsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -10798,6 +11561,7 @@ export type UserUpdateWithoutSaved_ListingsInput = {
 
 export type UserUpdateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -10832,6 +11596,7 @@ export type UserWhereInput = {
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
   accounts?: InputMaybe<AccountListRelationFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   emailVerified?: InputMaybe<DateTimeNullableFilter>;
   first_name?: InputMaybe<StringFilter>;
@@ -10849,6 +11614,7 @@ export type UserWhereUniqueInput = {
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
   accounts?: InputMaybe<AccountListRelationFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
   emailVerified?: InputMaybe<DateTimeNullableFilter>;
   first_name?: InputMaybe<StringFilter>;
@@ -11036,7 +11802,21 @@ export type GetTopEmployersQueryVariables = Exact<{
 }>;
 
 
-export type GetTopEmployersQuery = { __typename?: 'Query', getTopCompanies: Array<{ __typename?: 'Company', id: string, name: string, banner_image_url?: any | null, brand_image_url?: any | null, _count?: { __typename?: 'CompanyCount', listings: number } | null }> };
+export type GetTopEmployersQuery = { __typename?: 'Query', getTopCompanies: Array<{ __typename?: 'Company', id: string, name: string, banner_image_url?: any | null, brand_image_url?: any | null, listingsCount: number, _count?: { __typename?: 'CompanyCount', listings: number } | null }> };
+
+export type UnSaveJobListingMutationVariables = Exact<{
+  jobListingId: Scalars['String']['input'];
+}>;
+
+
+export type UnSaveJobListingMutation = { __typename?: 'Mutation', unSaveJobListing?: boolean | null };
+
+export type SaveJobListingMutationVariables = Exact<{
+  jobListingId: Scalars['String']['input'];
+}>;
+
+
+export type SaveJobListingMutation = { __typename?: 'Mutation', saveJobListing?: { __typename?: 'SavedListing', id: string, listing_id: string, userId: string, metadata?: any | null, createdAt: any } | null };
 
 export type GetCompanyWithListingsQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -11055,28 +11835,14 @@ export type GetCompanyQueryQueryVariables = Exact<{
 }>;
 
 
-export type GetCompanyQueryQuery = { __typename?: 'Query', getCompany?: { __typename?: 'Company', id: string, name: string, about_raw: string, career_description_raw: string, benefits: Array<string>, company_values: Array<string>, work_environment: Array<string>, hiring_process: Array<string>, createdAt: any, updatedAt: any, metadata?: any | null, email: any, brand_image_url?: any | null, banner_image_url?: any | null, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }>, listings: Array<{ __typename?: 'JobListing', id: string, name: string, location: string, languages: Array<string>, createdAt: any, description_raw: string, keywords: Array<string>, level?: JobListingLevel | null, parameters: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null }>, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string, coordinates?: { __typename?: 'Coordinates', latitude?: any | null, longitude?: any | null } | null }> } | null, local_info?: { __typename?: 'CompanyLocalInfo', since?: any | null, employeeCount?: number | null, locations: Array<string> } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', founded?: any | null, employeeCount?: number | null, headquarters: string, locations: Array<string> } | null } | null };
-
-export type UnSaveJobListingMutationVariables = Exact<{
-  jobListingId: Scalars['String']['input'];
-}>;
-
-
-export type UnSaveJobListingMutation = { __typename?: 'Mutation', unSaveJobListing?: boolean | null };
-
-export type SaveJobListingMutationVariables = Exact<{
-  jobListingId: Scalars['String']['input'];
-}>;
-
-
-export type SaveJobListingMutation = { __typename?: 'Mutation', saveJobListing?: { __typename?: 'SavedListing', id: string, listingId: string, userId: string, metadata?: any | null, createdAt: any } | null };
+export type GetCompanyQueryQuery = { __typename?: 'Query', getCompany?: { __typename?: 'Company', id: string, name: string, about_raw: string, career_description_raw: string, benefits: Array<string>, company_values: Array<string>, work_environment: Array<string>, hiring_process: Array<string>, createdAt: any, updatedAt: any, metadata?: any | null, email: any, brand_image_url?: any | null, banner_image_url?: any | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> | null, listings: Array<{ __typename?: 'JobListing', id: string, name: string, location: string, languages: Array<string>, createdAt: any, description_raw: string, keywords: Array<string>, level?: JobListingLevel | null, parameters: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null }>, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string, coordinates?: { __typename?: 'Coordinates', latitude?: any | null, longitude?: any | null } | null }> } | null, local_info?: { __typename?: 'CompanyLocalInfo', since?: any | null, employeeCount?: number | null, locations: Array<string> } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', founded?: any | null, employeeCount?: number | null, headquarters: string, locations: Array<string> } | null } | null };
 
 export type GetCompanyJobQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type GetCompanyJobQuery = { __typename?: 'Query', getJobListing?: { __typename?: 'JobListing', id: string, name: string, description_raw: string, external_application_url?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, location: string, languages: Array<string>, parameters: any, keywords: Array<string>, companyId: string, createdAt: any, updatedAt: any } | null };
+export type GetCompanyJobQuery = { __typename?: 'Query', getJobListing?: { __typename?: 'JobListing', id: string, name: string, description_raw: string, external_application_url?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, location: string, languages: Array<string>, parameters: any, keywords: Array<string>, company_id: string, createdAt: any, updatedAt: any } | null };
 
 export type SignInWithEmailCodeMutationVariables = Exact<{
   code: Scalars['Int']['input'];
@@ -11120,7 +11886,7 @@ export type SignInMutation = { __typename?: 'Mutation', signIn?: { __typename?: 
 export type MeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: any, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null, saved_listings: Array<{ __typename?: 'SavedListing', id: string, listingId: string, metadata?: any | null, createdAt: any }> } | null };
+export type MeQueryQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, name: string, first_name: string, last_name: string, email: any, image?: string | null, metadata?: any | null, cookieConsent?: boolean | null, cookiePreferences?: { __typename?: 'UserCookiePreferences', functionality: boolean, marketing: boolean, necessary: boolean, statistics: boolean } | null, saved_listings: Array<{ __typename?: 'SavedListing', id: string, listing_id: string, metadata?: any | null, createdAt: any }> } | null };
 
 export type GoogleLoginQueryQueryVariables = Exact<{
   redirectUrl: Scalars['String']['input'];
