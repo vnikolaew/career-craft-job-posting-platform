@@ -23,7 +23,7 @@ export const lucia = new Lucia(prismaAdapter, {
       attributes: {
          secure: process.env.NODE_ENV === `production`,
          sameSite: `lax`,
-         domain: `.apollo-next.com`,
+         domain: `.career-craft.com`,
       },
    },
    sessionExpiresIn: new TimeSpan(1, `d`),

@@ -1,12 +1,15 @@
 import { CompanyRelationsResolver } from "@generated/resolvers/relations";
 import { Company } from "@generated/models/Company";
+import { CompanyCount } from "@generated/resolvers/outputs/CompanyCount";
 import { CompanyCategory } from "@generated/models/CompanyCategory";
 import { JobListing } from "@generated/models/JobListing";
+
 import { Arg, Ctx, Field, FieldResolver, InputType, Int, ObjectType, Query, Resolver, Root } from "type-graphql";
 import { MyContext } from "@types";
 import { Max, Min } from "class-validator";
 import jsonCompanies from "@/data/companies.json";
 import jsonJobListings from "@/data/job_listings.json";
+
 import moment from "moment";
 import { JsonValue } from "@prisma/client/runtime/library";
 import { GraphQLEmailAddress, GraphQLLatitude, GraphQLLongitude, GraphQLURL } from "graphql-scalars";
@@ -143,18 +146,29 @@ export class CompanyResolver extends CompanyRelationsResolver {
       }
    }
 
+   @FieldResolver(_ => CompanyCount, { nullable: false })
+   public async _count(@Root() { id }: Company, @Ctx() { prisma }: MyContext): Promise<Partial<CompanyCount>> {
+      const { _count } = await prisma.company.findUnique({
+         where: { id },
+         select: { _count: { select: { listings: true, categories: true } } },
+      });
+
+      return { ..._count, listings: _count?.listings === 0 ? 5 : 0 };
+   }
+
    @FieldResolver(_ => [JobListing], { nullable: true })
    public async listings(@Root() company: Company): Promise<JobListing[]> {
       let listings = company.listings;
       if (!listings?.length) {
+
          return getRandomItems(jsonJobListings, 5)
             .map(l => ({
                ...l,
                work_from: l.work_from as WorkFromHome,
                level: l.level as JobListingLevel,
                type: l.type as JobListingEmploymentType,
-               createdAt: moment(l.createdAt).toDate(),
-               updatedAt: moment(l.updatedAt).toDate(),
+               createdAt: moment(l.createdAt)?.isValid() ? moment(l.createdAt).toDate() : moment().subtract(1, `m`).toDate(),
+               updatedAt: moment(l.updatedAt)?.isValid() ? moment(l.updatedAt).toDate() : moment().subtract(1, `m`).toDate(),
                company_id: company.id,
                company: { ...company },
             }));
@@ -184,7 +198,6 @@ export class CompanyResolver extends CompanyRelationsResolver {
             },
          },
       });
-      console.log({ categories });
       return categories;
    }
 

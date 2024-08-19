@@ -15,6 +15,7 @@
     "compile": "tsc --project tsconfig.json && npx tsc-alias -p tsconfig.json",
     "start": "npx tsx src/index.ts",
     "build": "npm run generate && npm run compile",
+    "predev": "npm run seed",
     "dev": "npx nodemon --watch src -e ts,js -x npm run start"
   },
   "_moduleAliases": {
@@ -52,6 +53,7 @@
     "graphql-query-complexity": "^1.0.0",
     "graphql-scalars": "^1.23.0",
     "graphql-subscriptions": "^2.0.0",
+    "graphql-tag": "^2.12.6",
     "graphql-ws": "^5.16.0",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",

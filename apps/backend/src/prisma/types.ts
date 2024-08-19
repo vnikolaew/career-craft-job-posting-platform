@@ -62,8 +62,15 @@ declare global {
          max: number
       } | { type: `fixed`, value: number })
 
+      export type FurloughPeriod = '21-25' | '25-30' | '30+'
+      export type JobListingFrom = 'direct-employer' | `agencies`
+
       export type JobListingParameters = {
          salary: JobListingSalary
+         furlough: FurloughPeriod
+         from: JobListingFrom
+         remoteInterview? : boolean
+         internship? : boolean
       }
 
    }

@@ -49,7 +49,7 @@ async function seedListings() {
             level: l.level as JobListingLevel,
             work_from: l.work_from as WorkFromHome,
             type: l.type as JobListingEmploymentType,
-            createdAt: moment(l.createdAt).isValid() ?  moment(l.createdAt).toDate() : moment().subtract(1, `d`).toDate(),
+            createdAt: moment(l.createdAt).isValid() ? moment(l.createdAt).toDate() : moment().subtract(1, `d`).toDate(),
             updatedAt: moment(l.updatedAt).isValid() ? moment(l.updatedAt).toDate() : moment().subtract(1, `d`).toDate(),
          });
       });
@@ -97,9 +97,11 @@ async function seedCompanies() {
    let count = await xprisma.company.count();
    if (count > 0) return;
 
-   let companies: (Company & { categories: Omit<CompanyCategory, "id">[] })[] = companiesJson
-      .map(({ id, ...c }) => ({
-         ...c, createdAt: moment(c.createdAt).toDate(), updatedAt: moment(c.updatedAt).toDate(),
+   let companies: (Company & { categories: Omit<CompanyCategory, "id">[] })[] =
+      companiesJson.map(({ id, ...c }) => ({
+         ...c,
+         createdAt: moment(c.createdAt).toDate(),
+         updatedAt: moment(c.updatedAt).toDate(),
       }));
 
    const companiesMap = new Map<string, Company>();
@@ -110,12 +112,12 @@ async function seedCompanies() {
       companiesMap[id] = { categories, listings, ...company };
    }
 
-   let categories = _.uniqBy(Object.entries(companiesMap).flatMap(([id, company]) => company.categories
+   let categories = _.uniqBy(Object.entries(companiesMap)
+         .flatMap(([id, company]) => company.categories
          .map(c => ({ ...c, companyId: id }))).concat(categoriesJson.map(c => ({ ...c, companyId: `` }))),
       c => c.name);
 
    let categoryToCompanyMap = new Map<string, string[]>();
-   console.log({ categories });
 
    for (let { name, description, companyId } of categories) {
       let category = await xprisma.companyCategory.create({

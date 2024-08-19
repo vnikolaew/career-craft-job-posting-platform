@@ -17,7 +17,6 @@ import { hostMiddleware } from "src/infrastructure/middleware";
 import cors from "cors";
 import { expressMiddleware } from "@apollo/server/express4";
 import { xprisma } from "@prisma/prisma";
-import { MoviesAPI } from "@modules/common/data-sources/MoviesAPI";
 
 import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
@@ -29,6 +28,7 @@ import { asyncIteratorToIterable } from "@modules/user/UserResolver";
 import { googleLoginRouter } from "@modules/user/auth/google";
 import * as https from "node:https";
 import { WHITELISTED_URLS } from "@infrastructure/middleware/HostMiddleware";
+import { Service } from "typedi";
 
 export class CustomApolloServer<TContext> {
    private readonly schema: Partial<BuildSchemaOptions> & { resolvers: NonEmptyArray<Function> };
@@ -61,7 +61,7 @@ export class CustomApolloServer<TContext> {
          {
             key: fs.readFileSync(path.join(process.cwd(), `certs`, `career-craft.com.key`)),
             cert: fs.readFileSync(path.join(process.cwd(), `certs`, `career-craft.com.crt`)),
-            passphrase: `default`
+            passphrase: `default`,
          },
          this.app) : http.createServer(this.app);
 
@@ -136,9 +136,7 @@ export class CustomApolloServer<TContext> {
                pubSub: this.pubSub,
                userId: undefined,
                req,
-               dataSources: {
-                  movies: new MoviesAPI({ cache: this.server.cache }),
-               },
+               dataSources: {},
             }) as TContext,
          }));
 

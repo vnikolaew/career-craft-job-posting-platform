@@ -17,6 +17,7 @@ type Account {
   token_type: String
   type: String!
   updatedAt: DateTimeISO!
+  user: User!
   userId: String!
 }
 
@@ -514,6 +515,12 @@ type AggregateJobListingCategory {
   _min: JobListingCategoryMinAggregate
 }
 
+type AggregateJobListingSubscription {
+  _count: JobListingSubscriptionCountAggregate
+  _max: JobListingSubscriptionMaxAggregate
+  _min: JobListingSubscriptionMinAggregate
+}
+
 type AggregateSavedListing {
   _count: SavedListingCountAggregate
   _max: SavedListingMaxAggregate
@@ -747,6 +754,13 @@ input CategoryOnCompanyWhereUniqueInput {
   createdAt: DateTimeFilter
 }
 
+type CategoryOnJobListing {
+  category_id: String!
+  createdAt: DateTimeISO!
+  listing_id: String!
+  updatedAt: DateTimeISO!
+}
+
 input CategoryOnJobListingCreateManyCategoryInput {
   createdAt: DateTimeISO
   listing_id: String!
@@ -814,6 +828,33 @@ input CategoryOnJobListingListing_idCategory_idCompoundUniqueInput {
 
 input CategoryOnJobListingOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+enum CategoryOnJobListingOrderByRelevanceFieldEnum {
+  category_id
+  listing_id
+}
+
+input CategoryOnJobListingOrderByRelevanceInput {
+  fields: [CategoryOnJobListingOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input CategoryOnJobListingOrderByWithRelationInput {
+  _relevance: CategoryOnJobListingOrderByRelevanceInput
+  category: JobListingCategoryOrderByWithRelationInput
+  category_id: SortOrder
+  createdAt: SortOrder
+  listing: JobListingOrderByWithRelationInput
+  listing_id: SortOrder
+}
+
+enum CategoryOnJobListingScalarFieldEnum {
+  category_id
+  createdAt
+  listing_id
+  updatedAt
 }
 
 input CategoryOnJobListingScalarWhereInput {
@@ -941,6 +982,7 @@ type Company {
   local_info: CompanyLocalInfo
   metadata: JSONObject
   name: String!
+  subscriptions(cursor: JobListingSubscriptionWhereUniqueInput, distinct: [JobListingSubscriptionScalarFieldEnum!], orderBy: [JobListingSubscriptionOrderByWithRelationInput!], skip: Int, take: Int, where: JobListingSubscriptionWhereInput): [JobListingSubscription!]!
   updatedAt: DateTimeISO!
   work_environment: [String!]!
   worldwide_info: CompanyWorldwideInfo
@@ -952,10 +994,12 @@ type CompanyCategory {
   description: String!
   id: ID!
   name: String!
+  subscriptions(cursor: JobListingSubscriptionWhereUniqueInput, distinct: [JobListingSubscriptionScalarFieldEnum!], orderBy: [JobListingSubscriptionOrderByWithRelationInput!], skip: Int, take: Int, where: JobListingSubscriptionWhereInput): [JobListingSubscription!]!
 }
 
 type CompanyCategoryCount {
   companies(where: CategoryOnCompanyWhereInput): Int!
+  subscriptions(where: JobListingSubscriptionWhereInput): Int!
 }
 
 type CompanyCategoryCountAggregate {
@@ -976,12 +1020,19 @@ input CompanyCategoryCreateInput {
   description: String!
   id: String
   name: String!
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutCategoriesInput
 }
 
 input CompanyCategoryCreateManyInput {
   description: String!
   id: String
   name: String!
+}
+
+input CompanyCategoryCreateNestedManyWithoutSubscriptionsInput {
+  connect: [CompanyCategoryWhereUniqueInput!]
+  connectOrCreate: [CompanyCategoryCreateOrConnectWithoutSubscriptionsInput!]
+  create: [CompanyCategoryCreateWithoutSubscriptionsInput!]
 }
 
 input CompanyCategoryCreateNestedOneWithoutCompaniesInput {
@@ -995,7 +1046,20 @@ input CompanyCategoryCreateOrConnectWithoutCompaniesInput {
   where: CompanyCategoryWhereUniqueInput!
 }
 
+input CompanyCategoryCreateOrConnectWithoutSubscriptionsInput {
+  create: CompanyCategoryCreateWithoutSubscriptionsInput!
+  where: CompanyCategoryWhereUniqueInput!
+}
+
 input CompanyCategoryCreateWithoutCompaniesInput {
+  description: String!
+  id: String
+  name: String!
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutCategoriesInput
+}
+
+input CompanyCategoryCreateWithoutSubscriptionsInput {
+  companies: CategoryOnCompanyCreateNestedManyWithoutCategoryInput
   description: String!
   id: String
   name: String!
@@ -1008,6 +1072,17 @@ type CompanyCategoryGroupBy {
   description: String!
   id: String!
   name: String!
+}
+
+input CompanyCategoryInput {
+  id: String!
+  name: String!
+}
+
+input CompanyCategoryListRelationFilter {
+  every: CompanyCategoryWhereInput
+  none: CompanyCategoryWhereInput
+  some: CompanyCategoryWhereInput
 }
 
 type CompanyCategoryMaxAggregate {
@@ -1032,6 +1107,10 @@ input CompanyCategoryMinOrderByAggregateInput {
   description: SortOrder
   id: SortOrder
   name: SortOrder
+}
+
+input CompanyCategoryOrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 enum CompanyCategoryOrderByRelevanceFieldEnum {
@@ -1061,6 +1140,7 @@ input CompanyCategoryOrderByWithRelationInput {
   description: SortOrder
   id: SortOrder
   name: SortOrder
+  subscriptions: JobListingSubscriptionOrderByRelationAggregateInput
 }
 
 input CompanyCategoryRelationFilter {
@@ -1072,6 +1152,15 @@ enum CompanyCategoryScalarFieldEnum {
   description
   id
   name
+}
+
+input CompanyCategoryScalarWhereInput {
+  AND: [CompanyCategoryScalarWhereInput!]
+  NOT: [CompanyCategoryScalarWhereInput!]
+  OR: [CompanyCategoryScalarWhereInput!]
+  description: StringFilter
+  id: StringFilter
+  name: StringFilter
 }
 
 input CompanyCategoryScalarWhereWithAggregatesInput {
@@ -1088,12 +1177,31 @@ input CompanyCategoryUpdateInput {
   description: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutCategoriesNestedInput
 }
 
 input CompanyCategoryUpdateManyMutationInput {
   description: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+}
+
+input CompanyCategoryUpdateManyWithWhereWithoutSubscriptionsInput {
+  data: CompanyCategoryUpdateManyMutationInput!
+  where: CompanyCategoryScalarWhereInput!
+}
+
+input CompanyCategoryUpdateManyWithoutSubscriptionsNestedInput {
+  connect: [CompanyCategoryWhereUniqueInput!]
+  connectOrCreate: [CompanyCategoryCreateOrConnectWithoutSubscriptionsInput!]
+  create: [CompanyCategoryCreateWithoutSubscriptionsInput!]
+  delete: [CompanyCategoryWhereUniqueInput!]
+  deleteMany: [CompanyCategoryScalarWhereInput!]
+  disconnect: [CompanyCategoryWhereUniqueInput!]
+  set: [CompanyCategoryWhereUniqueInput!]
+  update: [CompanyCategoryUpdateWithWhereUniqueWithoutSubscriptionsInput!]
+  updateMany: [CompanyCategoryUpdateManyWithWhereWithoutSubscriptionsInput!]
+  upsert: [CompanyCategoryUpsertWithWhereUniqueWithoutSubscriptionsInput!]
 }
 
 input CompanyCategoryUpdateOneRequiredWithoutCompaniesNestedInput {
@@ -1109,10 +1217,29 @@ input CompanyCategoryUpdateToOneWithWhereWithoutCompaniesInput {
   where: CompanyCategoryWhereInput
 }
 
+input CompanyCategoryUpdateWithWhereUniqueWithoutSubscriptionsInput {
+  data: CompanyCategoryUpdateWithoutSubscriptionsInput!
+  where: CompanyCategoryWhereUniqueInput!
+}
+
 input CompanyCategoryUpdateWithoutCompaniesInput {
   description: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutCategoriesNestedInput
+}
+
+input CompanyCategoryUpdateWithoutSubscriptionsInput {
+  companies: CategoryOnCompanyUpdateManyWithoutCategoryNestedInput
+  description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input CompanyCategoryUpsertWithWhereUniqueWithoutSubscriptionsInput {
+  create: CompanyCategoryCreateWithoutSubscriptionsInput!
+  update: CompanyCategoryUpdateWithoutSubscriptionsInput!
+  where: CompanyCategoryWhereUniqueInput!
 }
 
 input CompanyCategoryUpsertWithoutCompaniesInput {
@@ -1129,6 +1256,7 @@ input CompanyCategoryWhereInput {
   description: StringFilter
   id: StringFilter
   name: StringFilter
+  subscriptions: JobListingSubscriptionListRelationFilter
 }
 
 input CompanyCategoryWhereUniqueInput {
@@ -1139,6 +1267,7 @@ input CompanyCategoryWhereUniqueInput {
   description: StringFilter
   id: String
   name: StringFilter
+  subscriptions: JobListingSubscriptionListRelationFilter
 }
 
 type CompanyContact {
@@ -1165,6 +1294,7 @@ type CompanyContacts {
 type CompanyCount {
   categories(where: CategoryOnCompanyWhereInput): Int!
   listings(where: JobListingWhereInput): Int!
+  subscriptions(where: JobListingSubscriptionWhereInput): Int!
 }
 
 type CompanyCountAggregate {
@@ -1224,6 +1354,7 @@ input CompanyCreateInput {
   local_info: JSON
   metadata: JSON
   name: String!
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutCompanyInput
   work_environment: CompanyCreatework_environmentInput
   worldwide_info: JSON
 }
@@ -1259,6 +1390,12 @@ input CompanyCreateNestedOneWithoutListingsInput {
   create: CompanyCreateWithoutListingsInput
 }
 
+input CompanyCreateNestedOneWithoutSubscriptionsInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutSubscriptionsInput
+  create: CompanyCreateWithoutSubscriptionsInput
+}
+
 input CompanyCreateOrConnectWithoutCategoriesInput {
   create: CompanyCreateWithoutCategoriesInput!
   where: CompanyWhereUniqueInput!
@@ -1266,6 +1403,11 @@ input CompanyCreateOrConnectWithoutCategoriesInput {
 
 input CompanyCreateOrConnectWithoutListingsInput {
   create: CompanyCreateWithoutListingsInput!
+  where: CompanyWhereUniqueInput!
+}
+
+input CompanyCreateOrConnectWithoutSubscriptionsInput {
+  create: CompanyCreateWithoutSubscriptionsInput!
   where: CompanyWhereUniqueInput!
 }
 
@@ -1285,6 +1427,7 @@ input CompanyCreateWithoutCategoriesInput {
   local_info: JSON
   metadata: JSON
   name: String!
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutCompanyInput
   work_environment: CompanyCreatework_environmentInput
   worldwide_info: JSON
 }
@@ -1302,6 +1445,28 @@ input CompanyCreateWithoutListingsInput {
   email: String!
   hiring_process: CompanyCreatehiring_processInput
   id: String
+  local_info: JSON
+  metadata: JSON
+  name: String!
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutCompanyInput
+  work_environment: CompanyCreatework_environmentInput
+  worldwide_info: JSON
+}
+
+input CompanyCreateWithoutSubscriptionsInput {
+  about_raw: String!
+  banner_image_url: String
+  benefits: CompanyCreatebenefitsInput
+  brand_image_url: String
+  career_description_raw: String!
+  categories: CategoryOnCompanyCreateNestedManyWithoutCompanyInput
+  company_values: CompanyCreatecompany_valuesInput
+  contacts: JSON
+  createdAt: DateTimeISO
+  email: String!
+  hiring_process: CompanyCreatehiring_processInput
+  id: String
+  listings: JobListingCreateNestedManyWithoutCompanyInput
   local_info: JSON
   metadata: JSON
   name: String!
@@ -1400,6 +1565,11 @@ input CompanyMinOrderByAggregateInput {
   name: SortOrder
 }
 
+input CompanyNullableRelationFilter {
+  is: CompanyWhereInput
+  isNot: CompanyWhereInput
+}
+
 enum CompanyOrderByRelevanceFieldEnum {
   about_raw
   banner_image_url
@@ -1460,6 +1630,7 @@ input CompanyOrderByWithRelationInput {
   local_info: SortOrder
   metadata: SortOrderInput
   name: SortOrder
+  subscriptions: JobListingSubscriptionOrderByRelationAggregateInput
   work_environment: SortOrder
   worldwide_info: SortOrder
 }
@@ -1528,6 +1699,7 @@ input CompanyUpdateInput {
   local_info: JSON
   metadata: JSON
   name: StringFieldUpdateOperationsInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutCompanyNestedInput
   work_environment: CompanyUpdatework_environmentInput
   worldwide_info: JSON
 }
@@ -1567,6 +1739,16 @@ input CompanyUpdateOneRequiredWithoutListingsNestedInput {
   upsert: CompanyUpsertWithoutListingsInput
 }
 
+input CompanyUpdateOneWithoutSubscriptionsNestedInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutSubscriptionsInput
+  create: CompanyCreateWithoutSubscriptionsInput
+  delete: CompanyWhereInput
+  disconnect: CompanyWhereInput
+  update: CompanyUpdateToOneWithWhereWithoutSubscriptionsInput
+  upsert: CompanyUpsertWithoutSubscriptionsInput
+}
+
 input CompanyUpdateToOneWithWhereWithoutCategoriesInput {
   data: CompanyUpdateWithoutCategoriesInput!
   where: CompanyWhereInput
@@ -1574,6 +1756,11 @@ input CompanyUpdateToOneWithWhereWithoutCategoriesInput {
 
 input CompanyUpdateToOneWithWhereWithoutListingsInput {
   data: CompanyUpdateWithoutListingsInput!
+  where: CompanyWhereInput
+}
+
+input CompanyUpdateToOneWithWhereWithoutSubscriptionsInput {
+  data: CompanyUpdateWithoutSubscriptionsInput!
   where: CompanyWhereInput
 }
 
@@ -1593,6 +1780,7 @@ input CompanyUpdateWithoutCategoriesInput {
   local_info: JSON
   metadata: JSON
   name: StringFieldUpdateOperationsInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutCompanyNestedInput
   work_environment: CompanyUpdatework_environmentInput
   worldwide_info: JSON
 }
@@ -1610,6 +1798,28 @@ input CompanyUpdateWithoutListingsInput {
   email: StringFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
+  local_info: JSON
+  metadata: JSON
+  name: StringFieldUpdateOperationsInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutCompanyNestedInput
+  work_environment: CompanyUpdatework_environmentInput
+  worldwide_info: JSON
+}
+
+input CompanyUpdateWithoutSubscriptionsInput {
+  about_raw: StringFieldUpdateOperationsInput
+  banner_image_url: NullableStringFieldUpdateOperationsInput
+  benefits: CompanyUpdatebenefitsInput
+  brand_image_url: NullableStringFieldUpdateOperationsInput
+  career_description_raw: StringFieldUpdateOperationsInput
+  categories: CategoryOnCompanyUpdateManyWithoutCompanyNestedInput
+  company_values: CompanyUpdatecompany_valuesInput
+  contacts: JSON
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  hiring_process: CompanyUpdatehiring_processInput
+  id: StringFieldUpdateOperationsInput
+  listings: JobListingUpdateManyWithoutCompanyNestedInput
   local_info: JSON
   metadata: JSON
   name: StringFieldUpdateOperationsInput
@@ -1649,6 +1859,12 @@ input CompanyUpsertWithoutListingsInput {
   where: CompanyWhereInput
 }
 
+input CompanyUpsertWithoutSubscriptionsInput {
+  create: CompanyCreateWithoutSubscriptionsInput!
+  update: CompanyUpdateWithoutSubscriptionsInput!
+  where: CompanyWhereInput
+}
+
 input CompanyWhereInput {
   AND: [CompanyWhereInput!]
   NOT: [CompanyWhereInput!]
@@ -1669,6 +1885,7 @@ input CompanyWhereInput {
   local_info: JsonFilter
   metadata: JsonNullableFilter
   name: StringFilter
+  subscriptions: JobListingSubscriptionListRelationFilter
   work_environment: StringNullableListFilter
   worldwide_info: JsonFilter
 }
@@ -1693,6 +1910,7 @@ input CompanyWhereUniqueInput {
   local_info: JsonFilter
   metadata: JsonNullableFilter
   name: StringFilter
+  subscriptions: JobListingSubscriptionListRelationFilter
   work_environment: StringNullableListFilter
   worldwide_info: JsonFilter
 }
@@ -1708,6 +1926,11 @@ type Coordinates {
   latitude: Latitude
   longitude: Longitude
 }
+
+"""
+A field whose value is a Currency: https://en.wikipedia.org/wiki/ISO_4217.
+"""
+scalar Currency @specifiedBy(url: "https://en.wikipedia.org/wiki/ISO_4217")
 
 input DateTimeFieldUpdateOperationsInput {
   set: DateTimeISO
@@ -1768,6 +1991,11 @@ input DateTimeWithAggregatesFilter {
   notIn: [DateTimeISO!]
 }
 
+type DeleteAllSubscriptionsResponse {
+  deleted_count: Int!
+  success: Boolean!
+}
+
 """
 A field whose value conforms to the standard internet email address format as specified in HTML Spec: https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address.
 """
@@ -1807,6 +2035,27 @@ input EnumJobListingLevelNullableWithAggregatesFilter {
   notIn: [JobListingLevel!]
 }
 
+input EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput {
+  set: JobListingSubscriptionNotificationFrequency
+}
+
+input EnumJobListingSubscriptionNotificationFrequencyFilter {
+  equals: JobListingSubscriptionNotificationFrequency
+  in: [JobListingSubscriptionNotificationFrequency!]
+  not: NestedEnumJobListingSubscriptionNotificationFrequencyFilter
+  notIn: [JobListingSubscriptionNotificationFrequency!]
+}
+
+input EnumJobListingSubscriptionNotificationFrequencyWithAggregatesFilter {
+  _count: NestedIntFilter
+  _max: NestedEnumJobListingSubscriptionNotificationFrequencyFilter
+  _min: NestedEnumJobListingSubscriptionNotificationFrequencyFilter
+  equals: JobListingSubscriptionNotificationFrequency
+  in: [JobListingSubscriptionNotificationFrequency!]
+  not: NestedEnumJobListingSubscriptionNotificationFrequencyWithAggregatesFilter
+  notIn: [JobListingSubscriptionNotificationFrequency!]
+}
+
 input EnumWorkFromHomeNullableFilter {
   equals: WorkFromHome
   in: [WorkFromHome!]
@@ -1822,6 +2071,17 @@ input EnumWorkFromHomeNullableWithAggregatesFilter {
   in: [WorkFromHome!]
   not: NestedEnumWorkFromHomeNullableWithAggregatesFilter
   notIn: [WorkFromHome!]
+}
+
+enum FurloughPeriod {
+  ThirtyPlus
+  TwentyFiveToThirty
+  TwentyOneToTwentyFive
+}
+
+input GetSubscriptionsInput {
+  limit: Int = 10
+  skip: Int = 0
 }
 
 input GetTopCompaniesInput {
@@ -1873,6 +2133,8 @@ scalar JSONObject @specifiedBy(url: "http://www.ecma-international.org/publicati
 
 type JobListing {
   _count: JobListingCount
+  categories(cursor: CategoryOnJobListingWhereUniqueInput, distinct: [CategoryOnJobListingScalarFieldEnum!], orderBy: [CategoryOnJobListingOrderByWithRelationInput!], skip: Int, take: Int, where: CategoryOnJobListingWhereInput): [CategoryOnJobListing!]!
+  company: Company!
   company_id: String!
   createdAt: DateTimeISO!
   description_raw: String!
@@ -1887,6 +2149,7 @@ type JobListing {
 
   """[JobListingParameters]"""
   parameters: JSON!
+  saves(cursor: SavedListingWhereUniqueInput, distinct: [SavedListingScalarFieldEnum!], orderBy: [SavedListingOrderByWithRelationInput!], skip: Int, take: Int, where: SavedListingWhereInput): [SavedListing!]!
   type: JobListingEmploymentType
   updatedAt: DateTimeISO!
   work_from: WorkFromHome
@@ -1896,6 +2159,7 @@ type JobListingCategory {
   _count: JobListingCategoryCount
   description: String!
   id: ID!
+  listings(cursor: CategoryOnJobListingWhereUniqueInput, distinct: [CategoryOnJobListingScalarFieldEnum!], orderBy: [CategoryOnJobListingOrderByWithRelationInput!], skip: Int, take: Int, where: CategoryOnJobListingWhereInput): [CategoryOnJobListing!]!
   name: String!
 }
 
@@ -2283,6 +2547,11 @@ enum JobListingEmploymentType {
   Temporary
 }
 
+enum JobListingFrom {
+  Agencies
+  DirectEmployer
+}
+
 type JobListingGroupBy {
   _count: JobListingCountAggregate
   _max: JobListingMaxAggregate
@@ -2429,9 +2698,21 @@ input JobListingOrderByWithRelationInput {
   work_from: SortOrderInput
 }
 
+input JobListingParameters {
+  from: JobListingFrom
+  furlough: FurloughPeriod
+  internship: Boolean
+  remoteInterview: Boolean
+  salary: JobListingSalary
+}
+
 input JobListingRelationFilter {
   is: JobListingWhereInput
   isNot: JobListingWhereInput
+}
+
+input JobListingSalary {
+  currency: Currency!
 }
 
 enum JobListingScalarFieldEnum {
@@ -2487,6 +2768,647 @@ input JobListingScalarWhereWithAggregatesInput {
   parameters: JsonWithAggregatesFilter
   type: EnumJobListingEmploymentTypeNullableWithAggregatesFilter
   work_from: EnumWorkFromHomeNullableWithAggregatesFilter
+}
+
+type JobListingSubscription {
+  _count: JobListingSubscriptionCount
+  categories(cursor: CompanyCategoryWhereUniqueInput, distinct: [CompanyCategoryScalarFieldEnum!], orderBy: [CompanyCategoryOrderByWithRelationInput!], skip: Int, take: Int, where: CompanyCategoryWhereInput): [CompanyCategory!]!
+  company(where: CompanyWhereInput): Company
+  company_id: String
+  createdAt: DateTimeISO!
+  id: ID!
+  keywords: [String!]!
+  languages: [String!]!
+  level: JobListingLevel
+  location: String
+  metadata: JSON
+  notification_frequency: JobListingSubscriptionNotificationFrequency!
+
+  """[JobListingParameters]"""
+  parameters: JSON!
+  type: JobListingEmploymentType
+  updatedAt: DateTimeISO!
+  user: User!
+  user_id: String!
+  work_from: WorkFromHome
+}
+
+type JobListingSubscriptionCount {
+  categories(where: CompanyCategoryWhereInput): Int!
+}
+
+type JobListingSubscriptionCountAggregate {
+  _all: Int!
+  company_id: Int!
+  createdAt: Int!
+  id: Int!
+  keywords: Int!
+  languages: Int!
+  level: Int!
+  location: Int!
+  metadata: Int!
+  notification_frequency: Int!
+  parameters: Int!
+  type: Int!
+  updatedAt: Int!
+  user_id: Int!
+  work_from: Int!
+}
+
+input JobListingSubscriptionCountOrderByAggregateInput {
+  company_id: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  keywords: SortOrder
+  languages: SortOrder
+  level: SortOrder
+  location: SortOrder
+  metadata: SortOrder
+  notification_frequency: SortOrder
+  parameters: SortOrder
+  type: SortOrder
+  user_id: SortOrder
+  work_from: SortOrder
+}
+
+input JobListingSubscriptionCreateInput {
+  categories: CompanyCategoryCreateNestedManyWithoutSubscriptionsInput
+  company: CompanyCreateNestedOneWithoutSubscriptionsInput
+  createdAt: DateTimeISO
+  id: String
+  keywords: JobListingSubscriptionCreatekeywordsInput
+  languages: JobListingSubscriptionCreatelanguagesInput
+  level: JobListingLevel
+  location: String
+  metadata: JSON
+  notification_frequency: JobListingSubscriptionNotificationFrequency!
+  parameters: JSON
+  type: JobListingEmploymentType
+  user: UserCreateNestedOneWithoutSubscriptionsInput!
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionCreateManyCompanyInput {
+  createdAt: DateTimeISO
+  id: String
+  keywords: JobListingSubscriptionCreatekeywordsInput
+  languages: JobListingSubscriptionCreatelanguagesInput
+  level: JobListingLevel
+  location: String
+  metadata: JSON
+  notification_frequency: JobListingSubscriptionNotificationFrequency!
+  parameters: JSON
+  type: JobListingEmploymentType
+  user_id: String!
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionCreateManyCompanyInputEnvelope {
+  data: [JobListingSubscriptionCreateManyCompanyInput!]!
+  skipDuplicates: Boolean
+}
+
+input JobListingSubscriptionCreateManyInput {
+  company_id: String
+  createdAt: DateTimeISO
+  id: String
+  keywords: JobListingSubscriptionCreatekeywordsInput
+  languages: JobListingSubscriptionCreatelanguagesInput
+  level: JobListingLevel
+  location: String
+  metadata: JSON
+  notification_frequency: JobListingSubscriptionNotificationFrequency!
+  parameters: JSON
+  type: JobListingEmploymentType
+  user_id: String!
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionCreateManyUserInput {
+  company_id: String
+  createdAt: DateTimeISO
+  id: String
+  keywords: JobListingSubscriptionCreatekeywordsInput
+  languages: JobListingSubscriptionCreatelanguagesInput
+  level: JobListingLevel
+  location: String
+  metadata: JSON
+  notification_frequency: JobListingSubscriptionNotificationFrequency!
+  parameters: JSON
+  type: JobListingEmploymentType
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionCreateManyUserInputEnvelope {
+  data: [JobListingSubscriptionCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input JobListingSubscriptionCreateNestedManyWithoutCategoriesInput {
+  connect: [JobListingSubscriptionWhereUniqueInput!]
+  connectOrCreate: [JobListingSubscriptionCreateOrConnectWithoutCategoriesInput!]
+  create: [JobListingSubscriptionCreateWithoutCategoriesInput!]
+}
+
+input JobListingSubscriptionCreateNestedManyWithoutCompanyInput {
+  connect: [JobListingSubscriptionWhereUniqueInput!]
+  connectOrCreate: [JobListingSubscriptionCreateOrConnectWithoutCompanyInput!]
+  create: [JobListingSubscriptionCreateWithoutCompanyInput!]
+  createMany: JobListingSubscriptionCreateManyCompanyInputEnvelope
+}
+
+input JobListingSubscriptionCreateNestedManyWithoutUserInput {
+  connect: [JobListingSubscriptionWhereUniqueInput!]
+  connectOrCreate: [JobListingSubscriptionCreateOrConnectWithoutUserInput!]
+  create: [JobListingSubscriptionCreateWithoutUserInput!]
+  createMany: JobListingSubscriptionCreateManyUserInputEnvelope
+}
+
+input JobListingSubscriptionCreateOrConnectWithoutCategoriesInput {
+  create: JobListingSubscriptionCreateWithoutCategoriesInput!
+  where: JobListingSubscriptionWhereUniqueInput!
+}
+
+input JobListingSubscriptionCreateOrConnectWithoutCompanyInput {
+  create: JobListingSubscriptionCreateWithoutCompanyInput!
+  where: JobListingSubscriptionWhereUniqueInput!
+}
+
+input JobListingSubscriptionCreateOrConnectWithoutUserInput {
+  create: JobListingSubscriptionCreateWithoutUserInput!
+  where: JobListingSubscriptionWhereUniqueInput!
+}
+
+input JobListingSubscriptionCreateWithoutCategoriesInput {
+  company: CompanyCreateNestedOneWithoutSubscriptionsInput
+  createdAt: DateTimeISO
+  id: String
+  keywords: JobListingSubscriptionCreatekeywordsInput
+  languages: JobListingSubscriptionCreatelanguagesInput
+  level: JobListingLevel
+  location: String
+  metadata: JSON
+  notification_frequency: JobListingSubscriptionNotificationFrequency!
+  parameters: JSON
+  type: JobListingEmploymentType
+  user: UserCreateNestedOneWithoutSubscriptionsInput!
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionCreateWithoutCompanyInput {
+  categories: CompanyCategoryCreateNestedManyWithoutSubscriptionsInput
+  createdAt: DateTimeISO
+  id: String
+  keywords: JobListingSubscriptionCreatekeywordsInput
+  languages: JobListingSubscriptionCreatelanguagesInput
+  level: JobListingLevel
+  location: String
+  metadata: JSON
+  notification_frequency: JobListingSubscriptionNotificationFrequency!
+  parameters: JSON
+  type: JobListingEmploymentType
+  user: UserCreateNestedOneWithoutSubscriptionsInput!
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionCreateWithoutUserInput {
+  categories: CompanyCategoryCreateNestedManyWithoutSubscriptionsInput
+  company: CompanyCreateNestedOneWithoutSubscriptionsInput
+  createdAt: DateTimeISO
+  id: String
+  keywords: JobListingSubscriptionCreatekeywordsInput
+  languages: JobListingSubscriptionCreatelanguagesInput
+  level: JobListingLevel
+  location: String
+  metadata: JSON
+  notification_frequency: JobListingSubscriptionNotificationFrequency!
+  parameters: JSON
+  type: JobListingEmploymentType
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionCreatekeywordsInput {
+  set: [String!]!
+}
+
+input JobListingSubscriptionCreatelanguagesInput {
+  set: [String!]!
+}
+
+type JobListingSubscriptionGroupBy {
+  _count: JobListingSubscriptionCountAggregate
+  _max: JobListingSubscriptionMaxAggregate
+  _min: JobListingSubscriptionMinAggregate
+  company_id: String
+  createdAt: DateTimeISO!
+  id: String!
+  keywords: [String!]
+  languages: [String!]
+  level: JobListingLevel
+  location: String
+  metadata: JSON
+  notification_frequency: JobListingSubscriptionNotificationFrequency!
+  parameters: JSON!
+  type: JobListingEmploymentType
+  updatedAt: DateTimeISO!
+  user_id: String!
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionListRelationFilter {
+  every: JobListingSubscriptionWhereInput
+  none: JobListingSubscriptionWhereInput
+  some: JobListingSubscriptionWhereInput
+}
+
+type JobListingSubscriptionMaxAggregate {
+  company_id: String
+  createdAt: DateTimeISO
+  id: String
+  level: JobListingLevel
+  location: String
+  notification_frequency: JobListingSubscriptionNotificationFrequency
+  type: JobListingEmploymentType
+  updatedAt: DateTimeISO
+  user_id: String
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionMaxOrderByAggregateInput {
+  company_id: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  level: SortOrder
+  location: SortOrder
+  notification_frequency: SortOrder
+  type: SortOrder
+  user_id: SortOrder
+  work_from: SortOrder
+}
+
+type JobListingSubscriptionMinAggregate {
+  company_id: String
+  createdAt: DateTimeISO
+  id: String
+  level: JobListingLevel
+  location: String
+  notification_frequency: JobListingSubscriptionNotificationFrequency
+  type: JobListingEmploymentType
+  updatedAt: DateTimeISO
+  user_id: String
+  work_from: WorkFromHome
+}
+
+input JobListingSubscriptionMinOrderByAggregateInput {
+  company_id: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  level: SortOrder
+  location: SortOrder
+  notification_frequency: SortOrder
+  type: SortOrder
+  user_id: SortOrder
+  work_from: SortOrder
+}
+
+enum JobListingSubscriptionNotificationFrequency {
+  Daily
+  Weekly
+}
+
+input JobListingSubscriptionOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+enum JobListingSubscriptionOrderByRelevanceFieldEnum {
+  company_id
+  id
+  keywords
+  languages
+  location
+  user_id
+}
+
+input JobListingSubscriptionOrderByRelevanceInput {
+  fields: [JobListingSubscriptionOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input JobListingSubscriptionOrderByWithAggregationInput {
+  _count: JobListingSubscriptionCountOrderByAggregateInput
+  _max: JobListingSubscriptionMaxOrderByAggregateInput
+  _min: JobListingSubscriptionMinOrderByAggregateInput
+  company_id: SortOrderInput
+  createdAt: SortOrder
+  id: SortOrder
+  keywords: SortOrder
+  languages: SortOrder
+  level: SortOrderInput
+  location: SortOrderInput
+  metadata: SortOrderInput
+  notification_frequency: SortOrder
+  parameters: SortOrder
+  type: SortOrderInput
+  user_id: SortOrder
+  work_from: SortOrderInput
+}
+
+input JobListingSubscriptionOrderByWithRelationInput {
+  _relevance: JobListingSubscriptionOrderByRelevanceInput
+  categories: CompanyCategoryOrderByRelationAggregateInput
+  company: CompanyOrderByWithRelationInput
+  company_id: SortOrderInput
+  createdAt: SortOrder
+  id: SortOrder
+  keywords: SortOrder
+  languages: SortOrder
+  level: SortOrderInput
+  location: SortOrderInput
+  metadata: SortOrderInput
+  notification_frequency: SortOrder
+  parameters: SortOrder
+  type: SortOrderInput
+  user: UserOrderByWithRelationInput
+  user_id: SortOrder
+  work_from: SortOrderInput
+}
+
+enum JobListingSubscriptionScalarFieldEnum {
+  company_id
+  createdAt
+  id
+  keywords
+  languages
+  level
+  location
+  metadata
+  notification_frequency
+  parameters
+  type
+  updatedAt
+  user_id
+  work_from
+}
+
+input JobListingSubscriptionScalarWhereInput {
+  AND: [JobListingSubscriptionScalarWhereInput!]
+  NOT: [JobListingSubscriptionScalarWhereInput!]
+  OR: [JobListingSubscriptionScalarWhereInput!]
+  company_id: StringNullableFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  keywords: StringNullableListFilter
+  languages: StringNullableListFilter
+  level: EnumJobListingLevelNullableFilter
+  location: StringNullableFilter
+  metadata: JsonNullableFilter
+  notification_frequency: EnumJobListingSubscriptionNotificationFrequencyFilter
+  parameters: JsonFilter
+  type: EnumJobListingEmploymentTypeNullableFilter
+  user_id: StringFilter
+  work_from: EnumWorkFromHomeNullableFilter
+}
+
+input JobListingSubscriptionScalarWhereWithAggregatesInput {
+  AND: [JobListingSubscriptionScalarWhereWithAggregatesInput!]
+  NOT: [JobListingSubscriptionScalarWhereWithAggregatesInput!]
+  OR: [JobListingSubscriptionScalarWhereWithAggregatesInput!]
+  company_id: StringNullableWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  keywords: StringNullableListFilter
+  languages: StringNullableListFilter
+  level: EnumJobListingLevelNullableWithAggregatesFilter
+  location: StringNullableWithAggregatesFilter
+  metadata: JsonNullableWithAggregatesFilter
+  notification_frequency: EnumJobListingSubscriptionNotificationFrequencyWithAggregatesFilter
+  parameters: JsonWithAggregatesFilter
+  type: EnumJobListingEmploymentTypeNullableWithAggregatesFilter
+  user_id: StringWithAggregatesFilter
+  work_from: EnumWorkFromHomeNullableWithAggregatesFilter
+}
+
+input JobListingSubscriptionUpdateInput {
+  categories: CompanyCategoryUpdateManyWithoutSubscriptionsNestedInput
+  company: CompanyUpdateOneWithoutSubscriptionsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  keywords: JobListingSubscriptionUpdatekeywordsInput
+  languages: JobListingSubscriptionUpdatelanguagesInput
+  level: NullableEnumJobListingLevelFieldUpdateOperationsInput
+  location: NullableStringFieldUpdateOperationsInput
+  metadata: JSON
+  notification_frequency: EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput
+  parameters: JSON
+  type: NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutSubscriptionsNestedInput
+  work_from: NullableEnumWorkFromHomeFieldUpdateOperationsInput
+}
+
+input JobListingSubscriptionUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  keywords: JobListingSubscriptionUpdatekeywordsInput
+  languages: JobListingSubscriptionUpdatelanguagesInput
+  level: NullableEnumJobListingLevelFieldUpdateOperationsInput
+  location: NullableStringFieldUpdateOperationsInput
+  metadata: JSON
+  notification_frequency: EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput
+  parameters: JSON
+  type: NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput
+  work_from: NullableEnumWorkFromHomeFieldUpdateOperationsInput
+}
+
+input JobListingSubscriptionUpdateManyWithWhereWithoutCategoriesInput {
+  data: JobListingSubscriptionUpdateManyMutationInput!
+  where: JobListingSubscriptionScalarWhereInput!
+}
+
+input JobListingSubscriptionUpdateManyWithWhereWithoutCompanyInput {
+  data: JobListingSubscriptionUpdateManyMutationInput!
+  where: JobListingSubscriptionScalarWhereInput!
+}
+
+input JobListingSubscriptionUpdateManyWithWhereWithoutUserInput {
+  data: JobListingSubscriptionUpdateManyMutationInput!
+  where: JobListingSubscriptionScalarWhereInput!
+}
+
+input JobListingSubscriptionUpdateManyWithoutCategoriesNestedInput {
+  connect: [JobListingSubscriptionWhereUniqueInput!]
+  connectOrCreate: [JobListingSubscriptionCreateOrConnectWithoutCategoriesInput!]
+  create: [JobListingSubscriptionCreateWithoutCategoriesInput!]
+  delete: [JobListingSubscriptionWhereUniqueInput!]
+  deleteMany: [JobListingSubscriptionScalarWhereInput!]
+  disconnect: [JobListingSubscriptionWhereUniqueInput!]
+  set: [JobListingSubscriptionWhereUniqueInput!]
+  update: [JobListingSubscriptionUpdateWithWhereUniqueWithoutCategoriesInput!]
+  updateMany: [JobListingSubscriptionUpdateManyWithWhereWithoutCategoriesInput!]
+  upsert: [JobListingSubscriptionUpsertWithWhereUniqueWithoutCategoriesInput!]
+}
+
+input JobListingSubscriptionUpdateManyWithoutCompanyNestedInput {
+  connect: [JobListingSubscriptionWhereUniqueInput!]
+  connectOrCreate: [JobListingSubscriptionCreateOrConnectWithoutCompanyInput!]
+  create: [JobListingSubscriptionCreateWithoutCompanyInput!]
+  createMany: JobListingSubscriptionCreateManyCompanyInputEnvelope
+  delete: [JobListingSubscriptionWhereUniqueInput!]
+  deleteMany: [JobListingSubscriptionScalarWhereInput!]
+  disconnect: [JobListingSubscriptionWhereUniqueInput!]
+  set: [JobListingSubscriptionWhereUniqueInput!]
+  update: [JobListingSubscriptionUpdateWithWhereUniqueWithoutCompanyInput!]
+  updateMany: [JobListingSubscriptionUpdateManyWithWhereWithoutCompanyInput!]
+  upsert: [JobListingSubscriptionUpsertWithWhereUniqueWithoutCompanyInput!]
+}
+
+input JobListingSubscriptionUpdateManyWithoutUserNestedInput {
+  connect: [JobListingSubscriptionWhereUniqueInput!]
+  connectOrCreate: [JobListingSubscriptionCreateOrConnectWithoutUserInput!]
+  create: [JobListingSubscriptionCreateWithoutUserInput!]
+  createMany: JobListingSubscriptionCreateManyUserInputEnvelope
+  delete: [JobListingSubscriptionWhereUniqueInput!]
+  deleteMany: [JobListingSubscriptionScalarWhereInput!]
+  disconnect: [JobListingSubscriptionWhereUniqueInput!]
+  set: [JobListingSubscriptionWhereUniqueInput!]
+  update: [JobListingSubscriptionUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [JobListingSubscriptionUpdateManyWithWhereWithoutUserInput!]
+  upsert: [JobListingSubscriptionUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input JobListingSubscriptionUpdateWithWhereUniqueWithoutCategoriesInput {
+  data: JobListingSubscriptionUpdateWithoutCategoriesInput!
+  where: JobListingSubscriptionWhereUniqueInput!
+}
+
+input JobListingSubscriptionUpdateWithWhereUniqueWithoutCompanyInput {
+  data: JobListingSubscriptionUpdateWithoutCompanyInput!
+  where: JobListingSubscriptionWhereUniqueInput!
+}
+
+input JobListingSubscriptionUpdateWithWhereUniqueWithoutUserInput {
+  data: JobListingSubscriptionUpdateWithoutUserInput!
+  where: JobListingSubscriptionWhereUniqueInput!
+}
+
+input JobListingSubscriptionUpdateWithoutCategoriesInput {
+  company: CompanyUpdateOneWithoutSubscriptionsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  keywords: JobListingSubscriptionUpdatekeywordsInput
+  languages: JobListingSubscriptionUpdatelanguagesInput
+  level: NullableEnumJobListingLevelFieldUpdateOperationsInput
+  location: NullableStringFieldUpdateOperationsInput
+  metadata: JSON
+  notification_frequency: EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput
+  parameters: JSON
+  type: NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutSubscriptionsNestedInput
+  work_from: NullableEnumWorkFromHomeFieldUpdateOperationsInput
+}
+
+input JobListingSubscriptionUpdateWithoutCompanyInput {
+  categories: CompanyCategoryUpdateManyWithoutSubscriptionsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  keywords: JobListingSubscriptionUpdatekeywordsInput
+  languages: JobListingSubscriptionUpdatelanguagesInput
+  level: NullableEnumJobListingLevelFieldUpdateOperationsInput
+  location: NullableStringFieldUpdateOperationsInput
+  metadata: JSON
+  notification_frequency: EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput
+  parameters: JSON
+  type: NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutSubscriptionsNestedInput
+  work_from: NullableEnumWorkFromHomeFieldUpdateOperationsInput
+}
+
+input JobListingSubscriptionUpdateWithoutUserInput {
+  categories: CompanyCategoryUpdateManyWithoutSubscriptionsNestedInput
+  company: CompanyUpdateOneWithoutSubscriptionsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  keywords: JobListingSubscriptionUpdatekeywordsInput
+  languages: JobListingSubscriptionUpdatelanguagesInput
+  level: NullableEnumJobListingLevelFieldUpdateOperationsInput
+  location: NullableStringFieldUpdateOperationsInput
+  metadata: JSON
+  notification_frequency: EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput
+  parameters: JSON
+  type: NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput
+  work_from: NullableEnumWorkFromHomeFieldUpdateOperationsInput
+}
+
+input JobListingSubscriptionUpdatekeywordsInput {
+  push: [String!]
+  set: [String!]
+}
+
+input JobListingSubscriptionUpdatelanguagesInput {
+  push: [String!]
+  set: [String!]
+}
+
+input JobListingSubscriptionUpsertWithWhereUniqueWithoutCategoriesInput {
+  create: JobListingSubscriptionCreateWithoutCategoriesInput!
+  update: JobListingSubscriptionUpdateWithoutCategoriesInput!
+  where: JobListingSubscriptionWhereUniqueInput!
+}
+
+input JobListingSubscriptionUpsertWithWhereUniqueWithoutCompanyInput {
+  create: JobListingSubscriptionCreateWithoutCompanyInput!
+  update: JobListingSubscriptionUpdateWithoutCompanyInput!
+  where: JobListingSubscriptionWhereUniqueInput!
+}
+
+input JobListingSubscriptionUpsertWithWhereUniqueWithoutUserInput {
+  create: JobListingSubscriptionCreateWithoutUserInput!
+  update: JobListingSubscriptionUpdateWithoutUserInput!
+  where: JobListingSubscriptionWhereUniqueInput!
+}
+
+input JobListingSubscriptionWhereInput {
+  AND: [JobListingSubscriptionWhereInput!]
+  NOT: [JobListingSubscriptionWhereInput!]
+  OR: [JobListingSubscriptionWhereInput!]
+  categories: CompanyCategoryListRelationFilter
+  company: CompanyNullableRelationFilter
+  company_id: StringNullableFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  keywords: StringNullableListFilter
+  languages: StringNullableListFilter
+  level: EnumJobListingLevelNullableFilter
+  location: StringNullableFilter
+  metadata: JsonNullableFilter
+  notification_frequency: EnumJobListingSubscriptionNotificationFrequencyFilter
+  parameters: JsonFilter
+  type: EnumJobListingEmploymentTypeNullableFilter
+  user: UserRelationFilter
+  user_id: StringFilter
+  work_from: EnumWorkFromHomeNullableFilter
+}
+
+input JobListingSubscriptionWhereUniqueInput {
+  AND: [JobListingSubscriptionWhereInput!]
+  NOT: [JobListingSubscriptionWhereInput!]
+  OR: [JobListingSubscriptionWhereInput!]
+  categories: CompanyCategoryListRelationFilter
+  company: CompanyNullableRelationFilter
+  company_id: StringNullableFilter
+  createdAt: DateTimeFilter
+  id: String
+  keywords: StringNullableListFilter
+  languages: StringNullableListFilter
+  level: EnumJobListingLevelNullableFilter
+  location: StringNullableFilter
+  metadata: JsonNullableFilter
+  notification_frequency: EnumJobListingSubscriptionNotificationFrequencyFilter
+  parameters: JsonFilter
+  type: EnumJobListingEmploymentTypeNullableFilter
+  user: UserRelationFilter
+  user_id: StringFilter
+  work_from: EnumWorkFromHomeNullableFilter
 }
 
 input JobListingUpdateInput {
@@ -2776,11 +3698,13 @@ A field whose value is a valid decimal degrees longitude number (53.471): https:
 scalar Longitude
 
 type Mutation {
+  confirmJobListingSubscription(subscriptionId: String!, subscriptionKey: String!): JobListingSubscription
   createManyAccount(data: [AccountCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyCompany(data: [CompanyCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyCompanyCategory(data: [CompanyCategoryCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyJobListing(data: [JobListingCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyJobListingCategory(data: [JobListingCategoryCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyJobListingSubscription(data: [JobListingSubscriptionCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManySavedListing(data: [SavedListingCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManySession(data: [SessionCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyUser(data: [UserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
@@ -2790,15 +3714,18 @@ type Mutation {
   createOneCompanyCategory(data: CompanyCategoryCreateInput!, relationLoadStrategy: RelationLoadStrategy): CompanyCategory!
   createOneJobListing(data: JobListingCreateInput!, relationLoadStrategy: RelationLoadStrategy): JobListing!
   createOneJobListingCategory(data: JobListingCategoryCreateInput!, relationLoadStrategy: RelationLoadStrategy): JobListingCategory!
+  createOneJobListingSubscription(data: JobListingSubscriptionCreateInput!, relationLoadStrategy: RelationLoadStrategy): JobListingSubscription!
   createOneSavedListing(data: SavedListingCreateInput!, relationLoadStrategy: RelationLoadStrategy): SavedListing!
   createOneSession(data: SessionCreateInput!, relationLoadStrategy: RelationLoadStrategy): Session!
   createOneUser(data: UserCreateInput!, relationLoadStrategy: RelationLoadStrategy): User!
   createOneVerificationToken(data: VerificationTokenCreateInput!, relationLoadStrategy: RelationLoadStrategy): VerificationToken!
+  deleteAllSubscriptions: DeleteAllSubscriptionsResponse!
   deleteManyAccount(where: AccountWhereInput): AffectedRowsOutput!
   deleteManyCompany(where: CompanyWhereInput): AffectedRowsOutput!
   deleteManyCompanyCategory(where: CompanyCategoryWhereInput): AffectedRowsOutput!
   deleteManyJobListing(where: JobListingWhereInput): AffectedRowsOutput!
   deleteManyJobListingCategory(where: JobListingCategoryWhereInput): AffectedRowsOutput!
+  deleteManyJobListingSubscription(where: JobListingSubscriptionWhereInput): AffectedRowsOutput!
   deleteManySavedListing(where: SavedListingWhereInput): AffectedRowsOutput!
   deleteManySession(where: SessionWhereInput): AffectedRowsOutput!
   deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
@@ -2808,6 +3735,7 @@ type Mutation {
   deleteOneCompanyCategory(relationLoadStrategy: RelationLoadStrategy, where: CompanyCategoryWhereUniqueInput!): CompanyCategory
   deleteOneJobListing(relationLoadStrategy: RelationLoadStrategy, where: JobListingWhereUniqueInput!): JobListing
   deleteOneJobListingCategory(relationLoadStrategy: RelationLoadStrategy, where: JobListingCategoryWhereUniqueInput!): JobListingCategory
+  deleteOneJobListingSubscription(relationLoadStrategy: RelationLoadStrategy, where: JobListingSubscriptionWhereUniqueInput!): JobListingSubscription
   deleteOneSavedListing(relationLoadStrategy: RelationLoadStrategy, where: SavedListingWhereUniqueInput!): SavedListing
   deleteOneSession(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   deleteOneUser(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
@@ -2821,12 +3749,15 @@ type Mutation {
   signOut: Boolean!
   signUp(signUpModel: UserSignUpInput!): User!
   signUpWithEmailCode(code: Int!, email: EmailAddress!, firstName: String!, identifier: String!, lastName: String!): User!
+  subscribeToCompanyListings(input: SubscribeToJobListingsInput!): JobListingSubscription
   unSaveJobListing(listingId: String!): Boolean
+  unSubscribeToJobListings(subscriptionId: String!): Boolean!
   updateManyAccount(data: AccountUpdateManyMutationInput!, where: AccountWhereInput): AffectedRowsOutput!
   updateManyCompany(data: CompanyUpdateManyMutationInput!, where: CompanyWhereInput): AffectedRowsOutput!
   updateManyCompanyCategory(data: CompanyCategoryUpdateManyMutationInput!, where: CompanyCategoryWhereInput): AffectedRowsOutput!
   updateManyJobListing(data: JobListingUpdateManyMutationInput!, where: JobListingWhereInput): AffectedRowsOutput!
   updateManyJobListingCategory(data: JobListingCategoryUpdateManyMutationInput!, where: JobListingCategoryWhereInput): AffectedRowsOutput!
+  updateManyJobListingSubscription(data: JobListingSubscriptionUpdateManyMutationInput!, where: JobListingSubscriptionWhereInput): AffectedRowsOutput!
   updateManySavedListing(data: SavedListingUpdateManyMutationInput!, where: SavedListingWhereInput): AffectedRowsOutput!
   updateManySession(data: SessionUpdateManyMutationInput!, where: SessionWhereInput): AffectedRowsOutput!
   updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
@@ -2836,6 +3767,7 @@ type Mutation {
   updateOneCompanyCategory(data: CompanyCategoryUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: CompanyCategoryWhereUniqueInput!): CompanyCategory
   updateOneJobListing(data: JobListingUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: JobListingWhereUniqueInput!): JobListing
   updateOneJobListingCategory(data: JobListingCategoryUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: JobListingCategoryWhereUniqueInput!): JobListingCategory
+  updateOneJobListingSubscription(data: JobListingSubscriptionUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: JobListingSubscriptionWhereUniqueInput!): JobListingSubscription
   updateOneSavedListing(data: SavedListingUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: SavedListingWhereUniqueInput!): SavedListing
   updateOneSession(data: SessionUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   updateOneUser(data: UserUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
@@ -2845,6 +3777,7 @@ type Mutation {
   upsertOneCompanyCategory(create: CompanyCategoryCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: CompanyCategoryUpdateInput!, where: CompanyCategoryWhereUniqueInput!): CompanyCategory!
   upsertOneJobListing(create: JobListingCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: JobListingUpdateInput!, where: JobListingWhereUniqueInput!): JobListing!
   upsertOneJobListingCategory(create: JobListingCategoryCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: JobListingCategoryUpdateInput!, where: JobListingCategoryWhereUniqueInput!): JobListingCategory!
+  upsertOneJobListingSubscription(create: JobListingSubscriptionCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: JobListingSubscriptionUpdateInput!, where: JobListingSubscriptionWhereUniqueInput!): JobListingSubscription!
   upsertOneSavedListing(create: SavedListingCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: SavedListingUpdateInput!, where: SavedListingWhereUniqueInput!): SavedListing!
   upsertOneSession(create: SessionCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: SessionUpdateInput!, where: SessionWhereUniqueInput!): Session!
   upsertOneUser(create: UserCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
@@ -2934,6 +3867,23 @@ input NestedEnumJobListingLevelNullableWithAggregatesFilter {
   in: [JobListingLevel!]
   not: NestedEnumJobListingLevelNullableWithAggregatesFilter
   notIn: [JobListingLevel!]
+}
+
+input NestedEnumJobListingSubscriptionNotificationFrequencyFilter {
+  equals: JobListingSubscriptionNotificationFrequency
+  in: [JobListingSubscriptionNotificationFrequency!]
+  not: NestedEnumJobListingSubscriptionNotificationFrequencyFilter
+  notIn: [JobListingSubscriptionNotificationFrequency!]
+}
+
+input NestedEnumJobListingSubscriptionNotificationFrequencyWithAggregatesFilter {
+  _count: NestedIntFilter
+  _max: NestedEnumJobListingSubscriptionNotificationFrequencyFilter
+  _min: NestedEnumJobListingSubscriptionNotificationFrequencyFilter
+  equals: JobListingSubscriptionNotificationFrequency
+  in: [JobListingSubscriptionNotificationFrequency!]
+  not: NestedEnumJobListingSubscriptionNotificationFrequencyWithAggregatesFilter
+  notIn: [JobListingSubscriptionNotificationFrequency!]
 }
 
 input NestedEnumWorkFromHomeNullableFilter {
@@ -3141,6 +4091,7 @@ type Query {
   aggregateCompanyCategory(cursor: CompanyCategoryWhereUniqueInput, orderBy: [CompanyCategoryOrderByWithRelationInput!], skip: Int, take: Int, where: CompanyCategoryWhereInput): AggregateCompanyCategory!
   aggregateJobListing(cursor: JobListingWhereUniqueInput, orderBy: [JobListingOrderByWithRelationInput!], skip: Int, take: Int, where: JobListingWhereInput): AggregateJobListing!
   aggregateJobListingCategory(cursor: JobListingCategoryWhereUniqueInput, orderBy: [JobListingCategoryOrderByWithRelationInput!], skip: Int, take: Int, where: JobListingCategoryWhereInput): AggregateJobListingCategory!
+  aggregateJobListingSubscription(cursor: JobListingSubscriptionWhereUniqueInput, orderBy: [JobListingSubscriptionOrderByWithRelationInput!], skip: Int, take: Int, where: JobListingSubscriptionWhereInput): AggregateJobListingSubscription!
   aggregateSavedListing(cursor: SavedListingWhereUniqueInput, orderBy: [SavedListingOrderByWithRelationInput!], skip: Int, take: Int, where: SavedListingWhereInput): AggregateSavedListing!
   aggregateSession(cursor: SessionWhereUniqueInput, orderBy: [SessionOrderByWithRelationInput!], skip: Int, take: Int, where: SessionWhereInput): AggregateSession!
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
@@ -3160,6 +4111,8 @@ type Query {
   findFirstJobListingCategory(cursor: JobListingCategoryWhereUniqueInput, distinct: [JobListingCategoryScalarFieldEnum!], orderBy: [JobListingCategoryOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingCategoryWhereInput): JobListingCategory
   findFirstJobListingCategoryOrThrow(cursor: JobListingCategoryWhereUniqueInput, distinct: [JobListingCategoryScalarFieldEnum!], orderBy: [JobListingCategoryOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingCategoryWhereInput): JobListingCategory
   findFirstJobListingOrThrow(cursor: JobListingWhereUniqueInput, distinct: [JobListingScalarFieldEnum!], orderBy: [JobListingOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingWhereInput): JobListing
+  findFirstJobListingSubscription(cursor: JobListingSubscriptionWhereUniqueInput, distinct: [JobListingSubscriptionScalarFieldEnum!], orderBy: [JobListingSubscriptionOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingSubscriptionWhereInput): JobListingSubscription
+  findFirstJobListingSubscriptionOrThrow(cursor: JobListingSubscriptionWhereUniqueInput, distinct: [JobListingSubscriptionScalarFieldEnum!], orderBy: [JobListingSubscriptionOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingSubscriptionWhereInput): JobListingSubscription
   findFirstSavedListing(cursor: SavedListingWhereUniqueInput, distinct: [SavedListingScalarFieldEnum!], orderBy: [SavedListingOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: SavedListingWhereInput): SavedListing
   findFirstSavedListingOrThrow(cursor: SavedListingWhereUniqueInput, distinct: [SavedListingScalarFieldEnum!], orderBy: [SavedListingOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: SavedListingWhereInput): SavedListing
   findFirstSession(cursor: SessionWhereUniqueInput, distinct: [SessionScalarFieldEnum!], orderBy: [SessionOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: SessionWhereInput): Session
@@ -3173,6 +4126,7 @@ type Query {
   getCompanyCategory(relationLoadStrategy: RelationLoadStrategy, where: CompanyCategoryWhereUniqueInput!): CompanyCategory
   getJobListing(relationLoadStrategy: RelationLoadStrategy, where: JobListingWhereUniqueInput!): JobListing
   getJobListingCategory(relationLoadStrategy: RelationLoadStrategy, where: JobListingCategoryWhereUniqueInput!): JobListingCategory
+  getJobListingSubscription(relationLoadStrategy: RelationLoadStrategy, where: JobListingSubscriptionWhereUniqueInput!): JobListingSubscription
   getSavedListing(relationLoadStrategy: RelationLoadStrategy, where: SavedListingWhereUniqueInput!): SavedListing
   getSession(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   getTopCompanies(input: GetTopCompaniesInput!): [Company!]!
@@ -3185,6 +4139,7 @@ type Query {
   groupByCompanyCategory(by: [CompanyCategoryScalarFieldEnum!]!, having: CompanyCategoryScalarWhereWithAggregatesInput, orderBy: [CompanyCategoryOrderByWithAggregationInput!], skip: Int, take: Int, where: CompanyCategoryWhereInput): [CompanyCategoryGroupBy!]!
   groupByJobListing(by: [JobListingScalarFieldEnum!]!, having: JobListingScalarWhereWithAggregatesInput, orderBy: [JobListingOrderByWithAggregationInput!], skip: Int, take: Int, where: JobListingWhereInput): [JobListingGroupBy!]!
   groupByJobListingCategory(by: [JobListingCategoryScalarFieldEnum!]!, having: JobListingCategoryScalarWhereWithAggregatesInput, orderBy: [JobListingCategoryOrderByWithAggregationInput!], skip: Int, take: Int, where: JobListingCategoryWhereInput): [JobListingCategoryGroupBy!]!
+  groupByJobListingSubscription(by: [JobListingSubscriptionScalarFieldEnum!]!, having: JobListingSubscriptionScalarWhereWithAggregatesInput, orderBy: [JobListingSubscriptionOrderByWithAggregationInput!], skip: Int, take: Int, where: JobListingSubscriptionWhereInput): [JobListingSubscriptionGroupBy!]!
   groupBySavedListing(by: [SavedListingScalarFieldEnum!]!, having: SavedListingScalarWhereWithAggregatesInput, orderBy: [SavedListingOrderByWithAggregationInput!], skip: Int, take: Int, where: SavedListingWhereInput): [SavedListingGroupBy!]!
   groupBySession(by: [SessionScalarFieldEnum!]!, having: SessionScalarWhereWithAggregatesInput, orderBy: [SessionOrderByWithAggregationInput!], skip: Int, take: Int, where: SessionWhereInput): [SessionGroupBy!]!
   groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByWithAggregationInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
@@ -3192,8 +4147,11 @@ type Query {
   jobListing(relationLoadStrategy: RelationLoadStrategy, where: JobListingWhereUniqueInput!): JobListing
   jobListingCategories(cursor: JobListingCategoryWhereUniqueInput, distinct: [JobListingCategoryScalarFieldEnum!], orderBy: [JobListingCategoryOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingCategoryWhereInput): [JobListingCategory!]!
   jobListingCategory(relationLoadStrategy: RelationLoadStrategy, where: JobListingCategoryWhereUniqueInput!): JobListingCategory
+  jobListingSubscription(relationLoadStrategy: RelationLoadStrategy, where: JobListingSubscriptionWhereUniqueInput!): JobListingSubscription
+  jobListingSubscriptions(cursor: JobListingSubscriptionWhereUniqueInput, distinct: [JobListingSubscriptionScalarFieldEnum!], orderBy: [JobListingSubscriptionOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingSubscriptionWhereInput): [JobListingSubscription!]!
   jobListings(cursor: JobListingWhereUniqueInput, distinct: [JobListingScalarFieldEnum!], orderBy: [JobListingOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingWhereInput): [JobListing!]!
   me: User
+  mySubscriptions(input: GetSubscriptionsInput!): [JobListingSubscription!]!
   savedListing(relationLoadStrategy: RelationLoadStrategy, where: SavedListingWhereUniqueInput!): SavedListing
   savedListings(cursor: SavedListingWhereUniqueInput, distinct: [SavedListingScalarFieldEnum!], orderBy: [SavedListingOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: SavedListingWhereInput): [SavedListing!]!
   search(search: UsersSearchInput! = {limit: 10, search: ""}): [UserSearchResponse!]!
@@ -3564,6 +4522,7 @@ type Session {
   id: ID!
   sessionToken: String!
   updatedAt: DateTimeISO!
+  user: User!
   userId: String!
 }
 
@@ -3928,6 +4887,19 @@ input StringWithAggregatesFilter {
   startsWith: String
 }
 
+input SubscribeToJobListingsInput {
+  categories: [CompanyCategoryInput!]!
+  companyId: String
+  employmentType: JobListingEmploymentType
+  frequency: JobListingSubscriptionNotificationFrequency!
+  keywords: [String!]!
+  languages: [String!]!
+  level: JobListingLevel
+  location: String
+  parameters: JobListingParameters
+  workFromHome: WorkFromHome
+}
+
 type Subscription {
   randomNumber: Int!
   userSignedUp: User!
@@ -3960,6 +4932,7 @@ type User {
   name: String!
   saved_listings(cursor: SavedListingWhereUniqueInput, distinct: [SavedListingScalarFieldEnum!], orderBy: [SavedListingOrderByWithRelationInput!], skip: Int, take: Int, where: SavedListingWhereInput): [SavedListing!]!
   sessions(cursor: SessionWhereUniqueInput, distinct: [SessionScalarFieldEnum!], orderBy: [SessionOrderByWithRelationInput!], skip: Int, take: Int, where: SessionWhereInput): [Session!]!
+  subscriptions(cursor: JobListingSubscriptionWhereUniqueInput, distinct: [JobListingSubscriptionScalarFieldEnum!], orderBy: [JobListingSubscriptionOrderByWithRelationInput!], skip: Int, take: Int, where: JobListingSubscriptionWhereInput): [JobListingSubscription!]!
   updatedAt: DateTimeISO!
 }
 
@@ -3974,6 +4947,7 @@ type UserCount {
   accounts(where: AccountWhereInput): Int!
   saved_listings(where: SavedListingWhereInput): Int!
   sessions(where: SessionWhereInput): Int!
+  subscriptions(where: JobListingSubscriptionWhereInput): Int!
 }
 
 type UserCountAggregate {
@@ -4016,6 +4990,7 @@ input UserCreateInput {
   name: String!
   saved_listings: SavedListingCreateNestedManyWithoutUserInput
   sessions: SessionCreateNestedManyWithoutUserInput
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutUserInput
 }
 
 input UserCreateManyInput {
@@ -4048,6 +5023,12 @@ input UserCreateNestedOneWithoutSessionsInput {
   create: UserCreateWithoutSessionsInput
 }
 
+input UserCreateNestedOneWithoutSubscriptionsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutSubscriptionsInput
+  create: UserCreateWithoutSubscriptionsInput
+}
+
 input UserCreateOrConnectWithoutAccountsInput {
   create: UserCreateWithoutAccountsInput!
   where: UserWhereUniqueInput!
@@ -4063,6 +5044,11 @@ input UserCreateOrConnectWithoutSessionsInput {
   where: UserWhereUniqueInput!
 }
 
+input UserCreateOrConnectWithoutSubscriptionsInput {
+  create: UserCreateWithoutSubscriptionsInput!
+  where: UserWhereUniqueInput!
+}
+
 input UserCreateWithoutAccountsInput {
   createdAt: DateTimeISO
   email: String!
@@ -4075,6 +5061,7 @@ input UserCreateWithoutAccountsInput {
   name: String!
   saved_listings: SavedListingCreateNestedManyWithoutUserInput
   sessions: SessionCreateNestedManyWithoutUserInput
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutUserInput
 }
 
 input UserCreateWithoutSaved_listingsInput {
@@ -4089,6 +5076,7 @@ input UserCreateWithoutSaved_listingsInput {
   metadata: JSON
   name: String!
   sessions: SessionCreateNestedManyWithoutUserInput
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutUserInput
 }
 
 input UserCreateWithoutSessionsInput {
@@ -4103,6 +5091,22 @@ input UserCreateWithoutSessionsInput {
   metadata: JSON
   name: String!
   saved_listings: SavedListingCreateNestedManyWithoutUserInput
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutUserInput
+}
+
+input UserCreateWithoutSubscriptionsInput {
+  accounts: AccountCreateNestedManyWithoutUserInput
+  createdAt: DateTimeISO
+  email: String!
+  emailVerified: DateTimeISO
+  first_name: String!
+  id: String
+  image: String
+  last_name: String!
+  metadata: JSON
+  name: String!
+  saved_listings: SavedListingCreateNestedManyWithoutUserInput
+  sessions: SessionCreateNestedManyWithoutUserInput
 }
 
 type UserGroupBy {
@@ -4215,6 +5219,7 @@ input UserOrderByWithRelationInput {
   name: SortOrder
   saved_listings: SavedListingOrderByRelationAggregateInput
   sessions: SessionOrderByRelationAggregateInput
+  subscriptions: JobListingSubscriptionOrderByRelationAggregateInput
 }
 
 input UserRelationFilter {
@@ -4269,6 +5274,7 @@ type UserSearchResponse {
   name: String!
   saved_listings(cursor: SavedListingWhereUniqueInput, distinct: [SavedListingScalarFieldEnum!], orderBy: [SavedListingOrderByWithRelationInput!], skip: Int, take: Int, where: SavedListingWhereInput): [SavedListing!]!
   sessions(cursor: SessionWhereUniqueInput, distinct: [SessionScalarFieldEnum!], orderBy: [SessionOrderByWithRelationInput!], skip: Int, take: Int, where: SessionWhereInput): [Session!]!
+  subscriptions(cursor: JobListingSubscriptionWhereUniqueInput, distinct: [JobListingSubscriptionScalarFieldEnum!], orderBy: [JobListingSubscriptionOrderByWithRelationInput!], skip: Int, take: Int, where: JobListingSubscriptionWhereInput): [JobListingSubscription!]!
   updatedAt: DateTimeISO!
 }
 
@@ -4297,6 +5303,7 @@ input UserUpdateInput {
   name: StringFieldUpdateOperationsInput
   saved_listings: SavedListingUpdateManyWithoutUserNestedInput
   sessions: SessionUpdateManyWithoutUserNestedInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 input UserUpdateManyMutationInput {
@@ -4335,6 +5342,14 @@ input UserUpdateOneRequiredWithoutSessionsNestedInput {
   upsert: UserUpsertWithoutSessionsInput
 }
 
+input UserUpdateOneRequiredWithoutSubscriptionsNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutSubscriptionsInput
+  create: UserCreateWithoutSubscriptionsInput
+  update: UserUpdateToOneWithWhereWithoutSubscriptionsInput
+  upsert: UserUpsertWithoutSubscriptionsInput
+}
+
 input UserUpdateToOneWithWhereWithoutAccountsInput {
   data: UserUpdateWithoutAccountsInput!
   where: UserWhereInput
@@ -4350,6 +5365,11 @@ input UserUpdateToOneWithWhereWithoutSessionsInput {
   where: UserWhereInput
 }
 
+input UserUpdateToOneWithWhereWithoutSubscriptionsInput {
+  data: UserUpdateWithoutSubscriptionsInput!
+  where: UserWhereInput
+}
+
 input UserUpdateWithoutAccountsInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
@@ -4362,6 +5382,7 @@ input UserUpdateWithoutAccountsInput {
   name: StringFieldUpdateOperationsInput
   saved_listings: SavedListingUpdateManyWithoutUserNestedInput
   sessions: SessionUpdateManyWithoutUserNestedInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 input UserUpdateWithoutSaved_listingsInput {
@@ -4376,6 +5397,7 @@ input UserUpdateWithoutSaved_listingsInput {
   metadata: JSON
   name: StringFieldUpdateOperationsInput
   sessions: SessionUpdateManyWithoutUserNestedInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 input UserUpdateWithoutSessionsInput {
@@ -4390,6 +5412,22 @@ input UserUpdateWithoutSessionsInput {
   metadata: JSON
   name: StringFieldUpdateOperationsInput
   saved_listings: SavedListingUpdateManyWithoutUserNestedInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutUserNestedInput
+}
+
+input UserUpdateWithoutSubscriptionsInput {
+  accounts: AccountUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  metadata: JSON
+  name: StringFieldUpdateOperationsInput
+  saved_listings: SavedListingUpdateManyWithoutUserNestedInput
+  sessions: SessionUpdateManyWithoutUserNestedInput
 }
 
 input UserUpsertWithoutAccountsInput {
@@ -4410,6 +5448,12 @@ input UserUpsertWithoutSessionsInput {
   where: UserWhereInput
 }
 
+input UserUpsertWithoutSubscriptionsInput {
+  create: UserCreateWithoutSubscriptionsInput!
+  update: UserUpdateWithoutSubscriptionsInput!
+  where: UserWhereInput
+}
+
 input UserWhereInput {
   AND: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -4426,6 +5470,7 @@ input UserWhereInput {
   name: StringFilter
   saved_listings: SavedListingListRelationFilter
   sessions: SessionListRelationFilter
+  subscriptions: JobListingSubscriptionListRelationFilter
 }
 
 input UserWhereUniqueInput {
@@ -4444,6 +5489,7 @@ input UserWhereUniqueInput {
   name: StringFilter
   saved_listings: SavedListingListRelationFilter
   sessions: SessionListRelationFilter
+  subscriptions: JobListingSubscriptionListRelationFilter
 }
 
 input UsersSearchInput {

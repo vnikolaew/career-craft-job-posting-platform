@@ -1,19 +1,9 @@
 import type { Metadata } from "next";
 import {
    Inter,
-   Oswald,
    Rubik,
-   Rubik_Mono_One,
-   PT_Sans,
-   Work_Sans,
-   Raleway,
-   Montserrat,
    Roboto_Mono,
    Open_Sans,
-   Dancing_Script,
-   Merriweather,
-   Lato,
-   Noto_Sans,
 } from "next/font/google";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
@@ -22,6 +12,8 @@ import { APP_DESCRIPTION_LONGER, APP_KEYWORDS, APP_NAME, AUTHOR, AUTHOR_WEBSITE 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Providers from "@/providers";
+import Script from "next/script";
+import ScrollToTopButton from "@/components/common/ScrollToTopButton";
 
 const inter = Inter({
    weight: ["400", "500", "600", "700"],
@@ -76,7 +68,7 @@ export default function RootLayout({
          // data-theme={`corporate`}
             className={`${dancingScript.variable}`} style={{}} color={`dark`} suppressHydrationWarning lang="en">
       <head>
-         <script src="https://leaflet-extras.github.com/leaflet.css/dist/leaflet.css.bundle.min.js"></script>
+         <Script src="https://leaflet-extras.github.com/leaflet.css/dist/leaflet.css.bundle.min.js"></Script>
          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
                integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
                crossOrigin="" />
@@ -87,6 +79,7 @@ export default function RootLayout({
          <main className={`min-h-[70vh] mt-24`}>
             {children}
          </main>
+         <ScrollToTopButton />
          <Footer />
       </Providers>
       </body>

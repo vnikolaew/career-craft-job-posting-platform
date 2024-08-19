@@ -1,5 +1,7 @@
 import { JobListingCrudResolver as Base } from "@generated/resolvers/crud";
+
 import { JobListing } from "@generated/models/JobListing";
+
 import { Authorized, Ctx, Directive, FieldResolver, Resolver, Root } from "type-graphql";
 import { MyContext } from "@types";
 
