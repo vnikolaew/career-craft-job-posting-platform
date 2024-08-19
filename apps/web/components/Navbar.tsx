@@ -9,8 +9,10 @@ import { useMutation, useQuery } from "@apollo/client";
 import { UserSignInInput } from "@/__generated__/graphql";
 import { isValidUrl } from "@/lib/utils";
 import Google from "@/components/icons/Google";
-import { Building2, CircleUserRound, LogOut } from "lucide-react";
+import { Building2, CircleUserRound, LogOut, Menu } from "lucide-react";
 import LoadingButton from "@/components/common/LoadingButton";
+import Drawer from "./common/Drawer";
+import SideDrawer from "@/components/common/SideDrawer";
 
 export interface NavbarProps {
 }
@@ -21,7 +23,7 @@ const DEFAULT_USER: UserSignInInput = {
    password: `vNikolaew123!`,
 };
 
-const SIGN_OUT_MUTATION = gql(/* GraphQL */`
+export const SIGN_OUT_MUTATION = gql(/* GraphQL */`
     mutation SignOut {
         signOut
     }
@@ -95,27 +97,15 @@ const Navbar = ({}: NavbarProps) => {
    });
 
    const [signIn, { data: signInData, loading: signingIn }] = useMutation(SIGN_IN_MUTATION, {});
-   const [signOut, { data: signOutData, loading: signingOut }] = useMutation(SIGN_OUT_MUTATION, {});
+   const [signOut, { data: signOutData, loading: signingOut }] = useMutation(SIGN_OUT_MUTATION, {
+      refetchQueries: [ME_QUERY],
+   });
 
    const handleGoogleSignIn = async () => {
       const res = await getGoogleLoginUrl({ redirectUrl: window.location.href });
       if (isValidUrl(res.data.googleLoginUrl)) {
          window.location.href = res.data.googleLoginUrl;
       }
-   };
-
-   const handleRegularSignIn = async () => {
-      await signIn({
-         variables: {
-            signInModel: DEFAULT_USER,
-         },
-         onCompleted: (data) => {
-            if (data?.signIn?.id) {
-               console.log(data.signIn);
-               window.location.reload();
-            }
-         },
-      });
    };
 
    async function handleSignOut() {
@@ -130,15 +120,19 @@ const Navbar = ({}: NavbarProps) => {
       <div id={`navbar`}
            className={`w-full px-24 py-5 border-b border-neutral-300 fixed bg-opacity-80 bg-neutral-100 z-10`}>
          <nav className={`flex items-center justify-between`}>
-            <Link className={`inline-flex gap-4 items-center`} href={`/`}>
-               <Image className={` shadow-md`}
+            <Link className={`flex flex-col gap-2 items-start`} href={`/`}>
+               <Image className={`shadow-md`}
                       height={64} width={132} src={logo} alt={`logo`} />
+               <span className={`text-sm text-neutral-500 leading-tight drop-shadow-sm`}>
+                  Where Opportunities Meet Talent.
+               </span>
             </Link>
             <div className={`flex items-center gap-4`}>
                {loading ? (
                   <Fragment>
                      <div className={`h-10 w-10 rounded-full bg-neutral-400 skeleton`} />
                      <div className={`h-4 rounded-md w-24 bg-neutral-400 skeleton mr-4`} />
+                     <div className={`h-8 w-8 rounded-full bg-neutral-400 skeleton mr-4`} />
                   </Fragment>
                ) : <Fragment />}
                <span>
@@ -149,17 +143,33 @@ const Navbar = ({}: NavbarProps) => {
                                src={data?.me?.image ?? DEFAULT_USER_AVATAR_URL}
                                alt={``} />
                      </Link>
-                     <span
-                        className={`mr-4`}>{data?.me?.name?.length ? data?.me?.name : `${data?.me?.first_name} ${data?.me?.last_name}`}</span>
+                     <span className={`mr-4 text-lg`}>
+                        {data?.me?.name?.length ? data?.me?.name : `${data?.me?.first_name} ${data?.me?.last_name}`}
+                     </span>
                      <Link onClick={async e => {
                         e.preventDefault();
                         await handleSignOut();
                      }} href={`/`}>
-                        <LoadingButton loadingText={`Signing out`} loading={signingOut} className={`btn-error !h-fit !min-h-fit !py-2 !px-6 !text-white text-base !gap-3`}>
-                           Sign out
-                           <LogOut size={18} />
-                        </LoadingButton>
+                        <div data-tip={`Sign out`} className={`tooltip tooltip-bottom`}>
+                           <LoadingButton
+                              loadingText={``}
+                              loading={signingOut}
+                              className={`btn-error !h-fit !min-h-fit !py-2 !px-2 !text-white text-base !gap-3 !rounded-full !bg-transparent !shadow-sm !border-red-300 hover:!bg-red-300`}>
+                              <LogOut className={`!text-red-600`} size={18} />
+                           </LoadingButton>
+                        </div>
                      </Link>
+                     <Drawer.Provider>
+                        <Drawer.Trigger>
+                           <button
+                              className={`btn btn-outline btn-circle !h-fit !p-2 !border-none hover:!bg-neutral-300`}>
+                              <Menu className={`text-neutral-700`} />
+                           </button>
+                        </Drawer.Trigger>
+                        <Drawer.Content>
+                           <SideDrawer />
+                        </Drawer.Content>
+                     </Drawer.Provider>
                   </div>
                ) : !loading ? (
                      <div className={`flex items-center gap-4`}>
@@ -189,8 +199,9 @@ const Navbar = ({}: NavbarProps) => {
                               </li>
                            </ul>
                         </div>
-                        <Link className={`btn btn-info !h-fit !min-h-fit !py-2.5 !px-6 !text-white !bg-green-600 !border-green-600 !shadow-md hover:!opacity-95 duration-100 transition-opacity`}
-                              href={`/signin`}>
+                        <Link
+                           className={`btn btn-info !h-fit !min-h-fit !py-2.5 !px-6 !text-white !bg-green-600 !border-green-600 !shadow-md hover:!opacity-95 duration-100 transition-opacity`}
+                           href={`/signin`}>
                            Sign in
                         </Link>
                         <Link onClick={async e => {

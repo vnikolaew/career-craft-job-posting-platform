@@ -8,12 +8,12 @@ export interface PageProps {
    params: { id: string };
 }
 
-export async function generateStaticParams({ params: { id } }: PageProps) {
-   const company = await getCompanyDetailsWithListings(id);
-   return company?.listings?.map(l => l?.id).filter(Boolean) ?? [];
-}
+// export async function generateStaticParams({ params: { id } }: PageProps) {
+//    const company = await getCompanyDetailsWithListings(id);
+//    return company?.listings?.map(l => l?.id).filter(Boolean) ?? [];
+// }
 
-export const revalidate = 600;
+// export const revalidate = 600;
 
 const Page = async ({ params: { id } }: PageProps) => {
    const company = await getCompanyDetailsWithListings(id);

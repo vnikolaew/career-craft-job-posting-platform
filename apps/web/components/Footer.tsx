@@ -3,7 +3,6 @@ import Link from "next/link";
 import logo from "@/public/favicon.png";
 import Image from "next/image";
 import { Github } from "lucide-react";
-import { APP_NAME } from "@/config/site";
 
 export interface FooterProps {
 }
@@ -45,16 +44,18 @@ export const Icons = {
       </svg>
    ),
 };
-const ICON_CLASSNAME = `h-6 w-6 !fill-green-400 text-white transition-colors duration-100 hover:!fill-accent hover:!text-accent`
+const ICON_CLASSNAME = `h-6 w-6 !fill-green-600 text-white transition-colors duration-100 hover:!fill-accent hover:!text-accent`
 
 const Footer = ({}: FooterProps) => {
    return (
       <section className={`w-full px-24 py-12 mt-24 border-t border-neutral-300 bg-neutral-100`}>
          <div className={`flex items-center justify-between w-full`}>
             <div className={`flex flex-col items-start`}>
-               <Link className={`inline-flex gap-2 items-center`} href={`/`}>
+               <Link className={`flex flex-col gap-2 items-start`} href={`/`}>
                   <Image className={`shadow-md`} height={32} width={120} src={logo} alt={`logo`} />
-                  {/*<h2 className={`text-lg font-semibold`}>{APP_NAME}</h2>*/}
+                  <span className={`text-sm text-neutral-500 leading-tight drop-shadow-sm`}>
+                     Where Opportunities Meet Talent.
+                  </span>
                </Link>
                <span className={`!mt-4 text-sm !text-neutral-400`}>
                   Copyright © {new Date().getFullYear()} - All rights reserved.

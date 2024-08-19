@@ -11,6 +11,7 @@ import { cache } from "react";
 import moment from "moment/moment";
 import { GET_COMPANY_LISTINGS_QUERY } from "@/app/company/[id]/_queries/graphql";
 import { client } from "@/providers/apollo/client";
+import { ApolloError } from "@apollo/client";
 
 const GET_ALL_COMPANIES = gql(/* GraphQL */`
     query GetAllCompanies {
@@ -21,7 +22,7 @@ const GET_ALL_COMPANIES = gql(/* GraphQL */`
     }
 `);
 
-const GET_COMPANY_QUERY = gql(/* GraphQL */`
+ const GET_COMPANY_QUERY = gql(/* GraphQL */`
     query GetCompanyQuery($id: String!) {
         getCompany(where: {id: $id}) {
             id
@@ -101,9 +102,15 @@ export const getCompanyDetails = cache(async (id: string): Promise<GetCompanyQue
       return data?.getCompany!;
    } catch (err) {
 
+      if(err instanceof ApolloError) {
+         console.log(err.cause?.locations);
+      }
+
       let company = companies.find(c => c.id === id);
       return company ? {
          ...company,
+         createdAt: moment(company.createdAt).toDate(),
+         updatedAt: moment(company.updatedAt).toDate(),
          listings: [],
          contacts: {
             ...company.contacts,
