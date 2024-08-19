@@ -10,18 +10,21 @@ import LoadingButton from "@/components/common/LoadingButton";
 import { GET_COMPANY_LISTINGS_QUERY } from "@/app/company/[id]/_queries/graphql";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
+import { DEFAULT_COMPANY_LOGO_URL } from "@/providers/apollo/ApolloProvider";
+import { useMeQuery } from "@/hooks/useMeId";
 
 export interface JobListingCardProps {
    listing: Partial<JobListing>;
 }
 
-const UNSAVE_JOB_LISTING_MUTATION = gql(/* GraphQL */`
+export const UNSAVE_JOB_LISTING_MUTATION = gql(/* GraphQL */`
     mutation UnSaveJobListing($jobListingId: String!) {
         unSaveJobListing(listingId: $jobListingId)
     }
 `);
 
-const SAVE_JOB_LISTING_MUTATION = gql(/* GraphQL */`
+export const SAVE_JOB_LISTING_MUTATION = gql(/* GraphQL */`
     mutation SaveJobListing($jobListingId: String!) {
         saveJobListing(listingId: $jobListingId) {
             id
@@ -44,7 +47,7 @@ const JobListingCard = ({ listing }: JobListingCardProps) => {
       return moment(date).isSame(moment().subtract(1, `days`), `day`) ? `Yesterday` : moment(date).format(`DD.MM.YY`);
    }, [listing.createdAt]);
 
-   const { data: me } = useQuery(ME_QUERY, { fetchPolicy: `cache-only` });
+   const me = useMeQuery()
    const [saveJobListing, { loading: saving }] = useMutation(SAVE_JOB_LISTING_MUTATION, { variables: { jobListingId: listing.id! } });
    const [unSaveJobListing, { loading: unsaving }] = useMutation(UNSAVE_JOB_LISTING_MUTATION, { variables: { jobListingId: listing.id! } });
 
@@ -67,30 +70,37 @@ const JobListingCard = ({ listing }: JobListingCardProps) => {
    }
 
    return (
-      <div className={`w-full flex flex-col items-start gap-4 mt-4 bg-neutral-100 shadow-md p-4 rounded-md`}>
-         <Link href={`/job/${listing.id}`} className={`w-full flex flex-col items-start gap-4`}>
-            <div className={`w-2/3 flex items-center justify-between`}>
-               <time>{listingCreatedAtDisplayValue}</time>
-               <div data-tip={isSaved ? `Unsave` : `Save`} className={`tooltip`}>
-                  <LoadingButton
-                     loadingText={``}
-                     loading={saving || unsaving}
-                     onClick={async _ => {
-                        if (isSaved) await handleUnSaveJobListing();
-                        else await handleSaveJobListing();
-                     }}
-                     className={cn(`btn-circle btn-outline !bg-transparent !border-none !px-0 hover:!bg-green-200 transition-colors duration-200`,
-                        isSaved && `!bg-green-200 !text-green-600 !fill-green-600`)}>
-                     <Bookmark
-                        className={cn(`!text-neutral-500 !h-5 !w-5`, isSaved && `!fill-green-600 !border-green-600`)}
-                        size={20} />
-                  </LoadingButton>
+      <div className={`w-full flex flex-col items-start gap-4 mt-4 bg-neutral-100 shadow-md p-4 rounded-lg`}>
+         <div className={`w-full px-2 flex items-center gap-8 transition-transform duration-200`}>
+            <Link title={listing.name} href={`/job/${listing.id}`} className={`w-3/5 flex flex-col items-start gap-2`}>
+               <div className={`w-full flex items-center justify-between`}>
+                  <time>{listingCreatedAtDisplayValue}</time>
+                  <div data-tip={isSaved ? `Unsave` : `Save`} className={`tooltip`}>
+                     <LoadingButton
+                        loadingText={``}
+                        loading={saving || unsaving}
+                        onClick={async _ => {
+                           if (isSaved) await handleUnSaveJobListing();
+                           else await handleSaveJobListing();
+                        }}
+                        className={cn(`btn-circle btn-outline !bg-transparent !border-none !px-0 hover:!bg-green-200 transition-colors duration-200`,
+                           isSaved && `!bg-green-200 !text-green-600 !fill-green-600`)}>
+                        <Bookmark
+                           className={cn(`!text-neutral-500 !h-5 !w-5`, isSaved && `!fill-green-600 !border-green-600`)}
+                           size={18} />
+                     </LoadingButton>
+                  </div>
                </div>
+               <h2 className={`text-2xl font-semibold`}>{listing.name}</h2>
+               <h3 className={``}>{listing.location}</h3>
+               {/*<p dangerouslySetInnerHTML={{ __html: listing.description_raw ?? `` }} />*/}
+            </Link>
+            <div className={`w-[2px] !h-full !min-h-32 border-[1px] border-dashed border-neutral-300`} />
+            <div className={`flex-1 flex items-start justify-start`}>
+               <Image className={`rounded-md`} height={100} width={100} src={DEFAULT_COMPANY_LOGO_URL}
+                      alt={listing.name!} />
             </div>
-            <h2 className={`text-2xl font-semibold`}>{listing.name}</h2>
-            <h3 className={``}>{listing.location}; {listing.id}</h3>
-            {/*<p dangerouslySetInnerHTML={{ __html: listing.description_raw ?? `` }} />*/}
-         </Link>
+         </div>
       </div>
    );
 };

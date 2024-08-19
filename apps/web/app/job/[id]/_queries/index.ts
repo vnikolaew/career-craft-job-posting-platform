@@ -2,9 +2,10 @@
 
 import { gql } from "@/__generated__";
 import { client } from "@/providers/apollo/client";
+import { cache } from "react";
 
 const GET_COMPANY_JOB_LISTING = gql(/* GraphQL */`
-    query GetCompanyJob($id: String!) {
+    query GetJobListing($id: String!) {
         getJobListing(where: { id: $id }) {
             id
             name
@@ -17,21 +18,41 @@ const GET_COMPANY_JOB_LISTING = gql(/* GraphQL */`
             languages
             parameters
             keywords
-            company_id    
+            company_id
             createdAt
             updatedAt
+            company {
+                id
+                email
+                name
+                brand_image_url
+                banner_image_url
+                companyCategories {
+                    id
+                    name
+                    description
+                }
+                worldwide_info {
+                    employeeCount
+                    headquarters
+                    locations
+                    founded
+                }
+                _count {
+                    listings
+                }
+            }
         }
     }
 `);
 
-export async function getCompanyJob({ id }: { id: string }) {
-   const jobListing = await client.query({
+export const getCompanyJob = cache(async ({ id }: { id: string }) => {
+   const {data} = await client.query({
       query: GET_COMPANY_JOB_LISTING,
       variables: {
          id,
       },
    });
 
-   return jobListing;
-
-}
+   return data?.getJobListing;
+})

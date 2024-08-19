@@ -69,7 +69,8 @@ export function EmailAddress(argName: string = "email", opts?: ArgOptions) {
 export function StringP(argName: string = "string", opts?: ArgOptions) {
     return createParameterDecorator<MyContext>(({args}) => args[argName], {
         arg: {
-            name: argName, typeFunc: of => String, options: {
+            name: argName,
+            typeFunc: of => String, options: {
                 ...opts
             }
         }
