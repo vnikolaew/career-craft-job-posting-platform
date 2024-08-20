@@ -40,13 +40,13 @@ const GET_MY_SUBSCRIPTIONS_QUERY = gql(/* GraphQL */`
 
 export async function getMySubscriptions(): Promise<GetMySubscriptionsQuery["mySubscriptions"] | null> {
    try {
-      let context = { headers: { Cookie: headers().get(`cookie`) } };
-
-      let { data, errors } = await client.query({
-         query: GET_MY_SUBSCRIPTIONS_QUERY,
-         variables: { input: { limit: 10 } },
-         context
-      });
+      let cookie = headers().get(`cookie`)!;
+      let { data, errors } = await client.authenticatedQuery(
+         cookie,
+         {
+            query: GET_MY_SUBSCRIPTIONS_QUERY,
+            variables: { input: { limit: 10 } },
+         });
 
       if (errors) console.log({ errors });
       return data?.mySubscriptions;

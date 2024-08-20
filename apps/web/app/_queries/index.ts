@@ -36,12 +36,10 @@ const TOTAL_JOB_LISTINGS_COUNT_QUERY = gql(/* GraphQL */`
 `);
 
 export async function getHomePageStats() {
-   let context = { headers: { Cookie: headers().get(`cookie`) } };
-
-   const { data: totalJobListingsCount } = await client.query({
-      query: TOTAL_JOB_LISTINGS_COUNT_QUERY,
-      context,
-   });
+   const { data: totalJobListingsCount } = await client.authenticatedQuery(
+      headers().get(`cookie`)!, {
+         query: TOTAL_JOB_LISTINGS_COUNT_QUERY,
+      });
 
    const jobListingsToday = totalJobListingsCount
       .jobListings

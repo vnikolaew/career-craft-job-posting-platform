@@ -27,21 +27,21 @@ const GET_SUBSCRIPTION_BY_ID_QUERY = gql(/* GraphQL */`
 `);
 
 export async function getSubscriptionById(id: string) {
-   let context = { headers: { Cookie: headers().get(`cookie`) } };
-   let { data: me } = await client.query({
-      query: ME_QUERY, context,
-   });
+   let cookie = headers().get(`cookie`)!;
+
+   let { data: me } = await client.authenticatedQuery(
+      cookie, { query: ME_QUERY });
 
    try {
-      let {data, errors} = await client.query({
-         query: GET_SUBSCRIPTION_BY_ID_QUERY,
-         context,
-         variables: { getSubscriptionById: id, meId: me?.me?.id },
-      });
+      let { data, errors } = await client.authenticatedQuery(
+         cookie,
+         {
+            query: GET_SUBSCRIPTION_BY_ID_QUERY,
+            variables: { subscriptionId: id, meId: me?.me?.id! },
+         });
       return data?.jobListingSubscription;
-
    } catch (err) {
-      if(err instanceof ApolloError) {
+      if (err instanceof ApolloError) {
          console.log(err.cause?.extensions?.code);
       }
       return null;

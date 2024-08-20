@@ -1,5 +1,12 @@
 import { splitLink } from "@/providers/apollo/links";
-import { ApolloClient, InMemoryCache, TypePolicies } from "@apollo/client";
+import {
+   ApolloClient, ApolloClientOptions, ApolloQueryResult,
+   InMemoryCache,
+   NormalizedCacheObject,
+   OperationVariables,
+   QueryOptions,
+   TypePolicies,
+} from "@apollo/client";
 import {
    DEFAULT_COMPANY_BANNER_URL,
    DEFAULT_COMPANY_LOGO_URL,
@@ -25,7 +32,7 @@ const typePolicies: TypePolicies = {
       fields: {
          isSaved: {
             read(value?: boolean | null) {
-               return false
+               return false;
             },
          },
       },
@@ -50,8 +57,18 @@ const typePolicies: TypePolicies = {
    },
 };
 
+export class CustomApolloClient extends ApolloClient<NormalizedCacheObject> {
+   constructor(options: ApolloClientOptions<any>) {
+      super(options);
+   }
 
-export const client = new ApolloClient({
+   authenticatedQuery<T = any, TVariables extends OperationVariables = OperationVariables>(cookie: string, options: QueryOptions<TVariables, T>): Promise<ApolloQueryResult<T>> {
+      let context = { headers: { Cookie: cookie } };
+      return super.query({ context, ...options });
+   }
+}
+
+export const client = new CustomApolloClient({
    link: splitLink,
    uri: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
    cache: new InMemoryCache({ typePolicies }),
