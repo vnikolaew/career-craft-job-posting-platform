@@ -10,7 +10,6 @@ export interface PageProps {
 
 }
 
-
 const Page = async ({}: PageProps) => {
    const subscriptions = await getMySubscriptions();
    if (!subscriptions) redirect(`/`);
@@ -29,7 +28,7 @@ const Page = async ({}: PageProps) => {
             <div className={`flex w-full justify-between mt-8`}>
                <Link href={`/subscriptions/add`}>
                   <button
-                     className={`btn text-white !rounded-full !bg-green-600 !border-green-600 !px-12 !shadow-sm transition-shadow hover:!shadow-md text-lg !outline-none !shadow-md`}>
+                     className={`btn text-white !rounded-full !bg-green-600 !border-green-600 !px-12 !shadow-sm hover:!shadow-md text-lg !outline-none hover:!bg-opacity-80 transition-all duration-200`}>
                      <Plus size={18} />
                      Add a new subscription
                   </button>

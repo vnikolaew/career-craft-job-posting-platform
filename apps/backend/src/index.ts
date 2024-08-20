@@ -17,7 +17,15 @@ import {
    AuthMiddleware,
 } from "@infrastructure/middleware";
 import { MyContext } from "@types";
-import { JobListingSavesResolver, CategoriesResolver, EmailsResolver, UserResolver, CompanyResolver } from "@modules";
+import {
+   JobListingSavesResolver,
+   CategoriesResolver,
+   EmailsResolver,
+   UserResolver,
+   CompanyResolver,
+   AttachmentsResolver,
+   ApplicationsResolver,
+} from "@modules";
 import { JobListingCrudResolver } from "@modules/job_listings/JobListingResolver";
 import { SubscriptionsResolver } from "@modules/subscriptions/SubscriptionsResolver";
 
@@ -25,9 +33,15 @@ async function main() {
    const PORT = isNaN(Number.parseInt(process.env.PORT ?? ``)) ? 4000 : +process.env.PORT!;
 
    const schema: BuildSchemaOptions = {
-      resolvers: [UserResolver, CompanyResolver, SubscriptionsResolver, JobListingCrudResolver, JobListingSavesResolver, CategoriesResolver, EmailsResolver, UserCrudResolver,
-         ...Object.entries(CrudResolvers).filter(([key, _]) => key.endsWith(`Resolver`) && !key.includes(`CategoryOn`)).map(([_, resolver]) => resolver as Function),
-         ...Object.entries(RelationsResolvers).filter(([key, _]) => key.endsWith(`Resolver`) && !key.includes(`CategoryOn`)).map(([_, resolver]) => resolver as Function),
+      resolvers: [
+         UserResolver, CompanyResolver, SubscriptionsResolver, JobListingCrudResolver, JobListingSavesResolver,
+         AttachmentsResolver, ApplicationsResolver, CategoriesResolver, EmailsResolver, UserCrudResolver,
+         ...Object.entries(CrudResolvers)
+            .concat(Object.entries(RelationsResolvers) as any[])
+            .filter(([key, _]) => key.endsWith(`Resolver`) && !key.includes(`CategoryOn`))
+            .map(([_, resolver]) => resolver as Function),
+
+         // ...Object.entries(RelationsResolvers).filter(([key, _]) => key.endsWith(`Resolver`) && !key.includes(`CategoryOn`)).map(([_, resolver]) => resolver as Function),
          // @ts-ignore
          ...Object.entries(scalarResolvers).map(([_, resolver]) => resolver as Function)],
       scalarsMap: [

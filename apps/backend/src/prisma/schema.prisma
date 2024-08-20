@@ -49,6 +49,39 @@ model User {
   updatedAt      DateTime                 @updatedAt
   saved_listings SavedListing[]
   subscriptions  JobListingSubscription[]
+  attachments    UserAttachments[]
+  applications   UserJobApplication[]
+}
+
+model UserJobApplication {
+  id String @id @default(cuid())
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  listing_id String
+  listing    JobListing @relation(fields: [listing_id], references: [id], onDelete: Cascade)
+
+  metadata Json? @default("null") @db.JsonB
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserAttachments {
+  id String @id @default(cuid())
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  attachment_url       String
+  attachment_name      String
+  attachment_extension String
+
+  metadata Json? @default("null") @db.JsonB
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model SavedListing {
@@ -209,6 +242,7 @@ model JobListingSubscription {
   user_id String?
   user    User?   @relation(fields: [user_id], references: [id])
 
+  user_email             String?
   metadata               Json?                                       @default("null") @db.JsonB
   notification_frequency JobListingSubscriptionNotificationFrequency
 
@@ -259,8 +293,9 @@ model JobListing {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  saves      SavedListing[]
-  categories CategoryOnJobListing[]
+  saves        SavedListing[]
+  categories   CategoryOnJobListing[]
+  applications UserJobApplication[]
 }
 
 enum JobListingLevel {

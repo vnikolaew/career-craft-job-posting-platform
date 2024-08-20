@@ -34,6 +34,7 @@ const GET_MY_SUBSCRIPTIONS_QUERY = gql(/* GraphQL */`
                 name
                 description
             }
+            
         }
     }
 `);
@@ -41,6 +42,7 @@ const GET_MY_SUBSCRIPTIONS_QUERY = gql(/* GraphQL */`
 export async function getMySubscriptions(): Promise<GetMySubscriptionsQuery["mySubscriptions"] | null> {
    try {
       let cookie = headers().get(`cookie`)!;
+
       let { data, errors } = await client.authenticatedQuery(
          cookie,
          {
@@ -49,6 +51,7 @@ export async function getMySubscriptions(): Promise<GetMySubscriptionsQuery["myS
          });
 
       if (errors) console.log({ errors });
+      else console.log(data.mySubscriptions);
       return data?.mySubscriptions;
    } catch (err) {
       console.error({ err });

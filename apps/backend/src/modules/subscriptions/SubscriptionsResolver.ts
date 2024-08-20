@@ -1,4 +1,5 @@
 import { JobListingSubscriptionRelationsResolver } from "@generated/resolvers/relations";
+import { User } from "@generated/models/User";
 import { JobListingSubscription } from "@generated/models/JobListingSubscription";
 import {
    JobListingSubscriptionNotificationFrequency,
@@ -13,12 +14,18 @@ import {
    Resolver, Root,
 } from "type-graphql";
 import { MyContext } from "@types";
-import { StringP } from "@infrastructure/decorators";
+import { NoCache, StringP } from "@infrastructure/decorators";
 import * as jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 import { EmailService } from "@repo/emails";
 import { APP_HOST_NAME, APP_NAME, COMPANY_DETAILS } from "@consts";
-import { GetSubscriptionsInput, SubscribeToJobListingsInput, DeleteAllSubscriptionsResponse } from "./models";
+import {
+   GetSubscriptionsInput,
+   SubscribeToJobListingsInput,
+   DeleteAllSubscriptionsResponse,
+   GetSubscriptionsJobListingsResponse,
+} from "./models";
+import moment from "moment";
 
 @Resolver(of => JobListingSubscription)
 export class SubscriptionsResolver extends JobListingSubscriptionRelationsResolver {
@@ -29,7 +36,7 @@ export class SubscriptionsResolver extends JobListingSubscriptionRelationsResolv
 
    @FieldResolver(of => String, { nullable: false })
    @Authorized()
-   public async description(@Root() subscription: JobListingSubscription): Promise<string> {
+   public description(@Root() subscription: JobListingSubscription): string {
       let {
          type,
          work_from,
@@ -39,6 +46,8 @@ export class SubscriptionsResolver extends JobListingSubscriptionRelationsResolv
          categories,
          location,
          level,
+         company,
+         company_id,
       } = subscription;
 
       let criteria = [
@@ -51,7 +60,8 @@ export class SubscriptionsResolver extends JobListingSubscriptionRelationsResolv
          .filter(x => !!x.length);
 
       let description = `New job listings${keywords?.length ? ` with keywords ${keywords.join(`, `)}` : ``}${job_categories?.length ? ` for ${job_categories?.map(c => c.name).join(`, `)}` : ``}${location ? ` for ${location}` : ``} in categor${categories?.length > 1 ? "ies" : "y"} ${categories?.map(c => `"${c.name}"`).join(`, `)}`
-         + `${criteria.length ? ` with criteria: ${criteria.join(`, `)}` : ``}.`;
+         + `${criteria.length ? ` with criteria: ${criteria.join(`, `)}` : ``}`
+         + `${company?.name ? ` from <b>${company.name}</b>` : ``}.`;
 
       return description;
    }
@@ -215,5 +225,77 @@ export class SubscriptionsResolver extends JobListingSubscriptionRelationsResolv
       } catch (err) {
          return { deleted_count: 0, success: false };
       }
+   }
+
+   @Query(of => [User], { nullable: false })
+   @NoCache()
+   async getAllUsersWithSubscriptions(@Ctx() { prisma }: MyContext,
+   ): Promise<User[]> {
+      return await prisma.user.findMany({
+         where: {
+            subscriptions: {
+               some: {},
+            },
+         },
+         include: { subscriptions: true, saved_listings: true },
+      }) as User[];
+   }
+
+   @Query(of => GetSubscriptionsJobListingsResponse, { nullable: false })
+   @NoCache()
+   @Authorized()
+   async getSubscriptionsJobListingsForUser(
+      @Ctx() { prisma }: MyContext,
+      @StringP(`userId`) userId: string,
+   ): Promise<GetSubscriptionsJobListingsResponse> {
+      let userSubscriptions = await prisma.jobListingSubscription.findMany({
+         where: { user_id: userId, metadata: { path: [`confirmed`], equals: true } },
+         include: { categories: true, job_categories: true },
+      });
+
+      let listingIdsBySubscriptionId = new Map<string, string[]>();
+      for (let userSubscription of userSubscriptions) {
+         let filter: any = {};
+
+         if (userSubscription.type?.length) filter.type = userSubscription.type;
+         if (userSubscription.work_from?.length) filter.work_from = userSubscription.work_from;
+         if (userSubscription.level?.length) filter.level = userSubscription.level;
+         if (userSubscription.languages?.length) filter.languages = { hasEvery: userSubscription.languages };
+         if (userSubscription.keywords?.length) filter.keywords = { hasSome: userSubscription.keywords };
+         if (userSubscription.location?.length) filter.location = { contains: userSubscription.location.trim() };
+         if (userSubscription.company_id?.length) filter.company_id = userSubscription.company_id.trim();
+         if (userSubscription.categories?.length) filter.categories = { some: { category_id: { in: userSubscription.categories.map(c => c.id) } } };
+         if (userSubscription.job_categories?.length) filter.job_categories = { some: { category_id: { in: userSubscription.job_categories.map(c => c.id) } } };
+
+         if (userSubscription.notification_frequency === JobListingSubscriptionNotificationFrequency.Daily) {
+            filter.createdAt = { gte: moment().subtract(1, `d`).toDate() };
+         } else {
+            filter.createdAt = { gte: moment().subtract(1, `w`).toDate() };
+         }
+
+         let { categories, job_categories, ...rest } = filter;
+         filter = {
+            ...rest,
+            // OR: [
+            //    { categories: { ...(categories ?? {}) } },
+            //    { categories: { ...(job_categories ?? {}) } },
+            // ],
+         };
+
+         let jobListings = await prisma.jobListing.findMany({
+            select: { id: true },
+            where: filter,
+         });
+
+         listingIdsBySubscriptionId.set(userSubscription.id, [...jobListings.map(l => l.id)]);
+      }
+
+      return {
+         entries: [...listingIdsBySubscriptionId.entries()]
+            .map(([subscriptionId, listingIds]) => ({
+               subscriptionId,
+               listingIds,
+            })),
+      };
    }
 }

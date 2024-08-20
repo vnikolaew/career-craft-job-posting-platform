@@ -6,7 +6,6 @@ import Image from "next/image";
 import { DEFAULT_USER_AVATAR_URL, meIdVar } from "@/providers/apollo/ApolloProvider";
 import { gql } from "@/__generated__";
 import { useMutation, useQuery } from "@apollo/client";
-import { UserSignInInput } from "@/__generated__/graphql";
 import { isValidUrl } from "@/lib/utils";
 import Google from "@/components/icons/Google";
 import { Building2, CircleUserRound, LogOut, Menu } from "lucide-react";
@@ -16,12 +15,6 @@ import SideDrawer from "@/components/common/SideDrawer";
 
 export interface NavbarProps {
 }
-
-const DEFAULT_USER: UserSignInInput = {
-   email: `victorio.nikolaev25@gmail.com`,
-   username: `vnikolaew`,
-   password: `vNikolaew123!`,
-};
 
 export const SIGN_OUT_MUTATION = gql(/* GraphQL */`
     mutation SignOut {
@@ -103,9 +96,7 @@ const Navbar = ({}: NavbarProps) => {
 
    const handleGoogleSignIn = async () => {
       const res = await getGoogleLoginUrl({ redirectUrl: window.location.href });
-      if (isValidUrl(res.data.googleLoginUrl)) {
-         window.location.href = res.data.googleLoginUrl;
-      }
+      if (isValidUrl(res.data.googleLoginUrl)) window.location.href = res.data.googleLoginUrl;
    };
 
    async function handleSignOut() {

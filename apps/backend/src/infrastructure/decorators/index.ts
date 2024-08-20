@@ -71,6 +71,8 @@ export function StringP(argName: string = "string", opts?: ArgOptions) {
         arg: {
             name: argName,
             typeFunc: of => String, options: {
+                nullable: false,
+                description: `${argName} parameter`,
                 ...opts
             }
         }

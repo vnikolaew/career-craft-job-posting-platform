@@ -3,8 +3,16 @@
 import { client } from "@/providers/apollo/client";
 import { gql } from "@/__generated__";
 import { headers } from "next/headers";
-import { ME_QUERY } from "@/components/Navbar";
 import { ApolloError } from "@apollo/client";
+
+const ME_QUERY = gql(/* GraphQL */`
+    query MeQueryGSById {
+        me {
+            id
+            name
+        }
+    }
+`);
 
 const GET_SUBSCRIPTION_BY_ID_QUERY = gql(/* GraphQL */`
     query GetSubscriptionByIdQuery($subscriptionId: String!, $meId: String!) {
@@ -12,8 +20,23 @@ const GET_SUBSCRIPTION_BY_ID_QUERY = gql(/* GraphQL */`
             id
             company_id
             user_id
+            user_email
+            user {
+                id
+                name
+                email
+            }
+            categories {
+                id
+                name
+            }
+            job_categories {
+                id
+                name
+            }
             metadata
             notification_frequency
+            description
             location
             level
             work_from
@@ -23,21 +46,26 @@ const GET_SUBSCRIPTION_BY_ID_QUERY = gql(/* GraphQL */`
             keywords
             createdAt
             updatedAt
+            company {
+                id
+                name
+            }
         }}
 `);
 
 export async function getSubscriptionById(id: string) {
    let cookie = headers().get(`cookie`)!;
+   let context = { headers: { Cookie: cookie } };
 
-   let { data: me } = await client.authenticatedQuery(
-      cookie, { query: ME_QUERY });
+   let { data: me } = await client.query(
+      { query: ME_QUERY, context });
 
    try {
-      let { data, errors } = await client.authenticatedQuery(
-         cookie,
+      let { data, errors } = await client.query(
          {
             query: GET_SUBSCRIPTION_BY_ID_QUERY,
             variables: { subscriptionId: id, meId: me?.me?.id! },
+            context
          });
       return data?.jobListingSubscription;
    } catch (err) {

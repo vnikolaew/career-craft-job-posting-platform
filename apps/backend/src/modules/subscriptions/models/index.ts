@@ -155,3 +155,20 @@ export class DeleteAllSubscriptionsResponse {
    public deleted_count: number
 }
 
+
+@ObjectType()
+export class GetSubscriptionsJobListingsResponse {
+   @Field(of => [SubscriptionJobListingsResponse], { nullable: false })
+   public entries: SubscriptionJobListingsResponse [];
+}
+
+@ObjectType()
+export class SubscriptionJobListingsResponse {
+
+   @Field(() => String, {nullable: false})
+   public subscriptionId: string
+
+   @Field(() => [String], {nullable: false})
+   public listingIds: string[]
+}
+

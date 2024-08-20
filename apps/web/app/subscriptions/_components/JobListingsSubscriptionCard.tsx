@@ -11,16 +11,14 @@ export interface JobListingsSubscriptionCardProps {
 const JobListingsSubscriptionCard = ({ subscription }: JobListingsSubscriptionCardProps) => {
    return (
       <Link href={`/subscriptions/${subscription.id}`}>
-         <div className={`bg-neutral-100 p-4 !py-6 rounded-md shadow-md flex items-center gap-6`}>
+         <div className={`bg-neutral-100 p-4 !py-6 rounded-md shadow-md flex items-center gap-6 hover:!scale-[102%] transition-all duration-200`}>
             <Mail className={`text-green-600`} />
             <div className={`flex flex-col items-start gap-2`}>
             <span
                className={`text-neutral-500`}>Once {subscription.notification_frequency === JobListingSubscriptionNotificationFrequency.Daily
                ? `daily` : `weekly`}
             </span>
-               <span>
-                  {subscription.description}
-               </span>
+               <span dangerouslySetInnerHTML={{ __html: subscription.description }} />
             </div>
             <div className={`flex-1 flex justify-end`}>
                <div className="dropdown dropdown-bottom ">
@@ -44,8 +42,7 @@ const JobListingsSubscriptionCard = ({ subscription }: JobListingsSubscriptionCa
                      </span>
                         </div>
                      </li>
-                     <li
-                        className={``}>
+                     <li className={``}>
                         <div
                            className={`py-2 text-lg cursor-pointer w-full hover:!bg-neutral-200 rounded-md transition-colors duration-200 inline-flex items-center gap-2`}>
                            <Trash className={`text-red-700`} size={18} />

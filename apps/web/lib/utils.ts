@@ -29,3 +29,7 @@ function isValidDate(year: number, month: number, day: number) {
       date.getMonth() === month - 1 &&
       date.getDate() === day;
 }
+
+export function sleep(ms: number) {
+   return new Promise(resolve => setTimeout(resolve, ms));
+}
