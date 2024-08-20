@@ -196,7 +196,8 @@ model JobListingCategory {
   name        String
   description String
 
-  listings CategoryOnJobListing[]
+  listings      CategoryOnJobListing[]
+  subscriptions JobListingSubscription[]
 }
 
 model JobListingSubscription {
@@ -205,14 +206,15 @@ model JobListingSubscription {
   company_id String?
   company    Company? @relation(fields: [company_id], references: [id])
 
-  user_id String
-  user    User   @relation(fields: [user_id], references: [id])
+  user_id String?
+  user    User?   @relation(fields: [user_id], references: [id])
 
   metadata               Json?                                       @default("null") @db.JsonB
   notification_frequency JobListingSubscriptionNotificationFrequency
 
-  categories CompanyCategory[]
-  location   String?
+  categories     CompanyCategory[]
+  job_categories JobListingCategory[]
+  location       String?
 
   level     JobListingLevel?
   work_from WorkFromHome?

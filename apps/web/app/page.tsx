@@ -29,7 +29,7 @@ export default async function Home() {
                Today: <b className={`text-2xl text-black`}>{jobListingsToday}</b>
             </span>
          </div>
-         <div className={`divider w-3/4 mx-auto`} />
+         <div className={`divider w-3/4 mx-auto `} />
          <div className={`w-full bg-neutral-300 mt-12`}>
             <div className={`my-8 w-2/3 mx-auto !mb-16`}>
                <section className={`grid w-full grid-cols-[2fr_3fr_2fr] gap-4`}>

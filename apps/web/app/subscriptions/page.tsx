@@ -2,7 +2,7 @@ import React from "react";
 import { getMySubscriptions } from "./_queries";
 import { redirect } from "next/navigation";
 import JobListingsSubscriptionCard from "@/app/subscriptions/_components/JobListingsSubscriptionCard";
-import { EllipsisVertical, Pencil, Plug, Plus, Trash } from "lucide-react";
+import {  Plus } from "lucide-react";
 import DeleteAllButton from "@/app/subscriptions/_components/DeleteAllButton";
 import Link from "next/link";
 

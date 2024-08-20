@@ -8,8 +8,9 @@ import {
    Arg,
    Authorized,
    Ctx,
+   FieldResolver,
    Mutation, Query,
-   Resolver,
+   Resolver, Root,
 } from "type-graphql";
 import { MyContext } from "@types";
 import { StringP } from "@infrastructure/decorators";
@@ -26,6 +27,35 @@ export class SubscriptionsResolver extends JobListingSubscriptionRelationsResolv
       return `${origin}/subscriptions/confirm?key=${encodeURIComponent(key)}&subscriptionId=${encodeURIComponent(subscriptionId)}`;
    }
 
+   @FieldResolver(of => String, { nullable: false })
+   @Authorized()
+   public async description(@Root() subscription: JobListingSubscription): Promise<string> {
+      let {
+         type,
+         work_from,
+         keywords,
+         languages,
+         job_categories,
+         categories,
+         location,
+         level,
+      } = subscription;
+
+      let criteria = [
+         type,
+         work_from ? work_from : ``,
+         keywords?.length ? `with keywords ${keywords.join(`, `)}` : ``,
+         languages?.length ? `with languages ${languages?.join(`, `)}` : ``,
+         level ? `with level ${level}` : ``,
+      ].filter(Boolean)
+         .filter(x => !!x.length);
+
+      let description = `New job listings${keywords?.length ? ` with keywords ${keywords.join(`, `)}` : ``}${job_categories?.length ? ` for ${job_categories?.map(c => c.name).join(`, `)}` : ``}${location ? ` for ${location}` : ``} in categor${categories?.length > 1 ? "ies" : "y"} ${categories?.map(c => `"${c.name}"`).join(`, `)}`
+         + `${criteria.length ? ` with criteria: ${criteria.join(`, `)}` : ``}.`;
+
+      return description;
+   }
+
    @Mutation(of => JobListingSubscription, { nullable: true })
    @Authorized()
    async subscribeToCompanyListings(
@@ -35,6 +65,7 @@ export class SubscriptionsResolver extends JobListingSubscriptionRelationsResolv
          frequency,
          employmentType,
          categories,
+         job_categories,
          languages,
          level,
          workFromHome,
@@ -55,6 +86,9 @@ export class SubscriptionsResolver extends JobListingSubscriptionRelationsResolv
             type: employmentType,
             categories: {
                connect: categories,
+            },
+            job_categories: {
+               connect: job_categories,
             },
             languages,
             work_from: workFromHome,

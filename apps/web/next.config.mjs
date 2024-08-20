@@ -9,6 +9,9 @@ const nextConfig = {
 
       return config;
    },
+   experimental: {
+      fallbackNodePolyfills: false
+   },
    images: {
       remotePatterns: [
          {
