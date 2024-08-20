@@ -19,14 +19,14 @@ const JobListingsSubscriptionCard = ({ subscription }: JobListingsSubscriptionCa
                ? `daily` : `weekly`}
             </span>
                <span>
-               New job listings from {subscription.company?.name}
-            </span>
+                  {subscription.description}
+               </span>
             </div>
             <div className={`flex-1 flex justify-end`}>
                <div className="dropdown dropdown-bottom ">
                   <div onClick={e => {
-                     e.stopPropagation()
-                     e.preventDefault()
+                     e.stopPropagation();
+                     e.preventDefault();
                      console.log(`click`);
 
                   }} role={`button`} tabIndex={0} className="m-1 ">

@@ -2240,6 +2240,11 @@ export type IntNullableWithAggregatesFilter = {
   notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
+export type JobCategoryInput = {
+  id: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+};
+
 export type JobListing = {
   __typename?: 'JobListing';
   _count?: Maybe<JobListingCount>;
@@ -2291,6 +2296,7 @@ export type JobListingCategory = {
   id: Scalars['ID']['output'];
   listings: Array<CategoryOnJobListing>;
   name: Scalars['String']['output'];
+  subscriptions: Array<JobListingSubscription>;
 };
 
 
@@ -2303,14 +2309,30 @@ export type JobListingCategoryListingsArgs = {
   where?: InputMaybe<CategoryOnJobListingWhereInput>;
 };
 
+
+export type JobListingCategorySubscriptionsArgs = {
+  cursor?: InputMaybe<JobListingSubscriptionWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingSubscriptionScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingSubscriptionOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingSubscriptionWhereInput>;
+};
+
 export type JobListingCategoryCount = {
   __typename?: 'JobListingCategoryCount';
   listings: Scalars['Int']['output'];
+  subscriptions: Scalars['Int']['output'];
 };
 
 
 export type JobListingCategoryCountListingsArgs = {
   where?: InputMaybe<CategoryOnJobListingWhereInput>;
+};
+
+
+export type JobListingCategoryCountSubscriptionsArgs = {
+  where?: InputMaybe<JobListingSubscriptionWhereInput>;
 };
 
 export type JobListingCategoryCountAggregate = {
@@ -2332,12 +2354,19 @@ export type JobListingCategoryCreateInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutCategoryInput>;
   name: Scalars['String']['input'];
+  subscriptions?: InputMaybe<JobListingSubscriptionCreateNestedManyWithoutJob_CategoriesInput>;
 };
 
 export type JobListingCategoryCreateManyInput = {
   description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
+};
+
+export type JobListingCategoryCreateNestedManyWithoutSubscriptionsInput = {
+  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutSubscriptionsInput>>;
+  create?: InputMaybe<Array<JobListingCategoryCreateWithoutSubscriptionsInput>>;
 };
 
 export type JobListingCategoryCreateNestedOneWithoutListingsInput = {
@@ -2351,9 +2380,22 @@ export type JobListingCategoryCreateOrConnectWithoutListingsInput = {
   where: JobListingCategoryWhereUniqueInput;
 };
 
+export type JobListingCategoryCreateOrConnectWithoutSubscriptionsInput = {
+  create: JobListingCategoryCreateWithoutSubscriptionsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
 export type JobListingCategoryCreateWithoutListingsInput = {
   description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  subscriptions?: InputMaybe<JobListingSubscriptionCreateNestedManyWithoutJob_CategoriesInput>;
+};
+
+export type JobListingCategoryCreateWithoutSubscriptionsInput = {
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutCategoryInput>;
   name: Scalars['String']['input'];
 };
 
@@ -2365,6 +2407,12 @@ export type JobListingCategoryGroupBy = {
   description: Scalars['String']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
+};
+
+export type JobListingCategoryListRelationFilter = {
+  every?: InputMaybe<JobListingCategoryWhereInput>;
+  none?: InputMaybe<JobListingCategoryWhereInput>;
+  some?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCategoryMaxAggregate = {
@@ -2391,6 +2439,10 @@ export type JobListingCategoryMinOrderByAggregateInput = {
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
 };
 
 export enum JobListingCategoryOrderByRelevanceFieldEnum {
@@ -2420,6 +2472,7 @@ export type JobListingCategoryOrderByWithRelationInput = {
   id?: InputMaybe<SortOrder>;
   listings?: InputMaybe<CategoryOnJobListingOrderByRelationAggregateInput>;
   name?: InputMaybe<SortOrder>;
+  subscriptions?: InputMaybe<JobListingSubscriptionOrderByRelationAggregateInput>;
 };
 
 export type JobListingCategoryRelationFilter = {
@@ -2432,6 +2485,15 @@ export enum JobListingCategoryScalarFieldEnum {
   Id = 'id',
   Name = 'name'
 }
+
+export type JobListingCategoryScalarWhereInput = {
+  AND?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+};
 
 export type JobListingCategoryScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
@@ -2447,12 +2509,31 @@ export type JobListingCategoryUpdateInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listings?: InputMaybe<CategoryOnJobListingUpdateManyWithoutCategoryNestedInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  subscriptions?: InputMaybe<JobListingSubscriptionUpdateManyWithoutJob_CategoriesNestedInput>;
 };
 
 export type JobListingCategoryUpdateManyMutationInput = {
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpdateManyWithWhereWithoutSubscriptionsInput = {
+  data: JobListingCategoryUpdateManyMutationInput;
+  where: JobListingCategoryScalarWhereInput;
+};
+
+export type JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput = {
+  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutSubscriptionsInput>>;
+  create?: InputMaybe<Array<JobListingCategoryCreateWithoutSubscriptionsInput>>;
+  delete?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  set?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  update?: InputMaybe<Array<JobListingCategoryUpdateWithWhereUniqueWithoutSubscriptionsInput>>;
+  updateMany?: InputMaybe<Array<JobListingCategoryUpdateManyWithWhereWithoutSubscriptionsInput>>;
+  upsert?: InputMaybe<Array<JobListingCategoryUpsertWithWhereUniqueWithoutSubscriptionsInput>>;
 };
 
 export type JobListingCategoryUpdateOneRequiredWithoutListingsNestedInput = {
@@ -2468,10 +2549,29 @@ export type JobListingCategoryUpdateToOneWithWhereWithoutListingsInput = {
   where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
+export type JobListingCategoryUpdateWithWhereUniqueWithoutSubscriptionsInput = {
+  data: JobListingCategoryUpdateWithoutSubscriptionsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
 export type JobListingCategoryUpdateWithoutListingsInput = {
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  subscriptions?: InputMaybe<JobListingSubscriptionUpdateManyWithoutJob_CategoriesNestedInput>;
+};
+
+export type JobListingCategoryUpdateWithoutSubscriptionsInput = {
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  listings?: InputMaybe<CategoryOnJobListingUpdateManyWithoutCategoryNestedInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpsertWithWhereUniqueWithoutSubscriptionsInput = {
+  create: JobListingCategoryCreateWithoutSubscriptionsInput;
+  update: JobListingCategoryUpdateWithoutSubscriptionsInput;
+  where: JobListingCategoryWhereUniqueInput;
 };
 
 export type JobListingCategoryUpsertWithoutListingsInput = {
@@ -2488,6 +2588,7 @@ export type JobListingCategoryWhereInput = {
   id?: InputMaybe<StringFilter>;
   listings?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   name?: InputMaybe<StringFilter>;
+  subscriptions?: InputMaybe<JobListingSubscriptionListRelationFilter>;
 };
 
 export type JobListingCategoryWhereUniqueInput = {
@@ -2498,6 +2599,7 @@ export type JobListingCategoryWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   name?: InputMaybe<StringFilter>;
+  subscriptions?: InputMaybe<JobListingSubscriptionListRelationFilter>;
 };
 
 export type JobListingCount = {
@@ -2942,7 +3044,9 @@ export type JobListingSubscription = {
   company?: Maybe<Company>;
   company_id?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTimeISO']['output'];
+  description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
+  job_categories: Array<JobListingCategory>;
   keywords: Array<Scalars['String']['output']>;
   languages: Array<Scalars['String']['output']>;
   level?: Maybe<JobListingLevel>;
@@ -2953,8 +3057,8 @@ export type JobListingSubscription = {
   parameters: Scalars['JSON']['output'];
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
-  user: User;
-  user_id: Scalars['String']['output'];
+  user?: Maybe<User>;
+  user_id?: Maybe<Scalars['String']['output']>;
   work_from?: Maybe<WorkFromHome>;
 };
 
@@ -2973,14 +3077,35 @@ export type JobListingSubscriptionCompanyArgs = {
   where?: InputMaybe<CompanyWhereInput>;
 };
 
+
+export type JobListingSubscriptionJob_CategoriesArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
+export type JobListingSubscriptionUserArgs = {
+  where?: InputMaybe<UserWhereInput>;
+};
+
 export type JobListingSubscriptionCount = {
   __typename?: 'JobListingSubscriptionCount';
   categories: Scalars['Int']['output'];
+  job_categories: Scalars['Int']['output'];
 };
 
 
 export type JobListingSubscriptionCountCategoriesArgs = {
   where?: InputMaybe<CompanyCategoryWhereInput>;
+};
+
+
+export type JobListingSubscriptionCountJob_CategoriesArgs = {
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingSubscriptionCountAggregate = {
@@ -3023,6 +3148,7 @@ export type JobListingSubscriptionCreateInput = {
   company?: InputMaybe<CompanyCreateNestedOneWithoutSubscriptionsInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutSubscriptionsInput>;
   keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionCreatelanguagesInput>;
   level?: InputMaybe<JobListingLevel>;
@@ -3031,7 +3157,7 @@ export type JobListingSubscriptionCreateInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user: UserCreateNestedOneWithoutSubscriptionsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutSubscriptionsInput>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
@@ -3046,7 +3172,7 @@ export type JobListingSubscriptionCreateManyCompanyInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user_id: Scalars['String']['input'];
+  user_id?: InputMaybe<Scalars['String']['input']>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
@@ -3067,7 +3193,7 @@ export type JobListingSubscriptionCreateManyInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user_id: Scalars['String']['input'];
+  user_id?: InputMaybe<Scalars['String']['input']>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
@@ -3104,6 +3230,12 @@ export type JobListingSubscriptionCreateNestedManyWithoutCompanyInput = {
   createMany?: InputMaybe<JobListingSubscriptionCreateManyCompanyInputEnvelope>;
 };
 
+export type JobListingSubscriptionCreateNestedManyWithoutJob_CategoriesInput = {
+  connect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingSubscriptionCreateOrConnectWithoutJob_CategoriesInput>>;
+  create?: InputMaybe<Array<JobListingSubscriptionCreateWithoutJob_CategoriesInput>>;
+};
+
 export type JobListingSubscriptionCreateNestedManyWithoutUserInput = {
   connect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<JobListingSubscriptionCreateOrConnectWithoutUserInput>>;
@@ -3121,6 +3253,11 @@ export type JobListingSubscriptionCreateOrConnectWithoutCompanyInput = {
   where: JobListingSubscriptionWhereUniqueInput;
 };
 
+export type JobListingSubscriptionCreateOrConnectWithoutJob_CategoriesInput = {
+  create: JobListingSubscriptionCreateWithoutJob_CategoriesInput;
+  where: JobListingSubscriptionWhereUniqueInput;
+};
+
 export type JobListingSubscriptionCreateOrConnectWithoutUserInput = {
   create: JobListingSubscriptionCreateWithoutUserInput;
   where: JobListingSubscriptionWhereUniqueInput;
@@ -3130,6 +3267,7 @@ export type JobListingSubscriptionCreateWithoutCategoriesInput = {
   company?: InputMaybe<CompanyCreateNestedOneWithoutSubscriptionsInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutSubscriptionsInput>;
   keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionCreatelanguagesInput>;
   level?: InputMaybe<JobListingLevel>;
@@ -3138,12 +3276,30 @@ export type JobListingSubscriptionCreateWithoutCategoriesInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user: UserCreateNestedOneWithoutSubscriptionsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutSubscriptionsInput>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
 export type JobListingSubscriptionCreateWithoutCompanyInput = {
   categories?: InputMaybe<CompanyCategoryCreateNestedManyWithoutSubscriptionsInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutSubscriptionsInput>;
+  keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
+  languages?: InputMaybe<JobListingSubscriptionCreatelanguagesInput>;
+  level?: InputMaybe<JobListingLevel>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  notification_frequency: JobListingSubscriptionNotificationFrequency;
+  parameters?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<JobListingEmploymentType>;
+  user?: InputMaybe<UserCreateNestedOneWithoutSubscriptionsInput>;
+  work_from?: InputMaybe<WorkFromHome>;
+};
+
+export type JobListingSubscriptionCreateWithoutJob_CategoriesInput = {
+  categories?: InputMaybe<CompanyCategoryCreateNestedManyWithoutSubscriptionsInput>;
+  company?: InputMaybe<CompanyCreateNestedOneWithoutSubscriptionsInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
@@ -3154,7 +3310,7 @@ export type JobListingSubscriptionCreateWithoutCompanyInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user: UserCreateNestedOneWithoutSubscriptionsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutSubscriptionsInput>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
@@ -3163,6 +3319,7 @@ export type JobListingSubscriptionCreateWithoutUserInput = {
   company?: InputMaybe<CompanyCreateNestedOneWithoutSubscriptionsInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutSubscriptionsInput>;
   keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionCreatelanguagesInput>;
   level?: InputMaybe<JobListingLevel>;
@@ -3199,7 +3356,7 @@ export type JobListingSubscriptionGroupBy = {
   parameters: Scalars['JSON']['output'];
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
-  user_id: Scalars['String']['output'];
+  user_id?: Maybe<Scalars['String']['output']>;
   work_from?: Maybe<WorkFromHome>;
 };
 
@@ -3300,7 +3457,7 @@ export type JobListingSubscriptionOrderByWithAggregationInput = {
   notification_frequency?: InputMaybe<SortOrder>;
   parameters?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrderInput>;
-  user_id?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrderInput>;
   work_from?: InputMaybe<SortOrderInput>;
 };
 
@@ -3311,6 +3468,7 @@ export type JobListingSubscriptionOrderByWithRelationInput = {
   company_id?: InputMaybe<SortOrderInput>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  job_categories?: InputMaybe<JobListingCategoryOrderByRelationAggregateInput>;
   keywords?: InputMaybe<SortOrder>;
   languages?: InputMaybe<SortOrder>;
   level?: InputMaybe<SortOrderInput>;
@@ -3320,7 +3478,7 @@ export type JobListingSubscriptionOrderByWithRelationInput = {
   parameters?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrderInput>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
-  user_id?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrderInput>;
   work_from?: InputMaybe<SortOrderInput>;
 };
 
@@ -3356,7 +3514,7 @@ export type JobListingSubscriptionScalarWhereInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFilter>;
   parameters?: InputMaybe<JsonFilter>;
   type?: InputMaybe<EnumJobListingEmploymentTypeNullableFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
   work_from?: InputMaybe<EnumWorkFromHomeNullableFilter>;
 };
 
@@ -3375,7 +3533,7 @@ export type JobListingSubscriptionScalarWhereWithAggregatesInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyWithAggregatesFilter>;
   parameters?: InputMaybe<JsonWithAggregatesFilter>;
   type?: InputMaybe<EnumJobListingEmploymentTypeNullableWithAggregatesFilter>;
-  user_id?: InputMaybe<StringWithAggregatesFilter>;
+  user_id?: InputMaybe<StringNullableWithAggregatesFilter>;
   work_from?: InputMaybe<EnumWorkFromHomeNullableWithAggregatesFilter>;
 };
 
@@ -3384,6 +3542,7 @@ export type JobListingSubscriptionUpdateInput = {
   company?: InputMaybe<CompanyUpdateOneWithoutSubscriptionsNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  job_categories?: InputMaybe<JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput>;
   keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionUpdatelanguagesInput>;
   level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
@@ -3392,7 +3551,7 @@ export type JobListingSubscriptionUpdateInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput>;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutSubscriptionsNestedInput>;
+  user?: InputMaybe<UserUpdateOneWithoutSubscriptionsNestedInput>;
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
@@ -3416,6 +3575,11 @@ export type JobListingSubscriptionUpdateManyWithWhereWithoutCategoriesInput = {
 };
 
 export type JobListingSubscriptionUpdateManyWithWhereWithoutCompanyInput = {
+  data: JobListingSubscriptionUpdateManyMutationInput;
+  where: JobListingSubscriptionScalarWhereInput;
+};
+
+export type JobListingSubscriptionUpdateManyWithWhereWithoutJob_CategoriesInput = {
   data: JobListingSubscriptionUpdateManyMutationInput;
   where: JobListingSubscriptionScalarWhereInput;
 };
@@ -3452,6 +3616,19 @@ export type JobListingSubscriptionUpdateManyWithoutCompanyNestedInput = {
   upsert?: InputMaybe<Array<JobListingSubscriptionUpsertWithWhereUniqueWithoutCompanyInput>>;
 };
 
+export type JobListingSubscriptionUpdateManyWithoutJob_CategoriesNestedInput = {
+  connect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingSubscriptionCreateOrConnectWithoutJob_CategoriesInput>>;
+  create?: InputMaybe<Array<JobListingSubscriptionCreateWithoutJob_CategoriesInput>>;
+  delete?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<JobListingSubscriptionScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  set?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  update?: InputMaybe<Array<JobListingSubscriptionUpdateWithWhereUniqueWithoutJob_CategoriesInput>>;
+  updateMany?: InputMaybe<Array<JobListingSubscriptionUpdateManyWithWhereWithoutJob_CategoriesInput>>;
+  upsert?: InputMaybe<Array<JobListingSubscriptionUpsertWithWhereUniqueWithoutJob_CategoriesInput>>;
+};
+
 export type JobListingSubscriptionUpdateManyWithoutUserNestedInput = {
   connect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<JobListingSubscriptionCreateOrConnectWithoutUserInput>>;
@@ -3476,6 +3653,11 @@ export type JobListingSubscriptionUpdateWithWhereUniqueWithoutCompanyInput = {
   where: JobListingSubscriptionWhereUniqueInput;
 };
 
+export type JobListingSubscriptionUpdateWithWhereUniqueWithoutJob_CategoriesInput = {
+  data: JobListingSubscriptionUpdateWithoutJob_CategoriesInput;
+  where: JobListingSubscriptionWhereUniqueInput;
+};
+
 export type JobListingSubscriptionUpdateWithWhereUniqueWithoutUserInput = {
   data: JobListingSubscriptionUpdateWithoutUserInput;
   where: JobListingSubscriptionWhereUniqueInput;
@@ -3485,6 +3667,7 @@ export type JobListingSubscriptionUpdateWithoutCategoriesInput = {
   company?: InputMaybe<CompanyUpdateOneWithoutSubscriptionsNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  job_categories?: InputMaybe<JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput>;
   keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionUpdatelanguagesInput>;
   level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
@@ -3493,12 +3676,30 @@ export type JobListingSubscriptionUpdateWithoutCategoriesInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput>;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutSubscriptionsNestedInput>;
+  user?: InputMaybe<UserUpdateOneWithoutSubscriptionsNestedInput>;
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
 export type JobListingSubscriptionUpdateWithoutCompanyInput = {
   categories?: InputMaybe<CompanyCategoryUpdateManyWithoutSubscriptionsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  job_categories?: InputMaybe<JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput>;
+  keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
+  languages?: InputMaybe<JobListingSubscriptionUpdatelanguagesInput>;
+  level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
+  location?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput>;
+  parameters?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneWithoutSubscriptionsNestedInput>;
+  work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
+};
+
+export type JobListingSubscriptionUpdateWithoutJob_CategoriesInput = {
+  categories?: InputMaybe<CompanyCategoryUpdateManyWithoutSubscriptionsNestedInput>;
+  company?: InputMaybe<CompanyUpdateOneWithoutSubscriptionsNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
@@ -3509,7 +3710,7 @@ export type JobListingSubscriptionUpdateWithoutCompanyInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput>;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutSubscriptionsNestedInput>;
+  user?: InputMaybe<UserUpdateOneWithoutSubscriptionsNestedInput>;
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
@@ -3518,6 +3719,7 @@ export type JobListingSubscriptionUpdateWithoutUserInput = {
   company?: InputMaybe<CompanyUpdateOneWithoutSubscriptionsNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  job_categories?: InputMaybe<JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput>;
   keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionUpdatelanguagesInput>;
   level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
@@ -3551,6 +3753,12 @@ export type JobListingSubscriptionUpsertWithWhereUniqueWithoutCompanyInput = {
   where: JobListingSubscriptionWhereUniqueInput;
 };
 
+export type JobListingSubscriptionUpsertWithWhereUniqueWithoutJob_CategoriesInput = {
+  create: JobListingSubscriptionCreateWithoutJob_CategoriesInput;
+  update: JobListingSubscriptionUpdateWithoutJob_CategoriesInput;
+  where: JobListingSubscriptionWhereUniqueInput;
+};
+
 export type JobListingSubscriptionUpsertWithWhereUniqueWithoutUserInput = {
   create: JobListingSubscriptionCreateWithoutUserInput;
   update: JobListingSubscriptionUpdateWithoutUserInput;
@@ -3566,6 +3774,7 @@ export type JobListingSubscriptionWhereInput = {
   company_id?: InputMaybe<StringNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
+  job_categories?: InputMaybe<JobListingCategoryListRelationFilter>;
   keywords?: InputMaybe<StringNullableListFilter>;
   languages?: InputMaybe<StringNullableListFilter>;
   level?: InputMaybe<EnumJobListingLevelNullableFilter>;
@@ -3574,8 +3783,8 @@ export type JobListingSubscriptionWhereInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFilter>;
   parameters?: InputMaybe<JsonFilter>;
   type?: InputMaybe<EnumJobListingEmploymentTypeNullableFilter>;
-  user?: InputMaybe<UserRelationFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserNullableRelationFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
   work_from?: InputMaybe<EnumWorkFromHomeNullableFilter>;
 };
 
@@ -3588,6 +3797,7 @@ export type JobListingSubscriptionWhereUniqueInput = {
   company_id?: InputMaybe<StringNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryListRelationFilter>;
   keywords?: InputMaybe<StringNullableListFilter>;
   languages?: InputMaybe<StringNullableListFilter>;
   level?: InputMaybe<EnumJobListingLevelNullableFilter>;
@@ -3596,8 +3806,8 @@ export type JobListingSubscriptionWhereUniqueInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFilter>;
   parameters?: InputMaybe<JsonFilter>;
   type?: InputMaybe<EnumJobListingEmploymentTypeNullableFilter>;
-  user?: InputMaybe<UserRelationFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserNullableRelationFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
   work_from?: InputMaybe<EnumWorkFromHomeNullableFilter>;
 };
 
@@ -6258,6 +6468,7 @@ export type SubscribeToJobListingsInput = {
   companyId?: InputMaybe<Scalars['String']['input']>;
   employmentType?: InputMaybe<JobListingEmploymentType>;
   frequency: JobListingSubscriptionNotificationFrequency;
+  job_categories: Array<JobCategoryInput>;
   keywords: Array<Scalars['String']['input']>;
   languages: Array<Scalars['String']['input']>;
   level?: InputMaybe<JobListingLevel>;
@@ -6603,6 +6814,11 @@ export type UserMinOrderByAggregateInput = {
   name?: InputMaybe<SortOrder>;
 };
 
+export type UserNullableRelationFilter = {
+  is?: InputMaybe<UserWhereInput>;
+  isNot?: InputMaybe<UserWhereInput>;
+};
+
 export enum UserOrderByRelevanceFieldEnum {
   Email = 'email',
   FirstName = 'first_name',
@@ -6811,10 +7027,12 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   upsert?: InputMaybe<UserUpsertWithoutSessionsInput>;
 };
 
-export type UserUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+export type UserUpdateOneWithoutSubscriptionsNestedInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutSubscriptionsInput>;
   create?: InputMaybe<UserCreateWithoutSubscriptionsInput>;
+  delete?: InputMaybe<UserWhereInput>;
+  disconnect?: InputMaybe<UserWhereInput>;
   update?: InputMaybe<UserUpdateToOneWithWhereWithoutSubscriptionsInput>;
   upsert?: InputMaybe<UserUpsertWithoutSubscriptionsInput>;
 };
@@ -7224,6 +7442,14 @@ export type SignUpWithEmailCodeMutationVariables = Exact<{
 
 export type SignUpWithEmailCodeMutation = { __typename?: 'Mutation', signUpWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: any } };
 
+export type GetSubscriptionByIdQueryQueryVariables = Exact<{
+  subscriptionId: Scalars['String']['input'];
+  meId: Scalars['String']['input'];
+}>;
+
+
+export type GetSubscriptionByIdQueryQuery = { __typename?: 'Query', jobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, company_id?: string | null, user_id?: string | null, metadata?: any | null, notification_frequency: JobListingSubscriptionNotificationFrequency, location?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, languages: Array<string>, parameters: any, keywords: Array<string>, createdAt: any, updatedAt: any } | null };
+
 export type DeleteAllSubscriptionsMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7234,7 +7460,7 @@ export type GetMySubscriptionsQueryVariables = Exact<{
 }>;
 
 
-export type GetMySubscriptionsQuery = { __typename?: 'Query', mySubscriptions: Array<{ __typename?: 'JobListingSubscription', id: string, company_id?: string | null, user_id: string, metadata?: any | null, notification_frequency: JobListingSubscriptionNotificationFrequency, location?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, languages: Array<string>, parameters: any, keywords: Array<string>, createdAt: any, updatedAt: any, company?: { __typename?: 'Company', id: string, name: string, email: any } | null, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> }> };
+export type GetMySubscriptionsQuery = { __typename?: 'Query', mySubscriptions: Array<{ __typename?: 'JobListingSubscription', id: string, company_id?: string | null, user_id?: string | null, metadata?: any | null, notification_frequency: JobListingSubscriptionNotificationFrequency, location?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, languages: Array<string>, parameters: any, keywords: Array<string>, createdAt: any, updatedAt: any, description: string, company?: { __typename?: 'Company', id: string, name: string, email: any } | null, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> }> };
 
 export type MeQuerySlimQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -7246,7 +7472,7 @@ export type GetSubscriptionByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetSubscriptionByIdQuery = { __typename?: 'Query', jobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, user_id: string, company_id?: string | null, createdAt: any, metadata?: any | null, company?: { __typename?: 'Company', id: string, name: string } | null } | null };
+export type GetSubscriptionByIdQuery = { __typename?: 'Query', jobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, user_id?: string | null, company_id?: string | null, createdAt: any, metadata?: any | null, company?: { __typename?: 'Company', id: string, name: string } | null } | null };
 
 export type ConfirmSubscriptionMutationVariables = Exact<{
   key: Scalars['String']['input'];
@@ -7254,7 +7480,7 @@ export type ConfirmSubscriptionMutationVariables = Exact<{
 }>;
 
 
-export type ConfirmSubscriptionMutation = { __typename?: 'Mutation', confirmJobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, user_id: string, createdAt: any, metadata?: any | null } | null };
+export type ConfirmSubscriptionMutation = { __typename?: 'Mutation', confirmJobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, user_id?: string | null, createdAt: any, metadata?: any | null } | null };
 
 export type SignOutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -7285,7 +7511,7 @@ export type SubscribeToCompanyListingsMutationVariables = Exact<{
 }>;
 
 
-export type SubscribeToCompanyListingsMutation = { __typename?: 'Mutation', subscribeToCompanyListings?: { __typename?: 'JobListingSubscription', id: string, user_id: string, metadata?: any | null, createdAt: any, updatedAt: any, work_from?: WorkFromHome | null, level?: JobListingLevel | null, type?: JobListingEmploymentType | null, location?: string | null, languages: Array<string>, parameters: any, keywords: Array<string>, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> } | null };
+export type SubscribeToCompanyListingsMutation = { __typename?: 'Mutation', subscribeToCompanyListings?: { __typename?: 'JobListingSubscription', id: string, user_id?: string | null, metadata?: any | null, createdAt: any, updatedAt: any, work_from?: WorkFromHome | null, level?: JobListingLevel | null, type?: JobListingEmploymentType | null, location?: string | null, languages: Array<string>, parameters: any, keywords: Array<string>, description: string, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }>, job_categories: Array<{ __typename?: 'JobListingCategory', id: string, name: string }> } | null };
 
 
 export const GetTopJobCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTopJobCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetTopListingCategoriesInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTopListingCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]} as unknown as DocumentNode<GetTopJobCategoriesQuery, GetTopJobCategoriesQueryVariables>;
@@ -7302,8 +7528,9 @@ export const GetCompanyJobDocument = {"kind":"Document","definitions":[{"kind":"
 export const SignInWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignInWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signInWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignInWithEmailCodeMutation, SignInWithEmailCodeMutationVariables>;
 export const GenerateEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GenerateEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generateSignUpEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"expires"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<GenerateEmailCodeMutation, GenerateEmailCodeMutationVariables>;
 export const SignUpWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignUpWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUpWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"Argument","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignUpWithEmailCodeMutation, SignUpWithEmailCodeMutationVariables>;
+export const GetSubscriptionByIdQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSubscriptionByIdQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subscriptionId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"meId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jobListingSubscription"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subscriptionId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"user_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"equals"},"value":{"kind":"Variable","name":{"kind":"Name","value":"meId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"notification_frequency"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetSubscriptionByIdQueryQuery, GetSubscriptionByIdQueryQueryVariables>;
 export const DeleteAllSubscriptionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteAllSubscriptions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteAllSubscriptions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleted_count"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<DeleteAllSubscriptionsMutation, DeleteAllSubscriptionsMutationVariables>;
-export const GetMySubscriptionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMySubscriptions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetSubscriptionsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mySubscriptions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"notification_frequency"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<GetMySubscriptionsQuery, GetMySubscriptionsQueryVariables>;
+export const GetMySubscriptionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMySubscriptions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetSubscriptionsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mySubscriptions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"notification_frequency"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<GetMySubscriptionsQuery, GetMySubscriptionsQueryVariables>;
 export const MeQuerySlimDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MeQuerySlim"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<MeQuerySlimQuery, MeQuerySlimQueryVariables>;
 export const GetSubscriptionByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSubscriptionById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subscriptionId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jobListingSubscription"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subscriptionId"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]} as unknown as DocumentNode<GetSubscriptionByIdQuery, GetSubscriptionByIdQueryVariables>;
 export const ConfirmSubscriptionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ConfirmSubscription"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"key"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subscriptionId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"confirmJobListingSubscription"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"subscriptionKey"},"value":{"kind":"Variable","name":{"kind":"Name","value":"key"}}},{"kind":"Argument","name":{"kind":"Name","value":"subscriptionId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subscriptionId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]} as unknown as DocumentNode<ConfirmSubscriptionMutation, ConfirmSubscriptionMutationVariables>;
@@ -7311,7 +7538,7 @@ export const SignOutDocument = {"kind":"Document","definitions":[{"kind":"Operat
 export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"signInModel"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserSignInInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"signInModel"},"value":{"kind":"Variable","name":{"kind":"Name","value":"signInModel"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"cookieConsent"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"functionality"}},{"kind":"Field","name":{"kind":"Name","value":"marketing"}},{"kind":"Field","name":{"kind":"Name","value":"necessary"}},{"kind":"Field","name":{"kind":"Name","value":"statistics"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
 export const MeQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MeQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"cookieConsent"}},{"kind":"Field","name":{"kind":"Name","value":"cookiePreferences"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"functionality"}},{"kind":"Field","name":{"kind":"Name","value":"marketing"}},{"kind":"Field","name":{"kind":"Name","value":"necessary"}},{"kind":"Field","name":{"kind":"Name","value":"statistics"}}]}},{"kind":"Field","name":{"kind":"Name","value":"saved_listings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"listing_id"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]}}]} as unknown as DocumentNode<MeQueryQuery, MeQueryQueryVariables>;
 export const GoogleLoginQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GoogleLoginQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"redirectUrl"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"googleLoginUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"redirect_url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"redirectUrl"}}}]}]}}]} as unknown as DocumentNode<GoogleLoginQueryQuery, GoogleLoginQueryQueryVariables>;
-export const SubscribeToCompanyListingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SubscribeToCompanyListings"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SubscribeToJobListingsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"subscribeToCompanyListings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<SubscribeToCompanyListingsMutation, SubscribeToCompanyListingsMutationVariables>;
+export const SubscribeToCompanyListingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SubscribeToCompanyListings"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SubscribeToJobListingsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"subscribeToCompanyListings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"job_categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<SubscribeToCompanyListingsMutation, SubscribeToCompanyListingsMutationVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -9545,6 +9772,11 @@ export type IntNullableWithAggregatesFilter = {
   notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
+export type JobCategoryInput = {
+  id: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+};
+
 export type JobListing = {
   __typename?: 'JobListing';
   _count?: Maybe<JobListingCount>;
@@ -9596,6 +9828,7 @@ export type JobListingCategory = {
   id: Scalars['ID']['output'];
   listings: Array<CategoryOnJobListing>;
   name: Scalars['String']['output'];
+  subscriptions: Array<JobListingSubscription>;
 };
 
 
@@ -9608,14 +9841,30 @@ export type JobListingCategoryListingsArgs = {
   where?: InputMaybe<CategoryOnJobListingWhereInput>;
 };
 
+
+export type JobListingCategorySubscriptionsArgs = {
+  cursor?: InputMaybe<JobListingSubscriptionWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingSubscriptionScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingSubscriptionOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingSubscriptionWhereInput>;
+};
+
 export type JobListingCategoryCount = {
   __typename?: 'JobListingCategoryCount';
   listings: Scalars['Int']['output'];
+  subscriptions: Scalars['Int']['output'];
 };
 
 
 export type JobListingCategoryCountListingsArgs = {
   where?: InputMaybe<CategoryOnJobListingWhereInput>;
+};
+
+
+export type JobListingCategoryCountSubscriptionsArgs = {
+  where?: InputMaybe<JobListingSubscriptionWhereInput>;
 };
 
 export type JobListingCategoryCountAggregate = {
@@ -9637,12 +9886,19 @@ export type JobListingCategoryCreateInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutCategoryInput>;
   name: Scalars['String']['input'];
+  subscriptions?: InputMaybe<JobListingSubscriptionCreateNestedManyWithoutJob_CategoriesInput>;
 };
 
 export type JobListingCategoryCreateManyInput = {
   description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
+};
+
+export type JobListingCategoryCreateNestedManyWithoutSubscriptionsInput = {
+  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutSubscriptionsInput>>;
+  create?: InputMaybe<Array<JobListingCategoryCreateWithoutSubscriptionsInput>>;
 };
 
 export type JobListingCategoryCreateNestedOneWithoutListingsInput = {
@@ -9656,9 +9912,22 @@ export type JobListingCategoryCreateOrConnectWithoutListingsInput = {
   where: JobListingCategoryWhereUniqueInput;
 };
 
+export type JobListingCategoryCreateOrConnectWithoutSubscriptionsInput = {
+  create: JobListingCategoryCreateWithoutSubscriptionsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
 export type JobListingCategoryCreateWithoutListingsInput = {
   description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  subscriptions?: InputMaybe<JobListingSubscriptionCreateNestedManyWithoutJob_CategoriesInput>;
+};
+
+export type JobListingCategoryCreateWithoutSubscriptionsInput = {
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  listings?: InputMaybe<CategoryOnJobListingCreateNestedManyWithoutCategoryInput>;
   name: Scalars['String']['input'];
 };
 
@@ -9670,6 +9939,12 @@ export type JobListingCategoryGroupBy = {
   description: Scalars['String']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
+};
+
+export type JobListingCategoryListRelationFilter = {
+  every?: InputMaybe<JobListingCategoryWhereInput>;
+  none?: InputMaybe<JobListingCategoryWhereInput>;
+  some?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingCategoryMaxAggregate = {
@@ -9696,6 +9971,10 @@ export type JobListingCategoryMinOrderByAggregateInput = {
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+};
+
+export type JobListingCategoryOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
 };
 
 export enum JobListingCategoryOrderByRelevanceFieldEnum {
@@ -9725,6 +10004,7 @@ export type JobListingCategoryOrderByWithRelationInput = {
   id?: InputMaybe<SortOrder>;
   listings?: InputMaybe<CategoryOnJobListingOrderByRelationAggregateInput>;
   name?: InputMaybe<SortOrder>;
+  subscriptions?: InputMaybe<JobListingSubscriptionOrderByRelationAggregateInput>;
 };
 
 export type JobListingCategoryRelationFilter = {
@@ -9737,6 +10017,15 @@ export enum JobListingCategoryScalarFieldEnum {
   Id = 'id',
   Name = 'name'
 }
+
+export type JobListingCategoryScalarWhereInput = {
+  AND?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  NOT?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  OR?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+};
 
 export type JobListingCategoryScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<JobListingCategoryScalarWhereWithAggregatesInput>>;
@@ -9752,12 +10041,31 @@ export type JobListingCategoryUpdateInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listings?: InputMaybe<CategoryOnJobListingUpdateManyWithoutCategoryNestedInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  subscriptions?: InputMaybe<JobListingSubscriptionUpdateManyWithoutJob_CategoriesNestedInput>;
 };
 
 export type JobListingCategoryUpdateManyMutationInput = {
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpdateManyWithWhereWithoutSubscriptionsInput = {
+  data: JobListingCategoryUpdateManyMutationInput;
+  where: JobListingCategoryScalarWhereInput;
+};
+
+export type JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput = {
+  connect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingCategoryCreateOrConnectWithoutSubscriptionsInput>>;
+  create?: InputMaybe<Array<JobListingCategoryCreateWithoutSubscriptionsInput>>;
+  delete?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<JobListingCategoryScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  set?: InputMaybe<Array<JobListingCategoryWhereUniqueInput>>;
+  update?: InputMaybe<Array<JobListingCategoryUpdateWithWhereUniqueWithoutSubscriptionsInput>>;
+  updateMany?: InputMaybe<Array<JobListingCategoryUpdateManyWithWhereWithoutSubscriptionsInput>>;
+  upsert?: InputMaybe<Array<JobListingCategoryUpsertWithWhereUniqueWithoutSubscriptionsInput>>;
 };
 
 export type JobListingCategoryUpdateOneRequiredWithoutListingsNestedInput = {
@@ -9773,10 +10081,29 @@ export type JobListingCategoryUpdateToOneWithWhereWithoutListingsInput = {
   where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
+export type JobListingCategoryUpdateWithWhereUniqueWithoutSubscriptionsInput = {
+  data: JobListingCategoryUpdateWithoutSubscriptionsInput;
+  where: JobListingCategoryWhereUniqueInput;
+};
+
 export type JobListingCategoryUpdateWithoutListingsInput = {
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  subscriptions?: InputMaybe<JobListingSubscriptionUpdateManyWithoutJob_CategoriesNestedInput>;
+};
+
+export type JobListingCategoryUpdateWithoutSubscriptionsInput = {
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  listings?: InputMaybe<CategoryOnJobListingUpdateManyWithoutCategoryNestedInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type JobListingCategoryUpsertWithWhereUniqueWithoutSubscriptionsInput = {
+  create: JobListingCategoryCreateWithoutSubscriptionsInput;
+  update: JobListingCategoryUpdateWithoutSubscriptionsInput;
+  where: JobListingCategoryWhereUniqueInput;
 };
 
 export type JobListingCategoryUpsertWithoutListingsInput = {
@@ -9793,6 +10120,7 @@ export type JobListingCategoryWhereInput = {
   id?: InputMaybe<StringFilter>;
   listings?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   name?: InputMaybe<StringFilter>;
+  subscriptions?: InputMaybe<JobListingSubscriptionListRelationFilter>;
 };
 
 export type JobListingCategoryWhereUniqueInput = {
@@ -9803,6 +10131,7 @@ export type JobListingCategoryWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<CategoryOnJobListingListRelationFilter>;
   name?: InputMaybe<StringFilter>;
+  subscriptions?: InputMaybe<JobListingSubscriptionListRelationFilter>;
 };
 
 export type JobListingCount = {
@@ -10247,7 +10576,9 @@ export type JobListingSubscription = {
   company?: Maybe<Company>;
   company_id?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTimeISO']['output'];
+  description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
+  job_categories: Array<JobListingCategory>;
   keywords: Array<Scalars['String']['output']>;
   languages: Array<Scalars['String']['output']>;
   level?: Maybe<JobListingLevel>;
@@ -10258,8 +10589,8 @@ export type JobListingSubscription = {
   parameters: Scalars['JSON']['output'];
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
-  user: User;
-  user_id: Scalars['String']['output'];
+  user?: Maybe<User>;
+  user_id?: Maybe<Scalars['String']['output']>;
   work_from?: Maybe<WorkFromHome>;
 };
 
@@ -10278,14 +10609,35 @@ export type JobListingSubscriptionCompanyArgs = {
   where?: InputMaybe<CompanyWhereInput>;
 };
 
+
+export type JobListingSubscriptionJob_CategoriesArgs = {
+  cursor?: InputMaybe<JobListingCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<JobListingCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<JobListingCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<JobListingCategoryWhereInput>;
+};
+
+
+export type JobListingSubscriptionUserArgs = {
+  where?: InputMaybe<UserWhereInput>;
+};
+
 export type JobListingSubscriptionCount = {
   __typename?: 'JobListingSubscriptionCount';
   categories: Scalars['Int']['output'];
+  job_categories: Scalars['Int']['output'];
 };
 
 
 export type JobListingSubscriptionCountCategoriesArgs = {
   where?: InputMaybe<CompanyCategoryWhereInput>;
+};
+
+
+export type JobListingSubscriptionCountJob_CategoriesArgs = {
+  where?: InputMaybe<JobListingCategoryWhereInput>;
 };
 
 export type JobListingSubscriptionCountAggregate = {
@@ -10328,6 +10680,7 @@ export type JobListingSubscriptionCreateInput = {
   company?: InputMaybe<CompanyCreateNestedOneWithoutSubscriptionsInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutSubscriptionsInput>;
   keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionCreatelanguagesInput>;
   level?: InputMaybe<JobListingLevel>;
@@ -10336,7 +10689,7 @@ export type JobListingSubscriptionCreateInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user: UserCreateNestedOneWithoutSubscriptionsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutSubscriptionsInput>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
@@ -10351,7 +10704,7 @@ export type JobListingSubscriptionCreateManyCompanyInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user_id: Scalars['String']['input'];
+  user_id?: InputMaybe<Scalars['String']['input']>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
@@ -10372,7 +10725,7 @@ export type JobListingSubscriptionCreateManyInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user_id: Scalars['String']['input'];
+  user_id?: InputMaybe<Scalars['String']['input']>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
@@ -10409,6 +10762,12 @@ export type JobListingSubscriptionCreateNestedManyWithoutCompanyInput = {
   createMany?: InputMaybe<JobListingSubscriptionCreateManyCompanyInputEnvelope>;
 };
 
+export type JobListingSubscriptionCreateNestedManyWithoutJob_CategoriesInput = {
+  connect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingSubscriptionCreateOrConnectWithoutJob_CategoriesInput>>;
+  create?: InputMaybe<Array<JobListingSubscriptionCreateWithoutJob_CategoriesInput>>;
+};
+
 export type JobListingSubscriptionCreateNestedManyWithoutUserInput = {
   connect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<JobListingSubscriptionCreateOrConnectWithoutUserInput>>;
@@ -10426,6 +10785,11 @@ export type JobListingSubscriptionCreateOrConnectWithoutCompanyInput = {
   where: JobListingSubscriptionWhereUniqueInput;
 };
 
+export type JobListingSubscriptionCreateOrConnectWithoutJob_CategoriesInput = {
+  create: JobListingSubscriptionCreateWithoutJob_CategoriesInput;
+  where: JobListingSubscriptionWhereUniqueInput;
+};
+
 export type JobListingSubscriptionCreateOrConnectWithoutUserInput = {
   create: JobListingSubscriptionCreateWithoutUserInput;
   where: JobListingSubscriptionWhereUniqueInput;
@@ -10435,6 +10799,7 @@ export type JobListingSubscriptionCreateWithoutCategoriesInput = {
   company?: InputMaybe<CompanyCreateNestedOneWithoutSubscriptionsInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutSubscriptionsInput>;
   keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionCreatelanguagesInput>;
   level?: InputMaybe<JobListingLevel>;
@@ -10443,12 +10808,30 @@ export type JobListingSubscriptionCreateWithoutCategoriesInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user: UserCreateNestedOneWithoutSubscriptionsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutSubscriptionsInput>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
 export type JobListingSubscriptionCreateWithoutCompanyInput = {
   categories?: InputMaybe<CompanyCategoryCreateNestedManyWithoutSubscriptionsInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutSubscriptionsInput>;
+  keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
+  languages?: InputMaybe<JobListingSubscriptionCreatelanguagesInput>;
+  level?: InputMaybe<JobListingLevel>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  notification_frequency: JobListingSubscriptionNotificationFrequency;
+  parameters?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<JobListingEmploymentType>;
+  user?: InputMaybe<UserCreateNestedOneWithoutSubscriptionsInput>;
+  work_from?: InputMaybe<WorkFromHome>;
+};
+
+export type JobListingSubscriptionCreateWithoutJob_CategoriesInput = {
+  categories?: InputMaybe<CompanyCategoryCreateNestedManyWithoutSubscriptionsInput>;
+  company?: InputMaybe<CompanyCreateNestedOneWithoutSubscriptionsInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
@@ -10459,7 +10842,7 @@ export type JobListingSubscriptionCreateWithoutCompanyInput = {
   notification_frequency: JobListingSubscriptionNotificationFrequency;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<JobListingEmploymentType>;
-  user: UserCreateNestedOneWithoutSubscriptionsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutSubscriptionsInput>;
   work_from?: InputMaybe<WorkFromHome>;
 };
 
@@ -10468,6 +10851,7 @@ export type JobListingSubscriptionCreateWithoutUserInput = {
   company?: InputMaybe<CompanyCreateNestedOneWithoutSubscriptionsInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryCreateNestedManyWithoutSubscriptionsInput>;
   keywords?: InputMaybe<JobListingSubscriptionCreatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionCreatelanguagesInput>;
   level?: InputMaybe<JobListingLevel>;
@@ -10504,7 +10888,7 @@ export type JobListingSubscriptionGroupBy = {
   parameters: Scalars['JSON']['output'];
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
-  user_id: Scalars['String']['output'];
+  user_id?: Maybe<Scalars['String']['output']>;
   work_from?: Maybe<WorkFromHome>;
 };
 
@@ -10605,7 +10989,7 @@ export type JobListingSubscriptionOrderByWithAggregationInput = {
   notification_frequency?: InputMaybe<SortOrder>;
   parameters?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrderInput>;
-  user_id?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrderInput>;
   work_from?: InputMaybe<SortOrderInput>;
 };
 
@@ -10616,6 +11000,7 @@ export type JobListingSubscriptionOrderByWithRelationInput = {
   company_id?: InputMaybe<SortOrderInput>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  job_categories?: InputMaybe<JobListingCategoryOrderByRelationAggregateInput>;
   keywords?: InputMaybe<SortOrder>;
   languages?: InputMaybe<SortOrder>;
   level?: InputMaybe<SortOrderInput>;
@@ -10625,7 +11010,7 @@ export type JobListingSubscriptionOrderByWithRelationInput = {
   parameters?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrderInput>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
-  user_id?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrderInput>;
   work_from?: InputMaybe<SortOrderInput>;
 };
 
@@ -10661,7 +11046,7 @@ export type JobListingSubscriptionScalarWhereInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFilter>;
   parameters?: InputMaybe<JsonFilter>;
   type?: InputMaybe<EnumJobListingEmploymentTypeNullableFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
   work_from?: InputMaybe<EnumWorkFromHomeNullableFilter>;
 };
 
@@ -10680,7 +11065,7 @@ export type JobListingSubscriptionScalarWhereWithAggregatesInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyWithAggregatesFilter>;
   parameters?: InputMaybe<JsonWithAggregatesFilter>;
   type?: InputMaybe<EnumJobListingEmploymentTypeNullableWithAggregatesFilter>;
-  user_id?: InputMaybe<StringWithAggregatesFilter>;
+  user_id?: InputMaybe<StringNullableWithAggregatesFilter>;
   work_from?: InputMaybe<EnumWorkFromHomeNullableWithAggregatesFilter>;
 };
 
@@ -10689,6 +11074,7 @@ export type JobListingSubscriptionUpdateInput = {
   company?: InputMaybe<CompanyUpdateOneWithoutSubscriptionsNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  job_categories?: InputMaybe<JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput>;
   keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionUpdatelanguagesInput>;
   level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
@@ -10697,7 +11083,7 @@ export type JobListingSubscriptionUpdateInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput>;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutSubscriptionsNestedInput>;
+  user?: InputMaybe<UserUpdateOneWithoutSubscriptionsNestedInput>;
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
@@ -10721,6 +11107,11 @@ export type JobListingSubscriptionUpdateManyWithWhereWithoutCategoriesInput = {
 };
 
 export type JobListingSubscriptionUpdateManyWithWhereWithoutCompanyInput = {
+  data: JobListingSubscriptionUpdateManyMutationInput;
+  where: JobListingSubscriptionScalarWhereInput;
+};
+
+export type JobListingSubscriptionUpdateManyWithWhereWithoutJob_CategoriesInput = {
   data: JobListingSubscriptionUpdateManyMutationInput;
   where: JobListingSubscriptionScalarWhereInput;
 };
@@ -10757,6 +11148,19 @@ export type JobListingSubscriptionUpdateManyWithoutCompanyNestedInput = {
   upsert?: InputMaybe<Array<JobListingSubscriptionUpsertWithWhereUniqueWithoutCompanyInput>>;
 };
 
+export type JobListingSubscriptionUpdateManyWithoutJob_CategoriesNestedInput = {
+  connect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<JobListingSubscriptionCreateOrConnectWithoutJob_CategoriesInput>>;
+  create?: InputMaybe<Array<JobListingSubscriptionCreateWithoutJob_CategoriesInput>>;
+  delete?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<JobListingSubscriptionScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  set?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
+  update?: InputMaybe<Array<JobListingSubscriptionUpdateWithWhereUniqueWithoutJob_CategoriesInput>>;
+  updateMany?: InputMaybe<Array<JobListingSubscriptionUpdateManyWithWhereWithoutJob_CategoriesInput>>;
+  upsert?: InputMaybe<Array<JobListingSubscriptionUpsertWithWhereUniqueWithoutJob_CategoriesInput>>;
+};
+
 export type JobListingSubscriptionUpdateManyWithoutUserNestedInput = {
   connect?: InputMaybe<Array<JobListingSubscriptionWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<JobListingSubscriptionCreateOrConnectWithoutUserInput>>;
@@ -10781,6 +11185,11 @@ export type JobListingSubscriptionUpdateWithWhereUniqueWithoutCompanyInput = {
   where: JobListingSubscriptionWhereUniqueInput;
 };
 
+export type JobListingSubscriptionUpdateWithWhereUniqueWithoutJob_CategoriesInput = {
+  data: JobListingSubscriptionUpdateWithoutJob_CategoriesInput;
+  where: JobListingSubscriptionWhereUniqueInput;
+};
+
 export type JobListingSubscriptionUpdateWithWhereUniqueWithoutUserInput = {
   data: JobListingSubscriptionUpdateWithoutUserInput;
   where: JobListingSubscriptionWhereUniqueInput;
@@ -10790,6 +11199,7 @@ export type JobListingSubscriptionUpdateWithoutCategoriesInput = {
   company?: InputMaybe<CompanyUpdateOneWithoutSubscriptionsNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  job_categories?: InputMaybe<JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput>;
   keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionUpdatelanguagesInput>;
   level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
@@ -10798,12 +11208,30 @@ export type JobListingSubscriptionUpdateWithoutCategoriesInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput>;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutSubscriptionsNestedInput>;
+  user?: InputMaybe<UserUpdateOneWithoutSubscriptionsNestedInput>;
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
 export type JobListingSubscriptionUpdateWithoutCompanyInput = {
   categories?: InputMaybe<CompanyCategoryUpdateManyWithoutSubscriptionsNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  job_categories?: InputMaybe<JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput>;
+  keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
+  languages?: InputMaybe<JobListingSubscriptionUpdatelanguagesInput>;
+  level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
+  location?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput>;
+  parameters?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneWithoutSubscriptionsNestedInput>;
+  work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
+};
+
+export type JobListingSubscriptionUpdateWithoutJob_CategoriesInput = {
+  categories?: InputMaybe<CompanyCategoryUpdateManyWithoutSubscriptionsNestedInput>;
+  company?: InputMaybe<CompanyUpdateOneWithoutSubscriptionsNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
@@ -10814,7 +11242,7 @@ export type JobListingSubscriptionUpdateWithoutCompanyInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFieldUpdateOperationsInput>;
   parameters?: InputMaybe<Scalars['JSON']['input']>;
   type?: InputMaybe<NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutSubscriptionsNestedInput>;
+  user?: InputMaybe<UserUpdateOneWithoutSubscriptionsNestedInput>;
   work_from?: InputMaybe<NullableEnumWorkFromHomeFieldUpdateOperationsInput>;
 };
 
@@ -10823,6 +11251,7 @@ export type JobListingSubscriptionUpdateWithoutUserInput = {
   company?: InputMaybe<CompanyUpdateOneWithoutSubscriptionsNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  job_categories?: InputMaybe<JobListingCategoryUpdateManyWithoutSubscriptionsNestedInput>;
   keywords?: InputMaybe<JobListingSubscriptionUpdatekeywordsInput>;
   languages?: InputMaybe<JobListingSubscriptionUpdatelanguagesInput>;
   level?: InputMaybe<NullableEnumJobListingLevelFieldUpdateOperationsInput>;
@@ -10856,6 +11285,12 @@ export type JobListingSubscriptionUpsertWithWhereUniqueWithoutCompanyInput = {
   where: JobListingSubscriptionWhereUniqueInput;
 };
 
+export type JobListingSubscriptionUpsertWithWhereUniqueWithoutJob_CategoriesInput = {
+  create: JobListingSubscriptionCreateWithoutJob_CategoriesInput;
+  update: JobListingSubscriptionUpdateWithoutJob_CategoriesInput;
+  where: JobListingSubscriptionWhereUniqueInput;
+};
+
 export type JobListingSubscriptionUpsertWithWhereUniqueWithoutUserInput = {
   create: JobListingSubscriptionCreateWithoutUserInput;
   update: JobListingSubscriptionUpdateWithoutUserInput;
@@ -10871,6 +11306,7 @@ export type JobListingSubscriptionWhereInput = {
   company_id?: InputMaybe<StringNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
+  job_categories?: InputMaybe<JobListingCategoryListRelationFilter>;
   keywords?: InputMaybe<StringNullableListFilter>;
   languages?: InputMaybe<StringNullableListFilter>;
   level?: InputMaybe<EnumJobListingLevelNullableFilter>;
@@ -10879,8 +11315,8 @@ export type JobListingSubscriptionWhereInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFilter>;
   parameters?: InputMaybe<JsonFilter>;
   type?: InputMaybe<EnumJobListingEmploymentTypeNullableFilter>;
-  user?: InputMaybe<UserRelationFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserNullableRelationFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
   work_from?: InputMaybe<EnumWorkFromHomeNullableFilter>;
 };
 
@@ -10893,6 +11329,7 @@ export type JobListingSubscriptionWhereUniqueInput = {
   company_id?: InputMaybe<StringNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
+  job_categories?: InputMaybe<JobListingCategoryListRelationFilter>;
   keywords?: InputMaybe<StringNullableListFilter>;
   languages?: InputMaybe<StringNullableListFilter>;
   level?: InputMaybe<EnumJobListingLevelNullableFilter>;
@@ -10901,8 +11338,8 @@ export type JobListingSubscriptionWhereUniqueInput = {
   notification_frequency?: InputMaybe<EnumJobListingSubscriptionNotificationFrequencyFilter>;
   parameters?: InputMaybe<JsonFilter>;
   type?: InputMaybe<EnumJobListingEmploymentTypeNullableFilter>;
-  user?: InputMaybe<UserRelationFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserNullableRelationFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
   work_from?: InputMaybe<EnumWorkFromHomeNullableFilter>;
 };
 
@@ -13563,6 +14000,7 @@ export type SubscribeToJobListingsInput = {
   companyId?: InputMaybe<Scalars['String']['input']>;
   employmentType?: InputMaybe<JobListingEmploymentType>;
   frequency: JobListingSubscriptionNotificationFrequency;
+  job_categories: Array<JobCategoryInput>;
   keywords: Array<Scalars['String']['input']>;
   languages: Array<Scalars['String']['input']>;
   level?: InputMaybe<JobListingLevel>;
@@ -13908,6 +14346,11 @@ export type UserMinOrderByAggregateInput = {
   name?: InputMaybe<SortOrder>;
 };
 
+export type UserNullableRelationFilter = {
+  is?: InputMaybe<UserWhereInput>;
+  isNot?: InputMaybe<UserWhereInput>;
+};
+
 export enum UserOrderByRelevanceFieldEnum {
   Email = 'email',
   FirstName = 'first_name',
@@ -14116,10 +14559,12 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   upsert?: InputMaybe<UserUpsertWithoutSessionsInput>;
 };
 
-export type UserUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+export type UserUpdateOneWithoutSubscriptionsNestedInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutSubscriptionsInput>;
   create?: InputMaybe<UserCreateWithoutSubscriptionsInput>;
+  delete?: InputMaybe<UserWhereInput>;
+  disconnect?: InputMaybe<UserWhereInput>;
   update?: InputMaybe<UserUpdateToOneWithWhereWithoutSubscriptionsInput>;
   upsert?: InputMaybe<UserUpsertWithoutSubscriptionsInput>;
 };
@@ -14529,6 +14974,14 @@ export type SignUpWithEmailCodeMutationVariables = Exact<{
 
 export type SignUpWithEmailCodeMutation = { __typename?: 'Mutation', signUpWithEmailCode: { __typename?: 'User', id: string, first_name: string, last_name: string, name: string, metadata?: any | null, image?: string | null, email: any } };
 
+export type GetSubscriptionByIdQueryQueryVariables = Exact<{
+  subscriptionId: Scalars['String']['input'];
+  meId: Scalars['String']['input'];
+}>;
+
+
+export type GetSubscriptionByIdQueryQuery = { __typename?: 'Query', jobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, company_id?: string | null, user_id?: string | null, metadata?: any | null, notification_frequency: JobListingSubscriptionNotificationFrequency, location?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, languages: Array<string>, parameters: any, keywords: Array<string>, createdAt: any, updatedAt: any } | null };
+
 export type DeleteAllSubscriptionsMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -14539,7 +14992,7 @@ export type GetMySubscriptionsQueryVariables = Exact<{
 }>;
 
 
-export type GetMySubscriptionsQuery = { __typename?: 'Query', mySubscriptions: Array<{ __typename?: 'JobListingSubscription', id: string, company_id?: string | null, user_id: string, metadata?: any | null, notification_frequency: JobListingSubscriptionNotificationFrequency, location?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, languages: Array<string>, parameters: any, keywords: Array<string>, createdAt: any, updatedAt: any, company?: { __typename?: 'Company', id: string, name: string, email: any } | null, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> }> };
+export type GetMySubscriptionsQuery = { __typename?: 'Query', mySubscriptions: Array<{ __typename?: 'JobListingSubscription', id: string, company_id?: string | null, user_id?: string | null, metadata?: any | null, notification_frequency: JobListingSubscriptionNotificationFrequency, location?: string | null, level?: JobListingLevel | null, work_from?: WorkFromHome | null, type?: JobListingEmploymentType | null, languages: Array<string>, parameters: any, keywords: Array<string>, createdAt: any, updatedAt: any, description: string, company?: { __typename?: 'Company', id: string, name: string, email: any } | null, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> }> };
 
 export type MeQuerySlimQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -14551,7 +15004,7 @@ export type GetSubscriptionByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetSubscriptionByIdQuery = { __typename?: 'Query', jobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, user_id: string, company_id?: string | null, createdAt: any, metadata?: any | null, company?: { __typename?: 'Company', id: string, name: string } | null } | null };
+export type GetSubscriptionByIdQuery = { __typename?: 'Query', jobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, user_id?: string | null, company_id?: string | null, createdAt: any, metadata?: any | null, company?: { __typename?: 'Company', id: string, name: string } | null } | null };
 
 export type ConfirmSubscriptionMutationVariables = Exact<{
   key: Scalars['String']['input'];
@@ -14559,7 +15012,7 @@ export type ConfirmSubscriptionMutationVariables = Exact<{
 }>;
 
 
-export type ConfirmSubscriptionMutation = { __typename?: 'Mutation', confirmJobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, user_id: string, createdAt: any, metadata?: any | null } | null };
+export type ConfirmSubscriptionMutation = { __typename?: 'Mutation', confirmJobListingSubscription?: { __typename?: 'JobListingSubscription', id: string, user_id?: string | null, createdAt: any, metadata?: any | null } | null };
 
 export type SignOutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -14590,7 +15043,7 @@ export type SubscribeToCompanyListingsMutationVariables = Exact<{
 }>;
 
 
-export type SubscribeToCompanyListingsMutation = { __typename?: 'Mutation', subscribeToCompanyListings?: { __typename?: 'JobListingSubscription', id: string, user_id: string, metadata?: any | null, createdAt: any, updatedAt: any, work_from?: WorkFromHome | null, level?: JobListingLevel | null, type?: JobListingEmploymentType | null, location?: string | null, languages: Array<string>, parameters: any, keywords: Array<string>, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> } | null };
+export type SubscribeToCompanyListingsMutation = { __typename?: 'Mutation', subscribeToCompanyListings?: { __typename?: 'JobListingSubscription', id: string, user_id?: string | null, metadata?: any | null, createdAt: any, updatedAt: any, work_from?: WorkFromHome | null, level?: JobListingLevel | null, type?: JobListingEmploymentType | null, location?: string | null, languages: Array<string>, parameters: any, keywords: Array<string>, description: string, categories: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }>, job_categories: Array<{ __typename?: 'JobListingCategory', id: string, name: string }> } | null };
 
 
       export interface IntrospectionResultData {

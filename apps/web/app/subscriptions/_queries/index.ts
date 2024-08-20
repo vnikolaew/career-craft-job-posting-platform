@@ -23,6 +23,7 @@ const GET_MY_SUBSCRIPTIONS_QUERY = gql(/* GraphQL */`
             keywords
             createdAt
             updatedAt
+            description
             company {
                 id
                 name

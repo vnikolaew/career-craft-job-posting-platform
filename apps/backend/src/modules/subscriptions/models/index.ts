@@ -68,6 +68,14 @@ export class CompanyCategoryInput {
    name: string;
 }
 
+@InputType()
+export class JobCategoryInput {
+   @Field(of => String, { nullable: false })
+   id: string;
+
+   @Field(of => String, { nullable: false })
+   name: string;
+}
 
 @InputType(`JobListingParameters`)
 export class JobListingParametersInput {
@@ -101,6 +109,9 @@ export class SubscribeToJobListingsInput {
 
    @Field(of => [CompanyCategoryInput], { nullable: false })
    public categories: CompanyCategoryInput[];
+
+   @Field(of => [JobCategoryInput], { nullable: false })
+   public job_categories: JobCategoryInput[];
 
    @Field(of => [String], { nullable: false })
    public languages?: string[];
