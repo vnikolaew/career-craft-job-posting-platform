@@ -150,11 +150,6 @@ export class UserResolver extends UserRelationsResolver {
       };
    }
 
-   @Mutation(() => Boolean)
-   public async fileUpload(@Arg("file", () => GraphQLUpload) file: Upload, @Ctx() { prisma }: MyContext): Promise<boolean> {
-      return true;
-   }
-
    @Query(() => String)
    @NoCache()
    public async googleLoginUrl(@Arg("redirect_url", () => String, { nullable: true }) url: string, @Ctx() {

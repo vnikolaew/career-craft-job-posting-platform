@@ -14,12 +14,12 @@ import moment from "moment";
 import { JsonValue } from "@prisma/client/runtime/library";
 import { GraphQLEmailAddress, GraphQLLatitude, GraphQLLongitude, GraphQLURL } from "graphql-scalars";
 import { JobListingEmploymentType, JobListingLevel, WorkFromHome } from "@prisma/client";
+import { NoCache } from "@infrastructure/decorators";
 
 @InputType()
 class GetTopCompaniesInput {
 
-   @Field(() => Int, { nullable: true, defaultValue: 10 })
-   @Min(0)
+   @Field(() => Int, { nullable: true, defaultValue: 10 }) @Min(0)
    @Max(100)
    public limit: number = 10;
 
@@ -147,13 +147,17 @@ export class CompanyResolver extends CompanyRelationsResolver {
    }
 
    @FieldResolver(_ => CompanyCount, { nullable: false })
-   public async _count(@Root() { id }: Company, @Ctx() { prisma }: MyContext): Promise<Partial<CompanyCount>> {
-      const { _count } = await prisma.company.findUnique({
+   @NoCache()
+   public async _count(@Root() { id, _count }: Company, @Ctx() { prisma }: MyContext): Promise<Partial<CompanyCount>> {
+      if(!!_count) return _count;
+
+      const { _count: count } = await prisma.company.findUnique({
          where: { id },
          select: { _count: { select: { listings: true, categories: true } } },
       });
+      console.log(`we are here`, { count });
 
-      return { ..._count, listings: _count?.listings === 0 ? 5 : 0 };
+      return { ...count, listings: count?.listings === 0 ? 5 : 0 };
    }
 
    @FieldResolver(_ => [JobListing], { nullable: true })
@@ -178,7 +182,7 @@ export class CompanyResolver extends CompanyRelationsResolver {
 
    @FieldResolver(_ => [CompanyCategory], { nullable: true })
    public async companyCategories(@Root() company: Company, @Ctx() { prisma }: MyContext): Promise<CompanyCategory[]> {
-      let fetched = company.categories?.map(c => c.category) ?? [];
+      let fetched = company?.categories?.map(c => c?.category) ?? [];
       if (!!fetched?.length && fetched?.every(Boolean)) return fetched;
 
       let companyCategories = await prisma.company.findFirst({

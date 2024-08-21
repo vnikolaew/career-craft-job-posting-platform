@@ -2085,6 +2085,11 @@ input EnumWorkFromHomeNullableWithAggregatesFilter {
   notIn: [WorkFromHome!]
 }
 
+type FixedJobListingSalary implements JobListingSalary {
+  currency: Currency!
+  value: Float!
+}
+
 enum FurloughPeriod {
   ThirtyPlus
   TwentyFiveToThirty
@@ -2101,6 +2106,12 @@ input GetAttachmentsByUserInput {
   limit: Int = 10
   skip: Int = 0
   type: String = ""
+}
+
+input GetRelevantCompaniesInput {
+  category: String
+  limit: Int = 10
+  skip: Int = 0
 }
 
 input GetSubscriptionsInput {
@@ -2183,6 +2194,7 @@ type JobListing {
 
   """[JobListingParameters]"""
   parameters: JSON!
+  parametersTyped: JobListingParameters
   saves(cursor: SavedListingWhereUniqueInput, distinct: [SavedListingScalarFieldEnum!], orderBy: [SavedListingOrderByWithRelationInput!], skip: Int, take: Int, where: SavedListingWhereInput): [SavedListing!]!
   type: JobListingEmploymentType
   updatedAt: DateTimeISO!
@@ -2849,12 +2861,20 @@ input JobListingOrderByWithRelationInput {
   work_from: SortOrderInput
 }
 
-input JobListingParameters {
+type JobListingParameters {
+  from: JobListingFrom!
+  furlough: FurloughPeriod!
+  internship: Boolean
+  remoteInterview: Boolean
+  salary: JobListingSalary
+}
+
+input JobListingParametersInput {
   from: JobListingFrom
   furlough: FurloughPeriod
   internship: Boolean
   remoteInterview: Boolean
-  salary: JobListingSalary
+  salary: JobListingSalaryInput
 }
 
 input JobListingRelationFilter {
@@ -2862,7 +2882,11 @@ input JobListingRelationFilter {
   isNot: JobListingWhereInput
 }
 
-input JobListingSalary {
+interface JobListingSalary {
+  currency: Currency!
+}
+
+input JobListingSalaryInput {
   currency: Currency!
 }
 
@@ -4490,6 +4514,7 @@ type Query {
   getJobListing(relationLoadStrategy: RelationLoadStrategy, where: JobListingWhereUniqueInput!): JobListing
   getJobListingCategory(relationLoadStrategy: RelationLoadStrategy, where: JobListingCategoryWhereUniqueInput!): JobListingCategory
   getJobListingSubscription(relationLoadStrategy: RelationLoadStrategy, where: JobListingSubscriptionWhereUniqueInput!): JobListingSubscription
+  getMostRelevantCompanies(input: GetRelevantCompaniesInput!): [Company!]!
   getSavedListing(relationLoadStrategy: RelationLoadStrategy, where: SavedListingWhereUniqueInput!): SavedListing
   getSession(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   getSubscriptionsJobListingsForUser(
@@ -4540,6 +4565,12 @@ type Query {
 enum QueryMode {
   default
   insensitive
+}
+
+type RangeJobListingSalary implements JobListingSalary {
+  currency: Currency!
+  max: Float!
+  min: Float!
 }
 
 enum RelationLoadStrategy {
@@ -5271,7 +5302,7 @@ input SubscribeToJobListingsInput {
   languages: [String!]!
   level: JobListingLevel
   location: String
-  parameters: JobListingParameters
+  parameters: JobListingParametersInput
   workFromHome: WorkFromHome
 }
 

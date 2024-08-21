@@ -7,7 +7,8 @@ import * as RelationsResolvers from "@generated/resolvers/relations";
 import { CustomApolloServer } from "@server";
 import { BuildSchemaOptions } from "type-graphql";
 import { GraphQLJSONObject, resolvers as scalarResolvers } from "graphql-scalars";
-import { GraphQLUpload, Upload } from "@infrastructure/scalars/Upload";
+import { FileUpload } from "graphql-upload/processRequest.mjs";
+import GraphQLUpload from "graphql-upload/GraphQLUpload.mjs";
 import { __IS_DEV__ } from "@consts";
 import {
    DevOnlyMiddleware,
@@ -28,6 +29,7 @@ import {
 } from "@modules";
 import { JobListingCrudResolver } from "@modules/job_listings/JobListingResolver";
 import { SubscriptionsResolver } from "@modules/subscriptions/SubscriptionsResolver";
+import Upload from "graphql-upload/Upload.mjs";
 
 async function main() {
    const PORT = isNaN(Number.parseInt(process.env.PORT ?? ``)) ? 4000 : +process.env.PORT!;
@@ -46,10 +48,7 @@ async function main() {
          ...Object.entries(scalarResolvers).map(([_, resolver]) => resolver as Function)],
       scalarsMap: [
          { type: Object, scalar: GraphQLJSONObject },
-         {
-            type: Upload,
-            scalar: GraphQLUpload,
-         },
+         { type: Upload, scalar: GraphQLUpload },
       ],
       validate: false,
       authChecker: AuthMiddleware.authChecker,

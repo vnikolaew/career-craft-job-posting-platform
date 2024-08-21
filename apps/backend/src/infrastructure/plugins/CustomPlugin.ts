@@ -40,7 +40,6 @@ export class CustomPlugin implements ApolloServerPlugin<MyContext> {
                   timestamp: new Date().toISOString(),
                   operationId: contextValue.operationId,
                };
-
             }
          },
       };
@@ -53,8 +52,8 @@ export const getPlugins = (httpServer: http.Server): ApolloServerPlugin<BaseCont
          ApolloServerPluginLandingPageLocalDefault({})
          : ApolloServerPluginLandingPageProductionDefault({}),
       ApolloServerPluginDrainHttpServer({ httpServer }),
-      ApolloServerPluginCacheControl({ defaultMaxAge: 10 * 60 }),
+      !__IS_DEV__ && ApolloServerPluginCacheControl({ defaultMaxAge: 10 * 60 }),
       responseCachePlugin(),
       new CustomPlugin(),
-   ];
+   ].filter(Boolean);
 };

@@ -30,6 +30,7 @@ import { WHITELISTED_URLS } from "@infrastructure/middleware/HostMiddleware";
 
 import fileUpload from "express-fileupload";
 import { fileUploadHandler } from "@lib/services";
+import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 
 export class CustomApolloServer<TContext> {
    private readonly schema: Partial<BuildSchemaOptions> & { resolvers: NonEmptyArray<Function> };
@@ -55,6 +56,7 @@ export class CustomApolloServer<TContext> {
 
       this.app = express();
       this.app
+         .use(graphqlUploadExpress({ maxFiles: 10, maxFileSize: 1_000_000 }))
          .use(fileUpload({
             limits: { fileSize: 10 * 1024 * 1024 },
             useTempFiles: false,

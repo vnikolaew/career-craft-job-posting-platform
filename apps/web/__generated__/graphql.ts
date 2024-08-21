@@ -2206,6 +2206,12 @@ export type EnumWorkFromHomeNullableWithAggregatesFilter = {
   notIn?: InputMaybe<Array<WorkFromHome>>;
 };
 
+export type FixedJobListingSalary = JobListingSalary & {
+  __typename?: 'FixedJobListingSalary';
+  currency: Scalars['Currency']['output'];
+  value: Scalars['Float']['output'];
+};
+
 export enum FurloughPeriod {
   ThirtyPlus = 'ThirtyPlus',
   TwentyFiveToThirty = 'TwentyFiveToThirty',
@@ -2222,6 +2228,12 @@ export type GetAttachmentsByUserInput = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   type?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GetRelevantCompaniesInput = {
+  category?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type GetSubscriptionsInput = {
@@ -2295,6 +2307,7 @@ export type JobListing = {
   name: Scalars['String']['output'];
   /** [JobListingParameters] */
   parameters: Scalars['JSON']['output'];
+  parametersTyped?: Maybe<JobListingParameters>;
   saves: Array<SavedListing>;
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
@@ -3048,11 +3061,20 @@ export type JobListingOrderByWithRelationInput = {
 };
 
 export type JobListingParameters = {
+  __typename?: 'JobListingParameters';
+  from: JobListingFrom;
+  furlough: FurloughPeriod;
+  internship?: Maybe<Scalars['Boolean']['output']>;
+  remoteInterview?: Maybe<Scalars['Boolean']['output']>;
+  salary?: Maybe<JobListingSalary>;
+};
+
+export type JobListingParametersInput = {
   from?: InputMaybe<JobListingFrom>;
   furlough?: InputMaybe<FurloughPeriod>;
   internship?: InputMaybe<Scalars['Boolean']['input']>;
   remoteInterview?: InputMaybe<Scalars['Boolean']['input']>;
-  salary?: InputMaybe<JobListingSalary>;
+  salary?: InputMaybe<JobListingSalaryInput>;
 };
 
 export type JobListingRelationFilter = {
@@ -3061,6 +3083,10 @@ export type JobListingRelationFilter = {
 };
 
 export type JobListingSalary = {
+  currency: Scalars['Currency']['output'];
+};
+
+export type JobListingSalaryInput = {
   currency: Scalars['Currency']['input'];
 };
 
@@ -5288,6 +5314,7 @@ export type Query = {
   getJobListing?: Maybe<JobListing>;
   getJobListingCategory?: Maybe<JobListingCategory>;
   getJobListingSubscription?: Maybe<JobListingSubscription>;
+  getMostRelevantCompanies: Array<Company>;
   getSavedListing?: Maybe<SavedListing>;
   getSession?: Maybe<Session>;
   getSubscriptionsJobListingsForUser: GetSubscriptionsJobListingsResponse;
@@ -5820,6 +5847,11 @@ export type QueryGetJobListingSubscriptionArgs = {
 };
 
 
+export type QueryGetMostRelevantCompaniesArgs = {
+  input: GetRelevantCompaniesInput;
+};
+
+
 export type QueryGetSavedListingArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: SavedListingWhereUniqueInput;
@@ -6149,6 +6181,13 @@ export enum QueryMode {
   Default = 'default',
   Insensitive = 'insensitive'
 }
+
+export type RangeJobListingSalary = JobListingSalary & {
+  __typename?: 'RangeJobListingSalary';
+  currency: Scalars['Currency']['output'];
+  max: Scalars['Float']['output'];
+  min: Scalars['Float']['output'];
+};
 
 export enum RelationLoadStrategy {
   Join = 'join',
@@ -6891,7 +6930,7 @@ export type SubscribeToJobListingsInput = {
   languages: Array<Scalars['String']['input']>;
   level?: InputMaybe<JobListingLevel>;
   location?: InputMaybe<Scalars['String']['input']>;
-  parameters?: InputMaybe<JobListingParameters>;
+  parameters?: InputMaybe<JobListingParametersInput>;
   workFromHome?: InputMaybe<WorkFromHome>;
 };
 
@@ -8717,6 +8756,13 @@ export type GetCompanyQueryQueryVariables = Exact<{
 
 export type GetCompanyQueryQuery = { __typename?: 'Query', getCompany?: { __typename?: 'Company', id: string, name: string, about_raw: string, career_description_raw: string, benefits: Array<string>, company_values: Array<string>, work_environment: Array<string>, hiring_process: Array<string>, createdAt: any, updatedAt: any, metadata?: any | null, email: any, brand_image_url?: any | null, banner_image_url?: any | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> | null, listings: Array<{ __typename?: 'JobListing', id: string, name: string, location: string, languages: Array<string>, createdAt: any, description_raw: string, keywords: Array<string>, level?: JobListingLevel | null, parameters: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null }>, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string, coordinates?: { __typename?: 'Coordinates', latitude?: any | null, longitude?: any | null } | null }> } | null, local_info?: { __typename?: 'CompanyLocalInfo', since?: any | null, employeeCount?: number | null, locations: Array<string> } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', founded?: any | null, employeeCount?: number | null, headquarters: string, locations: Array<string> } | null } | null };
 
+export type FileUploadMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
+
+
+export type FileUploadMutation = { __typename?: 'Mutation', fileUpload: boolean };
+
 export type GetJobListingQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
@@ -8733,10 +8779,11 @@ export type GetCompanyJobQuery = { __typename?: 'Query', getJobListing?: { __typ
 
 export type GetJobListingsWithFilterQueryVariables = Exact<{
   filter: JobListingWhereInput;
+  category?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetJobListingsWithFilterQuery = { __typename?: 'Query', jobListings: Array<{ __typename?: 'JobListing', id: string, name: string, company_id: string, createdAt: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null, parameters: any, keywords: Array<string>, level?: JobListingLevel | null, isSaved?: boolean | null, languages: Array<string>, location: string, description_raw: string, external_application_url?: string | null, categories: Array<{ __typename?: 'CategoryOnJobListing', category_id: string }>, company: { __typename?: 'Company', id: string, name: string, email: any, brand_image_url?: any | null } }> };
+export type GetJobListingsWithFilterQuery = { __typename?: 'Query', getMostRelevantCompanies: Array<{ __typename?: 'Company', id: string, name: string, email: any, _count?: { __typename?: 'CompanyCount', listings: number, categories: number } | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string }> | null, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string }> } | null }>, jobListings: Array<{ __typename?: 'JobListing', id: string, name: string, company_id: string, createdAt: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null, parameters: any, keywords: Array<string>, level?: JobListingLevel | null, isSaved?: boolean | null, languages: Array<string>, location: string, description_raw: string, external_application_url?: string | null, parametersTyped?: { __typename?: 'JobListingParameters', from: JobListingFrom, furlough: FurloughPeriod, internship?: boolean | null, remoteInterview?: boolean | null, salary?: { __typename: 'FixedJobListingSalary', value: number, currency: any } | { __typename: 'RangeJobListingSalary', min: number, max: number, currency: any } | null } | null, categories: Array<{ __typename?: 'CategoryOnJobListing', category_id: string }>, company: { __typename?: 'Company', id: string, name: string, email: any, brand_image_url?: any | null, _count?: { __typename?: 'CompanyCount', listings: number } | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string }> | null, local_info?: { __typename?: 'CompanyLocalInfo', employeeCount?: number | null, locations: Array<string>, since?: any | null } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', locations: Array<string>, employeeCount?: number | null, founded?: any | null, headquarters: string } | null } }> };
 
 export type SignInWithEmailCodeMutationVariables = Exact<{
   code: Scalars['Int']['input'];
@@ -8854,9 +8901,10 @@ export const GetCompanyListingsCountQueryDocument = {"kind":"Document","definiti
 export const GetCompanyWithListingsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyWithListingsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCompany"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"listings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"isSaved"},"directives":[{"kind":"Directive","name":{"kind":"Name","value":"client"}}]}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyWithListingsQueryQuery, GetCompanyWithListingsQueryQueryVariables>;
 export const GetAllCompaniesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllCompanies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"companies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetAllCompaniesQuery, GetAllCompaniesQueryVariables>;
 export const GetCompanyQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCompany"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"about_raw"}},{"kind":"Field","name":{"kind":"Name","value":"career_description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"benefits"}},{"kind":"Field","name":{"kind":"Name","value":"company_values"}},{"kind":"Field","name":{"kind":"Name","value":"work_environment"}},{"kind":"Field","name":{"kind":"Name","value":"hiring_process"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"listings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"coordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company_bulstat"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"website_url"}},{"kind":"Field","name":{"kind":"Name","value":"facebook_url"}},{"kind":"Field","name":{"kind":"Name","value":"twitter_url"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin_url"}},{"kind":"Field","name":{"kind":"Name","value":"youtube_url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"local_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"since"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldwide_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"headquarters"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyQueryQuery, GetCompanyQueryQueryVariables>;
+export const FileUploadDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"FileUpload"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"file"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileUpload"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"file"},"value":{"kind":"Variable","name":{"kind":"Name","value":"file"}}}]}]}}]} as unknown as DocumentNode<FileUploadMutation, FileUploadMutationVariables>;
 export const GetJobListingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetJobListing"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldwide_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"headquarters"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}},{"kind":"Field","name":{"kind":"Name","value":"founded"}}]}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetJobListingQuery, GetJobListingQueryVariables>;
 export const GetCompanyJobDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyJob"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyJobQuery, GetCompanyJobQueryVariables>;
-export const GetJobListingsWithFilterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetJobListingsWithFilter"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"JobListingWhereInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jobListings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"isSaved"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}}]}}]}}]}}]} as unknown as DocumentNode<GetJobListingsWithFilterQuery, GetJobListingsWithFilterQueryVariables>;
+export const GetJobListingsWithFilterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetJobListingsWithFilter"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"JobListingWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"category"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getMostRelevantCompanies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"category"},"value":{"kind":"Variable","name":{"kind":"Name","value":"category"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"10"}},{"kind":"ObjectField","name":{"kind":"Name","value":"skip"},"value":{"kind":"IntValue","value":"0"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}},{"kind":"Field","name":{"kind":"Name","value":"categories"}}]}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"company_bulstat"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"website_url"}},{"kind":"Field","name":{"kind":"Name","value":"facebook_url"}},{"kind":"Field","name":{"kind":"Name","value":"twitter_url"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin_url"}},{"kind":"Field","name":{"kind":"Name","value":"youtube_url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"jobListings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"parametersTyped"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"furlough"}},{"kind":"Field","name":{"kind":"Name","value":"internship"}},{"kind":"Field","name":{"kind":"Name","value":"remoteInterview"}},{"kind":"Field","name":{"kind":"Name","value":"salary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FixedJobListingSalary"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"RangeJobListingSalary"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"min"}},{"kind":"Field","name":{"kind":"Name","value":"max"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"isSaved"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"local_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}},{"kind":"Field","name":{"kind":"Name","value":"since"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldwide_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"locations"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"headquarters"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetJobListingsWithFilterQuery, GetJobListingsWithFilterQueryVariables>;
 export const SignInWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignInWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signInWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignInWithEmailCodeMutation, SignInWithEmailCodeMutationVariables>;
 export const GenerateEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GenerateEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generateSignUpEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"expires"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<GenerateEmailCodeMutation, GenerateEmailCodeMutationVariables>;
 export const SignUpWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignUpWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUpWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"Argument","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignUpWithEmailCodeMutation, SignUpWithEmailCodeMutationVariables>;
@@ -11071,6 +11119,12 @@ export type EnumWorkFromHomeNullableWithAggregatesFilter = {
   notIn?: InputMaybe<Array<WorkFromHome>>;
 };
 
+export type FixedJobListingSalary = JobListingSalary & {
+  __typename?: 'FixedJobListingSalary';
+  currency: Scalars['Currency']['output'];
+  value: Scalars['Float']['output'];
+};
+
 export enum FurloughPeriod {
   ThirtyPlus = 'ThirtyPlus',
   TwentyFiveToThirty = 'TwentyFiveToThirty',
@@ -11087,6 +11141,12 @@ export type GetAttachmentsByUserInput = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   type?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GetRelevantCompaniesInput = {
+  category?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type GetSubscriptionsInput = {
@@ -11160,6 +11220,7 @@ export type JobListing = {
   name: Scalars['String']['output'];
   /** [JobListingParameters] */
   parameters: Scalars['JSON']['output'];
+  parametersTyped?: Maybe<JobListingParameters>;
   saves: Array<SavedListing>;
   type?: Maybe<JobListingEmploymentType>;
   updatedAt: Scalars['DateTimeISO']['output'];
@@ -11913,11 +11974,20 @@ export type JobListingOrderByWithRelationInput = {
 };
 
 export type JobListingParameters = {
+  __typename?: 'JobListingParameters';
+  from: JobListingFrom;
+  furlough: FurloughPeriod;
+  internship?: Maybe<Scalars['Boolean']['output']>;
+  remoteInterview?: Maybe<Scalars['Boolean']['output']>;
+  salary?: Maybe<JobListingSalary>;
+};
+
+export type JobListingParametersInput = {
   from?: InputMaybe<JobListingFrom>;
   furlough?: InputMaybe<FurloughPeriod>;
   internship?: InputMaybe<Scalars['Boolean']['input']>;
   remoteInterview?: InputMaybe<Scalars['Boolean']['input']>;
-  salary?: InputMaybe<JobListingSalary>;
+  salary?: InputMaybe<JobListingSalaryInput>;
 };
 
 export type JobListingRelationFilter = {
@@ -11926,6 +11996,10 @@ export type JobListingRelationFilter = {
 };
 
 export type JobListingSalary = {
+  currency: Scalars['Currency']['output'];
+};
+
+export type JobListingSalaryInput = {
   currency: Scalars['Currency']['input'];
 };
 
@@ -14153,6 +14227,7 @@ export type Query = {
   getJobListing?: Maybe<JobListing>;
   getJobListingCategory?: Maybe<JobListingCategory>;
   getJobListingSubscription?: Maybe<JobListingSubscription>;
+  getMostRelevantCompanies: Array<Company>;
   getSavedListing?: Maybe<SavedListing>;
   getSession?: Maybe<Session>;
   getSubscriptionsJobListingsForUser: GetSubscriptionsJobListingsResponse;
@@ -14685,6 +14760,11 @@ export type QueryGetJobListingSubscriptionArgs = {
 };
 
 
+export type QueryGetMostRelevantCompaniesArgs = {
+  input: GetRelevantCompaniesInput;
+};
+
+
 export type QueryGetSavedListingArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: SavedListingWhereUniqueInput;
@@ -15014,6 +15094,13 @@ export enum QueryMode {
   Default = 'default',
   Insensitive = 'insensitive'
 }
+
+export type RangeJobListingSalary = JobListingSalary & {
+  __typename?: 'RangeJobListingSalary';
+  currency: Scalars['Currency']['output'];
+  max: Scalars['Float']['output'];
+  min: Scalars['Float']['output'];
+};
 
 export enum RelationLoadStrategy {
   Join = 'join',
@@ -15756,7 +15843,7 @@ export type SubscribeToJobListingsInput = {
   languages: Array<Scalars['String']['input']>;
   level?: InputMaybe<JobListingLevel>;
   location?: InputMaybe<Scalars['String']['input']>;
-  parameters?: InputMaybe<JobListingParameters>;
+  parameters?: InputMaybe<JobListingParametersInput>;
   workFromHome?: InputMaybe<WorkFromHome>;
 };
 
@@ -17582,6 +17669,13 @@ export type GetCompanyQueryQueryVariables = Exact<{
 
 export type GetCompanyQueryQuery = { __typename?: 'Query', getCompany?: { __typename?: 'Company', id: string, name: string, about_raw: string, career_description_raw: string, benefits: Array<string>, company_values: Array<string>, work_environment: Array<string>, hiring_process: Array<string>, createdAt: any, updatedAt: any, metadata?: any | null, email: any, brand_image_url?: any | null, banner_image_url?: any | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string, description: string }> | null, listings: Array<{ __typename?: 'JobListing', id: string, name: string, location: string, languages: Array<string>, createdAt: any, description_raw: string, keywords: Array<string>, level?: JobListingLevel | null, parameters: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null }>, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string, coordinates?: { __typename?: 'Coordinates', latitude?: any | null, longitude?: any | null } | null }> } | null, local_info?: { __typename?: 'CompanyLocalInfo', since?: any | null, employeeCount?: number | null, locations: Array<string> } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', founded?: any | null, employeeCount?: number | null, headquarters: string, locations: Array<string> } | null } | null };
 
+export type FileUploadMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
+
+
+export type FileUploadMutation = { __typename?: 'Mutation', fileUpload: boolean };
+
 export type GetJobListingQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
@@ -17598,10 +17692,11 @@ export type GetCompanyJobQuery = { __typename?: 'Query', getJobListing?: { __typ
 
 export type GetJobListingsWithFilterQueryVariables = Exact<{
   filter: JobListingWhereInput;
+  category?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetJobListingsWithFilterQuery = { __typename?: 'Query', jobListings: Array<{ __typename?: 'JobListing', id: string, name: string, company_id: string, createdAt: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null, parameters: any, keywords: Array<string>, level?: JobListingLevel | null, isSaved?: boolean | null, languages: Array<string>, location: string, description_raw: string, external_application_url?: string | null, categories: Array<{ __typename?: 'CategoryOnJobListing', category_id: string }>, company: { __typename?: 'Company', id: string, name: string, email: any, brand_image_url?: any | null } }> };
+export type GetJobListingsWithFilterQuery = { __typename?: 'Query', getMostRelevantCompanies: Array<{ __typename?: 'Company', id: string, name: string, email: any, _count?: { __typename?: 'CompanyCount', listings: number, categories: number } | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string }> | null, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string }> } | null }>, jobListings: Array<{ __typename?: 'JobListing', id: string, name: string, company_id: string, createdAt: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null, parameters: any, keywords: Array<string>, level?: JobListingLevel | null, isSaved?: boolean | null, languages: Array<string>, location: string, description_raw: string, external_application_url?: string | null, parametersTyped?: { __typename?: 'JobListingParameters', from: JobListingFrom, furlough: FurloughPeriod, internship?: boolean | null, remoteInterview?: boolean | null, salary?: { __typename: 'FixedJobListingSalary', value: number, currency: any } | { __typename: 'RangeJobListingSalary', min: number, max: number, currency: any } | null } | null, categories: Array<{ __typename?: 'CategoryOnJobListing', category_id: string }>, company: { __typename?: 'Company', id: string, name: string, email: any, brand_image_url?: any | null, _count?: { __typename?: 'CompanyCount', listings: number } | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string }> | null, local_info?: { __typename?: 'CompanyLocalInfo', employeeCount?: number | null, locations: Array<string>, since?: any | null } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', locations: Array<string>, employeeCount?: number | null, founded?: any | null, headquarters: string } | null } }> };
 
 export type SignInWithEmailCodeMutationVariables = Exact<{
   code: Scalars['Int']['input'];
@@ -17721,7 +17816,20 @@ export type SubscribeToCompanyListingsMutation = { __typename?: 'Mutation', subs
 
       const result: IntrospectionResultData = {
   "__schema": {
-    "types": []
+    "types": [
+      {
+        "kind": "INTERFACE",
+        "name": "JobListingSalary",
+        "possibleTypes": [
+          {
+            "name": "FixedJobListingSalary"
+          },
+          {
+            "name": "RangeJobListingSalary"
+          }
+        ]
+      }
+    ]
   }
 };
 

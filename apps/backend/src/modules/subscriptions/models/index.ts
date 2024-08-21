@@ -8,20 +8,16 @@ import {
 } from "@generated/enums";
 import { Max, Min } from "class-validator";
 
-enum FurloughPeriod {
+export enum FurloughPeriod {
    TwentyOneToTwentyFive = "21-25",
    TwentyFiveToThirty = "25-30",
    ThirtyPlus = "30+"
 }
 
-enum JobListingFrom {
+export enum JobListingFrom {
    "DirectEmployer" = "direct-employer",
    "Agencies" = "agencies",
 }
-
-// registerEnumType(JobListingSubscriptionNotificationFrequency, {
-//    name: `JobListingSubscriptionNotificationFrequency`,
-// });
 
 registerEnumType(FurloughPeriod, {
    name: `FurloughPeriod`,
@@ -31,16 +27,21 @@ registerEnumType(JobListingFrom, {
    name: `JobListingFrom`,
 });
 
-@InputType(`JobListingSalary`)
-@InterfaceType(`JobListingSalary`)
+@InterfaceType({
+   resolveType: (value) => {
+      if (typeof value.min === "number") return `RangeJobListingSalary`;
+      else return `FixedJobListingSalary`;
+   },
+})
+@InputType(`JobListingSalaryInput`)
 export abstract class JobListingSalary {
    @Field(of => GraphQLCurrency)
-   currency: string;
+   public currency: string;
 
-   abstract type: string;
+   public abstract type: string;
 }
 
-@ObjectType({ implements: JobListingSalary })
+@ObjectType(`RangeJobListingSalary`, { implements: JobListingSalary })
 export class RangeJobListingSalary extends JobListingSalary {
    type: string = `range`;
 
@@ -51,7 +52,7 @@ export class RangeJobListingSalary extends JobListingSalary {
    max: number;
 }
 
-@ObjectType({ implements: JobListingSalary })
+@ObjectType(`FixedJobListingSalary`, { implements: JobListingSalary })
 export class FixedJobListingSalary extends JobListingSalary {
    type: string = `fixed`;
 
@@ -77,7 +78,7 @@ export class JobCategoryInput {
    name: string;
 }
 
-@InputType(`JobListingParameters`)
+@InputType(`JobListingParametersInput`)
 export class JobListingParametersInput {
 
    @Field(of => JobListingSalary, { nullable: true })
@@ -149,10 +150,10 @@ export class GetSubscriptionsInput {
 @ObjectType()
 export class DeleteAllSubscriptionsResponse {
    @Field(() => Boolean, { nullable: false })
-   public success: boolean
+   public success: boolean;
 
    @Field(() => Int, { nullable: false, defaultValue: 0 })
-   public deleted_count: number
+   public deleted_count: number;
 }
 
 
@@ -165,10 +166,10 @@ export class GetSubscriptionsJobListingsResponse {
 @ObjectType()
 export class SubscriptionJobListingsResponse {
 
-   @Field(() => String, {nullable: false})
-   public subscriptionId: string
+   @Field(() => String, { nullable: false })
+   public subscriptionId: string;
 
-   @Field(() => [String], {nullable: false})
-   public listingIds: string[]
+   @Field(() => [String], { nullable: false })
+   public listingIds: string[];
 }
 

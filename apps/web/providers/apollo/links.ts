@@ -4,6 +4,7 @@ import { ApolloLink, from, HttpLink, split } from "@apollo/client";
 import { RetryLink } from "@apollo/client/link/retry";
 import { APP_NAME, APP_VERSION } from "@/config/site";
 import { getMainDefinition } from "@apollo/client/utilities";
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 const wsLink2 = new GraphQLWsLink(
    createClient({
@@ -33,6 +34,7 @@ const chain = from([
          "x-client-version": APP_VERSION,
       },
    }),
+   createUploadLink({ credentials: `include` }),
 ]);
 
 export const splitLink = split(
