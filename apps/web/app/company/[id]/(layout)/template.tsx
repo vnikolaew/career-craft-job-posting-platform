@@ -40,7 +40,7 @@ const Template = ({ children, ...props }: TemplateProps) => {
                </span>
             </Link>
             <Link href={`/company/${id}/jobs`}
-                  className={cn(`text-neutral-500 btn btn-outline !rounded-full !min-h-fit !h-fit !py-3 flex items-center justify-start gap-2 !w-fit !px-6 hover:!bg-neutral-300 transition-all duration-100 !border-none !bg-neutral-200`, isJobsPage && `!bg-green-200 !text-green-700 hover:!bg-green-300`)}>
+                  className={cn(`text-neutral-500 btn btn-outline !rounded-full !min-h-fit !h-fit !py-3 flex items-center justify-start gap-2 !w-fit !px-6 hover:!bg-neutral-300 transition-all duration-100 !border-none !bg-neutral-200 hover:!text-neutral-700`, isJobsPage && `!bg-green-200 !text-green-700 hover:!bg-green-300`)}>
                <span className={`font-semibold text-base`}>
                   All jobs ({data?.getJobListing?.company?._count?.listings ?? 0})
                </span>

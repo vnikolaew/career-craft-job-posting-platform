@@ -52,8 +52,10 @@ const TopEmployersSection = ({}: TopEmployersSectionProps) => {
 const TopEmployerPreview = ({ company }: { company: Company }) => {
    return (
       <Link href={`/company/${company.id}`} className="indicator !bg-neutral-200/100 !w-full">
-         <span className="indicator-item badge badge-neutral">{company?._count?.listings ?? company.listingsCount ?? 0}</span>
-         <div className="btn !bg-transparent !border-none !text-neutral-500 !flex !items-center !justify-center p-4 !min-h-[100px] !w-full">
+         <span className="indicator-item badge badge-outline !bg-neutral-100 !border-neutral-300 !shadow-sm">
+            {company?._count?.listings ?? company.listingsCount ?? 0}
+         </span>
+         <div className="btn !bg-transparent !border-none !text-neutral-500 !flex !items-center !justify-center p-4 !min-h-[100px] !w-full !shadow-sm">
             {isValidUrl(company.brand_image_url) ? (
               <Image title={company.name} height={100} width={100} alt={company.name}
                      src={DEFAULT_COMPANY_LOGO_URL}

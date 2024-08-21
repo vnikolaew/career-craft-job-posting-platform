@@ -545,6 +545,12 @@ type AggregateUserAttachments {
   _min: UserAttachmentsMinAggregate
 }
 
+type AggregateUserJobApplication {
+  _count: UserJobApplicationCountAggregate
+  _max: UserJobApplicationMaxAggregate
+  _min: UserJobApplicationMinAggregate
+}
+
 type AggregateVerificationToken {
   _count: VerificationTokenCountAggregate
   _max: VerificationTokenMaxAggregate
@@ -2085,6 +2091,12 @@ enum FurloughPeriod {
   TwentyOneToTwentyFive
 }
 
+input GetApplicationsByUserInput {
+  limit: Int = 10
+  skip: Int = 0
+  type: String = ""
+}
+
 input GetAttachmentsByUserInput {
   limit: Int = 10
   skip: Int = 0
@@ -2154,6 +2166,7 @@ input JobCategoryInput {
 
 type JobListing {
   _count: JobListingCount
+  applications(cursor: UserJobApplicationWhereUniqueInput, distinct: [UserJobApplicationScalarFieldEnum!], orderBy: [UserJobApplicationOrderByWithRelationInput!], skip: Int, take: Int, where: UserJobApplicationWhereInput): [UserJobApplication!]!
   categories(cursor: CategoryOnJobListingWhereUniqueInput, distinct: [CategoryOnJobListingScalarFieldEnum!], orderBy: [CategoryOnJobListingOrderByWithRelationInput!], skip: Int, take: Int, where: CategoryOnJobListingWhereInput): [CategoryOnJobListing!]!
   company: Company!
   company_id: String!
@@ -2454,6 +2467,7 @@ input JobListingCategoryWhereUniqueInput {
 }
 
 type JobListingCount {
+  applications(where: UserJobApplicationWhereInput): Int!
   categories(where: CategoryOnJobListingWhereInput): Int!
   saves(where: SavedListingWhereInput): Int!
 }
@@ -2493,6 +2507,7 @@ input JobListingCountOrderByAggregateInput {
 }
 
 input JobListingCreateInput {
+  applications: UserJobApplicationCreateNestedManyWithoutListingInput
   categories: CategoryOnJobListingCreateNestedManyWithoutListingInput
   company: CompanyCreateNestedOneWithoutListingsInput!
   createdAt: DateTimeISO
@@ -2553,6 +2568,12 @@ input JobListingCreateNestedManyWithoutCompanyInput {
   createMany: JobListingCreateManyCompanyInputEnvelope
 }
 
+input JobListingCreateNestedOneWithoutApplicationsInput {
+  connect: JobListingWhereUniqueInput
+  connectOrCreate: JobListingCreateOrConnectWithoutApplicationsInput
+  create: JobListingCreateWithoutApplicationsInput
+}
+
 input JobListingCreateNestedOneWithoutCategoriesInput {
   connect: JobListingWhereUniqueInput
   connectOrCreate: JobListingCreateOrConnectWithoutCategoriesInput
@@ -2563,6 +2584,11 @@ input JobListingCreateNestedOneWithoutSavesInput {
   connect: JobListingWhereUniqueInput
   connectOrCreate: JobListingCreateOrConnectWithoutSavesInput
   create: JobListingCreateWithoutSavesInput
+}
+
+input JobListingCreateOrConnectWithoutApplicationsInput {
+  create: JobListingCreateWithoutApplicationsInput!
+  where: JobListingWhereUniqueInput!
 }
 
 input JobListingCreateOrConnectWithoutCategoriesInput {
@@ -2580,7 +2606,26 @@ input JobListingCreateOrConnectWithoutSavesInput {
   where: JobListingWhereUniqueInput!
 }
 
+input JobListingCreateWithoutApplicationsInput {
+  categories: CategoryOnJobListingCreateNestedManyWithoutListingInput
+  company: CompanyCreateNestedOneWithoutListingsInput!
+  createdAt: DateTimeISO
+  description_raw: String!
+  external_application_url: String
+  id: String
+  keywords: JobListingCreatekeywordsInput
+  languages: JobListingCreatelanguagesInput
+  level: JobListingLevel
+  location: String!
+  name: String!
+  parameters: JSON
+  saves: SavedListingCreateNestedManyWithoutListingInput
+  type: JobListingEmploymentType
+  work_from: WorkFromHome
+}
+
 input JobListingCreateWithoutCategoriesInput {
+  applications: UserJobApplicationCreateNestedManyWithoutListingInput
   company: CompanyCreateNestedOneWithoutListingsInput!
   createdAt: DateTimeISO
   description_raw: String!
@@ -2598,6 +2643,7 @@ input JobListingCreateWithoutCategoriesInput {
 }
 
 input JobListingCreateWithoutCompanyInput {
+  applications: UserJobApplicationCreateNestedManyWithoutListingInput
   categories: CategoryOnJobListingCreateNestedManyWithoutListingInput
   createdAt: DateTimeISO
   description_raw: String!
@@ -2615,6 +2661,7 @@ input JobListingCreateWithoutCompanyInput {
 }
 
 input JobListingCreateWithoutSavesInput {
+  applications: UserJobApplicationCreateNestedManyWithoutListingInput
   categories: CategoryOnJobListingCreateNestedManyWithoutListingInput
   company: CompanyCreateNestedOneWithoutListingsInput!
   createdAt: DateTimeISO
@@ -2783,6 +2830,7 @@ input JobListingOrderByWithAggregationInput {
 
 input JobListingOrderByWithRelationInput {
   _relevance: JobListingOrderByRelevanceInput
+  applications: UserJobApplicationOrderByRelationAggregateInput
   categories: CategoryOnJobListingOrderByRelationAggregateInput
   company: CompanyOrderByWithRelationInput
   company_id: SortOrder
@@ -3633,6 +3681,7 @@ input JobListingSubscriptionWhereUniqueInput {
 }
 
 input JobListingUpdateInput {
+  applications: UserJobApplicationUpdateManyWithoutListingNestedInput
   categories: CategoryOnJobListingUpdateManyWithoutListingNestedInput
   company: CompanyUpdateOneRequiredWithoutListingsNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -3684,6 +3733,14 @@ input JobListingUpdateManyWithoutCompanyNestedInput {
   upsert: [JobListingUpsertWithWhereUniqueWithoutCompanyInput!]
 }
 
+input JobListingUpdateOneRequiredWithoutApplicationsNestedInput {
+  connect: JobListingWhereUniqueInput
+  connectOrCreate: JobListingCreateOrConnectWithoutApplicationsInput
+  create: JobListingCreateWithoutApplicationsInput
+  update: JobListingUpdateToOneWithWhereWithoutApplicationsInput
+  upsert: JobListingUpsertWithoutApplicationsInput
+}
+
 input JobListingUpdateOneRequiredWithoutCategoriesNestedInput {
   connect: JobListingWhereUniqueInput
   connectOrCreate: JobListingCreateOrConnectWithoutCategoriesInput
@@ -3698,6 +3755,11 @@ input JobListingUpdateOneRequiredWithoutSavesNestedInput {
   create: JobListingCreateWithoutSavesInput
   update: JobListingUpdateToOneWithWhereWithoutSavesInput
   upsert: JobListingUpsertWithoutSavesInput
+}
+
+input JobListingUpdateToOneWithWhereWithoutApplicationsInput {
+  data: JobListingUpdateWithoutApplicationsInput!
+  where: JobListingWhereInput
 }
 
 input JobListingUpdateToOneWithWhereWithoutCategoriesInput {
@@ -3715,7 +3777,26 @@ input JobListingUpdateWithWhereUniqueWithoutCompanyInput {
   where: JobListingWhereUniqueInput!
 }
 
+input JobListingUpdateWithoutApplicationsInput {
+  categories: CategoryOnJobListingUpdateManyWithoutListingNestedInput
+  company: CompanyUpdateOneRequiredWithoutListingsNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description_raw: StringFieldUpdateOperationsInput
+  external_application_url: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  keywords: JobListingUpdatekeywordsInput
+  languages: JobListingUpdatelanguagesInput
+  level: NullableEnumJobListingLevelFieldUpdateOperationsInput
+  location: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  parameters: JSON
+  saves: SavedListingUpdateManyWithoutListingNestedInput
+  type: NullableEnumJobListingEmploymentTypeFieldUpdateOperationsInput
+  work_from: NullableEnumWorkFromHomeFieldUpdateOperationsInput
+}
+
 input JobListingUpdateWithoutCategoriesInput {
+  applications: UserJobApplicationUpdateManyWithoutListingNestedInput
   company: CompanyUpdateOneRequiredWithoutListingsNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description_raw: StringFieldUpdateOperationsInput
@@ -3733,6 +3814,7 @@ input JobListingUpdateWithoutCategoriesInput {
 }
 
 input JobListingUpdateWithoutCompanyInput {
+  applications: UserJobApplicationUpdateManyWithoutListingNestedInput
   categories: CategoryOnJobListingUpdateManyWithoutListingNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description_raw: StringFieldUpdateOperationsInput
@@ -3750,6 +3832,7 @@ input JobListingUpdateWithoutCompanyInput {
 }
 
 input JobListingUpdateWithoutSavesInput {
+  applications: UserJobApplicationUpdateManyWithoutListingNestedInput
   categories: CategoryOnJobListingUpdateManyWithoutListingNestedInput
   company: CompanyUpdateOneRequiredWithoutListingsNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -3782,6 +3865,12 @@ input JobListingUpsertWithWhereUniqueWithoutCompanyInput {
   where: JobListingWhereUniqueInput!
 }
 
+input JobListingUpsertWithoutApplicationsInput {
+  create: JobListingCreateWithoutApplicationsInput!
+  update: JobListingUpdateWithoutApplicationsInput!
+  where: JobListingWhereInput
+}
+
 input JobListingUpsertWithoutCategoriesInput {
   create: JobListingCreateWithoutCategoriesInput!
   update: JobListingUpdateWithoutCategoriesInput!
@@ -3798,6 +3887,7 @@ input JobListingWhereInput {
   AND: [JobListingWhereInput!]
   NOT: [JobListingWhereInput!]
   OR: [JobListingWhereInput!]
+  applications: UserJobApplicationListRelationFilter
   categories: CategoryOnJobListingListRelationFilter
   company: CompanyRelationFilter
   company_id: StringFilter
@@ -3820,6 +3910,7 @@ input JobListingWhereUniqueInput {
   AND: [JobListingWhereInput!]
   NOT: [JobListingWhereInput!]
   OR: [JobListingWhereInput!]
+  applications: UserJobApplicationListRelationFilter
   categories: CategoryOnJobListingListRelationFilter
   company: CompanyRelationFilter
   company_id: StringFilter
@@ -3936,6 +4027,7 @@ type Mutation {
   createManySession(data: [SessionCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyUser(data: [UserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyUserAttachments(data: [UserAttachmentsCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyUserJobApplication(data: [UserJobApplicationCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyVerificationToken(data: [VerificationTokenCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createOneAccount(data: AccountCreateInput!, relationLoadStrategy: RelationLoadStrategy): Account!
   createOneCompany(data: CompanyCreateInput!, relationLoadStrategy: RelationLoadStrategy): Company!
@@ -3947,6 +4039,7 @@ type Mutation {
   createOneSession(data: SessionCreateInput!, relationLoadStrategy: RelationLoadStrategy): Session!
   createOneUser(data: UserCreateInput!, relationLoadStrategy: RelationLoadStrategy): User!
   createOneUserAttachments(data: UserAttachmentsCreateInput!, relationLoadStrategy: RelationLoadStrategy): UserAttachments!
+  createOneUserJobApplication(data: UserJobApplicationCreateInput!, relationLoadStrategy: RelationLoadStrategy): UserJobApplication!
   createOneVerificationToken(data: VerificationTokenCreateInput!, relationLoadStrategy: RelationLoadStrategy): VerificationToken!
   deleteAllSubscriptions: DeleteAllSubscriptionsResponse!
   deleteManyAccount(where: AccountWhereInput): AffectedRowsOutput!
@@ -3959,6 +4052,7 @@ type Mutation {
   deleteManySession(where: SessionWhereInput): AffectedRowsOutput!
   deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
   deleteManyUserAttachments(where: UserAttachmentsWhereInput): AffectedRowsOutput!
+  deleteManyUserJobApplication(where: UserJobApplicationWhereInput): AffectedRowsOutput!
   deleteManyVerificationToken(where: VerificationTokenWhereInput): AffectedRowsOutput!
   deleteOneAccount(relationLoadStrategy: RelationLoadStrategy, where: AccountWhereUniqueInput!): Account
   deleteOneCompany(relationLoadStrategy: RelationLoadStrategy, where: CompanyWhereUniqueInput!): Company
@@ -3970,6 +4064,7 @@ type Mutation {
   deleteOneSession(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   deleteOneUser(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
   deleteOneUserAttachments(relationLoadStrategy: RelationLoadStrategy, where: UserAttachmentsWhereUniqueInput!): UserAttachments
+  deleteOneUserJobApplication(relationLoadStrategy: RelationLoadStrategy, where: UserJobApplicationWhereUniqueInput!): UserJobApplication
   deleteOneVerificationToken(relationLoadStrategy: RelationLoadStrategy, where: VerificationTokenWhereUniqueInput!): VerificationToken
   fileUpload(file: Upload!): Boolean!
   generateSignUpEmailCode(email: EmailAddress!): SignUpWithEmailCodeResponse!
@@ -4014,6 +4109,7 @@ type Mutation {
   updateManySession(data: SessionUpdateManyMutationInput!, where: SessionWhereInput): AffectedRowsOutput!
   updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
   updateManyUserAttachments(data: UserAttachmentsUpdateManyMutationInput!, where: UserAttachmentsWhereInput): AffectedRowsOutput!
+  updateManyUserJobApplication(data: UserJobApplicationUpdateManyMutationInput!, where: UserJobApplicationWhereInput): AffectedRowsOutput!
   updateManyVerificationToken(data: VerificationTokenUpdateManyMutationInput!, where: VerificationTokenWhereInput): AffectedRowsOutput!
   updateOneAccount(data: AccountUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: AccountWhereUniqueInput!): Account
   updateOneCompany(data: CompanyUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: CompanyWhereUniqueInput!): Company
@@ -4025,6 +4121,7 @@ type Mutation {
   updateOneSession(data: SessionUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   updateOneUser(data: UserUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
   updateOneUserAttachments(data: UserAttachmentsUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: UserAttachmentsWhereUniqueInput!): UserAttachments
+  updateOneUserJobApplication(data: UserJobApplicationUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: UserJobApplicationWhereUniqueInput!): UserJobApplication
   updateOneVerificationToken(data: VerificationTokenUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: VerificationTokenWhereUniqueInput!): VerificationToken
   upsertOneAccount(create: AccountCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: AccountUpdateInput!, where: AccountWhereUniqueInput!): Account!
   upsertOneCompany(create: CompanyCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company!
@@ -4036,6 +4133,7 @@ type Mutation {
   upsertOneSession(create: SessionCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: SessionUpdateInput!, where: SessionWhereUniqueInput!): Session!
   upsertOneUser(create: UserCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
   upsertOneUserAttachments(create: UserAttachmentsCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: UserAttachmentsUpdateInput!, where: UserAttachmentsWhereUniqueInput!): UserAttachments!
+  upsertOneUserJobApplication(create: UserJobApplicationCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: UserJobApplicationUpdateInput!, where: UserJobApplicationWhereUniqueInput!): UserJobApplication!
   upsertOneVerificationToken(create: VerificationTokenCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: VerificationTokenUpdateInput!, where: VerificationTokenWhereUniqueInput!): VerificationToken!
   verifyEmail: VerifyEmailResponse!
 }
@@ -4351,6 +4449,7 @@ type Query {
   aggregateSession(cursor: SessionWhereUniqueInput, orderBy: [SessionOrderByWithRelationInput!], skip: Int, take: Int, where: SessionWhereInput): AggregateSession!
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
   aggregateUserAttachments(cursor: UserAttachmentsWhereUniqueInput, orderBy: [UserAttachmentsOrderByWithRelationInput!], skip: Int, take: Int, where: UserAttachmentsWhereInput): AggregateUserAttachments!
+  aggregateUserJobApplication(cursor: UserJobApplicationWhereUniqueInput, orderBy: [UserJobApplicationOrderByWithRelationInput!], skip: Int, take: Int, where: UserJobApplicationWhereInput): AggregateUserJobApplication!
   aggregateVerificationToken(cursor: VerificationTokenWhereUniqueInput, orderBy: [VerificationTokenOrderByWithRelationInput!], skip: Int, take: Int, where: VerificationTokenWhereInput): AggregateVerificationToken!
   companies(cursor: CompanyWhereUniqueInput, distinct: [CompanyScalarFieldEnum!], orderBy: [CompanyOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: CompanyWhereInput): [Company!]!
   company(relationLoadStrategy: RelationLoadStrategy, where: CompanyWhereUniqueInput!): Company
@@ -4376,6 +4475,8 @@ type Query {
   findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserWhereInput): User
   findFirstUserAttachments(cursor: UserAttachmentsWhereUniqueInput, distinct: [UserAttachmentsScalarFieldEnum!], orderBy: [UserAttachmentsOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserAttachmentsWhereInput): UserAttachments
   findFirstUserAttachmentsOrThrow(cursor: UserAttachmentsWhereUniqueInput, distinct: [UserAttachmentsScalarFieldEnum!], orderBy: [UserAttachmentsOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserAttachmentsWhereInput): UserAttachments
+  findFirstUserJobApplication(cursor: UserJobApplicationWhereUniqueInput, distinct: [UserJobApplicationScalarFieldEnum!], orderBy: [UserJobApplicationOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserJobApplicationWhereInput): UserJobApplication
+  findFirstUserJobApplicationOrThrow(cursor: UserJobApplicationWhereUniqueInput, distinct: [UserJobApplicationScalarFieldEnum!], orderBy: [UserJobApplicationOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserJobApplicationWhereInput): UserJobApplication
   findFirstUserOrThrow(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserWhereInput): User
   findFirstVerificationToken(cursor: VerificationTokenWhereUniqueInput, distinct: [VerificationTokenScalarFieldEnum!], orderBy: [VerificationTokenOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: VerificationTokenWhereInput): VerificationToken
   findFirstVerificationTokenOrThrow(cursor: VerificationTokenWhereUniqueInput, distinct: [VerificationTokenScalarFieldEnum!], orderBy: [VerificationTokenOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: VerificationTokenWhereInput): VerificationToken
@@ -4398,6 +4499,7 @@ type Query {
   getTopCompanies(input: GetTopCompaniesInput!): [Company!]!
   getTopListingCategories(input: GetTopListingCategoriesInput!): [JobListingCategory!]!
   getUser(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
+  getUserJobApplication(relationLoadStrategy: RelationLoadStrategy, where: UserJobApplicationWhereUniqueInput!): UserJobApplication
   getVerificationToken(relationLoadStrategy: RelationLoadStrategy, where: VerificationTokenWhereUniqueInput!): VerificationToken
   googleLoginUrl(redirect_url: String): String!
   groupByAccount(by: [AccountScalarFieldEnum!]!, having: AccountScalarWhereWithAggregatesInput, orderBy: [AccountOrderByWithAggregationInput!], skip: Int, take: Int, where: AccountWhereInput): [AccountGroupBy!]!
@@ -4410,6 +4512,7 @@ type Query {
   groupBySession(by: [SessionScalarFieldEnum!]!, having: SessionScalarWhereWithAggregatesInput, orderBy: [SessionOrderByWithAggregationInput!], skip: Int, take: Int, where: SessionWhereInput): [SessionGroupBy!]!
   groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByWithAggregationInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
   groupByUserAttachments(by: [UserAttachmentsScalarFieldEnum!]!, having: UserAttachmentsScalarWhereWithAggregatesInput, orderBy: [UserAttachmentsOrderByWithAggregationInput!], skip: Int, take: Int, where: UserAttachmentsWhereInput): [UserAttachmentsGroupBy!]!
+  groupByUserJobApplication(by: [UserJobApplicationScalarFieldEnum!]!, having: UserJobApplicationScalarWhereWithAggregatesInput, orderBy: [UserJobApplicationOrderByWithAggregationInput!], skip: Int, take: Int, where: UserJobApplicationWhereInput): [UserJobApplicationGroupBy!]!
   groupByVerificationToken(by: [VerificationTokenScalarFieldEnum!]!, having: VerificationTokenScalarWhereWithAggregatesInput, orderBy: [VerificationTokenOrderByWithAggregationInput!], skip: Int, take: Int, where: VerificationTokenWhereInput): [VerificationTokenGroupBy!]!
   jobListing(relationLoadStrategy: RelationLoadStrategy, where: JobListingWhereUniqueInput!): JobListing
   jobListingCategories(cursor: JobListingCategoryWhereUniqueInput, distinct: [JobListingCategoryScalarFieldEnum!], orderBy: [JobListingCategoryOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingCategoryWhereInput): [JobListingCategory!]!
@@ -4418,7 +4521,8 @@ type Query {
   jobListingSubscriptions(cursor: JobListingSubscriptionWhereUniqueInput, distinct: [JobListingSubscriptionScalarFieldEnum!], orderBy: [JobListingSubscriptionOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingSubscriptionWhereInput): [JobListingSubscription!]!
   jobListings(cursor: JobListingWhereUniqueInput, distinct: [JobListingScalarFieldEnum!], orderBy: [JobListingOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: JobListingWhereInput): [JobListing!]!
   me: User
-  myAttachments(input: GetAttachmentsByUserInput): [UserAttachments!]!
+  myApplications(input: GetApplicationsByUserInput!): [UserJobApplication!]!
+  myAttachments(input: GetAttachmentsByUserInput!): [UserAttachments!]!
   mySubscriptions(input: GetSubscriptionsInput!): [JobListingSubscription!]!
   savedListing(relationLoadStrategy: RelationLoadStrategy, where: SavedListingWhereUniqueInput!): SavedListing
   savedListings(cursor: SavedListingWhereUniqueInput, distinct: [SavedListingScalarFieldEnum!], orderBy: [SavedListingOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: SavedListingWhereInput): [SavedListing!]!
@@ -4426,6 +4530,8 @@ type Query {
   session(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   sessions(cursor: SessionWhereUniqueInput, distinct: [SessionScalarFieldEnum!], orderBy: [SessionOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: SessionWhereInput): [Session!]!
   user(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
+  userJobApplication(relationLoadStrategy: RelationLoadStrategy, where: UserJobApplicationWhereUniqueInput!): UserJobApplication
+  userJobApplications(cursor: UserJobApplicationWhereUniqueInput, distinct: [UserJobApplicationScalarFieldEnum!], orderBy: [UserJobApplicationOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserJobApplicationWhereInput): [UserJobApplication!]!
   users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserWhereInput): [User!]!
   verificationToken(relationLoadStrategy: RelationLoadStrategy, where: VerificationTokenWhereUniqueInput!): VerificationToken
   verificationTokens(cursor: VerificationTokenWhereUniqueInput, distinct: [VerificationTokenScalarFieldEnum!], orderBy: [VerificationTokenOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: VerificationTokenWhereInput): [VerificationToken!]!
@@ -5191,6 +5297,7 @@ scalar Upload
 type User {
   _count: UserCount
   accounts(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): [Account!]!
+  applications(cursor: UserJobApplicationWhereUniqueInput, distinct: [UserJobApplicationScalarFieldEnum!], orderBy: [UserJobApplicationOrderByWithRelationInput!], skip: Int, take: Int, where: UserJobApplicationWhereInput): [UserJobApplication!]!
   attachments(cursor: UserAttachmentsWhereUniqueInput, distinct: [UserAttachmentsScalarFieldEnum!], orderBy: [UserAttachmentsOrderByWithRelationInput!], skip: Int, take: Int, where: UserAttachmentsWhereInput): [UserAttachments!]!
   cookieConsent: Boolean
   cookiePreferences: UserCookiePreferences
@@ -5533,6 +5640,7 @@ type UserCookiePreferences {
 
 type UserCount {
   accounts(where: AccountWhereInput): Int!
+  applications(where: UserJobApplicationWhereInput): Int!
   attachments(where: UserAttachmentsWhereInput): Int!
   saved_listings(where: SavedListingWhereInput): Int!
   sessions(where: SessionWhereInput): Int!
@@ -5568,6 +5676,7 @@ input UserCountOrderByAggregateInput {
 
 input UserCreateInput {
   accounts: AccountCreateNestedManyWithoutUserInput
+  applications: UserJobApplicationCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
@@ -5601,6 +5710,12 @@ input UserCreateNestedOneWithoutAccountsInput {
   create: UserCreateWithoutAccountsInput
 }
 
+input UserCreateNestedOneWithoutApplicationsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutApplicationsInput
+  create: UserCreateWithoutApplicationsInput
+}
+
 input UserCreateNestedOneWithoutAttachmentsInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutAttachmentsInput
@@ -5630,6 +5745,11 @@ input UserCreateOrConnectWithoutAccountsInput {
   where: UserWhereUniqueInput!
 }
 
+input UserCreateOrConnectWithoutApplicationsInput {
+  create: UserCreateWithoutApplicationsInput!
+  where: UserWhereUniqueInput!
+}
+
 input UserCreateOrConnectWithoutAttachmentsInput {
   create: UserCreateWithoutAttachmentsInput!
   where: UserWhereUniqueInput!
@@ -5651,6 +5771,24 @@ input UserCreateOrConnectWithoutSubscriptionsInput {
 }
 
 input UserCreateWithoutAccountsInput {
+  applications: UserJobApplicationCreateNestedManyWithoutUserInput
+  attachments: UserAttachmentsCreateNestedManyWithoutUserInput
+  createdAt: DateTimeISO
+  email: String!
+  emailVerified: DateTimeISO
+  first_name: String!
+  id: String
+  image: String
+  last_name: String!
+  metadata: JSON
+  name: String!
+  saved_listings: SavedListingCreateNestedManyWithoutUserInput
+  sessions: SessionCreateNestedManyWithoutUserInput
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutUserInput
+}
+
+input UserCreateWithoutApplicationsInput {
+  accounts: AccountCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
@@ -5668,6 +5806,7 @@ input UserCreateWithoutAccountsInput {
 
 input UserCreateWithoutAttachmentsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
+  applications: UserJobApplicationCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
@@ -5684,6 +5823,7 @@ input UserCreateWithoutAttachmentsInput {
 
 input UserCreateWithoutSaved_listingsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
+  applications: UserJobApplicationCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
@@ -5700,6 +5840,7 @@ input UserCreateWithoutSaved_listingsInput {
 
 input UserCreateWithoutSessionsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
+  applications: UserJobApplicationCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
@@ -5716,6 +5857,7 @@ input UserCreateWithoutSessionsInput {
 
 input UserCreateWithoutSubscriptionsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
+  applications: UserJobApplicationCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
@@ -5745,6 +5887,344 @@ type UserGroupBy {
   name: String!
   password: String
   updatedAt: DateTimeISO!
+}
+
+type UserJobApplication {
+  createdAt: DateTimeISO!
+  id: ID!
+  listing: JobListing!
+  listing_id: String!
+  metadata: JSON
+  updatedAt: DateTimeISO!
+  user: User!
+  user_id: String!
+}
+
+type UserJobApplicationCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  id: Int!
+  listing_id: Int!
+  metadata: Int!
+  updatedAt: Int!
+  user_id: Int!
+}
+
+input UserJobApplicationCountOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  listing_id: SortOrder
+  metadata: SortOrder
+  user_id: SortOrder
+}
+
+input UserJobApplicationCreateInput {
+  createdAt: DateTimeISO
+  id: String
+  listing: JobListingCreateNestedOneWithoutApplicationsInput!
+  metadata: JSON
+  user: UserCreateNestedOneWithoutApplicationsInput!
+}
+
+input UserJobApplicationCreateManyInput {
+  createdAt: DateTimeISO
+  id: String
+  listing_id: String!
+  metadata: JSON
+  user_id: String!
+}
+
+input UserJobApplicationCreateManyListingInput {
+  createdAt: DateTimeISO
+  id: String
+  metadata: JSON
+  user_id: String!
+}
+
+input UserJobApplicationCreateManyListingInputEnvelope {
+  data: [UserJobApplicationCreateManyListingInput!]!
+  skipDuplicates: Boolean
+}
+
+input UserJobApplicationCreateManyUserInput {
+  createdAt: DateTimeISO
+  id: String
+  listing_id: String!
+  metadata: JSON
+}
+
+input UserJobApplicationCreateManyUserInputEnvelope {
+  data: [UserJobApplicationCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input UserJobApplicationCreateNestedManyWithoutListingInput {
+  connect: [UserJobApplicationWhereUniqueInput!]
+  connectOrCreate: [UserJobApplicationCreateOrConnectWithoutListingInput!]
+  create: [UserJobApplicationCreateWithoutListingInput!]
+  createMany: UserJobApplicationCreateManyListingInputEnvelope
+}
+
+input UserJobApplicationCreateNestedManyWithoutUserInput {
+  connect: [UserJobApplicationWhereUniqueInput!]
+  connectOrCreate: [UserJobApplicationCreateOrConnectWithoutUserInput!]
+  create: [UserJobApplicationCreateWithoutUserInput!]
+  createMany: UserJobApplicationCreateManyUserInputEnvelope
+}
+
+input UserJobApplicationCreateOrConnectWithoutListingInput {
+  create: UserJobApplicationCreateWithoutListingInput!
+  where: UserJobApplicationWhereUniqueInput!
+}
+
+input UserJobApplicationCreateOrConnectWithoutUserInput {
+  create: UserJobApplicationCreateWithoutUserInput!
+  where: UserJobApplicationWhereUniqueInput!
+}
+
+input UserJobApplicationCreateWithoutListingInput {
+  createdAt: DateTimeISO
+  id: String
+  metadata: JSON
+  user: UserCreateNestedOneWithoutApplicationsInput!
+}
+
+input UserJobApplicationCreateWithoutUserInput {
+  createdAt: DateTimeISO
+  id: String
+  listing: JobListingCreateNestedOneWithoutApplicationsInput!
+  metadata: JSON
+}
+
+type UserJobApplicationGroupBy {
+  _count: UserJobApplicationCountAggregate
+  _max: UserJobApplicationMaxAggregate
+  _min: UserJobApplicationMinAggregate
+  createdAt: DateTimeISO!
+  id: String!
+  listing_id: String!
+  metadata: JSON
+  updatedAt: DateTimeISO!
+  user_id: String!
+}
+
+input UserJobApplicationListRelationFilter {
+  every: UserJobApplicationWhereInput
+  none: UserJobApplicationWhereInput
+  some: UserJobApplicationWhereInput
+}
+
+type UserJobApplicationMaxAggregate {
+  createdAt: DateTimeISO
+  id: String
+  listing_id: String
+  updatedAt: DateTimeISO
+  user_id: String
+}
+
+input UserJobApplicationMaxOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  listing_id: SortOrder
+  user_id: SortOrder
+}
+
+type UserJobApplicationMinAggregate {
+  createdAt: DateTimeISO
+  id: String
+  listing_id: String
+  updatedAt: DateTimeISO
+  user_id: String
+}
+
+input UserJobApplicationMinOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  listing_id: SortOrder
+  user_id: SortOrder
+}
+
+input UserJobApplicationOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+enum UserJobApplicationOrderByRelevanceFieldEnum {
+  id
+  listing_id
+  user_id
+}
+
+input UserJobApplicationOrderByRelevanceInput {
+  fields: [UserJobApplicationOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input UserJobApplicationOrderByWithAggregationInput {
+  _count: UserJobApplicationCountOrderByAggregateInput
+  _max: UserJobApplicationMaxOrderByAggregateInput
+  _min: UserJobApplicationMinOrderByAggregateInput
+  createdAt: SortOrder
+  id: SortOrder
+  listing_id: SortOrder
+  metadata: SortOrderInput
+  user_id: SortOrder
+}
+
+input UserJobApplicationOrderByWithRelationInput {
+  _relevance: UserJobApplicationOrderByRelevanceInput
+  createdAt: SortOrder
+  id: SortOrder
+  listing: JobListingOrderByWithRelationInput
+  listing_id: SortOrder
+  metadata: SortOrderInput
+  user: UserOrderByWithRelationInput
+  user_id: SortOrder
+}
+
+enum UserJobApplicationScalarFieldEnum {
+  createdAt
+  id
+  listing_id
+  metadata
+  updatedAt
+  user_id
+}
+
+input UserJobApplicationScalarWhereInput {
+  AND: [UserJobApplicationScalarWhereInput!]
+  NOT: [UserJobApplicationScalarWhereInput!]
+  OR: [UserJobApplicationScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  listing_id: StringFilter
+  metadata: JsonNullableFilter
+  user_id: StringFilter
+}
+
+input UserJobApplicationScalarWhereWithAggregatesInput {
+  AND: [UserJobApplicationScalarWhereWithAggregatesInput!]
+  NOT: [UserJobApplicationScalarWhereWithAggregatesInput!]
+  OR: [UserJobApplicationScalarWhereWithAggregatesInput!]
+  createdAt: DateTimeWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  listing_id: StringWithAggregatesFilter
+  metadata: JsonNullableWithAggregatesFilter
+  user_id: StringWithAggregatesFilter
+}
+
+input UserJobApplicationUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  listing: JobListingUpdateOneRequiredWithoutApplicationsNestedInput
+  metadata: JSON
+  user: UserUpdateOneRequiredWithoutApplicationsNestedInput
+}
+
+input UserJobApplicationUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  metadata: JSON
+}
+
+input UserJobApplicationUpdateManyWithWhereWithoutListingInput {
+  data: UserJobApplicationUpdateManyMutationInput!
+  where: UserJobApplicationScalarWhereInput!
+}
+
+input UserJobApplicationUpdateManyWithWhereWithoutUserInput {
+  data: UserJobApplicationUpdateManyMutationInput!
+  where: UserJobApplicationScalarWhereInput!
+}
+
+input UserJobApplicationUpdateManyWithoutListingNestedInput {
+  connect: [UserJobApplicationWhereUniqueInput!]
+  connectOrCreate: [UserJobApplicationCreateOrConnectWithoutListingInput!]
+  create: [UserJobApplicationCreateWithoutListingInput!]
+  createMany: UserJobApplicationCreateManyListingInputEnvelope
+  delete: [UserJobApplicationWhereUniqueInput!]
+  deleteMany: [UserJobApplicationScalarWhereInput!]
+  disconnect: [UserJobApplicationWhereUniqueInput!]
+  set: [UserJobApplicationWhereUniqueInput!]
+  update: [UserJobApplicationUpdateWithWhereUniqueWithoutListingInput!]
+  updateMany: [UserJobApplicationUpdateManyWithWhereWithoutListingInput!]
+  upsert: [UserJobApplicationUpsertWithWhereUniqueWithoutListingInput!]
+}
+
+input UserJobApplicationUpdateManyWithoutUserNestedInput {
+  connect: [UserJobApplicationWhereUniqueInput!]
+  connectOrCreate: [UserJobApplicationCreateOrConnectWithoutUserInput!]
+  create: [UserJobApplicationCreateWithoutUserInput!]
+  createMany: UserJobApplicationCreateManyUserInputEnvelope
+  delete: [UserJobApplicationWhereUniqueInput!]
+  deleteMany: [UserJobApplicationScalarWhereInput!]
+  disconnect: [UserJobApplicationWhereUniqueInput!]
+  set: [UserJobApplicationWhereUniqueInput!]
+  update: [UserJobApplicationUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [UserJobApplicationUpdateManyWithWhereWithoutUserInput!]
+  upsert: [UserJobApplicationUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input UserJobApplicationUpdateWithWhereUniqueWithoutListingInput {
+  data: UserJobApplicationUpdateWithoutListingInput!
+  where: UserJobApplicationWhereUniqueInput!
+}
+
+input UserJobApplicationUpdateWithWhereUniqueWithoutUserInput {
+  data: UserJobApplicationUpdateWithoutUserInput!
+  where: UserJobApplicationWhereUniqueInput!
+}
+
+input UserJobApplicationUpdateWithoutListingInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  metadata: JSON
+  user: UserUpdateOneRequiredWithoutApplicationsNestedInput
+}
+
+input UserJobApplicationUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  listing: JobListingUpdateOneRequiredWithoutApplicationsNestedInput
+  metadata: JSON
+}
+
+input UserJobApplicationUpsertWithWhereUniqueWithoutListingInput {
+  create: UserJobApplicationCreateWithoutListingInput!
+  update: UserJobApplicationUpdateWithoutListingInput!
+  where: UserJobApplicationWhereUniqueInput!
+}
+
+input UserJobApplicationUpsertWithWhereUniqueWithoutUserInput {
+  create: UserJobApplicationCreateWithoutUserInput!
+  update: UserJobApplicationUpdateWithoutUserInput!
+  where: UserJobApplicationWhereUniqueInput!
+}
+
+input UserJobApplicationWhereInput {
+  AND: [UserJobApplicationWhereInput!]
+  NOT: [UserJobApplicationWhereInput!]
+  OR: [UserJobApplicationWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  listing: JobListingRelationFilter
+  listing_id: StringFilter
+  metadata: JsonNullableFilter
+  user: UserRelationFilter
+  user_id: StringFilter
+}
+
+input UserJobApplicationWhereUniqueInput {
+  AND: [UserJobApplicationWhereInput!]
+  NOT: [UserJobApplicationWhereInput!]
+  OR: [UserJobApplicationWhereInput!]
+  createdAt: DateTimeFilter
+  id: String
+  listing: JobListingRelationFilter
+  listing_id: StringFilter
+  metadata: JsonNullableFilter
+  user: UserRelationFilter
+  user_id: StringFilter
 }
 
 type UserMaxAggregate {
@@ -5834,6 +6314,7 @@ input UserOrderByWithAggregationInput {
 input UserOrderByWithRelationInput {
   _relevance: UserOrderByRelevanceInput
   accounts: AccountOrderByRelationAggregateInput
+  applications: UserJobApplicationOrderByRelationAggregateInput
   attachments: UserAttachmentsOrderByRelationAggregateInput
   createdAt: SortOrder
   email: SortOrder
@@ -5886,6 +6367,7 @@ input UserScalarWhereWithAggregatesInput {
 type UserSearchResponse {
   _count: UserCount
   accounts(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): [Account!]!
+  applications(cursor: UserJobApplicationWhereUniqueInput, distinct: [UserJobApplicationScalarFieldEnum!], orderBy: [UserJobApplicationOrderByWithRelationInput!], skip: Int, take: Int, where: UserJobApplicationWhereInput): [UserJobApplication!]!
   attachments(cursor: UserAttachmentsWhereUniqueInput, distinct: [UserAttachmentsScalarFieldEnum!], orderBy: [UserAttachmentsOrderByWithRelationInput!], skip: Int, take: Int, where: UserAttachmentsWhereInput): [UserAttachments!]!
   cookieConsent: Boolean
   cookiePreferences: UserCookiePreferences
@@ -5920,6 +6402,7 @@ input UserSignUpInput {
 
 input UserUpdateInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
+  applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
@@ -5953,6 +6436,14 @@ input UserUpdateOneRequiredWithoutAccountsNestedInput {
   create: UserCreateWithoutAccountsInput
   update: UserUpdateToOneWithWhereWithoutAccountsInput
   upsert: UserUpsertWithoutAccountsInput
+}
+
+input UserUpdateOneRequiredWithoutApplicationsNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutApplicationsInput
+  create: UserCreateWithoutApplicationsInput
+  update: UserUpdateToOneWithWhereWithoutApplicationsInput
+  upsert: UserUpsertWithoutApplicationsInput
 }
 
 input UserUpdateOneRequiredWithoutAttachmentsNestedInput {
@@ -5994,6 +6485,11 @@ input UserUpdateToOneWithWhereWithoutAccountsInput {
   where: UserWhereInput
 }
 
+input UserUpdateToOneWithWhereWithoutApplicationsInput {
+  data: UserUpdateWithoutApplicationsInput!
+  where: UserWhereInput
+}
+
 input UserUpdateToOneWithWhereWithoutAttachmentsInput {
   data: UserUpdateWithoutAttachmentsInput!
   where: UserWhereInput
@@ -6015,6 +6511,24 @@ input UserUpdateToOneWithWhereWithoutSubscriptionsInput {
 }
 
 input UserUpdateWithoutAccountsInput {
+  applications: UserJobApplicationUpdateManyWithoutUserNestedInput
+  attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  metadata: JSON
+  name: StringFieldUpdateOperationsInput
+  saved_listings: SavedListingUpdateManyWithoutUserNestedInput
+  sessions: SessionUpdateManyWithoutUserNestedInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutUserNestedInput
+}
+
+input UserUpdateWithoutApplicationsInput {
+  accounts: AccountUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
@@ -6032,6 +6546,7 @@ input UserUpdateWithoutAccountsInput {
 
 input UserUpdateWithoutAttachmentsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
+  applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -6048,6 +6563,7 @@ input UserUpdateWithoutAttachmentsInput {
 
 input UserUpdateWithoutSaved_listingsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
+  applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
@@ -6064,6 +6580,7 @@ input UserUpdateWithoutSaved_listingsInput {
 
 input UserUpdateWithoutSessionsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
+  applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
@@ -6080,6 +6597,7 @@ input UserUpdateWithoutSessionsInput {
 
 input UserUpdateWithoutSubscriptionsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
+  applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
@@ -6097,6 +6615,12 @@ input UserUpdateWithoutSubscriptionsInput {
 input UserUpsertWithoutAccountsInput {
   create: UserCreateWithoutAccountsInput!
   update: UserUpdateWithoutAccountsInput!
+  where: UserWhereInput
+}
+
+input UserUpsertWithoutApplicationsInput {
+  create: UserCreateWithoutApplicationsInput!
+  update: UserUpdateWithoutApplicationsInput!
   where: UserWhereInput
 }
 
@@ -6129,6 +6653,7 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   accounts: AccountListRelationFilter
+  applications: UserJobApplicationListRelationFilter
   attachments: UserAttachmentsListRelationFilter
   createdAt: DateTimeFilter
   email: StringFilter
@@ -6149,6 +6674,7 @@ input UserWhereUniqueInput {
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   accounts: AccountListRelationFilter
+  applications: UserJobApplicationListRelationFilter
   attachments: UserAttachmentsListRelationFilter
   createdAt: DateTimeFilter
   email: String

@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 
 export interface ToastProps extends PropsWithChildren {
    duration: number;
-   id: string
+   id: string;
 }
 
 export type ToastInfo = { id: string; children: React.ReactNode };
@@ -31,9 +31,7 @@ export const useToasts = () => {
 
 
 const Toasts = () => {
-   const {toasts} = useToasts();
-
-   console.log({ toasts });
+   const { toasts } = useToasts();
 
    return (
       <div className={`toast toast-end`}>
@@ -56,7 +54,7 @@ export const ToastsProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 
-const Toast = ({ children, duration = 3_000 ,id }: ToastProps) => {
+const Toast = ({ children, duration = 3_000, id }: ToastProps) => {
    const [show, setShow] = useState(true);
 
    useEffect(() => {

@@ -9,7 +9,6 @@ import { __IS_DEV__, __IS_HTTPS__ } from "@consts";
 import { KeyvAdapter } from "@apollo/utils.keyvadapter";
 import Keyv from "keyv";
 import { ErrorsAreMissesCache, InMemoryLRUCache } from "@apollo/utils.keyvaluecache";
-
 import * as path from "node:path";
 import * as fs from "node:fs";
 
@@ -28,7 +27,9 @@ import { asyncIteratorToIterable } from "@modules/user/UserResolver";
 import { googleLoginRouter } from "@modules/user/auth/google";
 import * as https from "node:https";
 import { WHITELISTED_URLS } from "@infrastructure/middleware/HostMiddleware";
-import { Service } from "typedi";
+
+import fileUpload from "express-fileupload";
+import { fileUploadHandler } from "@lib/services";
 
 export class CustomApolloServer<TContext> {
    private readonly schema: Partial<BuildSchemaOptions> & { resolvers: NonEmptyArray<Function> };
@@ -54,8 +55,13 @@ export class CustomApolloServer<TContext> {
 
       this.app = express();
       this.app
+         .use(fileUpload({
+            limits: { fileSize: 10 * 1024 * 1024 },
+            useTempFiles: false,
+         }))
          .use(`/login/github`, githubLoginRouter)
-         .use(`/login/google`, googleLoginRouter);
+         .use(`/login/google`, googleLoginRouter)
+         .post(`/file-upload`, fileUploadHandler);
 
       this.httpServer = __IS_HTTPS__ ? https.createServer(
          {

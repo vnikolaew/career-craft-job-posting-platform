@@ -31,7 +31,8 @@ const TopCategoriesSection = ({}: TopCategoriesSectionProps) => {
       <HomePageSection heading={"Categories"}>
          <div className={`flex flex-col items-start gap-4`}>
             {loading ? (
-               Array.from({ length: 10 }).map((_, index) => <Skeleton key={index} className={`w-3/5 h-10 shadow-sm `} />)
+               Array.from({ length: 10 }).map((_, index) => <Skeleton key={index}
+                                                                      className={`w-3/5 h-10 shadow-sm `} />)
             ) : (
                <Fragment>
                   {data?.getTopListingCategories?.map((category) => (
@@ -44,17 +45,19 @@ const TopCategoriesSection = ({}: TopCategoriesSectionProps) => {
    );
 };
 
-const CategoryBadge = ({ category }: { category: JobListingCategory }) => (
-   <div key={category.id} className={`w-full`}>
-      <Link href={`/`}
-            className={`text-neutral-500 btn btn-outline !rounded-full !min-h-fit !h-fit !py-3 flex items-center justify-start gap-2 !w-fit !px-6 hover:!bg-neutral-400 transition-all duration-100 !border-neutral-400`}>
-         <ShoppingCart size={18} />
-         <span className={`font-semibold text-base text-neutral-700`}>
-            {category.name}
-         </span>
-         <span className={`text-neutral-500`}>{category._count?.listings ?? 0}</span>
-      </Link>
-   </div>
-);
+const CategoryBadge = ({ category }: { category: JobListingCategory }) => {
+   return (
+      <div key={category.id} className={`w-full`}>
+         <Link href={`/jobs?category=${encodeURIComponent(category.name.toLowerCase().trim())}`}
+               className={`text-neutral-500 btn btn-outline !rounded-full !min-h-fit !h-fit !py-3 flex items-center justify-start gap-2 !w-fit !px-6 hover:!bg-neutral-300 transition-all duration-100 !border-neutral-300 group`}>
+            <ShoppingCart className={`group-hover:!text-neutral-500`} size={18} />
+            <span className={`font-semibold text-base text-neutral-700`}>
+               {category.name}
+            </span>
+            <span className={`text-neutral-500`}>{category._count?.listings ?? 0}</span>
+         </Link>
+      </div>
+   );
+};
 
 export default TopCategoriesSection;

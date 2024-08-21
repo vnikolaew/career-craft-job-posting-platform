@@ -81,5 +81,6 @@ export class SubscriptionMailingService {
          subject: `Notification about new job listings via e-mail in ${APP_NAME}`,
       });
 
+      return success
    }
 }

@@ -2,6 +2,12 @@
 module.exports = {
    daisyui: {
       themes: [
+         {
+            custom: {
+               ...require("daisyui/src/theming/themes")["light"],
+               primary: "#16a34a",
+            }
+         },
          "light",
          "dark",
          "cupcake",

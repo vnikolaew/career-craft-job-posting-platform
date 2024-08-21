@@ -65,8 +65,10 @@ export default function RootLayout({
 }>) {
    return (
       <html
-         // data-theme={`corporate`}
-            className={`${dancingScript.variable}`} style={{}} color={`dark`} suppressHydrationWarning lang="en">
+         data-theme={`custom`}
+            className={`${dancingScript.variable}`}
+            color={`dark`}
+            suppressHydrationWarning lang="en">
       <head>
          <Script src="https://leaflet-extras.github.com/leaflet.css/dist/leaflet.css.bundle.min.js"></Script>
          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
