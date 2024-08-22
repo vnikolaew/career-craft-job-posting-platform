@@ -40,7 +40,7 @@ export const SUBSCRIBE_TO_COMPANY_LISTINGS = gql(/* GraphQL */`
 `);
 
 const emailRegex =
-   /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-\.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\-]*\.)+[A-Z]{2,}$/i;
+   /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9-]*\.)+[A-Z]{2,}$/i;
 
 const schema = z.object({
    includeEmail: z.boolean().default(false),
@@ -71,7 +71,7 @@ const SubscribeToCompanyListingsModal = ({
    const me = useMeQuery();
    const signedIn = !!me?.me;
 
-   const { register, handleSubmit, formState, setValue, ...methods } = useForm<Schema>({
+   const { register, handleSubmit, formState, setValue } = useForm<Schema>({
       resolver: zodResolver(schema),
       reValidateMode: `onChange`,
       defaultValues: { email: me?.me?.email ?? ``, includeEmail: !signedIn },
@@ -98,9 +98,8 @@ const SubscribeToCompanyListingsModal = ({
          },
          onCompleted: (data) => {
             console.log(`Success`, data);
-            if (!!data.subscribeToCompanyListings) {
-               let el = document.getElementById(`subscribe-modal`)!;
-               el?.close();
+            if (data.subscribeToCompanyListings) {
+               document.getElementById(`subscribe-modal`)?.close();
                showToast({ id: toastId, children: <span>Successfully subscribed!</span> });
             }
          },

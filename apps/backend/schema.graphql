@@ -2109,7 +2109,7 @@ input GetAttachmentsByUserInput {
 }
 
 input GetRelevantCompaniesInput {
-  category: String
+  categories: [String!]
   limit: Int = 10
   skip: Int = 0
 }
@@ -2862,7 +2862,7 @@ input JobListingOrderByWithRelationInput {
 }
 
 type JobListingParameters {
-  from: JobListingFrom!
+  from: JobListingFrom
   furlough: FurloughPeriod!
   internship: Boolean
   remoteInterview: Boolean
@@ -4552,6 +4552,7 @@ type Query {
   savedListing(relationLoadStrategy: RelationLoadStrategy, where: SavedListingWhereUniqueInput!): SavedListing
   savedListings(cursor: SavedListingWhereUniqueInput, distinct: [SavedListingScalarFieldEnum!], orderBy: [SavedListingOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: SavedListingWhereInput): [SavedListing!]!
   search(search: UsersSearchInput! = {limit: 10, search: ""}): [UserSearchResponse!]!
+  searchJobListings(input: SearchJobListingsInput!): [JobListing!]!
   session(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   sessions(cursor: SessionWhereUniqueInput, distinct: [SessionScalarFieldEnum!], orderBy: [SessionOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: SessionWhereInput): [Session!]!
   user(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
@@ -4914,6 +4915,26 @@ input SavedListingWhereUniqueInput {
   metadata: JsonNullableFilter
   user: UserRelationFilter
   userId: StringFilter
+}
+
+input SearchJobListingsInput {
+  categories: [String!]
+  companyIds: [String!]
+  from: JobListingFrom
+  furlough: FurloughPeriod
+  internship: Boolean
+  keywords: [String!]
+  languages: [String!]
+  levels: [JobListingLevel!]
+  limit: Int = 10
+  locations: [String!]
+  noExperience: Boolean
+  professions: [String!]
+  remoteInterview: Boolean
+  salary: String
+  skip: Int = 0
+  types: [JobListingEmploymentType!]
+  workFromHome: Boolean
 }
 
 type SendVerificationEmailResponse {

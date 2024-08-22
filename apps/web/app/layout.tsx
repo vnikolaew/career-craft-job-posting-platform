@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import {
-   Inter,
    Rubik,
-   Roboto_Mono,
-   Open_Sans,
 } from "next/font/google";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
@@ -14,27 +11,6 @@ import Footer from "@/components/Footer";
 import Providers from "@/providers";
 import Script from "next/script";
 import ScrollToTopButton from "@/components/common/ScrollToTopButton";
-
-const inter = Inter({
-   weight: ["400", "500", "600", "700"],
-   subsets: ["latin"],
-   variable: "--font-mono",
-
-});
-
-const roboto = Roboto_Mono({
-   weight: "400",
-   subsets: ["latin"],
-   display: "swap",
-   variable: "--font-mono",
-});
-
-const openSans = Open_Sans({
-   variable: "--font-mono",
-   weight: "400",
-   subsets: ["latin"],
-   display: "swap",
-});
 
 const dancingScript = Rubik({
    variable: "--font-mono",
@@ -66,9 +42,9 @@ export default function RootLayout({
    return (
       <html
          data-theme={`custom`}
-            className={`${dancingScript.variable}`}
-            color={`dark`}
-            suppressHydrationWarning lang="en">
+         className={`${dancingScript.variable}`}
+         color={`dark`}
+         suppressHydrationWarning lang="en">
       <head>
          <Script src="https://leaflet-extras.github.com/leaflet.css/dist/leaflet.css.bundle.min.js"></Script>
          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"

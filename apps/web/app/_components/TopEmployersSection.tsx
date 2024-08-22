@@ -55,7 +55,7 @@ const TopEmployersList = ({ companies }: { companies: Company[] }) => {
 
 const TopEmployerPreview = ({ company }: { company: Company }) => {
    return (
-      <Link href={`/company/${company.id}`} className="indicator !bg-neutral-200/100 !w-full">
+      <Link href={`/company/${company.id}`} className="indicator !bg-neutral-100/100 !w-full">
          <span className="indicator-item badge badge-outline !bg-neutral-100 !border-neutral-300 !shadow-sm">
             {company?._count?.listings ?? company.listingsCount ?? 0}
          </span>

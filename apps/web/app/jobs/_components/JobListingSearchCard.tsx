@@ -102,7 +102,7 @@ const JobListingSearchCard = ({ jobListing }: JobListingSearchCardProps) => {
                   <div className={`w-full flex items-center justify-end gap-2 mt-2`}>
                      <Link href={`/company/${jobListing.company.id}/jobs`}>
                         <button
-                           className={`btn btn-ghost text-green-600 bg-transparent rounded-full !min-h-fit !py-3 !px-6 !h-fit`}>
+                           className={`btn btn-ghost text-green-600 bg-transparent rounded-full !min-h-fit !py-3 !px-6 !h-fit !text-nowrap !flex-nowrap`}>
                            <List size={14} />
                            Job listings ({jobListing.company._count?.listings})
                         </button>

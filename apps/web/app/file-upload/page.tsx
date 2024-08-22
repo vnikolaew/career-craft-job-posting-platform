@@ -21,16 +21,14 @@ const Page = ({}: PageProps) => {
          <h2>
             File upload. </h2>
          <input onChange={e => {
-            if (e.target.files?.length) {
-               setFile(e.target.files[0]!);
-            }
+            if (e.target.files?.length) setFile(e.target.files[0]!);
          }} type={`file`} />
          <button className={`btn btn-outline`} onClick={async e => {
             e.preventDefault()
-            if (file) {
-               await fileUpload({ variables: { file } })
-            }
-         }}>Upload</button>
+            if (file) await fileUpload({ variables: { file } });
+         }}>
+            Upload
+         </button>
       </section>
    );
 };

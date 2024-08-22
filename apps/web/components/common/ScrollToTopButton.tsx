@@ -31,14 +31,14 @@ const ScrollToTopButton = ({}: ScrollToTopButtonProps) => {
                initial={{
                   opacity: 100,
                }}
-               className={`!z-[100]`}
+               className={`!z-[100] rounded-full`}
                animate={{ opacity: 100 }}
                exit={{ opacity: 0 }}
             >
-               <div className={`tooltip tooltip-top fixed border-8 right-8 !z-[100] !h-fit opacity-70 `} data-tip={`Scroll to top`}>
+               <div className={`tooltip tooltip-top fixed border-8 right-8 !z-[100] !h-fit opacity-70 rounded-full`} data-tip={`Scroll to top`}>
                   <button
                      onClick={scrollToTop}
-                     className={`btn btn-circle rounded-full !bg-secondary-bg !p-2 !text-main opacity-70`}
+                     className={`btn btn-circle !rounded-full !bg-secondary-bg !p-2 !text-main opacity-70`}
                   >
                      <ChevronUp size={28} />
                   </button>

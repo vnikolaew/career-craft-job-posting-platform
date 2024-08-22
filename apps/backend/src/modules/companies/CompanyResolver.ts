@@ -155,7 +155,6 @@ export class CompanyResolver extends CompanyRelationsResolver {
          where: { id },
          select: { _count: { select: { listings: true, categories: true } } },
       });
-      console.log(`we are here`, { count });
 
       return { ...count, listings: count?.listings === 0 ? 5 : 0 };
    }

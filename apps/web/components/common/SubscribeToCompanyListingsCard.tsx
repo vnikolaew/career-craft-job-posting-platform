@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { MailCheck } from "lucide-react";
 import SubscribeToCompanyListingsModal from "@/components/common/SubscribeToCompanyListingsModal";
 
