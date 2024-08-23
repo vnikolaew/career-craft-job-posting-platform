@@ -52,7 +52,7 @@ const LevelsFilterModal = ({ id }: { id: string }) => {
             </h3>
             {loading && (
                <div className={`flex flex-wrap items-center mt-4 gap-2`}>
-                  <List count={10} render={() => <Skeleton className={`w-16 h-6 rounded-full`} />} />
+                  <List count={10} render={(id) => <Skeleton key={id} className={`w-16 h-6 rounded-full`} />} />
                </div>
             )}
             <div className={`flex flex-wrap items-center mt-4 gap-3 max-h-[400px] overflow-y-scroll`}>

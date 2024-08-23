@@ -5,6 +5,7 @@ import { Company } from "@generated/models/Company";
 import { Arg, Authorized, Ctx, Directive, FieldResolver, Mutation, Query, Resolver, Root } from "type-graphql";
 import { MyContext } from "@types";
 import {
+   GetEmploymentTypeDetailsResponse,
    GetJobListingLevelsDetailsResponse, GetKeywordsDetailsResponse,
    GetRelevantCompaniesInput,
    JobListingParameters,
@@ -15,6 +16,7 @@ import { NoCache } from "@infrastructure/decorators";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.mjs";
 import Upload from "graphql-upload/Upload.mjs";
 import _ from "lodash";
+import { JobListingQueryBuilder } from "@modules/job_listings/JobListingQueryBuilder";
 
 
 @Resolver(of => JobListing)
@@ -48,134 +50,30 @@ export class JobListingCrudResolver extends Base {
          skip,
          ...input
       }: SearchJobListingsInput): Promise<JobListing[]> {
-
       console.log({ input });
-      let clauses: Prisma.JobListingWhereInput[] = [];
-      if (input?.locations?.length) clauses.push({ location: { in: input.locations } });
 
-      if (input?.categories?.length) clauses.push(this.getCategoriesFilter(input.categories));
-
-      if (input?.from?.length) clauses.push({ parameters: { path: [`from`], equals: input.from.toLowerCase() } });
-
-      if (input?.furlough?.length) clauses.push({
-         parameters: {
-            path: [`furlough`],
-            equals: input.furlough.toLowerCase(),
-         },
-      });
-
-      if (input?.remoteInterview) clauses.push({ parameters: { path: [`remoteInterview`], equals: true } });
-      if (input?.internship) clauses.push({ parameters: { path: [`intern`], equals: true } });
-      if (input?.salary) clauses.push(this.getSalaryFilter(input.salary));
-      if (input?.languages?.length) clauses.push({ languages: { hasSome: input.languages } });
-      if (input?.keywords?.length) clauses.push({ keywords: { hasSome: input.keywords } });
-      if (input?.companyIds?.length) clauses.push({ company_id: { in: input.companyIds } });
-      if (input?.types?.length) clauses.push({ type: { in: input.types } });
-      if (input?.levels?.length) clauses.push({ level: { in: input.levels } });
+      let filter = new JobListingQueryBuilder()
+         .withLocation(input.locations)
+         .withCategories(input.categories)
+         .withFrom(input.from)
+         .withFurlough(input.furlough)
+         .withRemoteInterview(input.remoteInterview)
+         .withNoExperience(input.noExperience)
+         .withInternship(input.internship)
+         .withWorkFromHome(input.workFromHome)
+         .withSalary(input.salary)
+         .withLanguages(input.languages)
+         .withKeywords(input.keywords)
+         .withCompanyIds(input.companyIds)
+         .withTypes(input.types)
+         .withLevels(input.levels)
+         .filter;
 
       return await prisma.jobListing.findMany({
-         where: {
-            AND: clauses,
-         },
+         where: filter,
          orderBy: { createdAt: `desc` },
       });
    }
-
-   private getCategoriesFilter(categories: string[]): Prisma.JobListingWhereInput {
-      return {
-         OR: [{
-            company: {
-               categories: {
-                  some: {
-                     category: {
-                        name: {
-                           in: categories,
-                           mode: Prisma.QueryMode.insensitive,
-                        },
-                     },
-                  },
-               },
-            },
-         },
-            {
-               categories: {
-                  some: {
-                     category: {
-                        name: {
-                           in: categories,
-                           mode: Prisma.QueryMode.insensitive,
-                        },
-                     },
-                  },
-               },
-            },
-         ],
-      };
-   }
-
-   private getSalaryFilter(filter: string): Prisma.JobListingWhereInput {
-      // Try and parse salary range:
-      const matches = filter.match(/\d+([,.]?\d+)?/g);
-      let [min, max] = [parseFloat(matches[0].replace(/,/g, ``)), parseFloat(matches[1].replace(/,/g, ``))];
-
-      return {
-         OR: [
-            {
-               AND: [
-                  {
-                     parameters: {
-                        path: [`salary`, `type`], equals: `range`,
-                     },
-                  },
-                  {
-                     parameters: {
-                        path: [`salary`, `min`], lte: min,
-                     },
-                  },
-                  {
-                     parameters: {
-                        path: [`salary`, `max`], gte: min,
-                     },
-                  },
-               ],
-            },
-            {
-               AND: [
-                  {
-                     parameters: {
-                        path: [`salary`, `type`], equals: `range`,
-                     },
-                  },
-                  {
-                     parameters: {
-                        path: [`salary`, `min`], lte: max,
-                     },
-                  },
-                  {
-                     parameters: {
-                        path: [`salary`, `max`], gte: max,
-                     },
-                  },
-               ],
-            },
-            {
-               AND: [
-                  {
-                     parameters: {
-                        path: [`salary`, `type`], equals: `fixed`,
-                     },
-                  },
-                  {
-                     parameters: {
-                        path: [`salary`, `value`], gte: min, lte: max,
-                     },
-                  },
-               ],
-            },
-         ],
-      };
-   }
-
    @Mutation(of => Boolean, { nullable: false })
    public async fileUpload(@Arg(`file`, of => GraphQLUpload) file: Upload): Promise<boolean> {
       console.log({ file });
@@ -193,6 +91,23 @@ export class JobListingCrudResolver extends Base {
 
       return Object.entries(_.groupBy(jobListings, l => l.level))
          .map(([level, listings]) => ({ name: level, totalJobsCount: listings.length }));
+   }
+
+   @Query(of => [GetEmploymentTypeDetailsResponse], { nullable: false })
+   @NoCache()
+   public async getAllEmploymentTypes(@Ctx() { prisma }: MyContext): Promise<GetEmploymentTypeDetailsResponse[]> {
+      let listings = await prisma.jobListing.findMany({
+         select: { id: true, type: true },
+      });
+
+      let typesListingsCount = new Map<string, number>();
+
+      for (let listing of listings) {
+         typesListingsCount.set(listing.type, (typesListingsCount.get(listing.type) || 0) + 1);
+      }
+
+      return [...typesListingsCount.entries()]
+         .map(([keyword, count]) => ({ name: keyword, totalJobsCount: count }));
    }
 
 

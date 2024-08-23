@@ -2120,6 +2120,11 @@ input GetCategoriesDetailsInput {
   skip: Int! = 0
 }
 
+type GetEmploymentTypeDetailsResponse {
+  name: String
+  totalJobsCount: Int!
+}
+
 type GetJobListingLevelsDetailsResponse {
   name: String
   totalJobsCount: Int!
@@ -4530,6 +4535,7 @@ type Query {
   findUniqueUserAttachments(relationLoadStrategy: RelationLoadStrategy, where: UserAttachmentsWhereUniqueInput!): UserAttachments
   findUniqueUserAttachmentsOrThrow(relationLoadStrategy: RelationLoadStrategy, where: UserAttachmentsWhereUniqueInput!): UserAttachments
   getAccount(relationLoadStrategy: RelationLoadStrategy, where: AccountWhereUniqueInput!): Account
+  getAllEmploymentTypes: [GetEmploymentTypeDetailsResponse!]!
   getAllKeywords: [GetKeywordsDetailsResponse!]!
   getAllUsersWithSubscriptions: [User!]!
   getCompany(relationLoadStrategy: RelationLoadStrategy, where: CompanyWhereUniqueInput!): Company

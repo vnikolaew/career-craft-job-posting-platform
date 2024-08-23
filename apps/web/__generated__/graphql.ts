@@ -2243,6 +2243,12 @@ export type GetCategoriesDetailsInput = {
   skip?: Scalars['Int']['input'];
 };
 
+export type GetEmploymentTypeDetailsResponse = {
+  __typename?: 'GetEmploymentTypeDetailsResponse';
+  name?: Maybe<Scalars['String']['output']>;
+  totalJobsCount: Scalars['Int']['output'];
+};
+
 export type GetJobListingLevelsDetailsResponse = {
   __typename?: 'GetJobListingLevelsDetailsResponse';
   name?: Maybe<Scalars['String']['output']>;
@@ -5333,6 +5339,7 @@ export type Query = {
   findUniqueUserAttachments?: Maybe<UserAttachments>;
   findUniqueUserAttachmentsOrThrow?: Maybe<UserAttachments>;
   getAccount?: Maybe<Account>;
+  getAllEmploymentTypes: Array<GetEmploymentTypeDetailsResponse>;
   getAllKeywords: Array<GetKeywordsDetailsResponse>;
   getAllUsersWithSubscriptions: Array<User>;
   getCompany?: Maybe<Company>;
@@ -8843,6 +8850,11 @@ export type GetAllCategoriesQueryQueryVariables = Exact<{
 
 export type GetAllCategoriesQueryQuery = { __typename?: 'Query', getCompanyCategoriesDetails: Array<{ __typename?: 'CategoryDetailsResponse', id: string, name: string, description: string, totalJobListings: number }> };
 
+export type GetAllEmploymentTypesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllEmploymentTypesQueryQuery = { __typename?: 'Query', getAllEmploymentTypes: Array<{ __typename?: 'GetEmploymentTypeDetailsResponse', name?: string | null, totalJobsCount: number }> };
+
 export type GetAllLevelsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8986,6 +8998,7 @@ export const FileUploadDocument = {"kind":"Document","definitions":[{"kind":"Ope
 export const GetJobListingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetJobListing"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"banner_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldwide_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"headquarters"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}},{"kind":"Field","name":{"kind":"Name","value":"founded"}}]}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetJobListingQuery, GetJobListingQueryVariables>;
 export const GetCompanyJobDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCompanyJob"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getJobListing"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetCompanyJobQuery, GetCompanyJobQueryVariables>;
 export const GetAllCategoriesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllCategoriesQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetCategoriesDetailsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCompanyCategoriesDetails"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"totalJobListings"}}]}}]}}]} as unknown as DocumentNode<GetAllCategoriesQueryQuery, GetAllCategoriesQueryQueryVariables>;
+export const GetAllEmploymentTypesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllEmploymentTypesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getAllEmploymentTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"totalJobsCount"}}]}}]}}]} as unknown as DocumentNode<GetAllEmploymentTypesQueryQuery, GetAllEmploymentTypesQueryQueryVariables>;
 export const GetAllLevelsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllLevelsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getJobListingLevelsDetails"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"totalJobsCount"}}]}}]}}]} as unknown as DocumentNode<GetAllLevelsQueryQuery, GetAllLevelsQueryQueryVariables>;
 export const GetAllKeywordsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllKeywordsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getAllKeywords"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"totalJobsCount"}}]}}]}}]} as unknown as DocumentNode<GetAllKeywordsQueryQuery, GetAllKeywordsQueryQueryVariables>;
 export const GetAllJobCategoriesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllJobCategoriesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jobListingCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllJobCategoriesQueryQuery, GetAllJobCategoriesQueryQueryVariables>;
@@ -11241,6 +11254,12 @@ export type GetCategoriesDetailsInput = {
   skip?: Scalars['Int']['input'];
 };
 
+export type GetEmploymentTypeDetailsResponse = {
+  __typename?: 'GetEmploymentTypeDetailsResponse';
+  name?: Maybe<Scalars['String']['output']>;
+  totalJobsCount: Scalars['Int']['output'];
+};
+
 export type GetJobListingLevelsDetailsResponse = {
   __typename?: 'GetJobListingLevelsDetailsResponse';
   name?: Maybe<Scalars['String']['output']>;
@@ -14331,6 +14350,7 @@ export type Query = {
   findUniqueUserAttachments?: Maybe<UserAttachments>;
   findUniqueUserAttachmentsOrThrow?: Maybe<UserAttachments>;
   getAccount?: Maybe<Account>;
+  getAllEmploymentTypes: Array<GetEmploymentTypeDetailsResponse>;
   getAllKeywords: Array<GetKeywordsDetailsResponse>;
   getAllUsersWithSubscriptions: Array<User>;
   getCompany?: Maybe<Company>;
@@ -17840,6 +17860,11 @@ export type GetAllCategoriesQueryQueryVariables = Exact<{
 
 
 export type GetAllCategoriesQueryQuery = { __typename?: 'Query', getCompanyCategoriesDetails: Array<{ __typename?: 'CategoryDetailsResponse', id: string, name: string, description: string, totalJobListings: number }> };
+
+export type GetAllEmploymentTypesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllEmploymentTypesQueryQuery = { __typename?: 'Query', getAllEmploymentTypes: Array<{ __typename?: 'GetEmploymentTypeDetailsResponse', name?: string | null, totalJobsCount: number }> };
 
 export type GetAllLevelsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 

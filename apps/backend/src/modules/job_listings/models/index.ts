@@ -116,3 +116,13 @@ export class GetKeywordsDetailsResponse {
    @Field(() => Int, { nullable: false, defaultValue: 0 })
    public totalJobsCount: number = 0;
 }
+
+@ObjectType ()
+export class GetEmploymentTypeDetailsResponse {
+
+   @Field(() => String, { nullable: true })
+   public name: string
+
+   @Field(() => Int, { nullable: false, defaultValue: 0 })
+   public totalJobsCount: number = 0;
+}

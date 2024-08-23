@@ -2,12 +2,15 @@
 import React, { Fragment } from "react";
 import JobFilterButton from "@/app/jobs/_components/filters/JobFilterButton";
 import { SearchParams } from "@/app/jobs/_queries";
-import { useRouter } from "next/navigation";
 import CategoriesFilterButton from "@/app/jobs/_components/filters/CategoriesFilterButton";
 import ProfessionsFilterButton from "@/app/jobs/_components/filters/ProfessionsFilterButton";
 import BooleanFilterButton from "@/app/jobs/_components/filters/BooleanFilterButton";
 import JobListingsLevelFilterButton from "@/app/jobs/_components/filters/JobListingsLevelFilterButton";
 import SalaryFilterButton from "./SalaryFilterButton";
+import KeywordsFilterButton from "@/app/jobs/_components/filters/KeywordsFilterButton";
+import EmploymentTypeFilterButton from "@/app/jobs/_components/filters/EmploymentTypeFilterButton";
+import FurloughFilterButton from "./FurloughFilterButton";
+import FromFilterButton from "@/app/jobs/_components/filters/FromFilterButton";
 
 export interface JobFiltersSectionProps {
    params: SearchParams;
@@ -37,14 +40,9 @@ const JobFiltersSection = ({ params }: JobFiltersSectionProps) => {
          </JobFilterButton>
          <CategoriesFilterButton categories={params.categories} />
          <ProfessionsFilterButton professions={params.professions} />
+         <KeywordsFilterButton keywords={params.keywords} />
 
-         <JobFilterButton active={!!params.keywords?.length}>
-            Keywords<ButtonText values={params.keywords} />
-         </JobFilterButton>
-
-         <JobFilterButton active={!!params.types?.length}>
-            Employment type<ButtonText values={params.types} />
-         </JobFilterButton>
+         <EmploymentTypeFilterButton types={params.types}/>
 
          <BooleanFilterButton value={params.internship} paramName={`internship`} >
             Internship
@@ -60,19 +58,19 @@ const JobFiltersSection = ({ params }: JobFiltersSectionProps) => {
          </BooleanFilterButton>
 
          <JobListingsLevelFilterButton levels={params.levels} />
-         <JobFilterButton active={!!params.from?.length}>
-            From<ButtonText values={params.from?.length ? [params.from!] : []} />
-         </JobFilterButton>
+         <FromFilterButton from={params.from} />
+
          <JobFilterButton active={!!params.languages?.length}>
             Languages<ButtonText values={params.languages} />
          </JobFilterButton>
+
          <SalaryFilterButton salary={params.salary} />
-         <JobFilterButton active={!!params.furlough?.length}>
-            Furlough<ButtonText values={params.furlough?.length ? [params.furlough!] : []} />
-         </JobFilterButton>
+         <FurloughFilterButton furlough={params.furlough} />
+
          <JobFilterButton active={!!params.companyIds?.length}>
             Companies<ButtonText values={params.companyIds?.length ? params.companyIds! : []} />
          </JobFilterButton>
+
          <button className={`btn btn-neutral !rounded-full`} onClick={handleClearFilters}>Clear</button>
       </div>
    );
