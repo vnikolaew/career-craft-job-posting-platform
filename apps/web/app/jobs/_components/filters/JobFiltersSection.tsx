@@ -3,12 +3,17 @@ import React, { Fragment } from "react";
 import JobFilterButton from "@/app/jobs/_components/filters/JobFilterButton";
 import { SearchParams } from "@/app/jobs/_queries";
 import { useRouter } from "next/navigation";
+import CategoriesFilterButton from "@/app/jobs/_components/filters/CategoriesFilterButton";
+import ProfessionsFilterButton from "@/app/jobs/_components/filters/ProfessionsFilterButton";
+import BooleanFilterButton from "@/app/jobs/_components/filters/BooleanFilterButton";
+import JobListingsLevelFilterButton from "@/app/jobs/_components/filters/JobListingsLevelFilterButton";
+import SalaryFilterButton from "./SalaryFilterButton";
 
 export interface JobFiltersSectionProps {
    params: SearchParams;
 }
 
-const ButtonText = ({ values }: { values?: string[] }) => (
+export const ButtonText = ({ values }: { values?: string[] }) => (
    <Fragment>
       {values?.length ?
          <span className={`!font-normal truncate overflow-hidden`}>: {values.join(`, `)}</span> : ``}
@@ -18,8 +23,6 @@ const ButtonText = ({ values }: { values?: string[] }) => (
 
 
 const JobFiltersSection = ({ params }: JobFiltersSectionProps) => {
-   let router = useRouter()
-
    function handleClearFilters() {
       window.location.href = `${window.location.origin}${window.location.pathname}`
    }
@@ -32,42 +35,38 @@ const JobFiltersSection = ({ params }: JobFiltersSectionProps) => {
          <JobFilterButton active={!!params.locations?.length}>
             Locations<ButtonText values={params.locations} />
          </JobFilterButton>
-         <JobFilterButton active={!!params.categories?.length}>
-            Categories<ButtonText values={params.categories} />
-         </JobFilterButton>
-         <JobFilterButton active={!!params.professions?.length}>
-            Professions<ButtonText values={params.professions} />
-         </JobFilterButton>
+         <CategoriesFilterButton categories={params.categories} />
+         <ProfessionsFilterButton professions={params.professions} />
+
          <JobFilterButton active={!!params.keywords?.length}>
             Keywords<ButtonText values={params.keywords} />
          </JobFilterButton>
+
          <JobFilterButton active={!!params.types?.length}>
             Employment type<ButtonText values={params.types} />
          </JobFilterButton>
-         <JobFilterButton active={params.internship}>
+
+         <BooleanFilterButton value={params.internship} paramName={`internship`} >
             Internship
-         </JobFilterButton>
-         <JobFilterButton active={params.noExperience}>
+         </BooleanFilterButton>
+         <BooleanFilterButton value={params.noExperience} paramName={`noExperience`} >
             No experience
-         </JobFilterButton>
-         <JobFilterButton active={params.remoteInterview}>
+         </BooleanFilterButton>
+         <BooleanFilterButton value={params.remoteInterview} paramName={`remoteInterview`} >
             Remote interview
-         </JobFilterButton>
-         <JobFilterButton active={params.workFromHome}>
+         </BooleanFilterButton>
+         <BooleanFilterButton value={params.workFromHome} paramName={`workFromHome`} >
             Work from home
-         </JobFilterButton>
-         <JobFilterButton active={!!params.levels?.length}>
-            Level<ButtonText values={params.levels} />
-         </JobFilterButton>
+         </BooleanFilterButton>
+
+         <JobListingsLevelFilterButton levels={params.levels} />
          <JobFilterButton active={!!params.from?.length}>
             From<ButtonText values={params.from?.length ? [params.from!] : []} />
          </JobFilterButton>
          <JobFilterButton active={!!params.languages?.length}>
             Languages<ButtonText values={params.languages} />
          </JobFilterButton>
-         <JobFilterButton active={!!params.salary?.length}>
-            Salary<ButtonText values={params.salary?.length ? [params.salary!] : []} />
-         </JobFilterButton>
+         <SalaryFilterButton salary={params.salary} />
          <JobFilterButton active={!!params.furlough?.length}>
             Furlough<ButtonText values={params.furlough?.length ? [params.furlough!] : []} />
          </JobFilterButton>

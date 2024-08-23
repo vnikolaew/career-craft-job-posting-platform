@@ -54,3 +54,9 @@ details summary::marker {
 details summary::-webkit-details-marker {
     display: none;
 }
+
+@layer components {
+    .btn {
+        @apply min-h-fit h-fit py-2 px-8;
+    }
+}

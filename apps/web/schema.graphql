@@ -557,6 +557,13 @@ type AggregateVerificationToken {
   _min: VerificationTokenMinAggregate
 }
 
+type CategoryDetailsResponse {
+  description: String!
+  id: String!
+  name: String!
+  totalJobListings: Int!
+}
+
 type CategoryOnCompany {
   category_id: String!
   company_id: String!
@@ -2106,6 +2113,21 @@ input GetAttachmentsByUserInput {
   limit: Int = 10
   skip: Int = 0
   type: String = ""
+}
+
+input GetCategoriesDetailsInput {
+  limit: Int! = 10
+  skip: Int! = 0
+}
+
+type GetJobListingLevelsDetailsResponse {
+  name: String
+  totalJobsCount: Int!
+}
+
+type GetKeywordsDetailsResponse {
+  name: String
+  totalJobsCount: Int!
 }
 
 input GetRelevantCompaniesInput {
@@ -4508,11 +4530,14 @@ type Query {
   findUniqueUserAttachments(relationLoadStrategy: RelationLoadStrategy, where: UserAttachmentsWhereUniqueInput!): UserAttachments
   findUniqueUserAttachmentsOrThrow(relationLoadStrategy: RelationLoadStrategy, where: UserAttachmentsWhereUniqueInput!): UserAttachments
   getAccount(relationLoadStrategy: RelationLoadStrategy, where: AccountWhereUniqueInput!): Account
+  getAllKeywords: [GetKeywordsDetailsResponse!]!
   getAllUsersWithSubscriptions: [User!]!
   getCompany(relationLoadStrategy: RelationLoadStrategy, where: CompanyWhereUniqueInput!): Company
+  getCompanyCategoriesDetails(input: GetCategoriesDetailsInput!): [CategoryDetailsResponse!]!
   getCompanyCategory(relationLoadStrategy: RelationLoadStrategy, where: CompanyCategoryWhereUniqueInput!): CompanyCategory
   getJobListing(relationLoadStrategy: RelationLoadStrategy, where: JobListingWhereUniqueInput!): JobListing
   getJobListingCategory(relationLoadStrategy: RelationLoadStrategy, where: JobListingCategoryWhereUniqueInput!): JobListingCategory
+  getJobListingLevelsDetails: [GetJobListingLevelsDetailsResponse!]!
   getJobListingSubscription(relationLoadStrategy: RelationLoadStrategy, where: JobListingSubscriptionWhereUniqueInput!): JobListingSubscription
   getMostRelevantCompanies(input: GetRelevantCompaniesInput!): [Company!]!
   getSavedListing(relationLoadStrategy: RelationLoadStrategy, where: SavedListingWhereUniqueInput!): SavedListing

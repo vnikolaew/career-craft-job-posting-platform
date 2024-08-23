@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { getJobListings, normalizeParams } from "@/app/jobs/_queries";
 import JobListingSearchCard from "@/app/jobs/_components/JobListingSearchCard";
 import MostRelevantCompaniesSection from "@/app/jobs/_components/MostRelevantCompaniesSection";
@@ -28,9 +28,8 @@ export interface PageProps {
 
 const Page = async ({}: PageProps) => {
    let params = await normalizeParams() ?? {};
-   console.log({ params });
 
-   let { jobListings, mostRelevantCompanies } = await getJobListings({ categories: params.categories ?? [] });
+   let { jobListings, mostRelevantCompanies } = await getJobListings(params);
 
    return (
       <section className={`w-3/4 mx-auto mt-24 flex flex-col gap-8 items-center`}>
@@ -43,9 +42,17 @@ const Page = async ({}: PageProps) => {
                <div className={`mb-8 w-full`}>
                   <SubscribeToJobListingsCard categories={params.categories ?? []} />
                </div>
-               {jobListings.map((listing, index) => (
-                  <JobListingSearchCard jobListing={listing} key={index} />
-               ))}
+               {jobListings.length ? (
+                  <Fragment>
+                     {jobListings.map((listing, index) => (
+                        <JobListingSearchCard jobListing={listing} key={index} />
+                     ))}
+                  </Fragment>
+               ) : (
+                  <div className={`w-full mt-4 text-center text-neutral-500`}>
+                     <h2 className={`text-2xl drop-shadow-md`}>No job listings found matching this criteria.</h2>
+                  </div>
+               )}
             </div>
             <MostRelevantCompaniesSection companies={mostRelevantCompanies} />
          </div>

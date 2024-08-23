@@ -72,7 +72,7 @@ export class SearchJobListingsInput {
    public salary?: string;
 
    @Field(_ => [JobListingEmploymentType], { nullable: true })
-   public types?: string[];
+   public types?: JobListingEmploymentType[];
 
    @Field(_ => Boolean, { nullable: true })
    public internship?: boolean;
@@ -94,4 +94,25 @@ export class SearchJobListingsInput {
 
    @Field(_ => FurloughPeriod, { nullable: true })
    public furlough?: FurloughPeriod;
+}
+
+
+@ObjectType ()
+export class GetJobListingLevelsDetailsResponse {
+
+   @Field(() => String, { nullable: true, defaultValue: 10 })
+   public name: string
+
+   @Field(() => Int, { nullable: false, defaultValue: 0 })
+   public totalJobsCount: number = 0;
+}
+
+@ObjectType ()
+export class GetKeywordsDetailsResponse {
+
+   @Field(() => String, { nullable: true })
+   public name: string
+
+   @Field(() => Int, { nullable: false, defaultValue: 0 })
+   public totalJobsCount: number = 0;
 }

@@ -8,13 +8,9 @@ import {
    JobListingEmploymentType,
    JobListingFrom,
    JobListingLevel,
-   JobListingWhereInput,
-   QueryMode,
+   SearchJobListingsInput,
 } from "@/__generated__/graphql";
 
-export interface GetJobListingsFilter {
-   categories?: string[] | string;
-}
 
 export interface SearchParams {
    categories?: string[],
@@ -34,24 +30,31 @@ export interface SearchParams {
    salary?: string;
 }
 
+export interface GetJobListingsFilter extends SearchParams {
+
+}
+
 export async function normalizeParams(): Promise<SearchParams | null> {
-   const url = headers().get(`referer`);
+   const url = headers().get(`next-url`);
+   console.log({ url });
+
    if (!url) return null!;
 
    try {
       let params = new URL(url).searchParams;
+      console.log(params.get(`internship`));
       return {
          companyIds: params.getAll(`companyIds`) ?? [],
-         categories: params.getAll(`categories`) ?? [],
+         categories: params.getAll(`categories`)?.flatMap(x => x.split(`,`))?.map(x => x?.trim()).filter(Boolean) ?? [],
          locations: params.getAll(`locations`) ?? [],
-         professions: params.getAll(`profession`) ?? [],
-         keywords: params.getAll(`keywords`) ?? [],
-         types: params.getAll(`type`) as Lowercase<JobListingEmploymentType>[] ?? [],
+         professions: params.getAll(`professions`)?.flatMap(x => x.split(`,`))?.map(x => x?.trim()).filter(Boolean) ?? [],
+         keywords: params.getAll(`keywords`)?.flatMap(x => x.split(`,`))?.map(x => x?.trim()) ?? [],
+         types: params.getAll(`types`) as Lowercase<JobListingEmploymentType>[] ?? [],
          internship: params.get(`internship`) === `true`,
          noExperience: params.get(`noExperience`) === `true`,
          remoteInterview: params.get(`remoteInterview`) === `true`,
          workFromHome: params.get(`workFromHome`) === `true`,
-         levels: params.getAll(`level`) as JobListingLevel[] ?? [],
+         levels: params.getAll(`levels`)?.flatMap(x => x.split(`,`))?.map(x=> x?.trim()).filter(Boolean) as JobListingLevel[] ?? [],
          from: params.get(`from`) as JobListingFrom ?? undefined,
          languages: params.getAll(`languages`) ?? [],
          salary: params.get(`salary`) ?? undefined,
@@ -63,7 +66,7 @@ export async function normalizeParams(): Promise<SearchParams | null> {
 }
 
 const GET_JOB_LISTINGS_QUERY = gql(/* GraphQL */`
-    query GetJobListingsWithFilter($filter: JobListingWhereInput!, $categories: [String!]) {
+    query GetJobListingsWithFilter($filter: SearchJobListingsInput!, $categories: [String!]) {
         getMostRelevantCompanies(input: {categories: $categories, limit: 10, skip: 0}) {
             id
             name
@@ -95,7 +98,7 @@ const GET_JOB_LISTINGS_QUERY = gql(/* GraphQL */`
             }
         }
 
-        jobListings(where: $filter) {
+        searchJobListings(input: $filter) {
             id
             name
             company_id
@@ -163,27 +166,26 @@ const GET_JOB_LISTINGS_QUERY = gql(/* GraphQL */`
 export async function getJobListings(filter: GetJobListingsFilter) {
    let cookie = headers().get("cookie")!;
 
-   let inputFilter: JobListingWhereInput = {};
+   let inputFilter: SearchJobListingsInput = {};
    if (filter.categories?.length) {
       inputFilter = {
-         categories: {
-            some: {
-               category: {
-                  is: {
-                     name: {
-                        mode: QueryMode.Insensitive,
-                        in: Array.isArray(filter.categories)
-                           ? filter.categories
-                           : [filter.categories ?? ``],
-                     },
-                  },
-               },
-            },
-         },
+         categories: Array.isArray(filter.categories) ? filter.categories : [filter.categories ?? ``],
+         levels: filter.levels ?? [],
+         from: filter.from ?? undefined,
+         furlough: filter.furlough ?? undefined,
+         internship: filter.internship,
+         remoteInterview: filter.remoteInterview,
+         workFromHome: filter.workFromHome,
+         noExperience: filter.noExperience,
+         salary: filter.salary ?? undefined,
+         languages: filter.languages ?? [],
+         companyIds: filter.companyIds ?? [],
+         locations: filter.locations ?? [],
+         keywords: filter.keywords ?? [],
       };
    }
 
-   const { data: { jobListings, getMostRelevantCompanies } } =
+   const { data: { searchJobListings, getMostRelevantCompanies } } =
       await client.authenticatedQuery(cookie, {
          query: GET_JOB_LISTINGS_QUERY,
          variables: {
@@ -195,6 +197,5 @@ export async function getJobListings(filter: GetJobListingsFilter) {
          fetchPolicy: `network-only`,
       });
 
-   return { jobListings, mostRelevantCompanies: getMostRelevantCompanies };
-   ;
+   return { jobListings: searchJobListings, mostRelevantCompanies: getMostRelevantCompanies };
 }

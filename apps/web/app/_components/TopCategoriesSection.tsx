@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import { gql } from "@/__generated__";
 import HomePageSection from "@/app/_components/HomePageSection";
 import Skeleton from "@/components/common/Skeleton";
@@ -46,9 +46,11 @@ const TopCategoriesSection = ({}: TopCategoriesSectionProps) => {
 };
 
 const CategoryBadge = ({ category }: { category: JobListingCategory }) => {
+   const params = useMemo(() => new URLSearchParams({ categories: category.name.toLowerCase().trim() }), [category.name]);
+
    return (
       <div key={category.id} className={`w-full`}>
-         <Link href={`/jobs?category=${encodeURIComponent(category.name.toLowerCase().trim())}`}
+         <Link href={`/jobs?${params.toString()}`}
                className={`text-neutral-500 btn btn-outline !rounded-full !min-h-fit !h-fit !py-3 flex items-center justify-start gap-3 !w-fit !px-6 hover:!bg-neutral-300 transition-all duration-100 !border-neutral-300 group`}>
             <ShoppingCart className={`group-hover:!text-neutral-500 fill-neutral-500`} size={18} />
             <span className={`font-semibold text-base text-neutral-700`}>
