@@ -3,10 +3,10 @@ import React from "react";
 export interface PageProps {
 }
 
-const Page = async ({}: PageProps) => {
+const Page = ({}: PageProps) => {
    return (
       <div>
-         Terms of service page.
+         About page.
       </div>
    );
 };

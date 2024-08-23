@@ -33,3 +33,16 @@ function isValidDate(year: number, month: number, day: number) {
 export function sleep(ms: number) {
    return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+export function getRandomItems<T>(array: T[], n: number): T[] {
+   // Shuffle the array using Fisher-Yates algorithm
+   let shuffledArray = [...array];
+   for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j]!, shuffledArray[i]!];
+   }
+
+   // Return the first n elements of the shuffled array
+   return shuffledArray.slice(0, n);
+}
+

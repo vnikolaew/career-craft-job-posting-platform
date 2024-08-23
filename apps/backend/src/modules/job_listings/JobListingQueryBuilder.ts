@@ -25,7 +25,7 @@ export class JobListingQueryBuilder {
       this.filterClauses.push({
          parameters: {
             path: [`furlough`],
-            equals: furlough.toLowerCase(),
+            equals: furlough
          },
       });
       return this;

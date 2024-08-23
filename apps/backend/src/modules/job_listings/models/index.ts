@@ -126,3 +126,23 @@ export class GetEmploymentTypeDetailsResponse {
    @Field(() => Int, { nullable: false, defaultValue: 0 })
    public totalJobsCount: number = 0;
 }
+
+@ObjectType ()
+export class GetLanguagesDetailsResponse {
+
+   @Field(() => String, { nullable: true })
+   public name: string
+
+   @Field(() => Int, { nullable: false, defaultValue: 0 })
+   public totalJobsCount: number = 0;
+}
+
+@ObjectType ()
+export class GetLocationsDetailsResponse {
+
+   @Field(() => String, { nullable: true })
+   public name: string
+
+   @Field(() => Int, { nullable: false, defaultValue: 0 })
+   public totalJobsCount: number = 0;
+}

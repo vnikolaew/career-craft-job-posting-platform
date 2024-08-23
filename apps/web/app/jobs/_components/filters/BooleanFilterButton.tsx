@@ -14,7 +14,7 @@ const BooleanFilterButton = ({ value, paramName, children }: BooleanFilterButton
    return (
       <JobFilterButton
          onClick={_ =>
-            setValue(!valueBool).then(_ => window.location.reload())}
+            setValue(x => x === true ? null : !x).then(_ => window.location.reload())}
          modalEnabled={false} active={value === true}>
          {children}
       </JobFilterButton>

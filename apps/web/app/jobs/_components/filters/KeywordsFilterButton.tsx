@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import JobFilterButton from "./JobFilterButton";
 import { gql } from "@/__generated__";
 import { useQuery } from "@apollo/client";
@@ -46,10 +46,6 @@ const KeywordsFilterModal = ({ id }: { id: string }) => {
          ?.filter(k => !!k?.name?.toLowerCase().includes(debounced.trim().toLowerCase()))
       ?? [], [data?.getAllKeywords, debounced]);
 
-   useEffect(() => {
-      console.log({ debounced });
-   }, [debounced]);
-
    const [selectedKeywords, setSelectedKeywords] = useQueryState(`keywords`, parseAsArrayOf(parseAsString));
 
    async function handleClickCategory(category: string) {
@@ -76,7 +72,9 @@ const KeywordsFilterModal = ({ id }: { id: string }) => {
                            <span>
                               {keyword}
                            </span>
-                           <span className={`text-xs cursor-pointer`}>
+                           <span
+                              onClick={_ => setSelectedKeywords(k => k?.filter(x => x !== keyword) ?? [])}
+                              className={`text-xs cursor-pointer`}>
                               X
                            </span>
                         </div>

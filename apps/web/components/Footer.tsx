@@ -1,8 +1,10 @@
-import React from "react";
-import Link from "next/link";
+import React, { ComponentProps } from "react";
+import Link, { LinkProps } from "next/link";
 import logo from "@/public/favicon.png";
 import Image from "next/image";
 import { Github } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { APP_NAME, LINKS } from "@/config/site";
 
 export interface FooterProps {
 }
@@ -44,11 +46,11 @@ export const Icons = {
       </svg>
    ),
 };
-const ICON_CLASSNAME = `h-6 w-6 !fill-green-600 text-white transition-colors duration-100 hover:!fill-accent hover:!text-accent`
+const ICON_CLASSNAME = `h-8 w-8 !fill-green-600 text-white transition-colors duration-100 hover:!fill-green-700 hover:!text-green-700`;
 
 const Footer = ({}: FooterProps) => {
    return (
-      <section className={`w-full px-24 py-12 mt-24 border-t border-neutral-300 bg-neutral-100`}>
+      <section className={`w-full px-24 py-12 border-t border-neutral-300 bg-neutral-100`}>
          <div className={`flex items-center justify-between w-full`}>
             <div className={`flex flex-col items-start`}>
                <Link className={`flex flex-col gap-2 items-start`} href={`/`}>
@@ -60,6 +62,64 @@ const Footer = ({}: FooterProps) => {
                <span className={`!mt-4 text-sm !text-neutral-400`}>
                   Copyright © {new Date().getFullYear()} - All rights reserved.
                </span>
+            </div>
+            <div className={`flex-1 w-full mb-8`}>
+               <div className={`w-2/3 mx-auto flex items-start justify-around`}>
+                  <div className={`flex flex-col items-start gap-6`}>
+                     <h2 className={`text-xl drop-shadow-sm`}>
+                        Platform
+                     </h2>
+                     <ul className={`flex flex-col items-start gap-2 list-none`}>
+                        <li>
+                           <FooterLink href={`/`}>
+                              Home
+                           </FooterLink>
+                        </li>
+                        <li>
+                           <FooterLink href={`/jobs`}>
+                              Browse Jobs
+                           </FooterLink>
+                        </li>
+                     </ul>
+                  </div>
+                  <div className={`flex flex-col items-start gap-6`}>
+                     <h2 className={`text-xl drop-shadow-sm`}>
+                        Company
+                     </h2>
+                     <ul className={`flex flex-col items-start gap-2 list-none`}>
+                        <li>
+                           <FooterLink href={`/contact`}>
+                              Contact Us
+                           </FooterLink>
+                        </li>
+                        <li>
+                           <FooterLink href={`/about`}>
+                              About Us
+                           </FooterLink>
+                        </li>
+                     </ul>
+                  </div>
+
+                  <div className={`flex flex-col items-start gap-6`}>
+                     <h2 className={`text-xl drop-shadow-sm`}>Legal</h2>
+                     <ul className={`flex flex-col items-start gap-2 list-none`}>
+                        <li>
+                           <FooterLink href={`/privacy`}>Privacy Policy</FooterLink>
+                        </li>
+                        <li>
+                           <FooterLink href={`/terms`}>
+                              Terms & Conditions
+                           </FooterLink>
+                        </li>
+                        <li>
+                           <FooterLink href={`/cookie-policy`}>
+                              Cookie Policy
+                           </FooterLink>
+                        </li>
+                     </ul>
+                  </div>
+
+               </div>
             </div>
             <div>
                <div className="mb-8 mt-4 flex space-x-6">
@@ -96,5 +156,8 @@ const Footer = ({}: FooterProps) => {
       </section>
    );
 };
+
+const FooterLink = ({ className, ...props }: LinkProps & ComponentProps<"a">) => <Link
+   className={cn(`link link-hover !text-green-600`, className)} {...props}></Link>;
 
 export default Footer;

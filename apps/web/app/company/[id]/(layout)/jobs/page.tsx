@@ -32,7 +32,9 @@ const Page = async ({ params: { id } }: PageProps) => {
             Jobs Filter Section.
          </div>
          <div className={`w-full flex flex-col items-start mt-8 gap-4`}>
-            <h2 className={`text-3xl drop-shadow-sm`}>Job Offers</h2>
+            <h2 className={`text-3xl drop-shadow-sm`}>
+               Job Listings
+            </h2>
             <div className="divider !mt-0 !mb-0 !text-neutral-700 !w-2/3 !fill-neutral-700" />
             <div className={`w-full flex flex-col items-start gap-4 !text-neutral-600`}>
                {(company?.listings?.length ?? 0) === 0 ?

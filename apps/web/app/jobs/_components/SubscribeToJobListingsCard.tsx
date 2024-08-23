@@ -1,12 +1,18 @@
 "use client";
-import React, { Fragment } from "react";
+import React, { Fragment, useId } from "react";
 import { MailCheck } from "lucide-react";
+import SubscribeToCompanyListingsModal from "@/components/common/SubscribeToCompanyListingsModal";
+import { SubscribeToJobListingsInput } from "@/__generated__/graphql";
 
 export interface SubscribeToJobListingsCardProps {
-   categories: string[]
+   params?: SubscribeToJobListingsInput;
+   categories: string[];
+   description?: string;
 }
 
-const SubscribeToJobListingsCard = ({categories}: SubscribeToJobListingsCardProps) => {
+const SubscribeToJobListingsCard = ({ categories, description, params }: SubscribeToJobListingsCardProps) => {
+   const dialogId = useId();
+
    return (
       <Fragment>
          <div
@@ -14,20 +20,22 @@ const SubscribeToJobListingsCard = ({categories}: SubscribeToJobListingsCardProp
             <div className={`flex items-center gap-4`}>
                <MailCheck className={`text-green-600`} size={32} />
                <span className={`text-xl`}>
-                  Receive notifications about new job listings in categories <b>"{categories.join(`, `)}"</b>
+                  Receive notifications about new job listings {description ? <b>{description}</b> : <Fragment>
+                  in categories <b>"{categories.join(`, `)}"</b>
+               </Fragment>}
             </span>
             </div>
             <div className={`w-full flex items-center justify-center mt-4`}>
                <button onClick={e => {
                   e.preventDefault();
-                  document.getElementById(`subscribe-modal`)?.showModal();
+                  document.getElementById(dialogId)?.showModal();
                }}
                        className={`btn btn-outline !text-green-600 !rounded-full !px-12 hover:!bg-green-200 !shadow-md text-lg`}>
                   Subscribe
                </button>
             </div>
          </div>
-         {/*<SubscribeToCompanyListingsModal company={{ name, id, categories }} />*/}
+         <SubscribeToCompanyListingsModal params={params} id={dialogId} company={{ name: ``, id: ``, categories: [] }} />
       </Fragment>
    );
 };

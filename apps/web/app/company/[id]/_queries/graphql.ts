@@ -19,6 +19,23 @@ export const GET_COMPANY_LISTINGS_QUERY = gql(/* GraphQL */`
                 parameters
                 type
                 work_from
+                parametersTyped {
+                    salary {
+                        currency
+                        __typename
+                        ... on RangeJobListingSalary {
+                            min
+                            max
+                        }
+                        ... on FixedJobListingSalary {
+                            value
+                        }
+                    }
+                    remoteInterview
+                    internship
+                    furlough
+                    from
+                }
                 isSaved @client
             }
         }

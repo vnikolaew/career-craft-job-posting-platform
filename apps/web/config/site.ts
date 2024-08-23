@@ -30,5 +30,5 @@ export const LINKS = {
    discord: `https://discord.gg/San8FrTghW`,
    linkedIn: `https://www.linkedin.com/in/victorio-nikolaev-384a43298`,
    email: `victorio.nikolaev25@gmail.com`,
-   supportEmail: `victorio.nikolaev25@gmail.com`,
+   supportEmail: `support@career-craft.com`,
 } as const;

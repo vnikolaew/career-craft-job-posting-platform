@@ -1,6 +1,6 @@
 "use client";
 import React, { Fragment, useEffect, useMemo } from "react";
-import { GetCompanyWithListingsQueryQuery, JobListing } from "@/__generated__/graphql";
+import { GetCompanyWithListingsQueryQuery } from "@/__generated__/graphql";
 import { Bookmark } from "lucide-react";
 import moment from "moment";
 import { gql } from "@/__generated__";
@@ -13,9 +13,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { DEFAULT_COMPANY_LOGO_URL } from "@/providers/apollo/ApolloProvider";
 import { useMeQuery } from "@/hooks/useMeId";
+import { pascalToSpaces } from "@/app/jobs/_components/filters/EmploymentTypeFilterButton";
 
 export interface JobListingCardProps {
-   listing: Partial<JobListing>;
+   listing: GetCompanyWithListingsQueryQuery["getCompany"]["listings"][number]
 }
 
 export const UNSAVE_JOB_LISTING_MUTATION = gql(/* GraphQL */`
@@ -47,9 +48,26 @@ const JobListingCard = ({ listing }: JobListingCardProps) => {
       return moment(date).isSame(moment().subtract(1, `days`), `day`) ? `Yesterday` : moment(date).format(`DD.MM.YY`);
    }, [listing.createdAt]);
 
-   const me = useMeQuery()
+   const me = useMeQuery();
    const [saveJobListing, { loading: saving }] = useMutation(SAVE_JOB_LISTING_MUTATION, { variables: { jobListingId: listing.id! } });
    const [unSaveJobListing, { loading: unsaving }] = useMutation(UNSAVE_JOB_LISTING_MUTATION, { variables: { jobListingId: listing.id! } });
+
+   const description = useMemo(() => {
+      let description = ``;
+      if (listing.parametersTyped?.salary) {
+         if (listing.parametersTyped.salary.__typename === `RangeJobListingSalary`) {
+            description += ` Salary <b>from ${listing.parametersTyped.salary.from} to ${listing.parametersTyped.salary.to} ${listing.parametersTyped.salary.currency}</b>;`;
+         } else {
+            description += ` Salary: <b> ${listing.parametersTyped.salary.value} ${listing.parametersTyped.salary.currency}</b>;`;
+         }
+      }
+      if (listing.parametersTyped?.furlough) description += ` Furlough: <b> ${listing.parametersTyped.furlough}</b>;`;
+      if (listing.parametersTyped?.remoteInterview) description += ` <b>Remote interview</b>;`;
+      if (listing.parametersTyped?.from) description += ` <b>From ${pascalToSpaces(listing.parametersTyped.from)}</b>;`;
+      if (listing.level) description += ` <b>Level: ${listing.level}</b>;`;
+
+      return description.trim().endsWith(`;`) ? description.trim().slice(0, -1) : description;
+   }, [listing]);
 
    const isSaved = useMemo(() =>
          me?.me?.saved_listings?.some(l => l?.listing_id === listing.id),
@@ -93,7 +111,7 @@ const JobListingCard = ({ listing }: JobListingCardProps) => {
                </div>
                <h2 className={`text-2xl font-semibold`}>{listing.name}</h2>
                <h3 className={``}>{listing.location}</h3>
-               {/*<p dangerouslySetInnerHTML={{ __html: listing.description_raw ?? `` }} />*/}
+               <p dangerouslySetInnerHTML={{ __html: description }} />
             </Link>
             <div className={`w-[2px] !h-full !min-h-32 border-[1px] border-dashed border-neutral-300`} />
             <div className={`flex-1 flex items-start justify-start`}>

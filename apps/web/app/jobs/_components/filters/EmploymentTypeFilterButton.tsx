@@ -31,7 +31,7 @@ const GET_ALL_EMPLOYMENT_TYPES_QUERY = gql(/* GraphQL */`
     }
 `);
 
-function pascalToSpaces(str: string) {
+export function pascalToSpaces(str: string) {
    return str.replace(/([A-Z])/g, " $1").trim();
 }
 
@@ -71,7 +71,7 @@ const EmploymentTypeFilterModal = ({ id }: { id: string }) => {
                              selectedTypes?.includes(type.name!) && `!bg-green-100 !text-green-600 hover:!bg-green-300`)}>
                      <span className={cn(`text-neutral-400`,
                         selectedTypes?.includes(type.name!) && `!text-green-600`)}>{type.totalJobsCount}</span>
-                     {pascalToSpaces(type.name)}
+                     {pascalToSpaces(type.name!)}
                   </button>
                ))}
             </div>

@@ -9,14 +9,14 @@ import {
 import { Max, Min } from "class-validator";
 
 export enum FurloughPeriod {
-   TwentyOneToTwentyFive = "21-25",
-   TwentyFiveToThirty = "25-30",
-   ThirtyPlus = "30+"
+   TwentyOneToTwentyFive = "TwentyOneToTwentyFive",
+   TwentyFiveToThirty = "TwentyFiveToThirty",
+   ThirtyPlus = "ThirtyPlus"
 }
 
 export enum JobListingFrom {
-   "DirectEmployer" = "direct-employer",
-   "Agencies" = "agencies",
+   DirectEmployer = "DirectEmployer",
+   Agencies = "Agencies"
 }
 
 registerEnumType(FurloughPeriod, {

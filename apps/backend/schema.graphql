@@ -2135,6 +2135,16 @@ type GetKeywordsDetailsResponse {
   totalJobsCount: Int!
 }
 
+type GetLanguagesDetailsResponse {
+  name: String
+  totalJobsCount: Int!
+}
+
+type GetLocationsDetailsResponse {
+  name: String
+  totalJobsCount: Int!
+}
+
 input GetRelevantCompaniesInput {
   categories: [String!]
   limit: Int = 10
@@ -4537,6 +4547,8 @@ type Query {
   getAccount(relationLoadStrategy: RelationLoadStrategy, where: AccountWhereUniqueInput!): Account
   getAllEmploymentTypes: [GetEmploymentTypeDetailsResponse!]!
   getAllKeywords: [GetKeywordsDetailsResponse!]!
+  getAllLanguages: [GetLanguagesDetailsResponse!]!
+  getAllLocations: [GetLocationsDetailsResponse!]!
   getAllUsersWithSubscriptions: [User!]!
   getCompany(relationLoadStrategy: RelationLoadStrategy, where: CompanyWhereUniqueInput!): Company
   getCompanyCategoriesDetails(input: GetCategoriesDetailsInput!): [CategoryDetailsResponse!]!

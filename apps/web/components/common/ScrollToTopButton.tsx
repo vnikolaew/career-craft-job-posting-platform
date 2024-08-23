@@ -21,7 +21,6 @@ const ScrollToTopButton = ({}: ScrollToTopButtonProps) => {
       document.body.scrollTop = 0;
    };
 
-   // @ts-ignore
    return (
       <AnimatePresence>
          {showButton && (

@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useId } from "react";
 import { useMeQuery } from "@/hooks/useMeId";
 import { useForm } from "react-hook-form";
 import LoadingButton from "@/components/common/LoadingButton";
-import { JobListingSubscriptionNotificationFrequency } from "@/__generated__/graphql";
+import { JobListingSubscriptionNotificationFrequency, SubscribeToJobListingsInput } from "@/__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { useToasts } from "@/components/common/Toast";
 import { gql } from "@/__generated__";
@@ -58,6 +58,7 @@ export interface SubscribeToCompanyListingsModalProps {
       categories: { id: string, name: string }[]
    };
    id?: string;
+   params?: SubscribeToJobListingsInput;
 }
 
 const SubscribeToCompanyListingsModal = ({
@@ -67,6 +68,7 @@ const SubscribeToCompanyListingsModal = ({
                                                id,
                                                categories,
                                             },
+                                            params,
                                          }: SubscribeToCompanyListingsModalProps) => {
    const me = useMeQuery();
    const signedIn = !!me?.me;
@@ -89,11 +91,16 @@ const SubscribeToCompanyListingsModal = ({
          variables: {
             input: {
                companyId: id,
-               frequency: JobListingSubscriptionNotificationFrequency.Daily,
+               frequency: params?.frequency ?? JobListingSubscriptionNotificationFrequency.Daily,
                categories: categories.map(({ id, name }) => ({ id, name })),
-               job_categories: [],
-               keywords: [],
-               languages: [],
+               job_categories: params?.job_categories ?? [],
+               keywords: params?.keywords ?? [],
+               languages: params?.languages ?? [],
+               location: params?.location,
+               employmentType: params?.employmentType,
+               level: params?.level,
+               workFromHome: params?.workFromHome,
+               parameters: params?.parameters,
             },
          },
          onCompleted: (data) => {

@@ -6,7 +6,10 @@ import { Arg, Authorized, Ctx, Directive, FieldResolver, Mutation, Query, Resolv
 import { MyContext } from "@types";
 import {
    GetEmploymentTypeDetailsResponse,
-   GetJobListingLevelsDetailsResponse, GetKeywordsDetailsResponse,
+   GetJobListingLevelsDetailsResponse,
+   GetKeywordsDetailsResponse,
+   GetLanguagesDetailsResponse,
+   GetLocationsDetailsResponse,
    GetRelevantCompaniesInput,
    JobListingParameters,
    SearchJobListingsInput,
@@ -50,8 +53,8 @@ export class JobListingCrudResolver extends Base {
          skip,
          ...input
       }: SearchJobListingsInput): Promise<JobListing[]> {
-      console.log({ input });
 
+      console.log({ input });
       let filter = new JobListingQueryBuilder()
          .withLocation(input.locations)
          .withCategories(input.categories)
@@ -74,6 +77,7 @@ export class JobListingCrudResolver extends Base {
          orderBy: { createdAt: `desc` },
       });
    }
+
    @Mutation(of => Boolean, { nullable: false })
    public async fileUpload(@Arg(`file`, of => GraphQLUpload) file: Upload): Promise<boolean> {
       console.log({ file });
@@ -93,6 +97,24 @@ export class JobListingCrudResolver extends Base {
          .map(([level, listings]) => ({ name: level, totalJobsCount: listings.length }));
    }
 
+   @Query(of => [GetLocationsDetailsResponse], { nullable: false })
+   @NoCache()
+   public async getAllLocations(@Ctx() { prisma }: MyContext): Promise<GetLocationsDetailsResponse[]> {
+      let listings = await prisma.jobListing.findMany({
+         select: { id: true, type: true, location: true },
+      });
+
+      let locationsListingsCount = new Map<string, number>();
+
+      for (let listing of listings) {
+         locationsListingsCount.set(listing.location.trim(), (locationsListingsCount.get(listing.location) || 0) + 1);
+      }
+
+      return [...locationsListingsCount.entries()]
+         .map(([location, count]) => ({ name: location, totalJobsCount: count }));
+   }
+
+
    @Query(of => [GetEmploymentTypeDetailsResponse], { nullable: false })
    @NoCache()
    public async getAllEmploymentTypes(@Ctx() { prisma }: MyContext): Promise<GetEmploymentTypeDetailsResponse[]> {
@@ -108,6 +130,25 @@ export class JobListingCrudResolver extends Base {
 
       return [...typesListingsCount.entries()]
          .map(([keyword, count]) => ({ name: keyword, totalJobsCount: count }));
+   }
+
+   @Query(of => [GetLanguagesDetailsResponse], { nullable: false })
+   @NoCache()
+   public async getAllLanguages(@Ctx() { prisma }: MyContext): Promise<GetLanguagesDetailsResponse[]> {
+      let listings = await prisma.jobListing.findMany({
+         select: { id: true, languages: true },
+      });
+
+      let languagesListingsCount = new Map<string, number>();
+
+      for (let listing of listings) {
+         for (let language of listing.languages) {
+            languagesListingsCount.set(language, (languagesListingsCount.get(language) || 0) + 1);
+         }
+      }
+
+      return [...languagesListingsCount.entries()]
+         .map(([language, count]) => ({ name: language, totalJobsCount: count }));
    }
 
 

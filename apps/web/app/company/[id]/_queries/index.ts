@@ -12,6 +12,7 @@ import moment from "moment/moment";
 import { GET_COMPANY_LISTINGS_QUERY } from "@/app/company/[id]/_queries/graphql";
 import { client } from "@/providers/apollo/client";
 import { ApolloError } from "@apollo/client";
+import { getRandomItems } from "@/lib/utils";
 
 const GET_ALL_COMPANIES = gql(/* GraphQL */`
     query GetAllCompanies {
@@ -157,18 +158,6 @@ export const getCompanyDetailsWithListings = cache(async (id: string): Promise<G
       return { ...company };
    }
 });
-
-function getRandomItems<T>(array: T[], n: number): T[] {
-   // Shuffle the array using Fisher-Yates algorithm
-   let shuffledArray = [...array];
-   for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j]!, shuffledArray[i]!];
-   }
-
-   // Return the first n elements of the shuffled array
-   return shuffledArray.slice(0, n);
-}
 
 
 export const getAllCompanyIds = cache(async (): Promise<string[]> => {

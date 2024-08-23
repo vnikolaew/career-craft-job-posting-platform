@@ -5,6 +5,7 @@ import JobFilterButton from "./JobFilterButton";
 import { ButtonText } from "./JobFiltersSection";
 import { parseAsString, useQueryState } from "nuqs";
 import { cn } from "@/lib/utils";
+import { pascalToSpaces } from "@/app/jobs/_components/filters/EmploymentTypeFilterButton";
 
 export interface FromFilterButtonProps {
    from?: JobListingFrom;
@@ -18,7 +19,7 @@ const FROMS = {
 const FromFilterButton = ({ from }: FromFilterButtonProps) => {
    return (
       <JobFilterButton modal={id => <FromFilterModal id={id} />} active={!!from?.length}>
-         From<ButtonText values={from ? [from] : []} />
+         From<ButtonText values={from ? [pascalToSpaces(from)] : []} />
       </JobFilterButton>
    );
 };

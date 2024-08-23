@@ -19,7 +19,7 @@ const FURLOUGHS = {
 const FurloughFilterButton = ({ furlough }: FurloughFilterButtonProps) => {
    return (
       <JobFilterButton modal={id => <FurloughFilterModal id={id} />} active={!!furlough?.length}>
-         Furlough<ButtonText values={furlough ? [furlough] : []} />
+         Furlough<ButtonText values={furlough ? [`${FURLOUGHS[furlough]} days`] : []} />
       </JobFilterButton>
    );
 };

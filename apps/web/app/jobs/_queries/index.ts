@@ -25,12 +25,22 @@ export interface SearchParams {
    from?: JobListingFrom,
    furlough?: FurloughPeriod,
    languages?: string[],
-   companyIds?: string[],
+   companies?: string[],
    salary?: string;
 }
 
 export interface GetJobListingsFilter extends SearchParams {
+}
 
+function getArrayValue<T = string>(params: URLSearchParams, key: string): T[] | undefined {
+   let value = params.getAll(key);
+   if (value === null) return undefined;
+
+   return value?.flatMap(x => x.split(`,`))?.map(x => x?.trim()).filter(Boolean) as T[] ?? [];
+}
+
+function pascalToSpaces(str: string) {
+   return str.replace(/([A-Z])/g, " $1").trim();
 }
 
 function getBooleanValue(params: URLSearchParams, key: string): boolean | undefined {
@@ -40,32 +50,66 @@ function getBooleanValue(params: URLSearchParams, key: string): boolean | undefi
    return value === `true`;
 }
 
-export async function normalizeParams(): Promise<SearchParams | null> {
+const FURLOUGH_PERIODS=  {
+   [FurloughPeriod.TwentyOneToTwentyFive] : `21-25 days`,
+   [FurloughPeriod.TwentyFiveToThirty] : `25-30 days`,
+   [FurloughPeriod.ThirtyPlus] : `30+ days`,
+} as const
+
+export async function normalizeParams(): Promise<SearchParams & { description?: (companies: any[]) => string }> {
    const url = headers().get(`next-url`);
 
    if (!url) return null!;
 
    try {
       let params = new URL(url).searchParams;
-      return {
-         companyIds: params.getAll(`companyIds`) ?? [],
-         categories: params.getAll(`categories`)?.flatMap(x => x.split(`,`))?.map(x => x?.trim()).filter(Boolean) ?? [],
+      let normalized: SearchParams = {
+         companies: getArrayValue(params, `companies`) ?? [],
+         categories: getArrayValue(params, `categories`),
          locations: params.getAll(`locations`) ?? [],
-         professions: params.getAll(`professions`)?.flatMap(x => x.split(`,`))?.map(x => x?.trim()).filter(Boolean) ?? [],
-         keywords: params.getAll(`keywords`)?.flatMap(x => x.split(`,`))?.map(x => x?.trim()) ?? [],
+         professions: getArrayValue(params, `professions`),
+         keywords: getArrayValue(params, `keywords`),
          types: params.getAll(`types`) as Lowercase<JobListingEmploymentType>[] ?? [],
          internship: getBooleanValue(params, `internship`),
          noExperience: getBooleanValue(params, `noExperience`),
          remoteInterview: getBooleanValue(params, `remoteInterview`),
          workFromHome: getBooleanValue(params, `workFromHome`),
-         levels: params.getAll(`levels`)?.flatMap(x => x.split(`,`))?.map(x => x?.trim()).filter(Boolean) as JobListingLevel[] ?? [],
+         levels: getArrayValue(params, `levels`),
          from: params.get(`from`)?.length
             ? params.get(`from`)?.toLowerCase() === JobListingFrom.Agencies.toLowerCase()
                ? JobListingFrom.Agencies : JobListingFrom.DirectEmployer
             : undefined,
-         languages: params.getAll(`languages`) ?? [],
+         languages: getArrayValue(params, `languages`),
          salary: params.get(`salary`) ?? undefined,
          furlough: params.get(`furlough`) as FurloughPeriod ?? undefined,
+      };
+
+
+      return {
+         ...normalized,
+         description(allCompanies: { id: string, name: string }[]) {
+            let description = ``;
+            if (normalized.companies) description += ` from ${normalized.companies.map(c => allCompanies.find(x => x.id === c)?.name).join(`, `)} `;
+            if (normalized.professions?.length) description += `for ${normalized.professions.join(`, `)} `;
+            if (normalized.categories?.length) description += `in categories ${normalized.categories.join(`, `)} `;
+
+            description += `with criteria: `;
+            if(normalized.from) description += `from ${pascalToSpaces(normalized.from)}; `
+
+            if (normalized.locations?.length) description += `in ${normalized.locations.join(`, `)}; `;
+            if (normalized.salary) description += `salary: ${normalized.salary}; `;
+            if (normalized.types?.length) description += `type: ${normalized.types.join(`, `)}; `;
+            if (normalized.furlough) description += `furlough: ${FURLOUGH_PERIODS[normalized.furlough]}; `;
+            if (normalized.internship) description += `internship; `;
+            if (normalized.remoteInterview) description += `remote interview; `;
+            if (normalized.noExperience) description += `no experience needed; `;
+            if (normalized.workFromHome) description += `work from home; `;
+            if (normalized.keywords?.length) description += `with keywords: ${normalized.keywords.join(`, `)}; `;
+            if (normalized.languages?.length) description += `with languages: ${normalized.languages.join(`, `)}; `;
+            if (normalized.levels?.length) description += `with levels: ${normalized.levels.join(`, `)}; `;
+
+            return description.trim().endsWith(`;`) ? description.trim().slice(0, -1) : description;
+         },
       };
    } catch (err) {
       return null!;
@@ -103,6 +147,11 @@ const GET_JOB_LISTINGS_QUERY = gql(/* GraphQL */`
                 linkedin_url
                 youtube_url
             }
+        }
+
+        companies {
+            id
+            name
         }
 
         searchJobListings(input: $filter) {
@@ -173,28 +222,25 @@ const GET_JOB_LISTINGS_QUERY = gql(/* GraphQL */`
 export async function getJobListings(filter: GetJobListingsFilter) {
    let cookie = headers().get("cookie")!;
 
-   let inputFilter: SearchJobListingsInput = {};
-   console.log({ filter });
-   if (filter.categories?.length) {
-      inputFilter = {
-         categories: Array.isArray(filter.categories) ? filter.categories : [filter.categories ?? ``],
-         levels: filter.levels ?? [],
-         from: filter.from ?? undefined,
-         furlough: filter.furlough ?? undefined,
-         internship: filter.internship,
-         remoteInterview: filter.remoteInterview,
-         workFromHome: filter.workFromHome,
-         noExperience: filter.noExperience,
-         salary: filter.salary ?? undefined,
-         languages: filter.languages ?? [],
-         companyIds: filter.companyIds ?? [],
-         locations: filter.locations ?? [],
-         keywords: filter.keywords ?? [],
-         types: filter.types ?? [],
-      };
-   }
+   let inputFilter: SearchJobListingsInput = {
+      categories: filter.categories?.length ? Array.isArray(filter.categories) ? filter.categories : [filter.categories ?? ``] : undefined,
+      levels: filter.levels ?? [],
+      from: (filter.from ? filter.from?.toLowerCase() === `agencies` ? JobListingFrom.Agencies : JobListingFrom.DirectEmployer : undefined) as JobListingFrom | undefined,
+      furlough: filter.furlough ?? undefined,
+      internship: filter.internship,
+      remoteInterview: filter.remoteInterview,
+      workFromHome: filter.workFromHome,
+      noExperience: filter.noExperience,
+      salary: filter.salary ?? undefined,
+      languages: filter.languages ?? [],
+      companyIds: filter.companies ?? [],
+      locations: filter.locations ?? [],
+      keywords: filter.keywords ?? [],
+      types: filter.types ?? [],
+   };
 
-   const { data: { searchJobListings, getMostRelevantCompanies } } =
+   console.log({ inputFilter });
+   const { data: { searchJobListings, getMostRelevantCompanies, companies } } =
       await client.authenticatedQuery(cookie, {
          query: GET_JOB_LISTINGS_QUERY,
          variables: {
@@ -206,5 +252,5 @@ export async function getJobListings(filter: GetJobListingsFilter) {
          fetchPolicy: `network-only`,
       });
 
-   return { jobListings: searchJobListings, mostRelevantCompanies: getMostRelevantCompanies };
+   return { jobListings: searchJobListings, mostRelevantCompanies: getMostRelevantCompanies, allCompanies: companies };
 }

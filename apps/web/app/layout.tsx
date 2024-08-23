@@ -54,7 +54,7 @@ export default function RootLayout({
       <body>
       <Providers>
          <Navbar />
-         <main className={`min-h-[70vh] mt-24`}>
+         <main className={`min-h-[70vh] mt-24 `}>
             {children}
          </main>
          <ScrollToTopButton />

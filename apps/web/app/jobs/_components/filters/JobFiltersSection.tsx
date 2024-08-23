@@ -1,16 +1,17 @@
 "use client";
 import React, { Fragment } from "react";
-import JobFilterButton from "@/app/jobs/_components/filters/JobFilterButton";
+import {
+   CategoriesFilterButton,
+   ProfessionsFilterButton,
+   KeywordsFilterButton,
+   EmploymentTypeFilterButton,
+   BooleanFilterButton,
+   JobListingsLevelFilterButton,
+   FromFilterButton, LanguagesFilterButton, SalaryFilterButton, FurloughFilterButton,
+} from "@/app/jobs/_components/filters";
 import { SearchParams } from "@/app/jobs/_queries";
-import CategoriesFilterButton from "@/app/jobs/_components/filters/CategoriesFilterButton";
-import ProfessionsFilterButton from "@/app/jobs/_components/filters/ProfessionsFilterButton";
-import BooleanFilterButton from "@/app/jobs/_components/filters/BooleanFilterButton";
-import JobListingsLevelFilterButton from "@/app/jobs/_components/filters/JobListingsLevelFilterButton";
-import SalaryFilterButton from "./SalaryFilterButton";
-import KeywordsFilterButton from "@/app/jobs/_components/filters/KeywordsFilterButton";
-import EmploymentTypeFilterButton from "@/app/jobs/_components/filters/EmploymentTypeFilterButton";
-import FurloughFilterButton from "./FurloughFilterButton";
-import FromFilterButton from "@/app/jobs/_components/filters/FromFilterButton";
+import CompaniesFilterButton from "@/app/jobs/_components/filters/CompaniesFilterButton";
+import LocationsFilterButton from "@/app/jobs/_components/filters/LocationsFilterButton";
 
 export interface JobFiltersSectionProps {
    params: SearchParams;
@@ -27,51 +28,43 @@ export const ButtonText = ({ values }: { values?: string[] }) => (
 
 const JobFiltersSection = ({ params }: JobFiltersSectionProps) => {
    function handleClearFilters() {
-      window.location.href = `${window.location.origin}${window.location.pathname}`
+      window.location.href = `${window.location.origin}${window.location.pathname}`;
    }
 
    return (
-      <div className={`w-4/5 items-center flex flex-wrap gap-4 !mx-auto`}>
-         <pre className={`text-sm`}>
-            {JSON.stringify(params, null, 2)}
-         </pre>
-         <JobFilterButton active={!!params.locations?.length}>
-            Locations<ButtonText values={params.locations} />
-         </JobFilterButton>
+      <div className={`w-4/5 items-center flex flex-wrap gap-4 !mx-auto mt-4`}>
+         <LocationsFilterButton locations={params.locations} />
          <CategoriesFilterButton categories={params.categories} />
          <ProfessionsFilterButton professions={params.professions} />
          <KeywordsFilterButton keywords={params.keywords} />
+         <EmploymentTypeFilterButton types={params.types} />
 
-         <EmploymentTypeFilterButton types={params.types}/>
-
-         <BooleanFilterButton value={params.internship} paramName={`internship`} >
+         <BooleanFilterButton value={params.internship} paramName={`internship`}>
             Internship
          </BooleanFilterButton>
-         <BooleanFilterButton value={params.noExperience} paramName={`noExperience`} >
+         <BooleanFilterButton value={params.noExperience} paramName={`noExperience`}>
             No experience
          </BooleanFilterButton>
-         <BooleanFilterButton value={params.remoteInterview} paramName={`remoteInterview`} >
+         <BooleanFilterButton value={params.remoteInterview} paramName={`remoteInterview`}>
             Remote interview
          </BooleanFilterButton>
-         <BooleanFilterButton value={params.workFromHome} paramName={`workFromHome`} >
+         <BooleanFilterButton value={params.workFromHome} paramName={`workFromHome`}>
             Work from home
          </BooleanFilterButton>
 
          <JobListingsLevelFilterButton levels={params.levels} />
          <FromFilterButton from={params.from} />
-
-         <JobFilterButton active={!!params.languages?.length}>
-            Languages<ButtonText values={params.languages} />
-         </JobFilterButton>
-
+         <LanguagesFilterButton languages={params.languages} />
          <SalaryFilterButton salary={params.salary} />
          <FurloughFilterButton furlough={params.furlough} />
+         <CompaniesFilterButton companies={params.companies} />
 
-         <JobFilterButton active={!!params.companyIds?.length}>
-            Companies<ButtonText values={params.companyIds?.length ? params.companyIds! : []} />
-         </JobFilterButton>
-
-         <button className={`btn btn-neutral !rounded-full`} onClick={handleClearFilters}>Clear</button>
+         <button
+            title={`Clear`}
+            className={`btn btn-neutral !rounded-full !bg-transparent !text-green-600 !text-xl !border-none hover:!bg-green-100 !shadow-none`}
+            onClick={handleClearFilters}>
+            Clear All
+         </button>
       </div>
    );
 };
