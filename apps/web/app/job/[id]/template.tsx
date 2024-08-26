@@ -42,7 +42,9 @@ const Template = ({ children, ...props }: TemplateProps) => {
 
    return (
       <div className={`w-full`}>
-         <PageTopBar companyId={data?.getJobListing?.company_id!} totalListings={data?.getJobListing?.company?._count?.listings ?? 0} />
+         <PageTopBar
+          companyId={data?.getJobListing?.company_id!} 
+         totalListings={data?.getJobListing?.company?._count?.listings ?? 0} />
          {children}
       </div>
    );

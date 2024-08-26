@@ -183,7 +183,7 @@ const Navbar = ({}: NavbarProps) => {
                               </li>
                               <li
                                  className={`p-2 cursor-pointer w-full bg-green-600 transition-all hover:!bg-neutral-100 text-white hover:!text-green-600 rounded-md min-w-[200px]`}>
-                                 <Link className={`w-full inline-flex items-center gap-4 text-lg`} href={`/signup`}>
+                                 <Link className={`w-full inline-flex items-center gap-4 text-lg`} href={`/signup/company?step=general-conditions`}>
                                     <Building2 size={22} />
                                     Company
                                  </Link>

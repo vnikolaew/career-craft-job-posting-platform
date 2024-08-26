@@ -1,6 +1,6 @@
 import express from "express";
 import { generateState, OAuth2RequestError } from "arctic";
-import { getUserCookie, github, lucia } from "@lib/auth";
+import { getUserCookie, getUserCookieConsentCookie, github, lucia } from "@lib/auth";
 import { parseCookies, serializeCookie } from "oslo/cookie";
 import { xprisma } from "@prisma/prisma";
 
@@ -48,11 +48,11 @@ githubLoginRouter.get("/callback", async (req, res) => {
    const github_oauth_redirect_url = parseCookies(req.headers.cookie ?? "").get("github_oauth_redirect_url") ?? null;
 
    console.log({ github_oauth_redirect_url: decodeURIComponent(github_oauth_redirect_url) });
-   let redirect_url: string
+   let redirect_url: string;
    try {
-      redirect_url =  new URL(decodeURIComponent(github_oauth_redirect_url)).toString();
+      redirect_url = new URL(decodeURIComponent(github_oauth_redirect_url)).toString();
    } catch (err) {
-      redirect_url = `/`
+      redirect_url = `/`;
    }
 
    if (!code || !state || !storedState || state !== storedState) {
@@ -68,7 +68,7 @@ githubLoginRouter.get("/callback", async (req, res) => {
             Authorization: `Bearer ${tokens.accessToken}`,
          },
       });
-      const githubUser: GitHubUser = await githubUserResponse.json();
+      const githubUser: GitHubUser = await githubUserResponse.json() as GitHubUser;
 
       const existingUser = await xprisma.user.findFirst({
          where: {
@@ -88,8 +88,11 @@ githubLoginRouter.get("/callback", async (req, res) => {
          console.log(`User ${githubUser.login} already exists. Email: ${githubUser.email}.`);
 
          const cookie = await getUserCookie(existingUser);
+         const consentCookie = await getUserCookieConsentCookie(existingUser.cookieConsent);
+
          return res
             .appendHeader("Set-Cookie", cookie)
+            .appendHeader("Set-Cookie", consentCookie)
             .redirect(redirect_url);
       }
 
@@ -139,8 +142,12 @@ githubLoginRouter.get("/callback", async (req, res) => {
       });
 
       const cookie = await getUserCookie(user);
+      const consentCookie = await getUserCookieConsentCookie(user.cookieConsent);
 
-      return res.appendHeader("Set-Cookie", cookie).redirect(redirect_url);
+      return res
+         .appendHeader("Set-Cookie", cookie)
+         .appendHeader("Set-Cookie", consentCookie)
+         .redirect(redirect_url);
    } catch (e) {
       console.log(`An error occurred during GitHub authentication`, e);
       if (e instanceof OAuth2RequestError && e.message === "bad_verification_code") {

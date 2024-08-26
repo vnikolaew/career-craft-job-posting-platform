@@ -54,7 +54,6 @@ const SignInWithEmailForm = ({}: SignInWithEmailFormProps) => {
          Object.entries(data).forEach(([key, value]) => params.set(key, value.toString()));
          router.push(`${path}?${params.toString()}`);
       }
-
    };
 
    return (

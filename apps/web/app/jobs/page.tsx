@@ -39,8 +39,9 @@ const Page = async ({}: PageProps) => {
          <div className={`w-full grid grid-cols-[3fr_1fr] gap-12 mt-12`}>
             <div className={`w-full flex flex-col items-start gap-4`}>
                <div className={`mb-8 w-full`}>
-                  <SubscribeToJobListingsCard description={description?.(allCompanies)}
-                                              categories={params.categories ?? []} />
+                  <SubscribeToJobListingsCard
+                   description={description?.(allCompanies)}
+                     categories={params.categories ?? []} />
                </div>
                <div className={`my-4 w-full text-2xl drop-shadow-sm`}>
                   Total listings found: <b>{jobListings.length}</b>

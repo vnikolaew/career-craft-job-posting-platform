@@ -1,19 +1,20 @@
 "use client";
-import React, { Dispatch, PropsWithChildren, SetStateAction, useEffect, useId, useState } from "react";
+import React, { Dispatch, PropsWithChildren, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check } from "lucide-react";
 
 export interface ToastProps extends PropsWithChildren {
    duration: number;
    id: string;
+   icon?: ReactNode;
 }
 
-export type ToastInfo = { id: string; children: React.ReactNode };
+export type ToastInfo = { id: string; children: React.ReactNode, duration?: number, icon?: ReactNode };
 
 export const ToastsContext = React.createContext<[ToastInfo[], Dispatch<SetStateAction<ToastInfo[]>>]>([[], () => []]);
+
 export const useToasts = () => {
    let [toasts, setToasts] = React.useContext(ToastsContext);
-
    const showToast = (info: ToastInfo) => {
       setToasts(t => [...t, info]);
       return info;
@@ -36,7 +37,8 @@ const Toasts = () => {
    return (
       <div className={`toast toast-end`}>
          {toasts.map((toast) => (
-            <Toast id={toast.id} key={toast.id} duration={3000}>{toast.children}</Toast>
+            <Toast icon={toast.icon} id={toast.id} key={toast.id}
+                   duration={toast.duration ?? 3000}>{toast.children}</Toast>
          ))}
       </div>
    );
@@ -54,7 +56,7 @@ export const ToastsProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 
-const Toast = ({ children, duration = 3_000, id }: ToastProps) => {
+const Toast = ({ children, icon, duration = 3_000, id }: ToastProps) => {
    const [show, setShow] = useState(true);
 
    useEffect(() => {
@@ -72,8 +74,8 @@ const Toast = ({ children, duration = 3_000, id }: ToastProps) => {
                   animate={{ opacity: 100, translateX: 0 }}
                   exit={{ opacity: 0, translateX: `100%` }}
                   transition={{ duration: .3, ease: `easeInOut` }}
-                  className="alert alert-success !bg-green-600 !text-white !shadow-sm !text-lg !px-6 !py-4 !min-w-[300px] !bg-opacity-80 flex items-center gap-4">
-                  <Check className={`text-white`} size={18} />
+                  className="alert alert-success !bg-green-700 !text-white !shadow-sm !text-lg !px-6 !py-4 !min-w-[300px] !bg-opacity-80 flex items-center gap-4">
+                  {icon ?? <Check className={`text-white`} size={18} />}
                   <span>
                      {children}
                   </span>

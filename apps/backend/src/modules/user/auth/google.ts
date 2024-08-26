@@ -1,6 +1,6 @@
 import express from "express";
 import { OAuth2RequestError, GoogleTokens } from "arctic";
-import { getUserCookie, google } from "@lib/auth";
+import { getUserCookie, getUserCookieConsentCookie, google } from "@lib/auth";
 import { parseCookies } from "oslo/cookie";
 import { xprisma } from "@prisma/prisma";
 
@@ -55,8 +55,11 @@ googleLoginRouter.get("/callback", async (req, res) => {
 
       if (existingUser) {
          const cookie = await getUserCookie(existingUser);
+         const consentCookie = await getUserCookieConsentCookie(existingUser.cookieConsent);
+
          return res
             .appendHeader("Set-Cookie", cookie)
+            .appendHeader("Set-Cookie", consentCookie)
             .redirect(redirect_url);
       }
 
@@ -113,7 +116,12 @@ googleLoginRouter.get("/callback", async (req, res) => {
       });
 
       const cookie = await getUserCookie(user);
-      return res.appendHeader("Set-Cookie", cookie).redirect(redirect_url);
+      const consentCookie = await getUserCookieConsentCookie(existingUser.cookieConsent);
+
+      return res
+         .appendHeader("Set-Cookie", cookie)
+         .appendHeader("Set-Cookie", consentCookie)
+         .redirect(redirect_url);
    } catch (e) {
       console.log(`An error occurred during Google authentication`, e);
 

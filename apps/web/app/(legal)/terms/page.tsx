@@ -28,7 +28,7 @@ const Page = async ({}: PageProps) => {
 
             <h2 className={`text-3xl font-semibold mt-6`}>2. User Responsibilities</h2>
             <p className={`mt-4`}>As a user of our platform, you agree to:</p>
-            <ul>
+            <ul className={`list-disc flex flex-col items-start gap-2 mt-2 pl-4`}>
                <li>Provide accurate, current, and complete information about yourself as prompted by our registration
                   forms.
                </li>

@@ -4071,6 +4071,7 @@ A field whose value is a valid decimal degrees longitude number (53.471): https:
 scalar Longitude
 
 type Mutation {
+  acceptAllCookies: Boolean!
   confirmJobListingSubscription(
     """subscriptionId parameter"""
     subscriptionId: String!
@@ -4102,6 +4103,7 @@ type Mutation {
   createOneUserAttachments(data: UserAttachmentsCreateInput!, relationLoadStrategy: RelationLoadStrategy): UserAttachments!
   createOneUserJobApplication(data: UserJobApplicationCreateInput!, relationLoadStrategy: RelationLoadStrategy): UserJobApplication!
   createOneVerificationToken(data: VerificationTokenCreateInput!, relationLoadStrategy: RelationLoadStrategy): VerificationToken!
+  declineAllCookies: Boolean!
   deleteAllSubscriptions: DeleteAllSubscriptionsResponse!
   deleteManyAccount(where: AccountWhereInput): AffectedRowsOutput!
   deleteManyCompany(where: CompanyWhereInput): AffectedRowsOutput!
@@ -4160,6 +4162,7 @@ type Mutation {
     """subscriptionId parameter"""
     subscriptionId: String!
   ): Boolean!
+  updateCookiePreferences(input: UpdateCookiePreferencesInput!): Boolean!
   updateManyAccount(data: AccountUpdateManyMutationInput!, where: AccountWhereInput): AffectedRowsOutput!
   updateManyCompany(data: CompanyUpdateManyMutationInput!, where: CompanyWhereInput): AffectedRowsOutput!
   updateManyCompanyCategory(data: CompanyCategoryUpdateManyMutationInput!, where: CompanyCategoryWhereInput): AffectedRowsOutput!
@@ -4550,6 +4553,7 @@ type Query {
   getAllLanguages: [GetLanguagesDetailsResponse!]!
   getAllLocations: [GetLocationsDetailsResponse!]!
   getAllUsersWithSubscriptions: [User!]!
+  getAvailableCountries: [String!]!
   getCompany(relationLoadStrategy: RelationLoadStrategy, where: CompanyWhereUniqueInput!): Company
   getCompanyCategoriesDetails(input: GetCategoriesDetailsInput!): [CategoryDetailsResponse!]!
   getCompanyCategory(relationLoadStrategy: RelationLoadStrategy, where: CompanyCategoryWhereUniqueInput!): CompanyCategory
@@ -5384,6 +5388,13 @@ type SubscriptionJobListingsResponse {
 A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
 """
 scalar URL
+
+input UpdateCookiePreferencesInput {
+  Functionality: Boolean!
+  Marketing: Boolean!
+  Necessary: Boolean!
+  Statistics: Boolean!
+}
 
 """The `Upload` scalar type represents a file upload."""
 scalar Upload

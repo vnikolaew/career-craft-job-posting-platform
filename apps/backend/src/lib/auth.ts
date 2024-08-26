@@ -7,6 +7,7 @@ import moment from "moment/moment";
 import { GitHub, Google } from "arctic";
 import { xprisma } from "@prisma/prisma";
 import { __IS_HTTPS__ } from "@consts";
+import { serializeCookie } from "@modules/user/auth/utils";
 
 export const github = new GitHub(process.env.GH_CLIENT_ID!, process.env.GH_CLIENT_SECRET!);
 export const google = new Google(process.env.GOOGLE_ID!, process.env.GOOGLE_SECRET!, `http${__IS_HTTPS__ ? `s` : ``}://api.career-craft.com:4000/login/google/callback`);
@@ -51,6 +52,15 @@ export async function getUserCookie(user: Partial<User>) {
    cookie.attributes.httpOnly = false;
    cookie.attributes.sameSite = `lax`;
 
-   const serializedCookie = `${cookie.name}=${encodeURIComponent(cookie.value)}; Max-Age=${cookie.attributes.maxAge}; Domain=.career-craft.com; Expires=${moment().add(cookie.attributes.maxAge, `seconds`).format(`ddd, DD MMM YYYY HH:mm:ss [GMT]`)}; Path=${cookie.attributes.path!}; SameSite=${cookie.attributes.sameSite} ${cookie.attributes.httpOnly ? `;HttpOnly` : ``}`;
-   return serializedCookie;
+   return serializeCookie(cookie.name, cookie.value, cookie.attributes);
+}
+
+export async function getUserCookieConsentCookie(cookieConsent: boolean) {
+   return serializeCookie(`cookie-consent`, String(cookieConsent), {
+      httpOnly: false,
+      sameSite: `lax`,
+      domain: `.career-craft.com`,
+      path: `/`,
+      maxAge: 60 * 60 * 24
+   });
 }

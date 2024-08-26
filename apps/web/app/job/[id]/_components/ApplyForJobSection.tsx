@@ -33,6 +33,7 @@ const ApplyForJobSection = ({ jobListing }: ApplyForJobSectionProps) => {
       });
    }
 
+
    async function handleUnSaveJobListing() {
       await unSaveJobListing({
          onCompleted: data => console.log({ data }),
@@ -51,6 +52,7 @@ const ApplyForJobSection = ({ jobListing }: ApplyForJobSectionProps) => {
          <p className={`text-neutral-500`}>
             Apply with the CVs and files stored in your account.
          </p>
+
          <div className={`divider !mt-0`}></div>
          <div className={`flex items-center justify-center gap-4`}>
             <AuthorizedButton

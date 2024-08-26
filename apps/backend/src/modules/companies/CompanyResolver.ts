@@ -4,7 +4,19 @@ import { CompanyCount } from "@generated/resolvers/outputs/CompanyCount";
 import { CompanyCategory } from "@generated/models/CompanyCategory";
 import { JobListing } from "@generated/models/JobListing";
 
-import { Arg, Ctx, Field, FieldResolver, InputType, Int, ObjectType, Query, Resolver, Root } from "type-graphql";
+import {
+   Arg,
+   Authorized,
+   Ctx,
+   Field,
+   FieldResolver,
+   InputType,
+   Int,
+   ObjectType,
+   Query,
+   Resolver,
+   Root,
+} from "type-graphql";
 import { MyContext } from "@types";
 import { Max, Min } from "class-validator";
 import jsonCompanies from "@/data/companies.json";
@@ -15,6 +27,7 @@ import { JsonValue } from "@prisma/client/runtime/library";
 import { GraphQLEmailAddress, GraphQLLatitude, GraphQLLongitude, GraphQLURL } from "graphql-scalars";
 import { JobListingEmploymentType, JobListingLevel, WorkFromHome } from "@prisma/client";
 import { NoCache } from "@infrastructure/decorators";
+import { fetch } from "undici";
 
 @InputType()
 class GetTopCompaniesInput {
@@ -149,7 +162,7 @@ export class CompanyResolver extends CompanyRelationsResolver {
    @FieldResolver(_ => CompanyCount, { nullable: false })
    @NoCache()
    public async _count(@Root() { id, _count }: Company, @Ctx() { prisma }: MyContext): Promise<Partial<CompanyCount>> {
-      if(!!_count) return _count;
+      if (!!_count) return _count;
 
       const { _count: count } = await prisma.company.findUnique({
          where: { id },
@@ -255,5 +268,19 @@ export class CompanyResolver extends CompanyRelationsResolver {
          createdAt: moment(c.createdAt).toDate(),
          updatedAt: moment(c.updatedAt).toDate(),
       })) : companies;
+   }
+
+   @Query(_ => [String], { nullable: false })
+   @Authorized()
+   public async getAvailableCountries(@Ctx() { userId }: MyContext): Promise<string[]> {
+      let response = await fetch(`https://restcountries.com/v3.1/all?fields=name`, {
+         credentials: `include`,
+         mode: `cors`,
+      });
+
+      if (!response.ok) return [];
+
+      let countries = (await response.json() as any[]).map(x => x?.name?.common);
+      return countries
    }
 }

@@ -7,7 +7,6 @@ import * as RelationsResolvers from "@generated/resolvers/relations";
 import { CustomApolloServer } from "@server";
 import { BuildSchemaOptions } from "type-graphql";
 import { GraphQLJSONObject, resolvers as scalarResolvers } from "graphql-scalars";
-import { FileUpload } from "graphql-upload/processRequest.mjs";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.mjs";
 import { __IS_DEV__ } from "@consts";
 import {
@@ -30,13 +29,14 @@ import {
 import { JobListingCrudResolver } from "@modules/job_listings/JobListingResolver";
 import { SubscriptionsResolver } from "@modules/subscriptions/SubscriptionsResolver";
 import Upload from "graphql-upload/Upload.mjs";
+import { CookiesResolver } from "@modules/user/CookiesResolver";
 
 async function main() {
    const PORT = isNaN(Number.parseInt(process.env.PORT ?? ``)) ? 4000 : +process.env.PORT!;
 
    const schema: BuildSchemaOptions = {
       resolvers: [
-         UserResolver, CompanyResolver, SubscriptionsResolver, JobListingCrudResolver, JobListingSavesResolver,
+         UserResolver, CompanyResolver, CookiesResolver, SubscriptionsResolver, JobListingCrudResolver, JobListingSavesResolver,
          AttachmentsResolver, ApplicationsResolver, CategoriesResolver, EmailsResolver, UserCrudResolver,
          ...Object.entries(CrudResolvers)
             .concat(Object.entries(RelationsResolvers) as any[])

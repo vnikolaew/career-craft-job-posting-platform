@@ -7,7 +7,7 @@ export interface NotFoundProps {
 
 const NotFound = async ({}: NotFoundProps) => {
    return (
-      <section className={`w-3/4 mx-auto mt-24 flex flex-col gap-8 items-center !min-h-[80vh] justify-center`}>
+      <section className={`w-3/4 mx-auto my-24 flex flex-col gap-8 items-center !min-h-[80vh] justify-center`}>
          <div className={`mt-12 flex flex-col items-center gap-4`}>
             <HomePageNotFound className={`w-[360px]`} />
             <h2 className={`text-xl text-center drop-shadow-sm -mt-12`}>

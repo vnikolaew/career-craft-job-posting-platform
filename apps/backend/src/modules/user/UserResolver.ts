@@ -20,7 +20,6 @@ import { MyContext, Nullable } from "@types";
 import { getUserCookie, google, lucia } from "@lib/auth";
 import { getGravatarImageUrl } from "@modules/user/utils";
 import { AuthorizedField, NoCache, SessionId, UserId } from "src/infrastructure/decorators";
-import { GraphQLUpload, Upload } from "@infrastructure/scalars/Upload";
 import { JsonValue } from "@prisma/client/runtime/library";
 import { generateCodeVerifier, generateState } from "arctic";
 import { serializeCookie } from "oslo/cookie";
@@ -142,7 +141,15 @@ export class UserResolver extends UserRelationsResolver {
    @FieldResolver(_ => UserCookiePreferences, { nullable: true })
    @AuthorizedField()
    public async cookiePreferences(@Root() user: User, @Ctx() {}: MyContext): Promise<UserCookiePreferences> {
-      return user?.metadata?.[`cookie-preferences`] as UserCookiePreferences ?? {
+      let prefs = user?.metadata?.[`cookie-preferences`]
+      if (prefs) {
+         return {
+            necessary: prefs.Necessary,
+            statistics: prefs.Statistics,
+            functionality: prefs.Functionality,
+            marketing: prefs.Marketing,
+         }
+      } else return {
          necessary: true,
          statistics: false,
          functionality: false,

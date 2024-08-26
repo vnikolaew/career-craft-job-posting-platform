@@ -6,7 +6,7 @@ import Skeleton from "@/components/common/Skeleton";
 import { useQuery } from "@apollo/client";
 import { JobListingCategory } from "@/__generated__/graphql";
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
+import Truck from "@/components/icons/Truck";
 
 const GET_TOP_JOB_CATEGORIES = gql(/* GraphQL */`
     query GetTopJobCategories($input: GetTopListingCategoriesInput!) {
@@ -52,7 +52,7 @@ const CategoryBadge = ({ category }: { category: JobListingCategory }) => {
       <div key={category.id} className={`w-full`}>
          <Link href={`/jobs?${params.toString()}`}
                className={`text-neutral-500 btn btn-outline !rounded-full !min-h-fit !h-fit !py-3 flex items-center justify-start gap-3 !w-fit !px-6 hover:!bg-neutral-300 transition-all duration-100 !border-neutral-300 group`}>
-            <ShoppingCart className={`group-hover:!text-neutral-500 fill-neutral-500`} size={18} />
+            <Truck className={`group-hover:!text-neutral-500 !fill-neutral-500 !text-neutral-500 w-10 h-10`} />
             <span className={`font-semibold text-base text-neutral-700`}>
                {category.name}
             </span>

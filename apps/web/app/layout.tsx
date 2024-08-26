@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import Providers from "@/providers";
 import Script from "next/script";
 import ScrollToTopButton from "@/components/common/ScrollToTopButton";
+import CookieConsentBanner from "@/components/common/cookie-banner/CookieConsentBanner";
 
 const dancingScript = Rubik({
    variable: "--font-mono",
@@ -57,6 +58,7 @@ export default function RootLayout({
          <main className={`min-h-[70vh] mt-24 `}>
             {children}
          </main>
+         <CookieConsentBanner />
          <ScrollToTopButton />
          <Footer />
       </Providers>

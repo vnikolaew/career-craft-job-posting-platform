@@ -1,0 +1,13 @@
+{
+  "repos": [
+    {
+      "url": "C:\\Users\\Victorio\\Desktop\\Coding\\Front-End\\career-craft-job-posting-platform",
+      "main_branch": "origin/main"
+    },
+    {
+      "url": "C:\\Users\\Victorio\\Desktop\\Coding\\Front-End\\TurboText",
+      "main_branch": "origin/main"
+    }
+  ],
+  "cron_interval":  "0 0 * * *"
+}
