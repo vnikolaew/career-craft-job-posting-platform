@@ -2,6 +2,7 @@ import React from "react";
 import GeneralConditionsOfUseStep from "@/app/signup/company/_components/GeneralConditionsOfUseStep";
 import { match } from "ts-pattern";
 import SignUpStepOne from "@/app/signup/company/_components/SignUpStepOne";
+import SignUpStepTwo from "@/app/signup/company/_components/SignUpStepTwo";
 
 export interface PageProps {
    searchParams: {
@@ -17,7 +18,7 @@ const Page = async (props: PageProps) => {
          {match(step)
             .with(`general-conditions`, () => <GeneralConditionsOfUseStep />)
             .with(`register-one`, () => <SignUpStepOne />)
-            .with(`register-two`, () => <GeneralConditionsOfUseStep />)
+            .with(`register-two`, () => <SignUpStepTwo />)
             .otherwise(() => <GeneralConditionsOfUseStep />)
          }
       </section>

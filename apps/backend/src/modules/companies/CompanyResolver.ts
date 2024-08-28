@@ -271,7 +271,6 @@ export class CompanyResolver extends CompanyRelationsResolver {
    }
 
    @Query(_ => [String], { nullable: false })
-   @Authorized()
    public async getAvailableCountries(@Ctx() { userId }: MyContext): Promise<string[]> {
       let response = await fetch(`https://restcountries.com/v3.1/all?fields=name`, {
          credentials: `include`,

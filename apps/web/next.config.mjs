@@ -26,6 +26,10 @@ const nextConfig = {
          {
             hostname: `example.com`,
             protocol: `https`,
+         },
+         {
+            hostname: `business.jobs.bg`,
+            protocol: `https`,
          }
       ]
    }

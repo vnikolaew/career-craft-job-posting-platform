@@ -107,6 +107,10 @@ const Navbar = ({}: NavbarProps) => {
       });
    }
 
+   function onSignUpDropdownClick() {
+      document.activeElement?.blur()
+   }
+
    return (
       <div id={`navbar`}
            className={`w-full px-24 py-5 border-b border-neutral-300 fixed bg-opacity-80 bg-neutral-100 z-10`}>
@@ -164,10 +168,9 @@ const Navbar = ({}: NavbarProps) => {
                   </div>
                ) : !loading ? (
                      <div className={`flex items-center gap-4`}>
-                        <div className={`dropdown`}>
+                        <div id={`signup-dropdown`} className={`dropdown`}>
                            <Link onClick={async e => {
                               e.preventDefault();
-                              // await handleRegularSignIn();
                            }}
                                  className={`btn btn-outline btn-accent !h-fit !min-h-fit !py-2.5 !px-6 !shadow-md hover:!opacity-95 duration-100 transition-all !text-green-600 !border-green-600 hover:!bg-neutral-100`}
                                  href={`/signup`}>
@@ -176,14 +179,14 @@ const Navbar = ({}: NavbarProps) => {
                            <ul
                               className={`menu dropdown-content rounded-md bg-neutral-100 px-2 flex flex-col items-start gap-1`}>
                               <li className={`p-2 cursor-pointer w-full rounded-md min-w-[200px] `}>
-                                 <Link className={`w-full inline-flex items-center gap-4 text-lg`} href={`/signup/user`}>
+                                 <Link onClick={onSignUpDropdownClick} className={`w-full inline-flex items-center gap-4 text-lg`} href={`/signup/user`}>
                                     <CircleUserRound size={22} />
                                     User
                                  </Link>
                               </li>
                               <li
                                  className={`p-2 cursor-pointer w-full bg-green-600 transition-all hover:!bg-neutral-100 text-white hover:!text-green-600 rounded-md min-w-[200px]`}>
-                                 <Link className={`w-full inline-flex items-center gap-4 text-lg`} href={`/signup/company?step=general-conditions`}>
+                                 <Link onClick={onSignUpDropdownClick} className={`w-full inline-flex items-center gap-4 text-lg`} href={`/signup/company?step=general-conditions`}>
                                     <Building2 size={22} />
                                     Company
                                  </Link>

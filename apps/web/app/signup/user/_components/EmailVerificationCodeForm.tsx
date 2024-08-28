@@ -66,7 +66,6 @@ const EmailVerificationCodeForm = ({}: EmailVerificationCodeFormProps) => {
 
    const onSubmit = async (data: Inputs) => {
       console.log(data);
-      console.log({ searchParams });
 
       let variables = {
          code: data.code,
