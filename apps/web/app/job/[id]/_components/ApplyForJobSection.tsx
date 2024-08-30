@@ -33,7 +33,6 @@ const ApplyForJobSection = ({ jobListing }: ApplyForJobSectionProps) => {
       });
    }
 
-
    async function handleUnSaveJobListing() {
       await unSaveJobListing({
          onCompleted: data => console.log({ data }),

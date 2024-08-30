@@ -1,7 +1,7 @@
 import React from "react";
 import { GetJobListingQuery } from "@/__generated__/graphql";
 import moment from "moment";
-import { BriefcaseBusiness, Calendar, List, Mail, MapPin, Search, Users } from "lucide-react";
+import { BriefcaseBusiness, Calendar, List, MapPin, Search, Users } from "lucide-react";
 import Image from "next/image";
 import { DEFAULT_COMPANY_LOGO_URL } from "@/providers/apollo/ApolloProvider";
 import { cn } from "@/lib/utils";
@@ -63,8 +63,8 @@ const JobListingRightSection = ({ jobListing }: JobListingRightSectionProps) => 
                      className={cn(`text-green-600 btn btn-outline !rounded-full !min-h-fit !h-fit !py-2 flex items-center justify-start gap-2 !w-fit !px-6 hover:!bg-neutral-200 transition-all duration-100 !border-none !bg-transparent hover:!text-green-600`)}>
                      <Search className={``} size={18} />
                      <span className={`font-semibold text-base`}>
-                  See profile
-               </span>
+                        See profile
+                     </span>
                   </button>
                </Link>
             </div>

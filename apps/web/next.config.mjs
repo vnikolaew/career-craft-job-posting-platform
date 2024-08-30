@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
    webpack: (config, options) => {
+      config.externals.push('canvas')
+      config.resolve.alias.canvas = false;
+
       config.module.rules.push({
          test: /\.(graphql|gql)/,
          exclude: /node_modules/,

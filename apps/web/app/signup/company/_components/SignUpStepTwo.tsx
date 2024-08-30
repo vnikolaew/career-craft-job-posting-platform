@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { Fragment, ReactNode, useMemo, useState } from "react";
+import React, { Fragment, ReactNode, useEffect, useMemo, useState } from "react";
 import * as z from "zod";
 import { FieldErrors, FieldPath, FormProvider, useForm, useFormContext } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -15,8 +15,8 @@ const schema = z.object({
    companyName: z.string(),
    companyAddressRegistration: z.string(),
    organizationType: z.union([z.literal(`company`), z.literal(`agency`)]),
-   businessSectors: z.union([z.literal(`company`), z.literal(`agency`)]),
-   companySite: z.string().url(),
+   businessSectors: z.array(z.string()).nullable().default([]),
+   companySite: z.string(),
    companyPhone: z.string(),
    companyAddress: z.string(),
    administratorFirstName: z.string(),
@@ -25,17 +25,24 @@ const schema = z.object({
    administratorPosition: z.string(),
    administratorPhone: z.string(),
    companyUsername: z.string(),
-   companyPassword: z.string().refine(x => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(x), { message: `Please enter a valid password.` }),
-   companyPasswordConfirm: z.string().refine(x => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/.test(x), { message: `Please enter a valid password.` }),
-   authorizedPerson: z.boolean(),
-   officialName: z.string(),
-   officialEmail: z.string().email(),
-   officialPhone: z.string(),
-   officialCorrespondenceAddress: z.string(),
+   companyPassword: z.string()
+      .refine(x => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(x), { message: `Please enter a valid password.` }),
+   companyPasswordConfirm: z.string()
+      .refine(x => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(x), { message: `Please enter a valid password.` }),
+   authorizedPerson: z.union([z.literal(`true`), z.literal(`false`)]),
+   officialName: z.string().nullish(),
+   officialEmail: z.string().email().nullish(),
+   officialPhone: z.string().nullish(),
+   officialCorrespondenceAddress: z.string().nullish() ,
    key: z.string(),
+}).refine(x => x.companyPassword === x.companyPasswordConfirm, {
+   message: `Passwords do not match.`,
+   path: [`companyPasswordConfirm`],
 });
 
 type Inputs = z.infer<typeof schema>;
+
+export const LS_COMPANY_SIGNUP_FORM_VALUES_KEY = `company-signup-form-values`;
 
 const SignUpStepTwo = ({}: SignUpStepTwoProps) => {
    const [fieldErrors, setFieldErrors] = useState<FieldErrors<Inputs>>(null!);
@@ -48,11 +55,21 @@ const SignUpStepTwo = ({}: SignUpStepTwoProps) => {
       register,
       handleSubmit,
       formState,
+      watch,
       ...methods
    } = useForm<Inputs>({
       resolver: zodResolver(schema),
       reValidateMode: `onSubmit`,
+      defaultValues: (_) => {
+         let data = schema.safeParse(JSON.parse(localStorage.getItem(LS_COMPANY_SIGNUP_FORM_VALUES_KEY)));
+         return data?.success ? data?.data : null!;
+      }
    });
+
+   const values = watch()
+   useEffect(() => {
+      localStorage.setItem(LS_COMPANY_SIGNUP_FORM_VALUES_KEY, JSON.stringify(values));
+   }, [values])
 
    function onSubmit(data) {
       console.log({ data });
@@ -267,7 +284,9 @@ const SignUpStepTwo = ({}: SignUpStepTwoProps) => {
                         Key:
                      </div>
                      <div>
-                        <Image height={200} width={200} src={`https://business.jobs.bg/protect_image.php?key=e9754cb00bbf925c73e6abdde71db053`} alt={`key`}/>
+                        <Image height={200} width={200}
+                               src={`https://business.jobs.bg/protect_image.php?key=e9754cb00bbf925c73e6abdde71db053`}
+                               alt={`key`} />
                      </div>
                   </label>
 
@@ -275,8 +294,9 @@ const SignUpStepTwo = ({}: SignUpStepTwoProps) => {
                   <p className={`ml-[200px]`}>
                      (Copy the letters/numbers from the blue box above. Use lowercase Latin letters.)
                   </p>
-                  <div className={`w-full flex items-center justify-center`}>
-                     <button className={`btn btn-lg shadow-sm !px-12 !bg-green-600 !text-white`}>
+                  <div className={`w-full flex items-center justify-center mt-4`}>
+                     <button
+                        className={`btn btn-lg shadow-sm !px-12 !bg-green-600 !text-white !py-3 hover:!opacity-80 transition-opacity duration-200`}>
                         Sign up
                      </button>
                   </div>

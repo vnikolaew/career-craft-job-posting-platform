@@ -57,6 +57,6 @@ details summary::-webkit-details-marker {
 
 @layer components {
     .btn {
-        @apply min-h-fit h-fit py-2 px-8;
+        @apply min-h-fit h-fit py-2 px-8 hover:!opacity-80 transition-opacity duration-200;
     }
 }
