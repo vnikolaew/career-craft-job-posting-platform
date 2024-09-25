@@ -80,8 +80,8 @@ const SignUpStepOne = ({}: SignUpStepOneProps) => {
                            (for the company's registration)
                         </span>
                         </div>
-                        <select className="select select-bordered !w-fit" {...register(`country`)}>
-                           {(data?.getAvailableCountries.toSorted() ?? [`sample`]).map((country: string) => (
+                        <select className="select select-bordered !w-fit !min-w-[350px]" {...register(`country`)}>
+                           {(data?.getAvailableCountries.toSorted() ?? []).map((country: string) => (
                               <option value={country} key={country}>
                                  {country}
                               </option>

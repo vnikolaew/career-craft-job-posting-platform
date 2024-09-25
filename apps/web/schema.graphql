@@ -994,6 +994,7 @@ type Company {
   contacts: CompanyContacts
   createdAt: DateTimeISO!
   email: EmailAddress!
+  emailVerified: DateTimeISO
   hiring_process: [String!]!
   id: ID!
   listings(cursor: JobListingWhereUniqueInput, distinct: [JobListingScalarFieldEnum!], orderBy: [JobListingOrderByWithRelationInput!], skip: Int, take: Int, where: JobListingWhereInput): [JobListing!]!
@@ -1327,6 +1328,7 @@ type CompanyCountAggregate {
   contacts: Int!
   createdAt: Int!
   email: Int!
+  emailVerified: Int!
   hiring_process: Int!
   id: Int!
   local_info: Int!
@@ -1347,6 +1349,7 @@ input CompanyCountOrderByAggregateInput {
   contacts: SortOrder
   createdAt: SortOrder
   email: SortOrder
+  emailVerified: SortOrder
   hiring_process: SortOrder
   id: SortOrder
   local_info: SortOrder
@@ -1367,6 +1370,7 @@ input CompanyCreateInput {
   contacts: JSON
   createdAt: DateTimeISO
   email: String!
+  emailVerified: DateTimeISO
   hiring_process: CompanyCreatehiring_processInput
   id: String
   listings: JobListingCreateNestedManyWithoutCompanyInput
@@ -1388,6 +1392,7 @@ input CompanyCreateManyInput {
   contacts: JSON
   createdAt: DateTimeISO
   email: String!
+  emailVerified: DateTimeISO
   hiring_process: CompanyCreatehiring_processInput
   id: String
   local_info: JSON
@@ -1440,6 +1445,7 @@ input CompanyCreateWithoutCategoriesInput {
   contacts: JSON
   createdAt: DateTimeISO
   email: String!
+  emailVerified: DateTimeISO
   hiring_process: CompanyCreatehiring_processInput
   id: String
   listings: JobListingCreateNestedManyWithoutCompanyInput
@@ -1462,6 +1468,7 @@ input CompanyCreateWithoutListingsInput {
   contacts: JSON
   createdAt: DateTimeISO
   email: String!
+  emailVerified: DateTimeISO
   hiring_process: CompanyCreatehiring_processInput
   id: String
   local_info: JSON
@@ -1483,6 +1490,7 @@ input CompanyCreateWithoutSubscriptionsInput {
   contacts: JSON
   createdAt: DateTimeISO
   email: String!
+  emailVerified: DateTimeISO
   hiring_process: CompanyCreatehiring_processInput
   id: String
   listings: JobListingCreateNestedManyWithoutCompanyInput
@@ -1522,6 +1530,7 @@ type CompanyGroupBy {
   contacts: JSON!
   createdAt: DateTimeISO!
   email: String!
+  emailVerified: DateTimeISO
   hiring_process: [String!]
   id: String!
   local_info: JSON!
@@ -1545,6 +1554,7 @@ type CompanyMaxAggregate {
   career_description_raw: String
   createdAt: DateTimeISO
   email: String
+  emailVerified: DateTimeISO
   id: String
   name: String
   updatedAt: DateTimeISO
@@ -1557,6 +1567,7 @@ input CompanyMaxOrderByAggregateInput {
   career_description_raw: SortOrder
   createdAt: SortOrder
   email: SortOrder
+  emailVerified: SortOrder
   id: SortOrder
   name: SortOrder
 }
@@ -1568,6 +1579,7 @@ type CompanyMinAggregate {
   career_description_raw: String
   createdAt: DateTimeISO
   email: String
+  emailVerified: DateTimeISO
   id: String
   name: String
   updatedAt: DateTimeISO
@@ -1580,6 +1592,7 @@ input CompanyMinOrderByAggregateInput {
   career_description_raw: SortOrder
   createdAt: SortOrder
   email: SortOrder
+  emailVerified: SortOrder
   id: SortOrder
   name: SortOrder
 }
@@ -1622,6 +1635,7 @@ input CompanyOrderByWithAggregationInput {
   contacts: SortOrder
   createdAt: SortOrder
   email: SortOrder
+  emailVerified: SortOrderInput
   hiring_process: SortOrder
   id: SortOrder
   local_info: SortOrder
@@ -1643,6 +1657,7 @@ input CompanyOrderByWithRelationInput {
   contacts: SortOrder
   createdAt: SortOrder
   email: SortOrder
+  emailVerified: SortOrderInput
   hiring_process: SortOrder
   id: SortOrder
   listings: JobListingOrderByRelationAggregateInput
@@ -1669,6 +1684,7 @@ enum CompanyScalarFieldEnum {
   contacts
   createdAt
   email
+  emailVerified
   hiring_process
   id
   local_info
@@ -1692,6 +1708,7 @@ input CompanyScalarWhereWithAggregatesInput {
   contacts: JsonWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   email: StringWithAggregatesFilter
+  emailVerified: DateTimeNullableWithAggregatesFilter
   hiring_process: StringNullableListFilter
   id: StringWithAggregatesFilter
   local_info: JsonWithAggregatesFilter
@@ -1699,6 +1716,30 @@ input CompanyScalarWhereWithAggregatesInput {
   name: StringWithAggregatesFilter
   work_environment: StringNullableListFilter
   worldwide_info: JsonWithAggregatesFilter
+}
+
+input CompanySignUpInput {
+  administratorEmail: String!
+  administratorFirstName: String!
+  administratorLastName: String!
+  administratorPhone: String!
+  administratorPosition: String!
+  authorizedPerson: Boolean!
+  businessSectors: [String!]!
+  companyAddress: String!
+  companyAddressRegistration: String!
+  companyName: String!
+  companyPassword: String!
+  companyPasswordConfirm: String!
+  companyPhone: String!
+  companySite: String!
+  companyUsername: String!
+  key: String!
+  officialCorrespondenceAddress: String
+  officialEmail: String
+  officialName: String
+  officialPhone: String
+  organizationType: String!
 }
 
 input CompanyUpdateInput {
@@ -1712,6 +1753,7 @@ input CompanyUpdateInput {
   contacts: JSON
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
   listings: JobListingUpdateManyWithoutCompanyNestedInput
@@ -1733,6 +1775,7 @@ input CompanyUpdateManyMutationInput {
   contacts: JSON
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
   local_info: JSON
@@ -1793,6 +1836,7 @@ input CompanyUpdateWithoutCategoriesInput {
   contacts: JSON
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
   listings: JobListingUpdateManyWithoutCompanyNestedInput
@@ -1815,6 +1859,7 @@ input CompanyUpdateWithoutListingsInput {
   contacts: JSON
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
   local_info: JSON
@@ -1836,6 +1881,7 @@ input CompanyUpdateWithoutSubscriptionsInput {
   contacts: JSON
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
   hiring_process: CompanyUpdatehiring_processInput
   id: StringFieldUpdateOperationsInput
   listings: JobListingUpdateManyWithoutCompanyNestedInput
@@ -1898,6 +1944,7 @@ input CompanyWhereInput {
   contacts: JsonFilter
   createdAt: DateTimeFilter
   email: StringFilter
+  emailVerified: DateTimeNullableFilter
   hiring_process: StringNullableListFilter
   id: StringFilter
   listings: JobListingListRelationFilter
@@ -1923,6 +1970,7 @@ input CompanyWhereUniqueInput {
   contacts: JsonFilter
   createdAt: DateTimeFilter
   email: String
+  emailVerified: DateTimeNullableFilter
   hiring_process: StringNullableListFilter
   id: String
   listings: JobListingListRelationFilter
@@ -4072,6 +4120,7 @@ scalar Longitude
 
 type Mutation {
   acceptAllCookies: Boolean!
+  companySignUp(input: CompanySignUpInput!): Company
   confirmJobListingSubscription(
     """subscriptionId parameter"""
     subscriptionId: String!

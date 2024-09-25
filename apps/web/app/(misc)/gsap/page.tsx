@@ -73,7 +73,6 @@ const Page = ({}: Props) => {
             <Box anim={`move`} className="box w-4 h-4 rounded-full bg-teal-500" />
             <Box anim={`rotate`} className="box w-4 h-4 rounded-md bg-red-500" />
 
-
             <div className="box w-4 h-4 rounded-full bg-sky-500 box-2"></div>
             <button onClick={_ => setX(x => x + 10)} className={`btn btn-sm`}>Click me 2</button>
             <div>

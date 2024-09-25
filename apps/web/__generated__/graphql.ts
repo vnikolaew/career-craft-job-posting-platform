@@ -1049,6 +1049,7 @@ export type Company = {
   contacts?: Maybe<CompanyContacts>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['EmailAddress']['output'];
+  emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   hiring_process: Array<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   listings: Array<JobListing>;
@@ -1457,6 +1458,7 @@ export type CompanyCountAggregate = {
   contacts: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
   email: Scalars['Int']['output'];
+  emailVerified: Scalars['Int']['output'];
   hiring_process: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
   local_info: Scalars['Int']['output'];
@@ -1477,6 +1479,7 @@ export type CompanyCountOrderByAggregateInput = {
   contacts?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   local_info?: InputMaybe<SortOrder>;
@@ -1497,6 +1500,7 @@ export type CompanyCreateInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
@@ -1518,6 +1522,7 @@ export type CompanyCreateManyInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
@@ -1570,6 +1575,7 @@ export type CompanyCreateWithoutCategoriesInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
@@ -1592,6 +1598,7 @@ export type CompanyCreateWithoutListingsInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
@@ -1613,6 +1620,7 @@ export type CompanyCreateWithoutSubscriptionsInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
@@ -1653,6 +1661,7 @@ export type CompanyGroupBy = {
   contacts: Scalars['JSON']['output'];
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['String']['output'];
+  emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   hiring_process?: Maybe<Array<Scalars['String']['output']>>;
   id: Scalars['String']['output'];
   local_info: Scalars['JSON']['output'];
@@ -1678,6 +1687,7 @@ export type CompanyMaxAggregate = {
   career_description_raw?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
@@ -1690,6 +1700,7 @@ export type CompanyMaxOrderByAggregateInput = {
   career_description_raw?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
 };
@@ -1702,6 +1713,7 @@ export type CompanyMinAggregate = {
   career_description_raw?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
@@ -1714,6 +1726,7 @@ export type CompanyMinOrderByAggregateInput = {
   career_description_raw?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
 };
@@ -1756,6 +1769,7 @@ export type CompanyOrderByWithAggregationInput = {
   contacts?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrderInput>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   local_info?: InputMaybe<SortOrder>;
@@ -1777,6 +1791,7 @@ export type CompanyOrderByWithRelationInput = {
   contacts?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrderInput>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   listings?: InputMaybe<JobListingOrderByRelationAggregateInput>;
@@ -1803,6 +1818,7 @@ export enum CompanyScalarFieldEnum {
   Contacts = 'contacts',
   CreatedAt = 'createdAt',
   Email = 'email',
+  EmailVerified = 'emailVerified',
   HiringProcess = 'hiring_process',
   Id = 'id',
   LocalInfo = 'local_info',
@@ -1826,6 +1842,7 @@ export type CompanyScalarWhereWithAggregatesInput = {
   contacts?: InputMaybe<JsonWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
+  emailVerified?: InputMaybe<DateTimeNullableWithAggregatesFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   local_info?: InputMaybe<JsonWithAggregatesFilter>;
@@ -1833,6 +1850,30 @@ export type CompanyScalarWhereWithAggregatesInput = {
   name?: InputMaybe<StringWithAggregatesFilter>;
   work_environment?: InputMaybe<StringNullableListFilter>;
   worldwide_info?: InputMaybe<JsonWithAggregatesFilter>;
+};
+
+export type CompanySignUpInput = {
+  administratorEmail: Scalars['String']['input'];
+  administratorFirstName: Scalars['String']['input'];
+  administratorLastName: Scalars['String']['input'];
+  administratorPhone: Scalars['String']['input'];
+  administratorPosition: Scalars['String']['input'];
+  authorizedPerson: Scalars['Boolean']['input'];
+  businessSectors: Array<Scalars['String']['input']>;
+  companyAddress: Scalars['String']['input'];
+  companyAddressRegistration: Scalars['String']['input'];
+  companyName: Scalars['String']['input'];
+  companyPassword: Scalars['String']['input'];
+  companyPasswordConfirm: Scalars['String']['input'];
+  companyPhone: Scalars['String']['input'];
+  companySite: Scalars['String']['input'];
+  companyUsername: Scalars['String']['input'];
+  key: Scalars['String']['input'];
+  officialCorrespondenceAddress?: InputMaybe<Scalars['String']['input']>;
+  officialEmail?: InputMaybe<Scalars['String']['input']>;
+  officialName?: InputMaybe<Scalars['String']['input']>;
+  officialPhone?: InputMaybe<Scalars['String']['input']>;
+  organizationType: Scalars['String']['input'];
 };
 
 export type CompanyUpdateInput = {
@@ -1846,6 +1887,7 @@ export type CompanyUpdateInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
@@ -1867,6 +1909,7 @@ export type CompanyUpdateManyMutationInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
@@ -1927,6 +1970,7 @@ export type CompanyUpdateWithoutCategoriesInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
@@ -1949,6 +1993,7 @@ export type CompanyUpdateWithoutListingsInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
@@ -1970,6 +2015,7 @@ export type CompanyUpdateWithoutSubscriptionsInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
@@ -2032,6 +2078,7 @@ export type CompanyWhereInput = {
   contacts?: InputMaybe<JsonFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
+  emailVerified?: InputMaybe<DateTimeNullableFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringFilter>;
   listings?: InputMaybe<JobListingListRelationFilter>;
@@ -2057,6 +2104,7 @@ export type CompanyWhereUniqueInput = {
   contacts?: InputMaybe<JsonFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
+  emailVerified?: InputMaybe<DateTimeNullableFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<JobListingListRelationFilter>;
@@ -4314,6 +4362,7 @@ export type JsonWithAggregatesFilter = {
 export type Mutation = {
   __typename?: 'Mutation';
   acceptAllCookies: Scalars['Boolean']['output'];
+  companySignUp?: Maybe<Company>;
   confirmJobListingSubscription?: Maybe<JobListingSubscription>;
   createManyAccount: AffectedRowsOutput;
   createManyCompany: AffectedRowsOutput;
@@ -4415,6 +4464,11 @@ export type Mutation = {
   upsertOneUserJobApplication: UserJobApplication;
   upsertOneVerificationToken: VerificationToken;
   verifyEmail: VerifyEmailResponse;
+};
+
+
+export type MutationCompanySignUpArgs = {
+  input: CompanySignUpInput;
 };
 
 
@@ -8937,6 +8991,13 @@ export type GetAllCountriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetAllCountriesQuery = { __typename?: 'Query', getAvailableCountries: Array<string> };
 
+export type CompanySignUpMutationVariables = Exact<{
+  input: CompanySignUpInput;
+}>;
+
+
+export type CompanySignUpMutation = { __typename?: 'Mutation', companySignUp?: { __typename?: 'Company', id: string, email: any, name: string, metadata?: any | null } | null };
+
 export type GenerateEmailCodeMutationVariables = Exact<{
   email: Scalars['EmailAddress']['input'];
 }>;
@@ -9075,6 +9136,7 @@ export const GetAllJobCategoriesQueryDocument = {"kind":"Document","definitions"
 export const GetJobListingsWithFilterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetJobListingsWithFilter"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SearchJobListingsInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"categories"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getMostRelevantCompanies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"categories"},"value":{"kind":"Variable","name":{"kind":"Name","value":"categories"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"10"}},{"kind":"ObjectField","name":{"kind":"Name","value":"skip"},"value":{"kind":"IntValue","value":"0"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}},{"kind":"Field","name":{"kind":"Name","value":"categories"}}]}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"company_bulstat"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"website_url"}},{"kind":"Field","name":{"kind":"Name","value":"facebook_url"}},{"kind":"Field","name":{"kind":"Name","value":"twitter_url"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin_url"}},{"kind":"Field","name":{"kind":"Name","value":"youtube_url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"companies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"searchJobListings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"parametersTyped"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"furlough"}},{"kind":"Field","name":{"kind":"Name","value":"internship"}},{"kind":"Field","name":{"kind":"Name","value":"remoteInterview"}},{"kind":"Field","name":{"kind":"Name","value":"salary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FixedJobListingSalary"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"RangeJobListingSalary"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"min"}},{"kind":"Field","name":{"kind":"Name","value":"max"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"isSaved"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"local_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}},{"kind":"Field","name":{"kind":"Name","value":"since"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldwide_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"locations"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"headquarters"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetJobListingsWithFilterQuery, GetJobListingsWithFilterQueryVariables>;
 export const SignInWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignInWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signInWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignInWithEmailCodeMutation, SignInWithEmailCodeMutationVariables>;
 export const GetAllCountriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllCountries"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getAvailableCountries"}}]}}]} as unknown as DocumentNode<GetAllCountriesQuery, GetAllCountriesQueryVariables>;
+export const CompanySignUpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CompanySignUp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CompanySignUpInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"companySignUp"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]} as unknown as DocumentNode<CompanySignUpMutation, CompanySignUpMutationVariables>;
 export const GenerateEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GenerateEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generateSignUpEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"expires"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<GenerateEmailCodeMutation, GenerateEmailCodeMutationVariables>;
 export const SignUpWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignUpWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUpWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"Argument","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignUpWithEmailCodeMutation, SignUpWithEmailCodeMutationVariables>;
 export const MeQueryGsByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MeQueryGSById"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<MeQueryGsByIdQuery, MeQueryGsByIdQueryVariables>;
@@ -10134,6 +10196,7 @@ export type Company = {
   contacts?: Maybe<CompanyContacts>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['EmailAddress']['output'];
+  emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   hiring_process: Array<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   listings: Array<JobListing>;
@@ -10542,6 +10605,7 @@ export type CompanyCountAggregate = {
   contacts: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
   email: Scalars['Int']['output'];
+  emailVerified: Scalars['Int']['output'];
   hiring_process: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
   local_info: Scalars['Int']['output'];
@@ -10562,6 +10626,7 @@ export type CompanyCountOrderByAggregateInput = {
   contacts?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrder>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   local_info?: InputMaybe<SortOrder>;
@@ -10582,6 +10647,7 @@ export type CompanyCreateInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
@@ -10603,6 +10669,7 @@ export type CompanyCreateManyInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
@@ -10655,6 +10722,7 @@ export type CompanyCreateWithoutCategoriesInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
@@ -10677,6 +10745,7 @@ export type CompanyCreateWithoutListingsInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
@@ -10698,6 +10767,7 @@ export type CompanyCreateWithoutSubscriptionsInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
   hiring_process?: InputMaybe<CompanyCreatehiring_ProcessInput>;
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<JobListingCreateNestedManyWithoutCompanyInput>;
@@ -10738,6 +10808,7 @@ export type CompanyGroupBy = {
   contacts: Scalars['JSON']['output'];
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['String']['output'];
+  emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   hiring_process?: Maybe<Array<Scalars['String']['output']>>;
   id: Scalars['String']['output'];
   local_info: Scalars['JSON']['output'];
@@ -10763,6 +10834,7 @@ export type CompanyMaxAggregate = {
   career_description_raw?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
@@ -10775,6 +10847,7 @@ export type CompanyMaxOrderByAggregateInput = {
   career_description_raw?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
 };
@@ -10787,6 +10860,7 @@ export type CompanyMinAggregate = {
   career_description_raw?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
@@ -10799,6 +10873,7 @@ export type CompanyMinOrderByAggregateInput = {
   career_description_raw?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
 };
@@ -10841,6 +10916,7 @@ export type CompanyOrderByWithAggregationInput = {
   contacts?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrderInput>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   local_info?: InputMaybe<SortOrder>;
@@ -10862,6 +10938,7 @@ export type CompanyOrderByWithRelationInput = {
   contacts?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrderInput>;
   hiring_process?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   listings?: InputMaybe<JobListingOrderByRelationAggregateInput>;
@@ -10888,6 +10965,7 @@ export enum CompanyScalarFieldEnum {
   Contacts = 'contacts',
   CreatedAt = 'createdAt',
   Email = 'email',
+  EmailVerified = 'emailVerified',
   HiringProcess = 'hiring_process',
   Id = 'id',
   LocalInfo = 'local_info',
@@ -10911,6 +10989,7 @@ export type CompanyScalarWhereWithAggregatesInput = {
   contacts?: InputMaybe<JsonWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
+  emailVerified?: InputMaybe<DateTimeNullableWithAggregatesFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   local_info?: InputMaybe<JsonWithAggregatesFilter>;
@@ -10918,6 +10997,30 @@ export type CompanyScalarWhereWithAggregatesInput = {
   name?: InputMaybe<StringWithAggregatesFilter>;
   work_environment?: InputMaybe<StringNullableListFilter>;
   worldwide_info?: InputMaybe<JsonWithAggregatesFilter>;
+};
+
+export type CompanySignUpInput = {
+  administratorEmail: Scalars['String']['input'];
+  administratorFirstName: Scalars['String']['input'];
+  administratorLastName: Scalars['String']['input'];
+  administratorPhone: Scalars['String']['input'];
+  administratorPosition: Scalars['String']['input'];
+  authorizedPerson: Scalars['Boolean']['input'];
+  businessSectors: Array<Scalars['String']['input']>;
+  companyAddress: Scalars['String']['input'];
+  companyAddressRegistration: Scalars['String']['input'];
+  companyName: Scalars['String']['input'];
+  companyPassword: Scalars['String']['input'];
+  companyPasswordConfirm: Scalars['String']['input'];
+  companyPhone: Scalars['String']['input'];
+  companySite: Scalars['String']['input'];
+  companyUsername: Scalars['String']['input'];
+  key: Scalars['String']['input'];
+  officialCorrespondenceAddress?: InputMaybe<Scalars['String']['input']>;
+  officialEmail?: InputMaybe<Scalars['String']['input']>;
+  officialName?: InputMaybe<Scalars['String']['input']>;
+  officialPhone?: InputMaybe<Scalars['String']['input']>;
+  organizationType: Scalars['String']['input'];
 };
 
 export type CompanyUpdateInput = {
@@ -10931,6 +11034,7 @@ export type CompanyUpdateInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
@@ -10952,6 +11056,7 @@ export type CompanyUpdateManyMutationInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
@@ -11012,6 +11117,7 @@ export type CompanyUpdateWithoutCategoriesInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
@@ -11034,6 +11140,7 @@ export type CompanyUpdateWithoutListingsInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   local_info?: InputMaybe<Scalars['JSON']['input']>;
@@ -11055,6 +11162,7 @@ export type CompanyUpdateWithoutSubscriptionsInput = {
   contacts?: InputMaybe<Scalars['JSON']['input']>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hiring_process?: InputMaybe<CompanyUpdatehiring_ProcessInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   listings?: InputMaybe<JobListingUpdateManyWithoutCompanyNestedInput>;
@@ -11117,6 +11225,7 @@ export type CompanyWhereInput = {
   contacts?: InputMaybe<JsonFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
+  emailVerified?: InputMaybe<DateTimeNullableFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<StringFilter>;
   listings?: InputMaybe<JobListingListRelationFilter>;
@@ -11142,6 +11251,7 @@ export type CompanyWhereUniqueInput = {
   contacts?: InputMaybe<JsonFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
+  emailVerified?: InputMaybe<DateTimeNullableFilter>;
   hiring_process?: InputMaybe<StringNullableListFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   listings?: InputMaybe<JobListingListRelationFilter>;
@@ -13399,6 +13509,7 @@ export type JsonWithAggregatesFilter = {
 export type Mutation = {
   __typename?: 'Mutation';
   acceptAllCookies: Scalars['Boolean']['output'];
+  companySignUp?: Maybe<Company>;
   confirmJobListingSubscription?: Maybe<JobListingSubscription>;
   createManyAccount: AffectedRowsOutput;
   createManyCompany: AffectedRowsOutput;
@@ -13500,6 +13611,11 @@ export type Mutation = {
   upsertOneUserJobApplication: UserJobApplication;
   upsertOneVerificationToken: VerificationToken;
   verifyEmail: VerifyEmailResponse;
+};
+
+
+export type MutationCompanySignUpArgs = {
+  input: CompanySignUpInput;
 };
 
 
@@ -18021,6 +18137,13 @@ export type GetAllCountriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllCountriesQuery = { __typename?: 'Query', getAvailableCountries: Array<string> };
+
+export type CompanySignUpMutationVariables = Exact<{
+  input: CompanySignUpInput;
+}>;
+
+
+export type CompanySignUpMutation = { __typename?: 'Mutation', companySignUp?: { __typename?: 'Company', id: string, email: any, name: string, metadata?: any | null } | null };
 
 export type GenerateEmailCodeMutationVariables = Exact<{
   email: Scalars['EmailAddress']['input'];

@@ -148,7 +148,8 @@ model Company {
   career_description_raw String
 
   /// @TypeGraphQL.omit(output: true)
-  email String @unique
+  email         String    @unique
+  emailVerified DateTime? @map("emailverified")
 
   /// [CompanyMetadata]
   /// @TypeGraphQL.omit(output: true)

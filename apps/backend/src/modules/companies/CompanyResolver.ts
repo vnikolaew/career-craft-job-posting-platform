@@ -11,7 +11,7 @@ import {
    Field,
    FieldResolver,
    InputType,
-   Int,
+   Int, Mutation,
    ObjectType,
    Query,
    Resolver,
@@ -28,6 +28,10 @@ import { GraphQLEmailAddress, GraphQLLatitude, GraphQLLongitude, GraphQLURL } fr
 import { JobListingEmploymentType, JobListingLevel, WorkFromHome } from "@prisma/client";
 import { NoCache } from "@infrastructure/decorators";
 import { fetch } from "undici";
+import * as z from "zod";
+import { EmailService } from "@modules/user/services/EmailService";
+import { CompanySignUpVerificationEmail } from "@repo/emails";
+import { APP_NAME } from "@consts";
 
 @InputType()
 class GetTopCompaniesInput {
@@ -83,6 +87,70 @@ export class CompanyWorldwideInfo {
 
    @Field(() => [String], { nullable: false })
    locations: string[];
+}
+
+@InputType()
+export class CompanySignUpInput {
+   @Field(() => String, { nullable: false })
+   companyName: string;
+
+   @Field(() => String, { nullable: false })
+   companyAddressRegistration: string;
+
+   @Field(() => String, { nullable: false })
+   organizationType: "company" | "agency";
+
+   @Field(() => [String], { nullable: false })
+   businessSectors: string[];
+
+   @Field(() => String, { nullable: false })
+   companySite: string;
+
+   @Field(() => String, { nullable: false })
+   companyPhone: string;
+
+   @Field(() => String, { nullable: false })
+   companyAddress: string;
+
+   @Field(() => String, { nullable: false })
+   administratorFirstName: string;
+
+   @Field(() => String, { nullable: false })
+   administratorLastName: string;
+
+   @Field(() => String, { nullable: false })
+   administratorEmail: string;
+
+   @Field(() => String, { nullable: false })
+   administratorPosition: string;
+
+   @Field(() => String, { nullable: false })
+   administratorPhone: string;
+
+   @Field(() => String, { nullable: false })
+   companyUsername: string;
+   @Field(() => String, { nullable: false })
+   companyPassword: string;
+   @Field(() => String, { nullable: false })
+   companyPasswordConfirm: string;
+
+   @Field(() => Boolean, { nullable: false })
+   authorizedPerson: boolean;
+
+   @Field(() => String, { nullable: true })
+   officialName?: string;
+
+   @Field(() => String, { nullable: true })
+   officialEmail?: string;
+
+   @Field(() => String, { nullable: true })
+   officialPhone?: string;
+
+   @Field(() => String, { nullable: true })
+   officialCorrespondenceAddress?: string;
+
+   @Field(() => String, { nullable: false })
+   key: string;
 }
 
 
@@ -150,6 +218,12 @@ function getRandomItems<T>(array: T[], n: number): T[] {
 
 @Resolver(of => Company)
 export class CompanyResolver extends CompanyRelationsResolver {
+   private readonly emailService: EmailService;
+
+   constructor() {
+      super();
+      this.emailService = new EmailService();
+   }
 
    @FieldResolver(_ => Int, { nullable: false })
    public async listingsCount(@Root() company: Company, @Ctx() { prisma }: MyContext): Promise<number> {
@@ -224,7 +298,7 @@ export class CompanyResolver extends CompanyRelationsResolver {
 
    @FieldResolver(_ => GraphQLEmailAddress, { nullable: false })
    public async email(@Root() company: Company): Promise<string> {
-      return company.email;
+      return company.email?.length ? company.email : `placeholder@placeholder.com`;
    }
 
    @FieldResolver(_ => GraphQLURL, { nullable: true })
@@ -280,6 +354,48 @@ export class CompanyResolver extends CompanyRelationsResolver {
       if (!response.ok) return [];
 
       let countries = (await response.json() as any[]).map(x => x?.name?.common);
-      return countries
+      return countries;
+   }
+
+   @Mutation(_ => Company, { nullable: true })
+   public async companySignUp(
+      @Ctx() { prisma, req }: MyContext,
+      @Arg("input", () => CompanySignUpInput, { nullable: false }) input: CompanySignUpInput): Promise<Company | null> {
+      try {
+         let company = await prisma.company.create({
+            data: {
+               name: input.companyName,
+               about_raw: ``,
+               career_description_raw: ``,
+               email: ``,
+               local_info: {},
+               worldwide_info: {},
+               contacts: {},
+               metadata: {},
+            },
+         });
+
+         let email = company.email;
+         let r = req.headers.referer;
+
+         console.log({ referer: r });
+
+         return company;
+
+         let response = await this.emailService.sendMail({
+            to: input.administratorEmail,
+            subject: `Company Sign Up Confirmation`,
+            react: CompanySignUpVerificationEmail({
+               confirmationUrl: `/company/confirm-signup?email=${email}`,
+               appName: APP_NAME,
+               name: company.name,
+            }),
+         });
+
+         return response.success ? company : null;
+      } catch (err) {
+         console.log({ err });
+         return null;
+      }
    }
 }

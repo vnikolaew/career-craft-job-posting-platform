@@ -16,8 +16,11 @@ export default async function Home({  }: HomeProps) {
 
    return (
       <section className={`flex flex-col items-center gap-8 mt-24 justify-center !min-h-full !bg-neutral-100`}>
-         <div className={`mt-24`}>
+         <div className={`mt-24 flex flex-col items-center gap-2`}>
             {signedOut && (<h2 className={`text-3xl mt-24`}>Welcome to <b>{APP_NAME}</b>.</h2>)}
+            <h3 className={`text-neutral-500 text-lg drop-shadow-md`}>
+               Where Opportunities Meet Talent.
+            </h3>
          </div>
          <div className={`w-3/4 flex items-center justify-between mt-8 px-24 mx-auto`}>
             <div className={`text-2xl text-neutral-500 inline-flex items-center gap-4`}>

@@ -30,19 +30,21 @@ const TopCategoriesSection = ({}: TopCategoriesSectionProps) => {
    return (
       <HomePageSection heading={"Categories"}>
          <div className={`flex flex-col items-start gap-4`}>
-            {loading ? (
-               Array.from({ length: 10 }).map((_, index) => <Skeleton key={index}
-                                                                      className={`w-3/5 h-10 shadow-sm `} />)
-            ) : (
-               <Fragment>
-                  {data?.getTopListingCategories?.map((category) => (
-                     <CategoryBadge key={category.id} category={category as JobListingCategory} />
-                  ))}
-               </Fragment>
-            )}
+            {loading ? Array.from({ length: 10 })
+               .map((_, index) =>
+                  <Skeleton key={index} className={`w-3/5 h-10 shadow-sm `} />)
+               : <CategoriesList categories={data?.getTopListingCategories as JobListingCategory[]} />}
          </div>
       </HomePageSection>
    );
+};
+
+const CategoriesList = ({ categories }: { categories: JobListingCategory[] }) => {
+   return <Fragment>
+      {categories?.map((category) => (
+         <CategoryBadge key={category.id} category={category as JobListingCategory} />
+      ))}
+   </Fragment>;
 };
 
 const CategoryBadge = ({ category }: { category: JobListingCategory }) => {
@@ -51,7 +53,7 @@ const CategoryBadge = ({ category }: { category: JobListingCategory }) => {
    return (
       <div key={category.id} className={`w-full`}>
          <Link href={`/jobs?${params.toString()}`}
-               className={`text-neutral-500 btn btn-outline !rounded-full !min-h-fit !h-fit !py-3 flex items-center justify-start gap-3 !w-fit !px-6 hover:!bg-neutral-300 transition-all duration-100 !border-neutral-300 group`}>
+               className={`text-neutral-500 btn btn-outline !rounded-full !min-h-fit !h-fit !py-3 flex items-center justify-start gap-3 !w-fit !px-6 hover:!bg-neutral-300 transition-all duration-100 !border-neutral-300 group !bg-neutral-100`}>
             <Truck className={`group-hover:!text-neutral-500 !fill-neutral-500 !text-neutral-500 w-10 h-10`} />
             <span className={`font-semibold text-base text-neutral-700`}>
                {category.name}

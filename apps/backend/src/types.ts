@@ -1,12 +1,10 @@
 import express from "express";
 import * as http from "node:http";
 import { xprisma } from "@prisma/prisma";
-import { MoviesAPI } from "@modules/common/data-sources/MoviesAPI";
 import { GraphQLResolveInfo } from "graphql";
 import { PubSub } from "graphql-subscriptions";
 
 export type DataSources = {
-   movies?: MoviesAPI;
 }
 
 export interface MyContext {

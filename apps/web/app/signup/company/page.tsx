@@ -3,6 +3,7 @@ import GeneralConditionsOfUseStep from "@/app/signup/company/_components/General
 import { match } from "ts-pattern";
 import SignUpStepOne from "@/app/signup/company/_components/SignUpStepOne";
 import SignUpStepTwo from "@/app/signup/company/_components/SignUpStepTwo";
+import SignUpSuccessStep from "./_components/SignUpSuccessStep";
 
 export interface PageProps {
    searchParams: {
@@ -19,6 +20,7 @@ const Page = async (props: PageProps) => {
             .with(`general-conditions`, () => <GeneralConditionsOfUseStep />)
             .with(`register-one`, () => <SignUpStepOne />)
             .with(`register-two`, () => <SignUpStepTwo />)
+            .with(`success`, () => <SignUpSuccessStep />)
             .otherwise(() => <GeneralConditionsOfUseStep />)
          }
       </section>

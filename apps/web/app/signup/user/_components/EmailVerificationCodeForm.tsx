@@ -9,7 +9,6 @@ import { gql } from "@/__generated__";
 import { useMutation } from "@apollo/client";
 import { ME_QUERY } from "@/components/Navbar";
 import Link from "next/link";
-import { sign } from "node:crypto";
 
 export interface EmailVerificationCodeFormProps {
 }

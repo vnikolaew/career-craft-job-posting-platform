@@ -1,12 +1,15 @@
 "use client";
 import Link from "next/link";
-import React, { Fragment, ReactNode, useEffect, useMemo, useState } from "react";
+import React, { ComponentProps, Fragment, ReactNode, useEffect, useMemo, useState } from "react";
 import * as z from "zod";
 import { FieldErrors, FieldPath, FormProvider, useForm, useFormContext } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { APP_HOST_NAME, APP_NAME } from "@/config/site";
 import Image from "next/image";
+import * as _ from "lodash";
+import { gql } from "@/__generated__";
+import { useMutation } from "@apollo/client";
 
 export interface SignUpStepTwoProps {
 }
@@ -33,9 +36,22 @@ const schema = z.object({
    officialName: z.string().nullish(),
    officialEmail: z.string().email().nullish(),
    officialPhone: z.string().nullish(),
-   officialCorrespondenceAddress: z.string().nullish() ,
+   officialCorrespondenceAddress: z.string().nullish(),
    key: z.string(),
-}).refine(x => x.companyPassword === x.companyPasswordConfirm, {
+});
+
+const COMPANY_SIGN_UP = gql(/* GraphQL */`
+    mutation CompanySignUp($input: CompanySignUpInput!) {
+        companySignUp(input: $input) {
+            id
+            email
+            name
+            metadata
+        }
+    }
+`);
+
+const refined = schema.refine(x => x.companyPassword === x.companyPasswordConfirm, {
    message: `Passwords do not match.`,
    path: [`companyPasswordConfirm`],
 });
@@ -46,6 +62,7 @@ export const LS_COMPANY_SIGNUP_FORM_VALUES_KEY = `company-signup-form-values`;
 
 const SignUpStepTwo = ({}: SignUpStepTwoProps) => {
    const [fieldErrors, setFieldErrors] = useState<FieldErrors<Inputs>>(null!);
+   const [companySignUp, { loading }] = useMutation(COMPANY_SIGN_UP, {});
 
    const router = useRouter();
    const searchParams = useSearchParams();
@@ -58,21 +75,70 @@ const SignUpStepTwo = ({}: SignUpStepTwoProps) => {
       watch,
       ...methods
    } = useForm<Inputs>({
-      resolver: zodResolver(schema),
+      resolver: zodResolver(refined),
       reValidateMode: `onSubmit`,
-      defaultValues: (_) => {
-         let data = schema.safeParse(JSON.parse(localStorage.getItem(LS_COMPANY_SIGNUP_FORM_VALUES_KEY)));
+      defaultValues: async (_) => {
+         let data = schema.partial().safeParse(JSON.parse(localStorage.getItem(LS_COMPANY_SIGNUP_FORM_VALUES_KEY) ?? `{}`));
+         console.log({ data });
+
          return data?.success ? data?.data : null!;
-      }
+      },
    });
 
-   const values = watch()
+   const values = watch();
    useEffect(() => {
-      localStorage.setItem(LS_COMPANY_SIGNUP_FORM_VALUES_KEY, JSON.stringify(values));
-   }, [values])
+      let data = schema
+         .partial()
+         .safeParse(JSON.parse(localStorage.getItem(LS_COMPANY_SIGNUP_FORM_VALUES_KEY) ?? `{}`))
+         ?.data ?? {};
+      let newValue = _.mergeWith(data, values, (src, dest) => {
+         if (values !== null || values !== undefined) return src;
+         return dest;
+      });
 
-   function onSubmit(data) {
+      localStorage.setItem(
+         LS_COMPANY_SIGNUP_FORM_VALUES_KEY,
+         JSON.stringify(newValue));
+   }, [values]);
+
+   async function onSubmit(data: Inputs) {
       console.log({ data });
+
+      // Handle company sign up:
+      let res = await companySignUp({
+         variables: {
+            input: {
+               administratorEmail: data.administratorEmail,
+               administratorFirstName: data.administratorFirstName,
+               administratorLastName: data.administratorLastName,
+               administratorPosition: data.administratorPosition,
+               administratorPhone: data.administratorPhone,
+               authorizedPerson: data.authorizedPerson === `true`,
+               businessSectors: [],
+               companyAddress: data.companyAddress,
+               companyAddressRegistration: data.companyAddressRegistration,
+               companyPhone: data.companyPhone,
+               companySite: data.companySite,
+               companyUsername: data.companyUsername,
+               companyPassword: data.companyPassword,
+               companyPasswordConfirm: data.companyPasswordConfirm,
+               companyName: data.companyName,
+               key: "key",
+               organizationType: "company",
+               officialCorrespondenceAddress: data.officialCorrespondenceAddress,
+               officialEmail: data.officialEmail,
+               officialName: data.officialName,
+            },
+         },
+      });
+
+      if (res.data?.companySignUp?.id && !res.errors?.length) {
+         let path = window.location.pathname;
+         let params = new URLSearchParams(searchParams);
+
+         params.set("step", "success");
+         router.push(`${path}?${params.toString()}`);
+      }
    }
 
    function onError(errors: any) {
@@ -194,7 +260,7 @@ const SignUpStepTwo = ({}: SignUpStepTwoProps) => {
                   <p className={`ml-[200px]`}>
                      (minimum 6 symbols)
                   </p>
-                  <FormTextField label={`Password: *`} name={`companyPassword`} />
+                  <FormTextField type={`password`} label={`Password: *`} name={`companyPassword`} />
                   <p className={`ml-[200px] !text-wrap`}>
                      (Choose a password at least 10 characters long, containing a combination of letters, numbers and
                      special characters. The password must not match and be sufficiently different from passwords you
@@ -211,7 +277,7 @@ const SignUpStepTwo = ({}: SignUpStepTwoProps) => {
                               (confirm)
                         </span>
                      </Fragment>
-                  } name={`companyPasswordConfirm`} />
+                  } type={`password`} name={`companyPasswordConfirm`} />
                   <div className={`divider w-full`} />
                   <div className={`w-2/3 flex flex-col items-start gap-2 !ml-auto !text-wrap`}>
                      <p>
@@ -307,10 +373,11 @@ const SignUpStepTwo = ({}: SignUpStepTwoProps) => {
    );
 };
 
-const FormTextField = ({ label, name, textarea = false }: {
+const FormTextField = ({ label, name, textarea = false, type = `text` }: {
    label: ReactNode,
    name: FieldPath<Inputs>,
-   textarea?: boolean
+   textarea?: boolean,
+   type?: ComponentProps<"input">["type"]
 }) => {
    const { register } = useFormContext<Inputs>();
 
@@ -323,7 +390,7 @@ const FormTextField = ({ label, name, textarea = false }: {
             <textarea placeholder=""
                       className="textarea input-bordered w-full min-w-[300px] min-h-[120px]" {...register(name)} />
          ) : (
-            <input type="text" placeholder=""
+            <input type={type} placeholder=""
                    className="input input-bordered w-full min-w-[300px]" {...register(name)} />
          )}
       </label>
