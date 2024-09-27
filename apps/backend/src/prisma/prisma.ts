@@ -11,7 +11,7 @@ export const globalForPrisma = globalThis as unknown as {
 };
 
 
-export let prisma = globalForPrisma.prisma ?? new PrismaClient({
+export let prisma: PrismaClient = globalForPrisma.prisma ?? new PrismaClient({
    // adapter: new PrismaPg(new Pool({ connectionString: process.env.DATABASE_URL! })),
    log: [{ emit: `stdout`, level: `info` }],
    errorFormat: `pretty`,
@@ -148,7 +148,7 @@ export let xprisma = prisma.$extends({
          },
       },
    },
-});
+}) as const;
 
 export type XPrismaClient = typeof xprisma
 

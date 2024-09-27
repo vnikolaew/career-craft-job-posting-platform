@@ -45,12 +45,13 @@ model User {
   accounts Account[]
   sessions Session[]
 
-  createdAt      DateTime                 @default(now())
-  updatedAt      DateTime                 @updatedAt
-  saved_listings SavedListing[]
-  subscriptions  JobListingSubscription[]
-  attachments    UserAttachments[]
-  applications   UserJobApplication[]
+  createdAt              DateTime                  @default(now())
+  updatedAt              DateTime                  @updatedAt
+  saved_listings         SavedListing[]
+  subscriptions          JobListingSubscription[]
+  attachments            UserAttachments[]
+  applications           UserJobApplication[]
+  cover_letter_templates UserCoverLetterTemplate[]
 }
 
 model UserJobApplication {
@@ -61,6 +62,21 @@ model UserJobApplication {
 
   listing_id String
   listing    JobListing @relation(fields: [listing_id], references: [id], onDelete: Cascade)
+
+  metadata Json? @default("null") @db.JsonB
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserCoverLetterTemplate {
+  id String @id @default(cuid())
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  letter String
+  name   String
 
   metadata Json? @default("null") @db.JsonB
 

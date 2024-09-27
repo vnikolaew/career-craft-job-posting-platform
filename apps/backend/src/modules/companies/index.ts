@@ -1,3 +1,3 @@
-import {CompanyResolver} from "@modules/companies/CompanyResolver"
+import { CompanyResolver } from "@modules/companies/CompanyResolver";
 
-export {CompanyResolver}
+export { CompanyResolver };

@@ -6,7 +6,7 @@
     "src"
   ],
   "compilerOptions": {
-    "target": "ES2021",
+    "target": "ES2022",
     "resolveJsonModule": true,
     "module": "CommonJS",
     "moduleResolution": "Node",

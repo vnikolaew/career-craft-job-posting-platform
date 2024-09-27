@@ -30,7 +30,6 @@ import { WHITELISTED_URLS } from "@infrastructure/middleware/HostMiddleware";
 
 import fileUpload from "express-fileupload";
 import { fileUploadHandler } from "@lib/services";
-import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 
 export class CustomApolloServer<TContext> {
    private readonly schema: Partial<BuildSchemaOptions> & { resolvers: NonEmptyArray<Function> };
@@ -56,11 +55,19 @@ export class CustomApolloServer<TContext> {
 
       this.app = express();
       this.app
-         .use(graphqlUploadExpress({ maxFiles: 10, maxFileSize: 1_000_000 }))
+         // .use(graphqlUploadExpress({ maxFiles: 10, maxFileSize: 1_000_000 }))
          .use(fileUpload({
             limits: { fileSize: 10 * 1024 * 1024 },
             useTempFiles: false,
          }))
+         .use(hostMiddleware)
+         .use(
+            cors<cors.CorsRequest>({
+               origin: [`http://apollo-next.com:3000`, `http://localhost:3000`, `https://apollo-next.com:3000`, `http://career-craft.com:3000`, `https://career-craft.com:3000`],
+               credentials: true,
+            }),
+         )
+         .use(express.json())
          .use(`/login/github`, githubLoginRouter)
          .use(`/login/google`, googleLoginRouter)
          .post(`/file-upload`, fileUploadHandler);
@@ -129,13 +136,6 @@ export class CustomApolloServer<TContext> {
       await this.server?.start();
 
       this.app.use(`/`,
-         hostMiddleware,
-         // graphqlUploadExpress(),
-         cors<cors.CorsRequest>({
-            origin: [`http://apollo-next.com:3000`, `http://localhost:3000`, `https://apollo-next.com:3000`, `http://career-craft.com:3000`, `https://career-craft.com:3000`],
-            credentials: true,
-         }),
-         express.json(),
          expressMiddleware(this.server, {
             context: async ({ req, res }) => ({
                prisma: xprisma,

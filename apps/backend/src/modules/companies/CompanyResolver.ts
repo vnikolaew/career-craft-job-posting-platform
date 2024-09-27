@@ -6,7 +6,6 @@ import { JobListing } from "@generated/models/JobListing";
 
 import {
    Arg,
-   Authorized,
    Ctx,
    Field,
    FieldResolver,
@@ -28,7 +27,6 @@ import { GraphQLEmailAddress, GraphQLLatitude, GraphQLLongitude, GraphQLURL } fr
 import { JobListingEmploymentType, JobListingLevel, WorkFromHome } from "@prisma/client";
 import { NoCache } from "@infrastructure/decorators";
 import { fetch } from "undici";
-import * as z from "zod";
 import { EmailService } from "@modules/user/services/EmailService";
 import { CompanySignUpVerificationEmail } from "@repo/emails";
 import { APP_NAME } from "@consts";

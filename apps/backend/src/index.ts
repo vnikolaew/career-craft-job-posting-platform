@@ -25,6 +25,7 @@ import {
    CompanyResolver,
    AttachmentsResolver,
    ApplicationsResolver,
+   CoverLetterTemplateResolver
 } from "@modules";
 import { JobListingCrudResolver } from "@modules/job_listings/JobListingResolver";
 import { SubscriptionsResolver } from "@modules/subscriptions/SubscriptionsResolver";
@@ -37,7 +38,7 @@ async function main() {
    const schema: BuildSchemaOptions = {
       resolvers: [
          UserResolver, CompanyResolver, CookiesResolver, SubscriptionsResolver, JobListingCrudResolver, JobListingSavesResolver,
-         AttachmentsResolver, ApplicationsResolver, CategoriesResolver, EmailsResolver, UserCrudResolver,
+         AttachmentsResolver, ApplicationsResolver, CategoriesResolver, EmailsResolver, UserCrudResolver, CoverLetterTemplateResolver,
          ...Object.entries(CrudResolvers)
             .concat(Object.entries(RelationsResolvers) as any[])
             .filter(([key, _]) => key.endsWith(`Resolver`) && !key.includes(`CategoryOn`))

@@ -545,6 +545,12 @@ type AggregateUserAttachments {
   _min: UserAttachmentsMinAggregate
 }
 
+type AggregateUserCoverLetterTemplate {
+  _count: UserCoverLetterTemplateCountAggregate
+  _max: UserCoverLetterTemplateMaxAggregate
+  _min: UserCoverLetterTemplateMinAggregate
+}
+
 type AggregateUserJobApplication {
   _count: UserJobApplicationCountAggregate
   _max: UserJobApplicationMaxAggregate
@@ -1992,6 +1998,11 @@ type CompanyWorldwideInfo {
 type Coordinates {
   latitude: Latitude
   longitude: Longitude
+}
+
+input CreateUserCoverLetterTemplateInput {
+  content: String!
+  name: String!
 }
 
 """
@@ -4138,6 +4149,7 @@ type Mutation {
   createManySession(data: [SessionCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyUser(data: [UserCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyUserAttachments(data: [UserAttachmentsCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+  createManyUserCoverLetterTemplate(data: [UserCoverLetterTemplateCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyUserJobApplication(data: [UserJobApplicationCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createManyVerificationToken(data: [VerificationTokenCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
   createOneAccount(data: AccountCreateInput!, relationLoadStrategy: RelationLoadStrategy): Account!
@@ -4150,9 +4162,12 @@ type Mutation {
   createOneSession(data: SessionCreateInput!, relationLoadStrategy: RelationLoadStrategy): Session!
   createOneUser(data: UserCreateInput!, relationLoadStrategy: RelationLoadStrategy): User!
   createOneUserAttachments(data: UserAttachmentsCreateInput!, relationLoadStrategy: RelationLoadStrategy): UserAttachments!
+  createOneUserCoverLetterTemplate(data: UserCoverLetterTemplateCreateInput!, relationLoadStrategy: RelationLoadStrategy): UserCoverLetterTemplate!
   createOneUserJobApplication(data: UserJobApplicationCreateInput!, relationLoadStrategy: RelationLoadStrategy): UserJobApplication!
   createOneVerificationToken(data: VerificationTokenCreateInput!, relationLoadStrategy: RelationLoadStrategy): VerificationToken!
+  createUserCoverLetterTemplate(input: CreateUserCoverLetterTemplateInput!): UserCoverLetterTemplate
   declineAllCookies: Boolean!
+  deleteAllCoverLetterTemplates: Boolean!
   deleteAllSubscriptions: DeleteAllSubscriptionsResponse!
   deleteManyAccount(where: AccountWhereInput): AffectedRowsOutput!
   deleteManyCompany(where: CompanyWhereInput): AffectedRowsOutput!
@@ -4164,6 +4179,7 @@ type Mutation {
   deleteManySession(where: SessionWhereInput): AffectedRowsOutput!
   deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
   deleteManyUserAttachments(where: UserAttachmentsWhereInput): AffectedRowsOutput!
+  deleteManyUserCoverLetterTemplate(where: UserCoverLetterTemplateWhereInput): AffectedRowsOutput!
   deleteManyUserJobApplication(where: UserJobApplicationWhereInput): AffectedRowsOutput!
   deleteManyVerificationToken(where: VerificationTokenWhereInput): AffectedRowsOutput!
   deleteOneAccount(relationLoadStrategy: RelationLoadStrategy, where: AccountWhereUniqueInput!): Account
@@ -4176,6 +4192,7 @@ type Mutation {
   deleteOneSession(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   deleteOneUser(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
   deleteOneUserAttachments(relationLoadStrategy: RelationLoadStrategy, where: UserAttachmentsWhereUniqueInput!): UserAttachments
+  deleteOneUserCoverLetterTemplate(relationLoadStrategy: RelationLoadStrategy, where: UserCoverLetterTemplateWhereUniqueInput!): UserCoverLetterTemplate
   deleteOneUserJobApplication(relationLoadStrategy: RelationLoadStrategy, where: UserJobApplicationWhereUniqueInput!): UserJobApplication
   deleteOneVerificationToken(relationLoadStrategy: RelationLoadStrategy, where: VerificationTokenWhereUniqueInput!): VerificationToken
   fileUpload(file: Upload!): Boolean!
@@ -4222,6 +4239,7 @@ type Mutation {
   updateManySession(data: SessionUpdateManyMutationInput!, where: SessionWhereInput): AffectedRowsOutput!
   updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
   updateManyUserAttachments(data: UserAttachmentsUpdateManyMutationInput!, where: UserAttachmentsWhereInput): AffectedRowsOutput!
+  updateManyUserCoverLetterTemplate(data: UserCoverLetterTemplateUpdateManyMutationInput!, where: UserCoverLetterTemplateWhereInput): AffectedRowsOutput!
   updateManyUserJobApplication(data: UserJobApplicationUpdateManyMutationInput!, where: UserJobApplicationWhereInput): AffectedRowsOutput!
   updateManyVerificationToken(data: VerificationTokenUpdateManyMutationInput!, where: VerificationTokenWhereInput): AffectedRowsOutput!
   updateOneAccount(data: AccountUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: AccountWhereUniqueInput!): Account
@@ -4234,6 +4252,7 @@ type Mutation {
   updateOneSession(data: SessionUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   updateOneUser(data: UserUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
   updateOneUserAttachments(data: UserAttachmentsUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: UserAttachmentsWhereUniqueInput!): UserAttachments
+  updateOneUserCoverLetterTemplate(data: UserCoverLetterTemplateUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: UserCoverLetterTemplateWhereUniqueInput!): UserCoverLetterTemplate
   updateOneUserJobApplication(data: UserJobApplicationUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: UserJobApplicationWhereUniqueInput!): UserJobApplication
   updateOneVerificationToken(data: VerificationTokenUpdateInput!, relationLoadStrategy: RelationLoadStrategy, where: VerificationTokenWhereUniqueInput!): VerificationToken
   upsertOneAccount(create: AccountCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: AccountUpdateInput!, where: AccountWhereUniqueInput!): Account!
@@ -4246,6 +4265,7 @@ type Mutation {
   upsertOneSession(create: SessionCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: SessionUpdateInput!, where: SessionWhereUniqueInput!): Session!
   upsertOneUser(create: UserCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
   upsertOneUserAttachments(create: UserAttachmentsCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: UserAttachmentsUpdateInput!, where: UserAttachmentsWhereUniqueInput!): UserAttachments!
+  upsertOneUserCoverLetterTemplate(create: UserCoverLetterTemplateCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: UserCoverLetterTemplateUpdateInput!, where: UserCoverLetterTemplateWhereUniqueInput!): UserCoverLetterTemplate!
   upsertOneUserJobApplication(create: UserJobApplicationCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: UserJobApplicationUpdateInput!, where: UserJobApplicationWhereUniqueInput!): UserJobApplication!
   upsertOneVerificationToken(create: VerificationTokenCreateInput!, relationLoadStrategy: RelationLoadStrategy, update: VerificationTokenUpdateInput!, where: VerificationTokenWhereUniqueInput!): VerificationToken!
   verifyEmail: VerifyEmailResponse!
@@ -4562,6 +4582,7 @@ type Query {
   aggregateSession(cursor: SessionWhereUniqueInput, orderBy: [SessionOrderByWithRelationInput!], skip: Int, take: Int, where: SessionWhereInput): AggregateSession!
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
   aggregateUserAttachments(cursor: UserAttachmentsWhereUniqueInput, orderBy: [UserAttachmentsOrderByWithRelationInput!], skip: Int, take: Int, where: UserAttachmentsWhereInput): AggregateUserAttachments!
+  aggregateUserCoverLetterTemplate(cursor: UserCoverLetterTemplateWhereUniqueInput, orderBy: [UserCoverLetterTemplateOrderByWithRelationInput!], skip: Int, take: Int, where: UserCoverLetterTemplateWhereInput): AggregateUserCoverLetterTemplate!
   aggregateUserJobApplication(cursor: UserJobApplicationWhereUniqueInput, orderBy: [UserJobApplicationOrderByWithRelationInput!], skip: Int, take: Int, where: UserJobApplicationWhereInput): AggregateUserJobApplication!
   aggregateVerificationToken(cursor: VerificationTokenWhereUniqueInput, orderBy: [VerificationTokenOrderByWithRelationInput!], skip: Int, take: Int, where: VerificationTokenWhereInput): AggregateVerificationToken!
   companies(cursor: CompanyWhereUniqueInput, distinct: [CompanyScalarFieldEnum!], orderBy: [CompanyOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: CompanyWhereInput): [Company!]!
@@ -4588,6 +4609,8 @@ type Query {
   findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserWhereInput): User
   findFirstUserAttachments(cursor: UserAttachmentsWhereUniqueInput, distinct: [UserAttachmentsScalarFieldEnum!], orderBy: [UserAttachmentsOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserAttachmentsWhereInput): UserAttachments
   findFirstUserAttachmentsOrThrow(cursor: UserAttachmentsWhereUniqueInput, distinct: [UserAttachmentsScalarFieldEnum!], orderBy: [UserAttachmentsOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserAttachmentsWhereInput): UserAttachments
+  findFirstUserCoverLetterTemplate(cursor: UserCoverLetterTemplateWhereUniqueInput, distinct: [UserCoverLetterTemplateScalarFieldEnum!], orderBy: [UserCoverLetterTemplateOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserCoverLetterTemplateWhereInput): UserCoverLetterTemplate
+  findFirstUserCoverLetterTemplateOrThrow(cursor: UserCoverLetterTemplateWhereUniqueInput, distinct: [UserCoverLetterTemplateScalarFieldEnum!], orderBy: [UserCoverLetterTemplateOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserCoverLetterTemplateWhereInput): UserCoverLetterTemplate
   findFirstUserJobApplication(cursor: UserJobApplicationWhereUniqueInput, distinct: [UserJobApplicationScalarFieldEnum!], orderBy: [UserJobApplicationOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserJobApplicationWhereInput): UserJobApplication
   findFirstUserJobApplicationOrThrow(cursor: UserJobApplicationWhereUniqueInput, distinct: [UserJobApplicationScalarFieldEnum!], orderBy: [UserJobApplicationOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserJobApplicationWhereInput): UserJobApplication
   findFirstUserOrThrow(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserWhereInput): User
@@ -4611,6 +4634,7 @@ type Query {
   getJobListingLevelsDetails: [GetJobListingLevelsDetailsResponse!]!
   getJobListingSubscription(relationLoadStrategy: RelationLoadStrategy, where: JobListingSubscriptionWhereUniqueInput!): JobListingSubscription
   getMostRelevantCompanies(input: GetRelevantCompaniesInput!): [Company!]!
+  getMyCoverLetterTemplates: [UserCoverLetterTemplate!]!
   getSavedListing(relationLoadStrategy: RelationLoadStrategy, where: SavedListingWhereUniqueInput!): SavedListing
   getSession(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   getSubscriptionsJobListingsForUser(
@@ -4620,6 +4644,7 @@ type Query {
   getTopCompanies(input: GetTopCompaniesInput!): [Company!]!
   getTopListingCategories(input: GetTopListingCategoriesInput!): [JobListingCategory!]!
   getUser(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
+  getUserCoverLetterTemplate(relationLoadStrategy: RelationLoadStrategy, where: UserCoverLetterTemplateWhereUniqueInput!): UserCoverLetterTemplate
   getUserJobApplication(relationLoadStrategy: RelationLoadStrategy, where: UserJobApplicationWhereUniqueInput!): UserJobApplication
   getVerificationToken(relationLoadStrategy: RelationLoadStrategy, where: VerificationTokenWhereUniqueInput!): VerificationToken
   googleLoginUrl(redirect_url: String): String!
@@ -4633,6 +4658,7 @@ type Query {
   groupBySession(by: [SessionScalarFieldEnum!]!, having: SessionScalarWhereWithAggregatesInput, orderBy: [SessionOrderByWithAggregationInput!], skip: Int, take: Int, where: SessionWhereInput): [SessionGroupBy!]!
   groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByWithAggregationInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
   groupByUserAttachments(by: [UserAttachmentsScalarFieldEnum!]!, having: UserAttachmentsScalarWhereWithAggregatesInput, orderBy: [UserAttachmentsOrderByWithAggregationInput!], skip: Int, take: Int, where: UserAttachmentsWhereInput): [UserAttachmentsGroupBy!]!
+  groupByUserCoverLetterTemplate(by: [UserCoverLetterTemplateScalarFieldEnum!]!, having: UserCoverLetterTemplateScalarWhereWithAggregatesInput, orderBy: [UserCoverLetterTemplateOrderByWithAggregationInput!], skip: Int, take: Int, where: UserCoverLetterTemplateWhereInput): [UserCoverLetterTemplateGroupBy!]!
   groupByUserJobApplication(by: [UserJobApplicationScalarFieldEnum!]!, having: UserJobApplicationScalarWhereWithAggregatesInput, orderBy: [UserJobApplicationOrderByWithAggregationInput!], skip: Int, take: Int, where: UserJobApplicationWhereInput): [UserJobApplicationGroupBy!]!
   groupByVerificationToken(by: [VerificationTokenScalarFieldEnum!]!, having: VerificationTokenScalarWhereWithAggregatesInput, orderBy: [VerificationTokenOrderByWithAggregationInput!], skip: Int, take: Int, where: VerificationTokenWhereInput): [VerificationTokenGroupBy!]!
   jobListing(relationLoadStrategy: RelationLoadStrategy, where: JobListingWhereUniqueInput!): JobListing
@@ -4652,6 +4678,8 @@ type Query {
   session(relationLoadStrategy: RelationLoadStrategy, where: SessionWhereUniqueInput!): Session
   sessions(cursor: SessionWhereUniqueInput, distinct: [SessionScalarFieldEnum!], orderBy: [SessionOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: SessionWhereInput): [Session!]!
   user(relationLoadStrategy: RelationLoadStrategy, where: UserWhereUniqueInput!): User
+  userCoverLetterTemplate(relationLoadStrategy: RelationLoadStrategy, where: UserCoverLetterTemplateWhereUniqueInput!): UserCoverLetterTemplate
+  userCoverLetterTemplates(cursor: UserCoverLetterTemplateWhereUniqueInput, distinct: [UserCoverLetterTemplateScalarFieldEnum!], orderBy: [UserCoverLetterTemplateOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserCoverLetterTemplateWhereInput): [UserCoverLetterTemplate!]!
   userJobApplication(relationLoadStrategy: RelationLoadStrategy, where: UserJobApplicationWhereUniqueInput!): UserJobApplication
   userJobApplications(cursor: UserJobApplicationWhereUniqueInput, distinct: [UserJobApplicationScalarFieldEnum!], orderBy: [UserJobApplicationOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserJobApplicationWhereInput): [UserJobApplication!]!
   users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], relationLoadStrategy: RelationLoadStrategy, skip: Int, take: Int, where: UserWhereInput): [User!]!
@@ -5456,6 +5484,7 @@ type User {
   attachments(cursor: UserAttachmentsWhereUniqueInput, distinct: [UserAttachmentsScalarFieldEnum!], orderBy: [UserAttachmentsOrderByWithRelationInput!], skip: Int, take: Int, where: UserAttachmentsWhereInput): [UserAttachments!]!
   cookieConsent: Boolean
   cookiePreferences: UserCookiePreferences
+  cover_letter_templates(cursor: UserCoverLetterTemplateWhereUniqueInput, distinct: [UserCoverLetterTemplateScalarFieldEnum!], orderBy: [UserCoverLetterTemplateOrderByWithRelationInput!], skip: Int, take: Int, where: UserCoverLetterTemplateWhereInput): [UserCoverLetterTemplate!]!
   createdAt: DateTimeISO!
   email: EmailAddress!
   emailVerified: DateTimeISO
@@ -5797,6 +5826,7 @@ type UserCount {
   accounts(where: AccountWhereInput): Int!
   applications(where: UserJobApplicationWhereInput): Int!
   attachments(where: UserAttachmentsWhereInput): Int!
+  cover_letter_templates(where: UserCoverLetterTemplateWhereInput): Int!
   saved_listings(where: SavedListingWhereInput): Int!
   sessions(where: SessionWhereInput): Int!
   subscriptions(where: JobListingSubscriptionWhereInput): Int!
@@ -5829,10 +5859,301 @@ input UserCountOrderByAggregateInput {
   name: SortOrder
 }
 
+type UserCoverLetterTemplate {
+  createdAt: DateTimeISO!
+  id: ID!
+  letter: String!
+  metadata: JSON
+  name: String!
+  updatedAt: DateTimeISO!
+  user: User!
+  user_id: String!
+}
+
+type UserCoverLetterTemplateCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  id: Int!
+  letter: Int!
+  metadata: Int!
+  name: Int!
+  updatedAt: Int!
+  user_id: Int!
+}
+
+input UserCoverLetterTemplateCountOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  letter: SortOrder
+  metadata: SortOrder
+  name: SortOrder
+  user_id: SortOrder
+}
+
+input UserCoverLetterTemplateCreateInput {
+  createdAt: DateTimeISO
+  id: String
+  letter: String!
+  metadata: JSON
+  name: String!
+  user: UserCreateNestedOneWithoutCover_letter_templatesInput!
+}
+
+input UserCoverLetterTemplateCreateManyInput {
+  createdAt: DateTimeISO
+  id: String
+  letter: String!
+  metadata: JSON
+  name: String!
+  user_id: String!
+}
+
+input UserCoverLetterTemplateCreateManyUserInput {
+  createdAt: DateTimeISO
+  id: String
+  letter: String!
+  metadata: JSON
+  name: String!
+}
+
+input UserCoverLetterTemplateCreateManyUserInputEnvelope {
+  data: [UserCoverLetterTemplateCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input UserCoverLetterTemplateCreateNestedManyWithoutUserInput {
+  connect: [UserCoverLetterTemplateWhereUniqueInput!]
+  connectOrCreate: [UserCoverLetterTemplateCreateOrConnectWithoutUserInput!]
+  create: [UserCoverLetterTemplateCreateWithoutUserInput!]
+  createMany: UserCoverLetterTemplateCreateManyUserInputEnvelope
+}
+
+input UserCoverLetterTemplateCreateOrConnectWithoutUserInput {
+  create: UserCoverLetterTemplateCreateWithoutUserInput!
+  where: UserCoverLetterTemplateWhereUniqueInput!
+}
+
+input UserCoverLetterTemplateCreateWithoutUserInput {
+  createdAt: DateTimeISO
+  id: String
+  letter: String!
+  metadata: JSON
+  name: String!
+}
+
+type UserCoverLetterTemplateGroupBy {
+  _count: UserCoverLetterTemplateCountAggregate
+  _max: UserCoverLetterTemplateMaxAggregate
+  _min: UserCoverLetterTemplateMinAggregate
+  createdAt: DateTimeISO!
+  id: String!
+  letter: String!
+  metadata: JSON
+  name: String!
+  updatedAt: DateTimeISO!
+  user_id: String!
+}
+
+input UserCoverLetterTemplateListRelationFilter {
+  every: UserCoverLetterTemplateWhereInput
+  none: UserCoverLetterTemplateWhereInput
+  some: UserCoverLetterTemplateWhereInput
+}
+
+type UserCoverLetterTemplateMaxAggregate {
+  createdAt: DateTimeISO
+  id: String
+  letter: String
+  name: String
+  updatedAt: DateTimeISO
+  user_id: String
+}
+
+input UserCoverLetterTemplateMaxOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  letter: SortOrder
+  name: SortOrder
+  user_id: SortOrder
+}
+
+type UserCoverLetterTemplateMinAggregate {
+  createdAt: DateTimeISO
+  id: String
+  letter: String
+  name: String
+  updatedAt: DateTimeISO
+  user_id: String
+}
+
+input UserCoverLetterTemplateMinOrderByAggregateInput {
+  createdAt: SortOrder
+  id: SortOrder
+  letter: SortOrder
+  name: SortOrder
+  user_id: SortOrder
+}
+
+input UserCoverLetterTemplateOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+enum UserCoverLetterTemplateOrderByRelevanceFieldEnum {
+  id
+  letter
+  name
+  user_id
+}
+
+input UserCoverLetterTemplateOrderByRelevanceInput {
+  fields: [UserCoverLetterTemplateOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input UserCoverLetterTemplateOrderByWithAggregationInput {
+  _count: UserCoverLetterTemplateCountOrderByAggregateInput
+  _max: UserCoverLetterTemplateMaxOrderByAggregateInput
+  _min: UserCoverLetterTemplateMinOrderByAggregateInput
+  createdAt: SortOrder
+  id: SortOrder
+  letter: SortOrder
+  metadata: SortOrderInput
+  name: SortOrder
+  user_id: SortOrder
+}
+
+input UserCoverLetterTemplateOrderByWithRelationInput {
+  _relevance: UserCoverLetterTemplateOrderByRelevanceInput
+  createdAt: SortOrder
+  id: SortOrder
+  letter: SortOrder
+  metadata: SortOrderInput
+  name: SortOrder
+  user: UserOrderByWithRelationInput
+  user_id: SortOrder
+}
+
+enum UserCoverLetterTemplateScalarFieldEnum {
+  createdAt
+  id
+  letter
+  metadata
+  name
+  updatedAt
+  user_id
+}
+
+input UserCoverLetterTemplateScalarWhereInput {
+  AND: [UserCoverLetterTemplateScalarWhereInput!]
+  NOT: [UserCoverLetterTemplateScalarWhereInput!]
+  OR: [UserCoverLetterTemplateScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  letter: StringFilter
+  metadata: JsonNullableFilter
+  name: StringFilter
+  user_id: StringFilter
+}
+
+input UserCoverLetterTemplateScalarWhereWithAggregatesInput {
+  AND: [UserCoverLetterTemplateScalarWhereWithAggregatesInput!]
+  NOT: [UserCoverLetterTemplateScalarWhereWithAggregatesInput!]
+  OR: [UserCoverLetterTemplateScalarWhereWithAggregatesInput!]
+  createdAt: DateTimeWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  letter: StringWithAggregatesFilter
+  metadata: JsonNullableWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  user_id: StringWithAggregatesFilter
+}
+
+input UserCoverLetterTemplateUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  letter: StringFieldUpdateOperationsInput
+  metadata: JSON
+  name: StringFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutCover_letter_templatesNestedInput
+}
+
+input UserCoverLetterTemplateUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  letter: StringFieldUpdateOperationsInput
+  metadata: JSON
+  name: StringFieldUpdateOperationsInput
+}
+
+input UserCoverLetterTemplateUpdateManyWithWhereWithoutUserInput {
+  data: UserCoverLetterTemplateUpdateManyMutationInput!
+  where: UserCoverLetterTemplateScalarWhereInput!
+}
+
+input UserCoverLetterTemplateUpdateManyWithoutUserNestedInput {
+  connect: [UserCoverLetterTemplateWhereUniqueInput!]
+  connectOrCreate: [UserCoverLetterTemplateCreateOrConnectWithoutUserInput!]
+  create: [UserCoverLetterTemplateCreateWithoutUserInput!]
+  createMany: UserCoverLetterTemplateCreateManyUserInputEnvelope
+  delete: [UserCoverLetterTemplateWhereUniqueInput!]
+  deleteMany: [UserCoverLetterTemplateScalarWhereInput!]
+  disconnect: [UserCoverLetterTemplateWhereUniqueInput!]
+  set: [UserCoverLetterTemplateWhereUniqueInput!]
+  update: [UserCoverLetterTemplateUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [UserCoverLetterTemplateUpdateManyWithWhereWithoutUserInput!]
+  upsert: [UserCoverLetterTemplateUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input UserCoverLetterTemplateUpdateWithWhereUniqueWithoutUserInput {
+  data: UserCoverLetterTemplateUpdateWithoutUserInput!
+  where: UserCoverLetterTemplateWhereUniqueInput!
+}
+
+input UserCoverLetterTemplateUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  letter: StringFieldUpdateOperationsInput
+  metadata: JSON
+  name: StringFieldUpdateOperationsInput
+}
+
+input UserCoverLetterTemplateUpsertWithWhereUniqueWithoutUserInput {
+  create: UserCoverLetterTemplateCreateWithoutUserInput!
+  update: UserCoverLetterTemplateUpdateWithoutUserInput!
+  where: UserCoverLetterTemplateWhereUniqueInput!
+}
+
+input UserCoverLetterTemplateWhereInput {
+  AND: [UserCoverLetterTemplateWhereInput!]
+  NOT: [UserCoverLetterTemplateWhereInput!]
+  OR: [UserCoverLetterTemplateWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  letter: StringFilter
+  metadata: JsonNullableFilter
+  name: StringFilter
+  user: UserRelationFilter
+  user_id: StringFilter
+}
+
+input UserCoverLetterTemplateWhereUniqueInput {
+  AND: [UserCoverLetterTemplateWhereInput!]
+  NOT: [UserCoverLetterTemplateWhereInput!]
+  OR: [UserCoverLetterTemplateWhereInput!]
+  createdAt: DateTimeFilter
+  id: String
+  letter: StringFilter
+  metadata: JsonNullableFilter
+  name: StringFilter
+  user: UserRelationFilter
+  user_id: StringFilter
+}
+
 input UserCreateInput {
   accounts: AccountCreateNestedManyWithoutUserInput
   applications: UserJobApplicationCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
+  cover_letter_templates: UserCoverLetterTemplateCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
@@ -5877,6 +6198,12 @@ input UserCreateNestedOneWithoutAttachmentsInput {
   create: UserCreateWithoutAttachmentsInput
 }
 
+input UserCreateNestedOneWithoutCover_letter_templatesInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCover_letter_templatesInput
+  create: UserCreateWithoutCover_letter_templatesInput
+}
+
 input UserCreateNestedOneWithoutSaved_listingsInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutSaved_listingsInput
@@ -5910,6 +6237,11 @@ input UserCreateOrConnectWithoutAttachmentsInput {
   where: UserWhereUniqueInput!
 }
 
+input UserCreateOrConnectWithoutCover_letter_templatesInput {
+  create: UserCreateWithoutCover_letter_templatesInput!
+  where: UserWhereUniqueInput!
+}
+
 input UserCreateOrConnectWithoutSaved_listingsInput {
   create: UserCreateWithoutSaved_listingsInput!
   where: UserWhereUniqueInput!
@@ -5928,6 +6260,7 @@ input UserCreateOrConnectWithoutSubscriptionsInput {
 input UserCreateWithoutAccountsInput {
   applications: UserJobApplicationCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
+  cover_letter_templates: UserCoverLetterTemplateCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
@@ -5945,6 +6278,7 @@ input UserCreateWithoutAccountsInput {
 input UserCreateWithoutApplicationsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
+  cover_letter_templates: UserCoverLetterTemplateCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
@@ -5962,6 +6296,25 @@ input UserCreateWithoutApplicationsInput {
 input UserCreateWithoutAttachmentsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
   applications: UserJobApplicationCreateNestedManyWithoutUserInput
+  cover_letter_templates: UserCoverLetterTemplateCreateNestedManyWithoutUserInput
+  createdAt: DateTimeISO
+  email: String!
+  emailVerified: DateTimeISO
+  first_name: String!
+  id: String
+  image: String
+  last_name: String!
+  metadata: JSON
+  name: String!
+  saved_listings: SavedListingCreateNestedManyWithoutUserInput
+  sessions: SessionCreateNestedManyWithoutUserInput
+  subscriptions: JobListingSubscriptionCreateNestedManyWithoutUserInput
+}
+
+input UserCreateWithoutCover_letter_templatesInput {
+  accounts: AccountCreateNestedManyWithoutUserInput
+  applications: UserJobApplicationCreateNestedManyWithoutUserInput
+  attachments: UserAttachmentsCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
@@ -5980,6 +6333,7 @@ input UserCreateWithoutSaved_listingsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
   applications: UserJobApplicationCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
+  cover_letter_templates: UserCoverLetterTemplateCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
@@ -5997,6 +6351,7 @@ input UserCreateWithoutSessionsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
   applications: UserJobApplicationCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
+  cover_letter_templates: UserCoverLetterTemplateCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
@@ -6014,6 +6369,7 @@ input UserCreateWithoutSubscriptionsInput {
   accounts: AccountCreateNestedManyWithoutUserInput
   applications: UserJobApplicationCreateNestedManyWithoutUserInput
   attachments: UserAttachmentsCreateNestedManyWithoutUserInput
+  cover_letter_templates: UserCoverLetterTemplateCreateNestedManyWithoutUserInput
   createdAt: DateTimeISO
   email: String!
   emailVerified: DateTimeISO
@@ -6471,6 +6827,7 @@ input UserOrderByWithRelationInput {
   accounts: AccountOrderByRelationAggregateInput
   applications: UserJobApplicationOrderByRelationAggregateInput
   attachments: UserAttachmentsOrderByRelationAggregateInput
+  cover_letter_templates: UserCoverLetterTemplateOrderByRelationAggregateInput
   createdAt: SortOrder
   email: SortOrder
   emailVerified: SortOrderInput
@@ -6526,6 +6883,7 @@ type UserSearchResponse {
   attachments(cursor: UserAttachmentsWhereUniqueInput, distinct: [UserAttachmentsScalarFieldEnum!], orderBy: [UserAttachmentsOrderByWithRelationInput!], skip: Int, take: Int, where: UserAttachmentsWhereInput): [UserAttachments!]!
   cookieConsent: Boolean
   cookiePreferences: UserCookiePreferences
+  cover_letter_templates(cursor: UserCoverLetterTemplateWhereUniqueInput, distinct: [UserCoverLetterTemplateScalarFieldEnum!], orderBy: [UserCoverLetterTemplateOrderByWithRelationInput!], skip: Int, take: Int, where: UserCoverLetterTemplateWhereInput): [UserCoverLetterTemplate!]!
   createdAt: DateTimeISO!
   email: EmailAddress!
   emailVerified: DateTimeISO
@@ -6559,6 +6917,7 @@ input UserUpdateInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
   applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
+  cover_letter_templates: UserCoverLetterTemplateUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -6609,6 +6968,14 @@ input UserUpdateOneRequiredWithoutAttachmentsNestedInput {
   upsert: UserUpsertWithoutAttachmentsInput
 }
 
+input UserUpdateOneRequiredWithoutCover_letter_templatesNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCover_letter_templatesInput
+  create: UserCreateWithoutCover_letter_templatesInput
+  update: UserUpdateToOneWithWhereWithoutCover_letter_templatesInput
+  upsert: UserUpsertWithoutCover_letter_templatesInput
+}
+
 input UserUpdateOneRequiredWithoutSaved_listingsNestedInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutSaved_listingsInput
@@ -6650,6 +7017,11 @@ input UserUpdateToOneWithWhereWithoutAttachmentsInput {
   where: UserWhereInput
 }
 
+input UserUpdateToOneWithWhereWithoutCover_letter_templatesInput {
+  data: UserUpdateWithoutCover_letter_templatesInput!
+  where: UserWhereInput
+}
+
 input UserUpdateToOneWithWhereWithoutSaved_listingsInput {
   data: UserUpdateWithoutSaved_listingsInput!
   where: UserWhereInput
@@ -6668,6 +7040,7 @@ input UserUpdateToOneWithWhereWithoutSubscriptionsInput {
 input UserUpdateWithoutAccountsInput {
   applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
+  cover_letter_templates: UserCoverLetterTemplateUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -6685,6 +7058,7 @@ input UserUpdateWithoutAccountsInput {
 input UserUpdateWithoutApplicationsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
+  cover_letter_templates: UserCoverLetterTemplateUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -6702,6 +7076,25 @@ input UserUpdateWithoutApplicationsInput {
 input UserUpdateWithoutAttachmentsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
   applications: UserJobApplicationUpdateManyWithoutUserNestedInput
+  cover_letter_templates: UserCoverLetterTemplateUpdateManyWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailVerified: NullableDateTimeFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  metadata: JSON
+  name: StringFieldUpdateOperationsInput
+  saved_listings: SavedListingUpdateManyWithoutUserNestedInput
+  sessions: SessionUpdateManyWithoutUserNestedInput
+  subscriptions: JobListingSubscriptionUpdateManyWithoutUserNestedInput
+}
+
+input UserUpdateWithoutCover_letter_templatesInput {
+  accounts: AccountUpdateManyWithoutUserNestedInput
+  applications: UserJobApplicationUpdateManyWithoutUserNestedInput
+  attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -6720,6 +7113,7 @@ input UserUpdateWithoutSaved_listingsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
   applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
+  cover_letter_templates: UserCoverLetterTemplateUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -6737,6 +7131,7 @@ input UserUpdateWithoutSessionsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
   applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
+  cover_letter_templates: UserCoverLetterTemplateUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -6754,6 +7149,7 @@ input UserUpdateWithoutSubscriptionsInput {
   accounts: AccountUpdateManyWithoutUserNestedInput
   applications: UserJobApplicationUpdateManyWithoutUserNestedInput
   attachments: UserAttachmentsUpdateManyWithoutUserNestedInput
+  cover_letter_templates: UserCoverLetterTemplateUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
@@ -6785,6 +7181,12 @@ input UserUpsertWithoutAttachmentsInput {
   where: UserWhereInput
 }
 
+input UserUpsertWithoutCover_letter_templatesInput {
+  create: UserCreateWithoutCover_letter_templatesInput!
+  update: UserUpdateWithoutCover_letter_templatesInput!
+  where: UserWhereInput
+}
+
 input UserUpsertWithoutSaved_listingsInput {
   create: UserCreateWithoutSaved_listingsInput!
   update: UserUpdateWithoutSaved_listingsInput!
@@ -6810,6 +7212,7 @@ input UserWhereInput {
   accounts: AccountListRelationFilter
   applications: UserJobApplicationListRelationFilter
   attachments: UserAttachmentsListRelationFilter
+  cover_letter_templates: UserCoverLetterTemplateListRelationFilter
   createdAt: DateTimeFilter
   email: StringFilter
   emailVerified: DateTimeNullableFilter
@@ -6831,6 +7234,7 @@ input UserWhereUniqueInput {
   accounts: AccountListRelationFilter
   applications: UserJobApplicationListRelationFilter
   attachments: UserAttachmentsListRelationFilter
+  cover_letter_templates: UserCoverLetterTemplateListRelationFilter
   createdAt: DateTimeFilter
   email: String
   emailVerified: DateTimeNullableFilter

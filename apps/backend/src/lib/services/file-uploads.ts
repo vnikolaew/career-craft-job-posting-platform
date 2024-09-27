@@ -10,15 +10,11 @@ interface IFileUploadService {
 }
 
 export class LocalFileSystemUploadService implements IFileUploadService {
-   private static readonly uploadsDir: string = `uploads`;
+   public static readonly uploadsDir: string = `uploads`;
 
-   async upload(file: File): Promise<boolean> {
-      let name = file.name;
-
+   async upload(data: Buffer, file_name: string): Promise<boolean> {
       try {
-         fs.writeFileSync(
-            path.join(process.cwd(), LocalFileSystemUploadService.uploadsDir, name.trim()),
-            new DataView(await file.arrayBuffer()));
+         fs.writeFileSync(path.join(process.cwd(), LocalFileSystemUploadService.uploadsDir, file_name.trim()), data);
 
          return true;
       } catch (err) {
@@ -30,20 +26,14 @@ export class LocalFileSystemUploadService implements IFileUploadService {
 
 export const fileUploadHandler = async (req: Request, res: Response) => {
    // Was a file submitted?
-   if (!req.files || !req.files.file) {
-      return res.status(422).send("No files were uploaded");
-   }
+   if (!req.files || !req.files.file) return res.status(422).send("No files were uploaded");
 
    const uploadedFile = req.files.file;
-   let extension = mime.extension(uploadedFile.mimetype);
-
-   console.log({ extension, uploadedFile });
-   let file = new File(uploadedFile.data, uploadedFile.name, {
-      type:  uploadedFile.mimetype,
-   });
 
    let localFileUploadService = new LocalFileSystemUploadService();
-   let success = await localFileUploadService.upload(file)
+   let success = await localFileUploadService.upload(uploadedFile.data, uploadedFile.name);
 
-   return res.json({ ok: success });
+   return success ?
+      res.json({ ok: success, path: `/${LocalFileSystemUploadService.uploadsDir}/${uploadedFile.name}` })
+      : res.json({ ok: success, path: null });
 };

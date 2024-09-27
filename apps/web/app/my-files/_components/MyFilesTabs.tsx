@@ -6,6 +6,7 @@ import { match } from "ts-pattern";
 import MyFilesTab from "./tabs/MyFilesTab";
 import MyVideosTab from "@/app/my-files/_components/tabs/MyVideosTab";
 import MyCoverLettersTab from "@/app/my-files/_components/tabs/MyCoverLettersTab";
+import { parseAsString, useQueryState } from "nuqs";
 
 export interface MyFilesTabsProps {
 }
@@ -13,11 +14,11 @@ export interface MyFilesTabsProps {
 const TABS = [
    `Files`,
    `Videos`,
-   `Mails`,
+   `CVs`,
 ] as const;
 
 const MyFilesTabs = ({}: MyFilesTabsProps) => {
-   const [tab, setTab] = useState<string>(TABS[0]);
+   const [tab, setTab] = useQueryState(`tab`, parseAsString.withDefault(TABS[0]))
 
    return (
       <div>

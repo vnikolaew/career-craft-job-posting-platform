@@ -594,6 +594,13 @@ export type AggregateUserAttachments = {
   _min?: Maybe<UserAttachmentsMinAggregate>;
 };
 
+export type AggregateUserCoverLetterTemplate = {
+  __typename?: 'AggregateUserCoverLetterTemplate';
+  _count?: Maybe<UserCoverLetterTemplateCountAggregate>;
+  _max?: Maybe<UserCoverLetterTemplateMaxAggregate>;
+  _min?: Maybe<UserCoverLetterTemplateMinAggregate>;
+};
+
 export type AggregateUserJobApplication = {
   __typename?: 'AggregateUserJobApplication';
   _count?: Maybe<UserJobApplicationCountAggregate>;
@@ -2128,6 +2135,11 @@ export type Coordinates = {
   __typename?: 'Coordinates';
   latitude?: Maybe<Scalars['Latitude']['output']>;
   longitude?: Maybe<Scalars['Longitude']['output']>;
+};
+
+export type CreateUserCoverLetterTemplateInput = {
+  content: Scalars['String']['input'];
+  name: Scalars['String']['input'];
 };
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -4374,6 +4386,7 @@ export type Mutation = {
   createManySession: AffectedRowsOutput;
   createManyUser: AffectedRowsOutput;
   createManyUserAttachments: AffectedRowsOutput;
+  createManyUserCoverLetterTemplate: AffectedRowsOutput;
   createManyUserJobApplication: AffectedRowsOutput;
   createManyVerificationToken: AffectedRowsOutput;
   createOneAccount: Account;
@@ -4386,9 +4399,12 @@ export type Mutation = {
   createOneSession: Session;
   createOneUser: User;
   createOneUserAttachments: UserAttachments;
+  createOneUserCoverLetterTemplate: UserCoverLetterTemplate;
   createOneUserJobApplication: UserJobApplication;
   createOneVerificationToken: VerificationToken;
+  createUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
   declineAllCookies: Scalars['Boolean']['output'];
+  deleteAllCoverLetterTemplates: Scalars['Boolean']['output'];
   deleteAllSubscriptions: DeleteAllSubscriptionsResponse;
   deleteManyAccount: AffectedRowsOutput;
   deleteManyCompany: AffectedRowsOutput;
@@ -4400,6 +4416,7 @@ export type Mutation = {
   deleteManySession: AffectedRowsOutput;
   deleteManyUser: AffectedRowsOutput;
   deleteManyUserAttachments: AffectedRowsOutput;
+  deleteManyUserCoverLetterTemplate: AffectedRowsOutput;
   deleteManyUserJobApplication: AffectedRowsOutput;
   deleteManyVerificationToken: AffectedRowsOutput;
   deleteOneAccount?: Maybe<Account>;
@@ -4412,6 +4429,7 @@ export type Mutation = {
   deleteOneSession?: Maybe<Session>;
   deleteOneUser?: Maybe<User>;
   deleteOneUserAttachments?: Maybe<UserAttachments>;
+  deleteOneUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
   deleteOneUserJobApplication?: Maybe<UserJobApplication>;
   deleteOneVerificationToken?: Maybe<VerificationToken>;
   fileUpload: Scalars['Boolean']['output'];
@@ -4437,6 +4455,7 @@ export type Mutation = {
   updateManySession: AffectedRowsOutput;
   updateManyUser: AffectedRowsOutput;
   updateManyUserAttachments: AffectedRowsOutput;
+  updateManyUserCoverLetterTemplate: AffectedRowsOutput;
   updateManyUserJobApplication: AffectedRowsOutput;
   updateManyVerificationToken: AffectedRowsOutput;
   updateOneAccount?: Maybe<Account>;
@@ -4449,6 +4468,7 @@ export type Mutation = {
   updateOneSession?: Maybe<Session>;
   updateOneUser?: Maybe<User>;
   updateOneUserAttachments?: Maybe<UserAttachments>;
+  updateOneUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
   updateOneUserJobApplication?: Maybe<UserJobApplication>;
   updateOneVerificationToken?: Maybe<VerificationToken>;
   upsertOneAccount: Account;
@@ -4461,6 +4481,7 @@ export type Mutation = {
   upsertOneSession: Session;
   upsertOneUser: User;
   upsertOneUserAttachments: UserAttachments;
+  upsertOneUserCoverLetterTemplate: UserCoverLetterTemplate;
   upsertOneUserJobApplication: UserJobApplication;
   upsertOneVerificationToken: VerificationToken;
   verifyEmail: VerifyEmailResponse;
@@ -4538,6 +4559,12 @@ export type MutationCreateManyUserAttachmentsArgs = {
 };
 
 
+export type MutationCreateManyUserCoverLetterTemplateArgs = {
+  data: Array<UserCoverLetterTemplateCreateManyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
 export type MutationCreateManyUserJobApplicationArgs = {
   data: Array<UserJobApplicationCreateManyInput>;
   skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
@@ -4610,6 +4637,12 @@ export type MutationCreateOneUserAttachmentsArgs = {
 };
 
 
+export type MutationCreateOneUserCoverLetterTemplateArgs = {
+  data: UserCoverLetterTemplateCreateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+};
+
+
 export type MutationCreateOneUserJobApplicationArgs = {
   data: UserJobApplicationCreateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
@@ -4619,6 +4652,11 @@ export type MutationCreateOneUserJobApplicationArgs = {
 export type MutationCreateOneVerificationTokenArgs = {
   data: VerificationTokenCreateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+};
+
+
+export type MutationCreateUserCoverLetterTemplateArgs = {
+  input: CreateUserCoverLetterTemplateInput;
 };
 
 
@@ -4669,6 +4707,11 @@ export type MutationDeleteManyUserArgs = {
 
 export type MutationDeleteManyUserAttachmentsArgs = {
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type MutationDeleteManyUserCoverLetterTemplateArgs = {
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -4739,6 +4782,12 @@ export type MutationDeleteOneUserArgs = {
 export type MutationDeleteOneUserAttachmentsArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: UserAttachmentsWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneUserCoverLetterTemplateArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: UserCoverLetterTemplateWhereUniqueInput;
 };
 
 
@@ -4875,6 +4924,12 @@ export type MutationUpdateManyUserAttachmentsArgs = {
 };
 
 
+export type MutationUpdateManyUserCoverLetterTemplateArgs = {
+  data: UserCoverLetterTemplateUpdateManyMutationInput;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+};
+
+
 export type MutationUpdateManyUserJobApplicationArgs = {
   data: UserJobApplicationUpdateManyMutationInput;
   where?: InputMaybe<UserJobApplicationWhereInput>;
@@ -4954,6 +5009,13 @@ export type MutationUpdateOneUserAttachmentsArgs = {
   data: UserAttachmentsUpdateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: UserAttachmentsWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneUserCoverLetterTemplateArgs = {
+  data: UserCoverLetterTemplateUpdateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: UserCoverLetterTemplateWhereUniqueInput;
 };
 
 
@@ -5048,6 +5110,14 @@ export type MutationUpsertOneUserAttachmentsArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   update: UserAttachmentsUpdateInput;
   where: UserAttachmentsWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneUserCoverLetterTemplateArgs = {
+  create: UserCoverLetterTemplateCreateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  update: UserCoverLetterTemplateUpdateInput;
+  where: UserCoverLetterTemplateWhereUniqueInput;
 };
 
 
@@ -5378,6 +5448,7 @@ export type Query = {
   aggregateSession: AggregateSession;
   aggregateUser: AggregateUser;
   aggregateUserAttachments: AggregateUserAttachments;
+  aggregateUserCoverLetterTemplate: AggregateUserCoverLetterTemplate;
   aggregateUserJobApplication: AggregateUserJobApplication;
   aggregateVerificationToken: AggregateVerificationToken;
   companies: Array<Company>;
@@ -5404,6 +5475,8 @@ export type Query = {
   findFirstUser?: Maybe<User>;
   findFirstUserAttachments?: Maybe<UserAttachments>;
   findFirstUserAttachmentsOrThrow?: Maybe<UserAttachments>;
+  findFirstUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
+  findFirstUserCoverLetterTemplateOrThrow?: Maybe<UserCoverLetterTemplate>;
   findFirstUserJobApplication?: Maybe<UserJobApplication>;
   findFirstUserJobApplicationOrThrow?: Maybe<UserJobApplication>;
   findFirstUserOrThrow?: Maybe<User>;
@@ -5427,12 +5500,14 @@ export type Query = {
   getJobListingLevelsDetails: Array<GetJobListingLevelsDetailsResponse>;
   getJobListingSubscription?: Maybe<JobListingSubscription>;
   getMostRelevantCompanies: Array<Company>;
+  getMyCoverLetterTemplates: Array<UserCoverLetterTemplate>;
   getSavedListing?: Maybe<SavedListing>;
   getSession?: Maybe<Session>;
   getSubscriptionsJobListingsForUser: GetSubscriptionsJobListingsResponse;
   getTopCompanies: Array<Company>;
   getTopListingCategories: Array<JobListingCategory>;
   getUser?: Maybe<User>;
+  getUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
   getUserJobApplication?: Maybe<UserJobApplication>;
   getVerificationToken?: Maybe<VerificationToken>;
   googleLoginUrl: Scalars['String']['output'];
@@ -5446,6 +5521,7 @@ export type Query = {
   groupBySession: Array<SessionGroupBy>;
   groupByUser: Array<UserGroupBy>;
   groupByUserAttachments: Array<UserAttachmentsGroupBy>;
+  groupByUserCoverLetterTemplate: Array<UserCoverLetterTemplateGroupBy>;
   groupByUserJobApplication: Array<UserJobApplicationGroupBy>;
   groupByVerificationToken: Array<VerificationTokenGroupBy>;
   jobListing?: Maybe<JobListing>;
@@ -5465,6 +5541,8 @@ export type Query = {
   session?: Maybe<Session>;
   sessions: Array<Session>;
   user?: Maybe<User>;
+  userCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
+  userCoverLetterTemplates: Array<UserCoverLetterTemplate>;
   userJobApplication?: Maybe<UserJobApplication>;
   userJobApplications: Array<UserJobApplication>;
   users: Array<User>;
@@ -5577,6 +5655,15 @@ export type QueryAggregateUserAttachmentsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type QueryAggregateUserCoverLetterTemplateArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -5846,6 +5933,28 @@ export type QueryFindFirstUserAttachmentsOrThrowArgs = {
 };
 
 
+export type QueryFindFirstUserCoverLetterTemplateArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+};
+
+
+export type QueryFindFirstUserCoverLetterTemplateOrThrowArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+};
+
+
 export type QueryFindFirstUserJobApplicationArgs = {
   cursor?: InputMaybe<UserJobApplicationWhereUniqueInput>;
   distinct?: InputMaybe<Array<UserJobApplicationScalarFieldEnum>>;
@@ -6003,6 +6112,12 @@ export type QueryGetUserArgs = {
 };
 
 
+export type QueryGetUserCoverLetterTemplateArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+
 export type QueryGetUserJobApplicationArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: UserJobApplicationWhereUniqueInput;
@@ -6117,6 +6232,16 @@ export type QueryGroupByUserAttachmentsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type QueryGroupByUserCoverLetterTemplateArgs = {
+  by: Array<UserCoverLetterTemplateScalarFieldEnum>;
+  having?: InputMaybe<UserCoverLetterTemplateScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -6253,6 +6378,23 @@ export type QuerySessionsArgs = {
 export type QueryUserArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: UserWhereUniqueInput;
+};
+
+
+export type QueryUserCoverLetterTemplateArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+
+export type QueryUserCoverLetterTemplatesArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -7105,6 +7247,7 @@ export type User = {
   attachments: Array<UserAttachments>;
   cookieConsent?: Maybe<Scalars['Boolean']['output']>;
   cookiePreferences?: Maybe<UserCookiePreferences>;
+  cover_letter_templates: Array<UserCoverLetterTemplate>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['EmailAddress']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
@@ -7152,6 +7295,17 @@ export type UserAttachmentsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+/** Always after the prisma-client-js generator */
+export type UserCover_Letter_TemplatesArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -7518,6 +7672,7 @@ export type UserCount = {
   accounts: Scalars['Int']['output'];
   applications: Scalars['Int']['output'];
   attachments: Scalars['Int']['output'];
+  cover_letter_templates: Scalars['Int']['output'];
   saved_listings: Scalars['Int']['output'];
   sessions: Scalars['Int']['output'];
   subscriptions: Scalars['Int']['output'];
@@ -7536,6 +7691,11 @@ export type UserCountApplicationsArgs = {
 
 export type UserCountAttachmentsArgs = {
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type UserCountCover_Letter_TemplatesArgs = {
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -7581,10 +7741,306 @@ export type UserCountOrderByAggregateInput = {
   name?: InputMaybe<SortOrder>;
 };
 
+export type UserCoverLetterTemplate = {
+  __typename?: 'UserCoverLetterTemplate';
+  createdAt: Scalars['DateTimeISO']['output'];
+  id: Scalars['ID']['output'];
+  letter: Scalars['String']['output'];
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTimeISO']['output'];
+  user: User;
+  user_id: Scalars['String']['output'];
+};
+
+export type UserCoverLetterTemplateCountAggregate = {
+  __typename?: 'UserCoverLetterTemplateCountAggregate';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  letter: Scalars['Int']['output'];
+  metadata: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+  user_id: Scalars['Int']['output'];
+};
+
+export type UserCoverLetterTemplateCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  metadata?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type UserCoverLetterTemplateCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  user: UserCreateNestedOneWithoutCover_Letter_TemplatesInput;
+};
+
+export type UserCoverLetterTemplateCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  user_id: Scalars['String']['input'];
+};
+
+export type UserCoverLetterTemplateCreateManyUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type UserCoverLetterTemplateCreateManyUserInputEnvelope = {
+  data: Array<UserCoverLetterTemplateCreateManyUserInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type UserCoverLetterTemplateCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCoverLetterTemplateCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<UserCoverLetterTemplateCreateWithoutUserInput>>;
+  createMany?: InputMaybe<UserCoverLetterTemplateCreateManyUserInputEnvelope>;
+};
+
+export type UserCoverLetterTemplateCreateOrConnectWithoutUserInput = {
+  create: UserCoverLetterTemplateCreateWithoutUserInput;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+export type UserCoverLetterTemplateCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type UserCoverLetterTemplateGroupBy = {
+  __typename?: 'UserCoverLetterTemplateGroupBy';
+  _count?: Maybe<UserCoverLetterTemplateCountAggregate>;
+  _max?: Maybe<UserCoverLetterTemplateMaxAggregate>;
+  _min?: Maybe<UserCoverLetterTemplateMinAggregate>;
+  createdAt: Scalars['DateTimeISO']['output'];
+  id: Scalars['String']['output'];
+  letter: Scalars['String']['output'];
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTimeISO']['output'];
+  user_id: Scalars['String']['output'];
+};
+
+export type UserCoverLetterTemplateListRelationFilter = {
+  every?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+  none?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+  some?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+};
+
+export type UserCoverLetterTemplateMaxAggregate = {
+  __typename?: 'UserCoverLetterTemplateMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  letter?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserCoverLetterTemplateMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type UserCoverLetterTemplateMinAggregate = {
+  __typename?: 'UserCoverLetterTemplateMinAggregate';
+  createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  letter?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserCoverLetterTemplateMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type UserCoverLetterTemplateOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export enum UserCoverLetterTemplateOrderByRelevanceFieldEnum {
+  Id = 'id',
+  Letter = 'letter',
+  Name = 'name',
+  UserId = 'user_id'
+}
+
+export type UserCoverLetterTemplateOrderByRelevanceInput = {
+  fields: Array<UserCoverLetterTemplateOrderByRelevanceFieldEnum>;
+  search: Scalars['String']['input'];
+  sort: SortOrder;
+};
+
+export type UserCoverLetterTemplateOrderByWithAggregationInput = {
+  _count?: InputMaybe<UserCoverLetterTemplateCountOrderByAggregateInput>;
+  _max?: InputMaybe<UserCoverLetterTemplateMaxOrderByAggregateInput>;
+  _min?: InputMaybe<UserCoverLetterTemplateMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  metadata?: InputMaybe<SortOrderInput>;
+  name?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type UserCoverLetterTemplateOrderByWithRelationInput = {
+  _relevance?: InputMaybe<UserCoverLetterTemplateOrderByRelevanceInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  metadata?: InputMaybe<SortOrderInput>;
+  name?: InputMaybe<SortOrder>;
+  user?: InputMaybe<UserOrderByWithRelationInput>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export enum UserCoverLetterTemplateScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  Letter = 'letter',
+  Metadata = 'metadata',
+  Name = 'name',
+  UpdatedAt = 'updatedAt',
+  UserId = 'user_id'
+}
+
+export type UserCoverLetterTemplateScalarWhereInput = {
+  AND?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereInput>>;
+  NOT?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereInput>>;
+  OR?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  letter?: InputMaybe<StringFilter>;
+  metadata?: InputMaybe<JsonNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringFilter>;
+};
+
+export type UserCoverLetterTemplateScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereWithAggregatesInput>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  letter?: InputMaybe<StringWithAggregatesFilter>;
+  metadata?: InputMaybe<JsonNullableWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  user_id?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type UserCoverLetterTemplateUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  letter?: InputMaybe<StringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutCover_Letter_TemplatesNestedInput>;
+};
+
+export type UserCoverLetterTemplateUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  letter?: InputMaybe<StringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserCoverLetterTemplateUpdateManyWithWhereWithoutUserInput = {
+  data: UserCoverLetterTemplateUpdateManyMutationInput;
+  where: UserCoverLetterTemplateScalarWhereInput;
+};
+
+export type UserCoverLetterTemplateUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCoverLetterTemplateCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<UserCoverLetterTemplateCreateWithoutUserInput>>;
+  createMany?: InputMaybe<UserCoverLetterTemplateCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  set?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  update?: InputMaybe<Array<UserCoverLetterTemplateUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: InputMaybe<Array<UserCoverLetterTemplateUpdateManyWithWhereWithoutUserInput>>;
+  upsert?: InputMaybe<Array<UserCoverLetterTemplateUpsertWithWhereUniqueWithoutUserInput>>;
+};
+
+export type UserCoverLetterTemplateUpdateWithWhereUniqueWithoutUserInput = {
+  data: UserCoverLetterTemplateUpdateWithoutUserInput;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+export type UserCoverLetterTemplateUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  letter?: InputMaybe<StringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserCoverLetterTemplateUpsertWithWhereUniqueWithoutUserInput = {
+  create: UserCoverLetterTemplateCreateWithoutUserInput;
+  update: UserCoverLetterTemplateUpdateWithoutUserInput;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+export type UserCoverLetterTemplateWhereInput = {
+  AND?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  NOT?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  OR?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  letter?: InputMaybe<StringFilter>;
+  metadata?: InputMaybe<JsonNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserRelationFilter>;
+  user_id?: InputMaybe<StringFilter>;
+};
+
+export type UserCoverLetterTemplateWhereUniqueInput = {
+  AND?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  NOT?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  OR?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter?: InputMaybe<StringFilter>;
+  metadata?: InputMaybe<JsonNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserRelationFilter>;
+  user_id?: InputMaybe<StringFilter>;
+};
+
 export type UserCreateInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -7629,6 +8085,12 @@ export type UserCreateNestedOneWithoutAttachmentsInput = {
   create?: InputMaybe<UserCreateWithoutAttachmentsInput>;
 };
 
+export type UserCreateNestedOneWithoutCover_Letter_TemplatesInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCover_Letter_TemplatesInput>;
+  create?: InputMaybe<UserCreateWithoutCover_Letter_TemplatesInput>;
+};
+
 export type UserCreateNestedOneWithoutSaved_ListingsInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutSaved_ListingsInput>;
@@ -7662,6 +8124,11 @@ export type UserCreateOrConnectWithoutAttachmentsInput = {
   where: UserWhereUniqueInput;
 };
 
+export type UserCreateOrConnectWithoutCover_Letter_TemplatesInput = {
+  create: UserCreateWithoutCover_Letter_TemplatesInput;
+  where: UserWhereUniqueInput;
+};
+
 export type UserCreateOrConnectWithoutSaved_ListingsInput = {
   create: UserCreateWithoutSaved_ListingsInput;
   where: UserWhereUniqueInput;
@@ -7680,6 +8147,7 @@ export type UserCreateOrConnectWithoutSubscriptionsInput = {
 export type UserCreateWithoutAccountsInput = {
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -7697,6 +8165,7 @@ export type UserCreateWithoutAccountsInput = {
 export type UserCreateWithoutApplicationsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -7714,6 +8183,25 @@ export type UserCreateWithoutApplicationsInput = {
 export type UserCreateWithoutAttachmentsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  first_name: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  last_name: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  saved_listings?: InputMaybe<SavedListingCreateNestedManyWithoutUserInput>;
+  sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
+  subscriptions?: InputMaybe<JobListingSubscriptionCreateNestedManyWithoutUserInput>;
+};
+
+export type UserCreateWithoutCover_Letter_TemplatesInput = {
+  accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
+  applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
+  attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -7732,6 +8220,7 @@ export type UserCreateWithoutSaved_ListingsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -7749,6 +8238,7 @@ export type UserCreateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -7766,6 +8256,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -8231,6 +8722,7 @@ export type UserOrderByWithRelationInput = {
   accounts?: InputMaybe<AccountOrderByRelationAggregateInput>;
   applications?: InputMaybe<UserJobApplicationOrderByRelationAggregateInput>;
   attachments?: InputMaybe<UserAttachmentsOrderByRelationAggregateInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateOrderByRelationAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrderInput>;
@@ -8287,6 +8779,7 @@ export type UserSearchResponse = {
   attachments: Array<UserAttachments>;
   cookieConsent?: Maybe<Scalars['Boolean']['output']>;
   cookiePreferences?: Maybe<UserCookiePreferences>;
+  cover_letter_templates: Array<UserCoverLetterTemplate>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['EmailAddress']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
@@ -8331,6 +8824,16 @@ export type UserSearchResponseAttachmentsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type UserSearchResponseCover_Letter_TemplatesArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -8379,6 +8882,7 @@ export type UserUpdateInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -8429,6 +8933,14 @@ export type UserUpdateOneRequiredWithoutAttachmentsNestedInput = {
   upsert?: InputMaybe<UserUpsertWithoutAttachmentsInput>;
 };
 
+export type UserUpdateOneRequiredWithoutCover_Letter_TemplatesNestedInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCover_Letter_TemplatesInput>;
+  create?: InputMaybe<UserCreateWithoutCover_Letter_TemplatesInput>;
+  update?: InputMaybe<UserUpdateToOneWithWhereWithoutCover_Letter_TemplatesInput>;
+  upsert?: InputMaybe<UserUpsertWithoutCover_Letter_TemplatesInput>;
+};
+
 export type UserUpdateOneRequiredWithoutSaved_ListingsNestedInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutSaved_ListingsInput>;
@@ -8470,6 +8982,11 @@ export type UserUpdateToOneWithWhereWithoutAttachmentsInput = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+export type UserUpdateToOneWithWhereWithoutCover_Letter_TemplatesInput = {
+  data: UserUpdateWithoutCover_Letter_TemplatesInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
 export type UserUpdateToOneWithWhereWithoutSaved_ListingsInput = {
   data: UserUpdateWithoutSaved_ListingsInput;
   where?: InputMaybe<UserWhereInput>;
@@ -8488,6 +9005,7 @@ export type UserUpdateToOneWithWhereWithoutSubscriptionsInput = {
 export type UserUpdateWithoutAccountsInput = {
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -8505,6 +9023,7 @@ export type UserUpdateWithoutAccountsInput = {
 export type UserUpdateWithoutApplicationsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -8522,6 +9041,25 @@ export type UserUpdateWithoutApplicationsInput = {
 export type UserUpdateWithoutAttachmentsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
+  first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  saved_listings?: InputMaybe<SavedListingUpdateManyWithoutUserNestedInput>;
+  sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
+  subscriptions?: InputMaybe<JobListingSubscriptionUpdateManyWithoutUserNestedInput>;
+};
+
+export type UserUpdateWithoutCover_Letter_TemplatesInput = {
+  accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
+  applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
+  attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -8540,6 +9078,7 @@ export type UserUpdateWithoutSaved_ListingsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -8557,6 +9096,7 @@ export type UserUpdateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -8574,6 +9114,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -8605,6 +9146,12 @@ export type UserUpsertWithoutAttachmentsInput = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+export type UserUpsertWithoutCover_Letter_TemplatesInput = {
+  create: UserCreateWithoutCover_Letter_TemplatesInput;
+  update: UserUpdateWithoutCover_Letter_TemplatesInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
 export type UserUpsertWithoutSaved_ListingsInput = {
   create: UserCreateWithoutSaved_ListingsInput;
   update: UserUpdateWithoutSaved_ListingsInput;
@@ -8630,6 +9177,7 @@ export type UserWhereInput = {
   accounts?: InputMaybe<AccountListRelationFilter>;
   applications?: InputMaybe<UserJobApplicationListRelationFilter>;
   attachments?: InputMaybe<UserAttachmentsListRelationFilter>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateListRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   emailVerified?: InputMaybe<DateTimeNullableFilter>;
@@ -8651,6 +9199,7 @@ export type UserWhereUniqueInput = {
   accounts?: InputMaybe<AccountListRelationFilter>;
   applications?: InputMaybe<UserJobApplicationListRelationFilter>;
   attachments?: InputMaybe<UserAttachmentsListRelationFilter>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateListRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
   emailVerified?: InputMaybe<DateTimeNullableFilter>;
@@ -8977,6 +9526,24 @@ export type GetJobListingsWithFilterQueryVariables = Exact<{
 
 export type GetJobListingsWithFilterQuery = { __typename?: 'Query', getMostRelevantCompanies: Array<{ __typename?: 'Company', id: string, name: string, email: any, _count?: { __typename?: 'CompanyCount', listings: number, categories: number } | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string }> | null, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string }> } | null }>, companies: Array<{ __typename?: 'Company', id: string, name: string }>, searchJobListings: Array<{ __typename?: 'JobListing', id: string, name: string, company_id: string, createdAt: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null, parameters: any, keywords: Array<string>, level?: JobListingLevel | null, isSaved?: boolean | null, languages: Array<string>, location: string, description_raw: string, external_application_url?: string | null, parametersTyped?: { __typename?: 'JobListingParameters', from?: JobListingFrom | null, furlough: FurloughPeriod, internship?: boolean | null, remoteInterview?: boolean | null, salary?: { __typename: 'FixedJobListingSalary', value: number, currency: any } | { __typename: 'RangeJobListingSalary', min: number, max: number, currency: any } | null } | null, categories: Array<{ __typename?: 'CategoryOnJobListing', category_id: string }>, company: { __typename?: 'Company', id: string, name: string, email: any, brand_image_url?: any | null, _count?: { __typename?: 'CompanyCount', listings: number } | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string }> | null, local_info?: { __typename?: 'CompanyLocalInfo', employeeCount?: number | null, locations: Array<string>, since?: any | null } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', locations: Array<string>, employeeCount?: number | null, founded?: any | null, headquarters: string } | null } }> };
 
+export type DeleteAllCvsMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DeleteAllCvsMutation = { __typename?: 'Mutation', deleteAllCoverLetterTemplates: boolean };
+
+export type MyCvsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyCvsQueryQuery = { __typename?: 'Query', getMyCoverLetterTemplates: Array<{ __typename?: 'UserCoverLetterTemplate', id: string, name: string, letter: string, metadata?: any | null, createdAt: any, user_id: string }> };
+
+export type CreateCvTemplateMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+  template: Scalars['String']['input'];
+}>;
+
+
+export type CreateCvTemplateMutation = { __typename?: 'Mutation', createUserCoverLetterTemplate?: { __typename?: 'UserCoverLetterTemplate', id: string, user_id: string, name: string, letter: string, createdAt: any, metadata?: any | null } | null };
+
 export type SignInWithEmailCodeMutationVariables = Exact<{
   code: Scalars['Int']['input'];
   email: Scalars['EmailAddress']['input'];
@@ -9134,6 +9701,9 @@ export const GetAllLanguagesQueryDocument = {"kind":"Document","definitions":[{"
 export const GetAllLocationsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllLocationsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getAllLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"totalJobsCount"}}]}}]}}]} as unknown as DocumentNode<GetAllLocationsQueryQuery, GetAllLocationsQueryQueryVariables>;
 export const GetAllJobCategoriesQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllJobCategoriesQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jobListingCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllJobCategoriesQueryQuery, GetAllJobCategoriesQueryQueryVariables>;
 export const GetJobListingsWithFilterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetJobListingsWithFilter"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SearchJobListingsInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"categories"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getMostRelevantCompanies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"categories"},"value":{"kind":"Variable","name":{"kind":"Name","value":"categories"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"10"}},{"kind":"ObjectField","name":{"kind":"Name","value":"skip"},"value":{"kind":"IntValue","value":"0"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}},{"kind":"Field","name":{"kind":"Name","value":"categories"}}]}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"company_bulstat"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone_number"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"website_url"}},{"kind":"Field","name":{"kind":"Name","value":"facebook_url"}},{"kind":"Field","name":{"kind":"Name","value":"twitter_url"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin_url"}},{"kind":"Field","name":{"kind":"Name","value":"youtube_url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"companies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"searchJobListings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"work_from"}},{"kind":"Field","name":{"kind":"Name","value":"parameters"}},{"kind":"Field","name":{"kind":"Name","value":"parametersTyped"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"furlough"}},{"kind":"Field","name":{"kind":"Name","value":"internship"}},{"kind":"Field","name":{"kind":"Name","value":"remoteInterview"}},{"kind":"Field","name":{"kind":"Name","value":"salary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FixedJobListingSalary"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"RangeJobListingSalary"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"min"}},{"kind":"Field","name":{"kind":"Name","value":"max"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"isSaved"}},{"kind":"Field","name":{"kind":"Name","value":"languages"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"description_raw"}},{"kind":"Field","name":{"kind":"Name","value":"external_application_url"}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listings"}}]}},{"kind":"Field","name":{"kind":"Name","value":"companyCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"brand_image_url"}},{"kind":"Field","name":{"kind":"Name","value":"local_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"locations"}},{"kind":"Field","name":{"kind":"Name","value":"since"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldwide_info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"locations"}},{"kind":"Field","name":{"kind":"Name","value":"employeeCount"}},{"kind":"Field","name":{"kind":"Name","value":"founded"}},{"kind":"Field","name":{"kind":"Name","value":"headquarters"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetJobListingsWithFilterQuery, GetJobListingsWithFilterQueryVariables>;
+export const DeleteAllCvsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteAllCvs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteAllCoverLetterTemplates"}}]}}]} as unknown as DocumentNode<DeleteAllCvsMutation, DeleteAllCvsMutationVariables>;
+export const MyCvsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MyCvsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getMyCoverLetterTemplates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"letter"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<MyCvsQueryQuery, MyCvsQueryQueryVariables>;
+export const CreateCvTemplateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateCvTemplate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"template"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUserCoverLetterTemplate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"content"},"value":{"kind":"Variable","name":{"kind":"Name","value":"template"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"letter"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]} as unknown as DocumentNode<CreateCvTemplateMutation, CreateCvTemplateMutationVariables>;
 export const SignInWithEmailCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignInWithEmailCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailAddress"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signInWithEmailCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"identifier"},"value":{"kind":"Variable","name":{"kind":"Name","value":"identifier"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignInWithEmailCodeMutation, SignInWithEmailCodeMutationVariables>;
 export const GetAllCountriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllCountries"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getAvailableCountries"}}]}}]} as unknown as DocumentNode<GetAllCountriesQuery, GetAllCountriesQueryVariables>;
 export const CompanySignUpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CompanySignUp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CompanySignUpInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"companySignUp"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"metadata"}}]}}]}}]} as unknown as DocumentNode<CompanySignUpMutation, CompanySignUpMutationVariables>;
@@ -9741,6 +10311,13 @@ export type AggregateUserAttachments = {
   _min?: Maybe<UserAttachmentsMinAggregate>;
 };
 
+export type AggregateUserCoverLetterTemplate = {
+  __typename?: 'AggregateUserCoverLetterTemplate';
+  _count?: Maybe<UserCoverLetterTemplateCountAggregate>;
+  _max?: Maybe<UserCoverLetterTemplateMaxAggregate>;
+  _min?: Maybe<UserCoverLetterTemplateMinAggregate>;
+};
+
 export type AggregateUserJobApplication = {
   __typename?: 'AggregateUserJobApplication';
   _count?: Maybe<UserJobApplicationCountAggregate>;
@@ -11275,6 +11852,11 @@ export type Coordinates = {
   __typename?: 'Coordinates';
   latitude?: Maybe<Scalars['Latitude']['output']>;
   longitude?: Maybe<Scalars['Longitude']['output']>;
+};
+
+export type CreateUserCoverLetterTemplateInput = {
+  content: Scalars['String']['input'];
+  name: Scalars['String']['input'];
 };
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -13521,6 +14103,7 @@ export type Mutation = {
   createManySession: AffectedRowsOutput;
   createManyUser: AffectedRowsOutput;
   createManyUserAttachments: AffectedRowsOutput;
+  createManyUserCoverLetterTemplate: AffectedRowsOutput;
   createManyUserJobApplication: AffectedRowsOutput;
   createManyVerificationToken: AffectedRowsOutput;
   createOneAccount: Account;
@@ -13533,9 +14116,12 @@ export type Mutation = {
   createOneSession: Session;
   createOneUser: User;
   createOneUserAttachments: UserAttachments;
+  createOneUserCoverLetterTemplate: UserCoverLetterTemplate;
   createOneUserJobApplication: UserJobApplication;
   createOneVerificationToken: VerificationToken;
+  createUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
   declineAllCookies: Scalars['Boolean']['output'];
+  deleteAllCoverLetterTemplates: Scalars['Boolean']['output'];
   deleteAllSubscriptions: DeleteAllSubscriptionsResponse;
   deleteManyAccount: AffectedRowsOutput;
   deleteManyCompany: AffectedRowsOutput;
@@ -13547,6 +14133,7 @@ export type Mutation = {
   deleteManySession: AffectedRowsOutput;
   deleteManyUser: AffectedRowsOutput;
   deleteManyUserAttachments: AffectedRowsOutput;
+  deleteManyUserCoverLetterTemplate: AffectedRowsOutput;
   deleteManyUserJobApplication: AffectedRowsOutput;
   deleteManyVerificationToken: AffectedRowsOutput;
   deleteOneAccount?: Maybe<Account>;
@@ -13559,6 +14146,7 @@ export type Mutation = {
   deleteOneSession?: Maybe<Session>;
   deleteOneUser?: Maybe<User>;
   deleteOneUserAttachments?: Maybe<UserAttachments>;
+  deleteOneUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
   deleteOneUserJobApplication?: Maybe<UserJobApplication>;
   deleteOneVerificationToken?: Maybe<VerificationToken>;
   fileUpload: Scalars['Boolean']['output'];
@@ -13584,6 +14172,7 @@ export type Mutation = {
   updateManySession: AffectedRowsOutput;
   updateManyUser: AffectedRowsOutput;
   updateManyUserAttachments: AffectedRowsOutput;
+  updateManyUserCoverLetterTemplate: AffectedRowsOutput;
   updateManyUserJobApplication: AffectedRowsOutput;
   updateManyVerificationToken: AffectedRowsOutput;
   updateOneAccount?: Maybe<Account>;
@@ -13596,6 +14185,7 @@ export type Mutation = {
   updateOneSession?: Maybe<Session>;
   updateOneUser?: Maybe<User>;
   updateOneUserAttachments?: Maybe<UserAttachments>;
+  updateOneUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
   updateOneUserJobApplication?: Maybe<UserJobApplication>;
   updateOneVerificationToken?: Maybe<VerificationToken>;
   upsertOneAccount: Account;
@@ -13608,6 +14198,7 @@ export type Mutation = {
   upsertOneSession: Session;
   upsertOneUser: User;
   upsertOneUserAttachments: UserAttachments;
+  upsertOneUserCoverLetterTemplate: UserCoverLetterTemplate;
   upsertOneUserJobApplication: UserJobApplication;
   upsertOneVerificationToken: VerificationToken;
   verifyEmail: VerifyEmailResponse;
@@ -13685,6 +14276,12 @@ export type MutationCreateManyUserAttachmentsArgs = {
 };
 
 
+export type MutationCreateManyUserCoverLetterTemplateArgs = {
+  data: Array<UserCoverLetterTemplateCreateManyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
 export type MutationCreateManyUserJobApplicationArgs = {
   data: Array<UserJobApplicationCreateManyInput>;
   skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
@@ -13757,6 +14354,12 @@ export type MutationCreateOneUserAttachmentsArgs = {
 };
 
 
+export type MutationCreateOneUserCoverLetterTemplateArgs = {
+  data: UserCoverLetterTemplateCreateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+};
+
+
 export type MutationCreateOneUserJobApplicationArgs = {
   data: UserJobApplicationCreateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
@@ -13766,6 +14369,11 @@ export type MutationCreateOneUserJobApplicationArgs = {
 export type MutationCreateOneVerificationTokenArgs = {
   data: VerificationTokenCreateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+};
+
+
+export type MutationCreateUserCoverLetterTemplateArgs = {
+  input: CreateUserCoverLetterTemplateInput;
 };
 
 
@@ -13816,6 +14424,11 @@ export type MutationDeleteManyUserArgs = {
 
 export type MutationDeleteManyUserAttachmentsArgs = {
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type MutationDeleteManyUserCoverLetterTemplateArgs = {
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -13886,6 +14499,12 @@ export type MutationDeleteOneUserArgs = {
 export type MutationDeleteOneUserAttachmentsArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: UserAttachmentsWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneUserCoverLetterTemplateArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: UserCoverLetterTemplateWhereUniqueInput;
 };
 
 
@@ -14022,6 +14641,12 @@ export type MutationUpdateManyUserAttachmentsArgs = {
 };
 
 
+export type MutationUpdateManyUserCoverLetterTemplateArgs = {
+  data: UserCoverLetterTemplateUpdateManyMutationInput;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+};
+
+
 export type MutationUpdateManyUserJobApplicationArgs = {
   data: UserJobApplicationUpdateManyMutationInput;
   where?: InputMaybe<UserJobApplicationWhereInput>;
@@ -14101,6 +14726,13 @@ export type MutationUpdateOneUserAttachmentsArgs = {
   data: UserAttachmentsUpdateInput;
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: UserAttachmentsWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneUserCoverLetterTemplateArgs = {
+  data: UserCoverLetterTemplateUpdateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: UserCoverLetterTemplateWhereUniqueInput;
 };
 
 
@@ -14195,6 +14827,14 @@ export type MutationUpsertOneUserAttachmentsArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   update: UserAttachmentsUpdateInput;
   where: UserAttachmentsWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneUserCoverLetterTemplateArgs = {
+  create: UserCoverLetterTemplateCreateInput;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  update: UserCoverLetterTemplateUpdateInput;
+  where: UserCoverLetterTemplateWhereUniqueInput;
 };
 
 
@@ -14525,6 +15165,7 @@ export type Query = {
   aggregateSession: AggregateSession;
   aggregateUser: AggregateUser;
   aggregateUserAttachments: AggregateUserAttachments;
+  aggregateUserCoverLetterTemplate: AggregateUserCoverLetterTemplate;
   aggregateUserJobApplication: AggregateUserJobApplication;
   aggregateVerificationToken: AggregateVerificationToken;
   companies: Array<Company>;
@@ -14551,6 +15192,8 @@ export type Query = {
   findFirstUser?: Maybe<User>;
   findFirstUserAttachments?: Maybe<UserAttachments>;
   findFirstUserAttachmentsOrThrow?: Maybe<UserAttachments>;
+  findFirstUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
+  findFirstUserCoverLetterTemplateOrThrow?: Maybe<UserCoverLetterTemplate>;
   findFirstUserJobApplication?: Maybe<UserJobApplication>;
   findFirstUserJobApplicationOrThrow?: Maybe<UserJobApplication>;
   findFirstUserOrThrow?: Maybe<User>;
@@ -14574,12 +15217,14 @@ export type Query = {
   getJobListingLevelsDetails: Array<GetJobListingLevelsDetailsResponse>;
   getJobListingSubscription?: Maybe<JobListingSubscription>;
   getMostRelevantCompanies: Array<Company>;
+  getMyCoverLetterTemplates: Array<UserCoverLetterTemplate>;
   getSavedListing?: Maybe<SavedListing>;
   getSession?: Maybe<Session>;
   getSubscriptionsJobListingsForUser: GetSubscriptionsJobListingsResponse;
   getTopCompanies: Array<Company>;
   getTopListingCategories: Array<JobListingCategory>;
   getUser?: Maybe<User>;
+  getUserCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
   getUserJobApplication?: Maybe<UserJobApplication>;
   getVerificationToken?: Maybe<VerificationToken>;
   googleLoginUrl: Scalars['String']['output'];
@@ -14593,6 +15238,7 @@ export type Query = {
   groupBySession: Array<SessionGroupBy>;
   groupByUser: Array<UserGroupBy>;
   groupByUserAttachments: Array<UserAttachmentsGroupBy>;
+  groupByUserCoverLetterTemplate: Array<UserCoverLetterTemplateGroupBy>;
   groupByUserJobApplication: Array<UserJobApplicationGroupBy>;
   groupByVerificationToken: Array<VerificationTokenGroupBy>;
   jobListing?: Maybe<JobListing>;
@@ -14612,6 +15258,8 @@ export type Query = {
   session?: Maybe<Session>;
   sessions: Array<Session>;
   user?: Maybe<User>;
+  userCoverLetterTemplate?: Maybe<UserCoverLetterTemplate>;
+  userCoverLetterTemplates: Array<UserCoverLetterTemplate>;
   userJobApplication?: Maybe<UserJobApplication>;
   userJobApplications: Array<UserJobApplication>;
   users: Array<User>;
@@ -14724,6 +15372,15 @@ export type QueryAggregateUserAttachmentsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type QueryAggregateUserCoverLetterTemplateArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -14993,6 +15650,28 @@ export type QueryFindFirstUserAttachmentsOrThrowArgs = {
 };
 
 
+export type QueryFindFirstUserCoverLetterTemplateArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+};
+
+
+export type QueryFindFirstUserCoverLetterTemplateOrThrowArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+};
+
+
 export type QueryFindFirstUserJobApplicationArgs = {
   cursor?: InputMaybe<UserJobApplicationWhereUniqueInput>;
   distinct?: InputMaybe<Array<UserJobApplicationScalarFieldEnum>>;
@@ -15150,6 +15829,12 @@ export type QueryGetUserArgs = {
 };
 
 
+export type QueryGetUserCoverLetterTemplateArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+
 export type QueryGetUserJobApplicationArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: UserJobApplicationWhereUniqueInput;
@@ -15264,6 +15949,16 @@ export type QueryGroupByUserAttachmentsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type QueryGroupByUserCoverLetterTemplateArgs = {
+  by: Array<UserCoverLetterTemplateScalarFieldEnum>;
+  having?: InputMaybe<UserCoverLetterTemplateScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -15400,6 +16095,23 @@ export type QuerySessionsArgs = {
 export type QueryUserArgs = {
   relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
   where: UserWhereUniqueInput;
+};
+
+
+export type QueryUserCoverLetterTemplateArgs = {
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+
+export type QueryUserCoverLetterTemplatesArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  relationLoadStrategy?: InputMaybe<RelationLoadStrategy>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -16252,6 +16964,7 @@ export type User = {
   attachments: Array<UserAttachments>;
   cookieConsent?: Maybe<Scalars['Boolean']['output']>;
   cookiePreferences?: Maybe<UserCookiePreferences>;
+  cover_letter_templates: Array<UserCoverLetterTemplate>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['EmailAddress']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
@@ -16299,6 +17012,17 @@ export type UserAttachmentsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+/** Always after the prisma-client-js generator */
+export type UserCover_Letter_TemplatesArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -16665,6 +17389,7 @@ export type UserCount = {
   accounts: Scalars['Int']['output'];
   applications: Scalars['Int']['output'];
   attachments: Scalars['Int']['output'];
+  cover_letter_templates: Scalars['Int']['output'];
   saved_listings: Scalars['Int']['output'];
   sessions: Scalars['Int']['output'];
   subscriptions: Scalars['Int']['output'];
@@ -16683,6 +17408,11 @@ export type UserCountApplicationsArgs = {
 
 export type UserCountAttachmentsArgs = {
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type UserCountCover_Letter_TemplatesArgs = {
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -16728,10 +17458,306 @@ export type UserCountOrderByAggregateInput = {
   name?: InputMaybe<SortOrder>;
 };
 
+export type UserCoverLetterTemplate = {
+  __typename?: 'UserCoverLetterTemplate';
+  createdAt: Scalars['DateTimeISO']['output'];
+  id: Scalars['ID']['output'];
+  letter: Scalars['String']['output'];
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTimeISO']['output'];
+  user: User;
+  user_id: Scalars['String']['output'];
+};
+
+export type UserCoverLetterTemplateCountAggregate = {
+  __typename?: 'UserCoverLetterTemplateCountAggregate';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  letter: Scalars['Int']['output'];
+  metadata: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+  user_id: Scalars['Int']['output'];
+};
+
+export type UserCoverLetterTemplateCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  metadata?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type UserCoverLetterTemplateCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  user: UserCreateNestedOneWithoutCover_Letter_TemplatesInput;
+};
+
+export type UserCoverLetterTemplateCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  user_id: Scalars['String']['input'];
+};
+
+export type UserCoverLetterTemplateCreateManyUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type UserCoverLetterTemplateCreateManyUserInputEnvelope = {
+  data: Array<UserCoverLetterTemplateCreateManyUserInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type UserCoverLetterTemplateCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCoverLetterTemplateCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<UserCoverLetterTemplateCreateWithoutUserInput>>;
+  createMany?: InputMaybe<UserCoverLetterTemplateCreateManyUserInputEnvelope>;
+};
+
+export type UserCoverLetterTemplateCreateOrConnectWithoutUserInput = {
+  create: UserCoverLetterTemplateCreateWithoutUserInput;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+export type UserCoverLetterTemplateCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type UserCoverLetterTemplateGroupBy = {
+  __typename?: 'UserCoverLetterTemplateGroupBy';
+  _count?: Maybe<UserCoverLetterTemplateCountAggregate>;
+  _max?: Maybe<UserCoverLetterTemplateMaxAggregate>;
+  _min?: Maybe<UserCoverLetterTemplateMinAggregate>;
+  createdAt: Scalars['DateTimeISO']['output'];
+  id: Scalars['String']['output'];
+  letter: Scalars['String']['output'];
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTimeISO']['output'];
+  user_id: Scalars['String']['output'];
+};
+
+export type UserCoverLetterTemplateListRelationFilter = {
+  every?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+  none?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+  some?: InputMaybe<UserCoverLetterTemplateWhereInput>;
+};
+
+export type UserCoverLetterTemplateMaxAggregate = {
+  __typename?: 'UserCoverLetterTemplateMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  letter?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserCoverLetterTemplateMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type UserCoverLetterTemplateMinAggregate = {
+  __typename?: 'UserCoverLetterTemplateMinAggregate';
+  createdAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  letter?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserCoverLetterTemplateMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type UserCoverLetterTemplateOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export enum UserCoverLetterTemplateOrderByRelevanceFieldEnum {
+  Id = 'id',
+  Letter = 'letter',
+  Name = 'name',
+  UserId = 'user_id'
+}
+
+export type UserCoverLetterTemplateOrderByRelevanceInput = {
+  fields: Array<UserCoverLetterTemplateOrderByRelevanceFieldEnum>;
+  search: Scalars['String']['input'];
+  sort: SortOrder;
+};
+
+export type UserCoverLetterTemplateOrderByWithAggregationInput = {
+  _count?: InputMaybe<UserCoverLetterTemplateCountOrderByAggregateInput>;
+  _max?: InputMaybe<UserCoverLetterTemplateMaxOrderByAggregateInput>;
+  _min?: InputMaybe<UserCoverLetterTemplateMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  metadata?: InputMaybe<SortOrderInput>;
+  name?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type UserCoverLetterTemplateOrderByWithRelationInput = {
+  _relevance?: InputMaybe<UserCoverLetterTemplateOrderByRelevanceInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  letter?: InputMaybe<SortOrder>;
+  metadata?: InputMaybe<SortOrderInput>;
+  name?: InputMaybe<SortOrder>;
+  user?: InputMaybe<UserOrderByWithRelationInput>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export enum UserCoverLetterTemplateScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  Letter = 'letter',
+  Metadata = 'metadata',
+  Name = 'name',
+  UpdatedAt = 'updatedAt',
+  UserId = 'user_id'
+}
+
+export type UserCoverLetterTemplateScalarWhereInput = {
+  AND?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereInput>>;
+  NOT?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereInput>>;
+  OR?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  letter?: InputMaybe<StringFilter>;
+  metadata?: InputMaybe<JsonNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringFilter>;
+};
+
+export type UserCoverLetterTemplateScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereWithAggregatesInput>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  letter?: InputMaybe<StringWithAggregatesFilter>;
+  metadata?: InputMaybe<JsonNullableWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  user_id?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type UserCoverLetterTemplateUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  letter?: InputMaybe<StringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutCover_Letter_TemplatesNestedInput>;
+};
+
+export type UserCoverLetterTemplateUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  letter?: InputMaybe<StringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserCoverLetterTemplateUpdateManyWithWhereWithoutUserInput = {
+  data: UserCoverLetterTemplateUpdateManyMutationInput;
+  where: UserCoverLetterTemplateScalarWhereInput;
+};
+
+export type UserCoverLetterTemplateUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCoverLetterTemplateCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<UserCoverLetterTemplateCreateWithoutUserInput>>;
+  createMany?: InputMaybe<UserCoverLetterTemplateCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<UserCoverLetterTemplateScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  set?: InputMaybe<Array<UserCoverLetterTemplateWhereUniqueInput>>;
+  update?: InputMaybe<Array<UserCoverLetterTemplateUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: InputMaybe<Array<UserCoverLetterTemplateUpdateManyWithWhereWithoutUserInput>>;
+  upsert?: InputMaybe<Array<UserCoverLetterTemplateUpsertWithWhereUniqueWithoutUserInput>>;
+};
+
+export type UserCoverLetterTemplateUpdateWithWhereUniqueWithoutUserInput = {
+  data: UserCoverLetterTemplateUpdateWithoutUserInput;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+export type UserCoverLetterTemplateUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  letter?: InputMaybe<StringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserCoverLetterTemplateUpsertWithWhereUniqueWithoutUserInput = {
+  create: UserCoverLetterTemplateCreateWithoutUserInput;
+  update: UserCoverLetterTemplateUpdateWithoutUserInput;
+  where: UserCoverLetterTemplateWhereUniqueInput;
+};
+
+export type UserCoverLetterTemplateWhereInput = {
+  AND?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  NOT?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  OR?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  letter?: InputMaybe<StringFilter>;
+  metadata?: InputMaybe<JsonNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserRelationFilter>;
+  user_id?: InputMaybe<StringFilter>;
+};
+
+export type UserCoverLetterTemplateWhereUniqueInput = {
+  AND?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  NOT?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  OR?: InputMaybe<Array<UserCoverLetterTemplateWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  letter?: InputMaybe<StringFilter>;
+  metadata?: InputMaybe<JsonNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserRelationFilter>;
+  user_id?: InputMaybe<StringFilter>;
+};
+
 export type UserCreateInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -16776,6 +17802,12 @@ export type UserCreateNestedOneWithoutAttachmentsInput = {
   create?: InputMaybe<UserCreateWithoutAttachmentsInput>;
 };
 
+export type UserCreateNestedOneWithoutCover_Letter_TemplatesInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCover_Letter_TemplatesInput>;
+  create?: InputMaybe<UserCreateWithoutCover_Letter_TemplatesInput>;
+};
+
 export type UserCreateNestedOneWithoutSaved_ListingsInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutSaved_ListingsInput>;
@@ -16809,6 +17841,11 @@ export type UserCreateOrConnectWithoutAttachmentsInput = {
   where: UserWhereUniqueInput;
 };
 
+export type UserCreateOrConnectWithoutCover_Letter_TemplatesInput = {
+  create: UserCreateWithoutCover_Letter_TemplatesInput;
+  where: UserWhereUniqueInput;
+};
+
 export type UserCreateOrConnectWithoutSaved_ListingsInput = {
   create: UserCreateWithoutSaved_ListingsInput;
   where: UserWhereUniqueInput;
@@ -16827,6 +17864,7 @@ export type UserCreateOrConnectWithoutSubscriptionsInput = {
 export type UserCreateWithoutAccountsInput = {
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -16844,6 +17882,7 @@ export type UserCreateWithoutAccountsInput = {
 export type UserCreateWithoutApplicationsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -16861,6 +17900,25 @@ export type UserCreateWithoutApplicationsInput = {
 export type UserCreateWithoutAttachmentsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  email: Scalars['String']['input'];
+  emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  first_name: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  last_name: Scalars['String']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  saved_listings?: InputMaybe<SavedListingCreateNestedManyWithoutUserInput>;
+  sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
+  subscriptions?: InputMaybe<JobListingSubscriptionCreateNestedManyWithoutUserInput>;
+};
+
+export type UserCreateWithoutCover_Letter_TemplatesInput = {
+  accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
+  applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
+  attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -16879,6 +17937,7 @@ export type UserCreateWithoutSaved_ListingsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -16896,6 +17955,7 @@ export type UserCreateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -16913,6 +17973,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   applications?: InputMaybe<UserJobApplicationCreateNestedManyWithoutUserInput>;
   attachments?: InputMaybe<UserAttachmentsCreateNestedManyWithoutUserInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTimeISO']['input']>;
   email: Scalars['String']['input'];
   emailVerified?: InputMaybe<Scalars['DateTimeISO']['input']>;
@@ -17378,6 +18439,7 @@ export type UserOrderByWithRelationInput = {
   accounts?: InputMaybe<AccountOrderByRelationAggregateInput>;
   applications?: InputMaybe<UserJobApplicationOrderByRelationAggregateInput>;
   attachments?: InputMaybe<UserAttachmentsOrderByRelationAggregateInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateOrderByRelationAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   emailVerified?: InputMaybe<SortOrderInput>;
@@ -17434,6 +18496,7 @@ export type UserSearchResponse = {
   attachments: Array<UserAttachments>;
   cookieConsent?: Maybe<Scalars['Boolean']['output']>;
   cookiePreferences?: Maybe<UserCookiePreferences>;
+  cover_letter_templates: Array<UserCoverLetterTemplate>;
   createdAt: Scalars['DateTimeISO']['output'];
   email: Scalars['EmailAddress']['output'];
   emailVerified?: Maybe<Scalars['DateTimeISO']['output']>;
@@ -17478,6 +18541,16 @@ export type UserSearchResponseAttachmentsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserAttachmentsWhereInput>;
+};
+
+
+export type UserSearchResponseCover_Letter_TemplatesArgs = {
+  cursor?: InputMaybe<UserCoverLetterTemplateWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserCoverLetterTemplateScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserCoverLetterTemplateOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserCoverLetterTemplateWhereInput>;
 };
 
 
@@ -17526,6 +18599,7 @@ export type UserUpdateInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -17576,6 +18650,14 @@ export type UserUpdateOneRequiredWithoutAttachmentsNestedInput = {
   upsert?: InputMaybe<UserUpsertWithoutAttachmentsInput>;
 };
 
+export type UserUpdateOneRequiredWithoutCover_Letter_TemplatesNestedInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCover_Letter_TemplatesInput>;
+  create?: InputMaybe<UserCreateWithoutCover_Letter_TemplatesInput>;
+  update?: InputMaybe<UserUpdateToOneWithWhereWithoutCover_Letter_TemplatesInput>;
+  upsert?: InputMaybe<UserUpsertWithoutCover_Letter_TemplatesInput>;
+};
+
 export type UserUpdateOneRequiredWithoutSaved_ListingsNestedInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutSaved_ListingsInput>;
@@ -17617,6 +18699,11 @@ export type UserUpdateToOneWithWhereWithoutAttachmentsInput = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+export type UserUpdateToOneWithWhereWithoutCover_Letter_TemplatesInput = {
+  data: UserUpdateWithoutCover_Letter_TemplatesInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
 export type UserUpdateToOneWithWhereWithoutSaved_ListingsInput = {
   data: UserUpdateWithoutSaved_ListingsInput;
   where?: InputMaybe<UserWhereInput>;
@@ -17635,6 +18722,7 @@ export type UserUpdateToOneWithWhereWithoutSubscriptionsInput = {
 export type UserUpdateWithoutAccountsInput = {
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -17652,6 +18740,7 @@ export type UserUpdateWithoutAccountsInput = {
 export type UserUpdateWithoutApplicationsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -17669,6 +18758,25 @@ export type UserUpdateWithoutApplicationsInput = {
 export type UserUpdateWithoutAttachmentsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
+  first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  saved_listings?: InputMaybe<SavedListingUpdateManyWithoutUserNestedInput>;
+  sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
+  subscriptions?: InputMaybe<JobListingSubscriptionUpdateManyWithoutUserNestedInput>;
+};
+
+export type UserUpdateWithoutCover_Letter_TemplatesInput = {
+  accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
+  applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
+  attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -17687,6 +18795,7 @@ export type UserUpdateWithoutSaved_ListingsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -17704,6 +18813,7 @@ export type UserUpdateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -17721,6 +18831,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   applications?: InputMaybe<UserJobApplicationUpdateManyWithoutUserNestedInput>;
   attachments?: InputMaybe<UserAttachmentsUpdateManyWithoutUserNestedInput>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
@@ -17752,6 +18863,12 @@ export type UserUpsertWithoutAttachmentsInput = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+export type UserUpsertWithoutCover_Letter_TemplatesInput = {
+  create: UserCreateWithoutCover_Letter_TemplatesInput;
+  update: UserUpdateWithoutCover_Letter_TemplatesInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
 export type UserUpsertWithoutSaved_ListingsInput = {
   create: UserCreateWithoutSaved_ListingsInput;
   update: UserUpdateWithoutSaved_ListingsInput;
@@ -17777,6 +18894,7 @@ export type UserWhereInput = {
   accounts?: InputMaybe<AccountListRelationFilter>;
   applications?: InputMaybe<UserJobApplicationListRelationFilter>;
   attachments?: InputMaybe<UserAttachmentsListRelationFilter>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateListRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   emailVerified?: InputMaybe<DateTimeNullableFilter>;
@@ -17798,6 +18916,7 @@ export type UserWhereUniqueInput = {
   accounts?: InputMaybe<AccountListRelationFilter>;
   applications?: InputMaybe<UserJobApplicationListRelationFilter>;
   attachments?: InputMaybe<UserAttachmentsListRelationFilter>;
+  cover_letter_templates?: InputMaybe<UserCoverLetterTemplateListRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
   emailVerified?: InputMaybe<DateTimeNullableFilter>;
@@ -18123,6 +19242,24 @@ export type GetJobListingsWithFilterQueryVariables = Exact<{
 
 
 export type GetJobListingsWithFilterQuery = { __typename?: 'Query', getMostRelevantCompanies: Array<{ __typename?: 'Company', id: string, name: string, email: any, _count?: { __typename?: 'CompanyCount', listings: number, categories: number } | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string }> | null, contacts?: { __typename?: 'CompanyContacts', name: string, company_bulstat: string, email: any, phone_number: string, address: string, website_url: any, facebook_url: any, twitter_url: any, linkedin_url: any, youtube_url: any, contacts: Array<{ __typename?: 'CompanyContact', city: string, address: string, phone_number: string }> } | null }>, companies: Array<{ __typename?: 'Company', id: string, name: string }>, searchJobListings: Array<{ __typename?: 'JobListing', id: string, name: string, company_id: string, createdAt: any, type?: JobListingEmploymentType | null, work_from?: WorkFromHome | null, parameters: any, keywords: Array<string>, level?: JobListingLevel | null, isSaved?: boolean | null, languages: Array<string>, location: string, description_raw: string, external_application_url?: string | null, parametersTyped?: { __typename?: 'JobListingParameters', from?: JobListingFrom | null, furlough: FurloughPeriod, internship?: boolean | null, remoteInterview?: boolean | null, salary?: { __typename: 'FixedJobListingSalary', value: number, currency: any } | { __typename: 'RangeJobListingSalary', min: number, max: number, currency: any } | null } | null, categories: Array<{ __typename?: 'CategoryOnJobListing', category_id: string }>, company: { __typename?: 'Company', id: string, name: string, email: any, brand_image_url?: any | null, _count?: { __typename?: 'CompanyCount', listings: number } | null, companyCategories?: Array<{ __typename?: 'CompanyCategory', id: string, name: string }> | null, local_info?: { __typename?: 'CompanyLocalInfo', employeeCount?: number | null, locations: Array<string>, since?: any | null } | null, worldwide_info?: { __typename?: 'CompanyWorldwideInfo', locations: Array<string>, employeeCount?: number | null, founded?: any | null, headquarters: string } | null } }> };
+
+export type DeleteAllCvsMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DeleteAllCvsMutation = { __typename?: 'Mutation', deleteAllCoverLetterTemplates: boolean };
+
+export type MyCvsQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyCvsQueryQuery = { __typename?: 'Query', getMyCoverLetterTemplates: Array<{ __typename?: 'UserCoverLetterTemplate', id: string, name: string, letter: string, metadata?: any | null, createdAt: any, user_id: string }> };
+
+export type CreateCvTemplateMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+  template: Scalars['String']['input'];
+}>;
+
+
+export type CreateCvTemplateMutation = { __typename?: 'Mutation', createUserCoverLetterTemplate?: { __typename?: 'UserCoverLetterTemplate', id: string, user_id: string, name: string, letter: string, createdAt: any, metadata?: any | null } | null };
 
 export type SignInWithEmailCodeMutationVariables = Exact<{
   code: Scalars['Int']['input'];
